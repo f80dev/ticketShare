@@ -11,11 +11,13 @@ import { OrderByPipe } from './order-by.pipe';
 import { TransPipe } from './trans.pipe';
 import { SafePipe } from './safe.pipe';
 import {
+  MatButtonModule,
+  MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatExpansionModule, MatGridListModule,
+  MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
   MatProgressSpinnerModule,
-  MatSelectModule, MatStepperModule,
+  MatSelectModule, MatSnackBarModule, MatStepperModule,
   MatToolbarModule
 } from "@angular/material";
 import {HttpClientModule} from "@angular/common/http";
@@ -32,6 +34,8 @@ import { TutoComponent } from './tuto/tuto.component';
 import { TimerComponent } from './timer/timer.component';
 import {ApiService} from "./api.service";
 import { HomeComponent } from './home/home.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {DeviceDetectorModule} from "ngx-device-detector";
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -72,6 +76,14 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatCheckboxModule,
     MatStepperModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatListModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [ ApiService,TransPipe,SafePipe,ClipboardService],
   bootstrap: [AppComponent]
