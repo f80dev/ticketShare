@@ -15,6 +15,8 @@ import {$$} from "../tools";
 })
 export class HomeComponent implements OnInit {
 
+  user:any={}
+
   constructor(public socket:Socket,
               public meta:Meta,
               public api: ApiService,
@@ -29,6 +31,12 @@ export class HomeComponent implements OnInit {
     this.analyse_params((p:any)=>{
       if(p.cmd=="store")
         this.router.navigate(["store"]);
+    });
+
+    this.socket.on("refresh",(data:any)=>{
+      if(data.user==this.user._id){
+
+      }
     });
   }
 

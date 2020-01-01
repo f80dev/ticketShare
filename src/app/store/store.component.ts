@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-store',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreComponent implements OnInit {
 
-  constructor() { }
+  events=[];
+
+  constructor(public api:ApiService) { }
 
   ngOnInit() {
+    this.api.getevents().subscribe((r:any)=>{
+      this.events=r;
+    })
   }
 
 }
