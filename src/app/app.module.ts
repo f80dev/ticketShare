@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { environment } from '../environments/environment';
 import { StoreComponent } from './store/store.component';
 import { EntranceComponent } from './entrance/entrance.component';
@@ -11,6 +12,7 @@ import { OrderByPipe } from './order-by.pipe';
 import { TransPipe } from './trans.pipe';
 import { SafePipe } from './safe.pipe';
 import {
+  MAT_DIALOG_DATA,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -34,8 +36,12 @@ import { TutoComponent } from './tuto/tuto.component';
 import { TimerComponent } from './timer/timer.component';
 import {ApiService} from "./api.service";
 import { HomeComponent } from './home/home.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DeviceDetectorModule} from "ngx-device-detector";
+import { PromptComponent } from './prompt/prompt.component';
+import { PlacesComponent } from './places/places.component';
+import { ValidateComponent } from './validate/validate.component';
+import { ScannerComponent } from './scanner/scanner.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -51,10 +57,18 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     CguComponent,
     TutoComponent,
     TimerComponent,
-    HomeComponent
+    HomeComponent,
+    PromptComponent,
+    PlacesComponent,
+    ValidateComponent,
+    ScannerComponent
+  ],
+  entryComponents: [
+    PromptComponent
   ],
   imports: [
     BrowserModule,
+    PickerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
@@ -82,10 +96,14 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatInputModule,
     MatListModule,
     ReactiveFormsModule,
+    FormsModule,
     MatSnackBarModule,
     DeviceDetectorModule.forRoot()
   ],
-  providers: [ ApiService,TransPipe,SafePipe,ClipboardService],
+  providers: [
+    ApiService,TransPipe,SafePipe,ClipboardService,
+    {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

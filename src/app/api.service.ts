@@ -24,8 +24,8 @@ export class ApiService {
     return this.http.get(api("getusers/"+ADMIN_PASSWORD));
   }
 
-  getevents(){
-    return this._get("events");
+  getevents(userid:string){
+    return this._get("events/"+userid);
   }
 
 
@@ -48,4 +48,19 @@ export class ApiService {
   }
 
 
+  adduser(result: string) {
+    return this._get("adduser/"+result);
+  }
+
+  getuser(address: string) {
+    return this._get("getuser/"+address);
+  }
+
+  available(event:string,buyer: string) {
+    return this._get("available/"+event+"/"+buyer);
+  }
+
+  use(address: any, event: string) {
+    return this._get("use/"+address+"/"+event);
+  }
 }
