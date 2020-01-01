@@ -1,0 +1,13 @@
+<div style="width:100%;text-align: center;" *ngIf="to_burn.length==0">
+  <app-scanner [size]="320"
+               filter="/home"
+               (flash)="onflash_event($event)">
+  </app-scanner>
+</div>
+
+<div style="width:100%;text-align: center;" *ngIf="to_burn.length>0">
+  <div *ngFor="let ticket of to_burn">
+    <a href="{{ticket.to_burn}}">Burn</a><br>
+  </div>
+</div>
+
