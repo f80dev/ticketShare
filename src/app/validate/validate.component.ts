@@ -13,6 +13,8 @@ export class ValidateComponent implements OnInit {
   public to_burn=[];
   showScanner=true;
 
+  lastAddress="";
+
   constructor(public api: ApiService,
               public config:ConfigService,
               public snackBar:MatSnackBar,
@@ -24,15 +26,33 @@ export class ValidateComponent implements OnInit {
   }
 
 
-  onflash_event($event: any) {
-    this.showScanner=false;
+  refresh(addr:string){
+    this.lastAddress=addr;
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.api.use($event.data,params.get("event")).subscribe((r:any)=>{
+    this.api.use(addr,params.get("event")).subscribe((r:any)=>{
       this.to_burn=r;
       if(this.to_burn.length==0){
         this.snackBar.open("Pas de ticket pour cet événement");
         this.showScanner=true;
       }
+    })
+  }
+
+  onflash_event($event: any) {
+    this.showScanner=false;
+    this.refresh($event.data);
+  }
+
+  update_addr($event) {
+    const addr=$event.currentTarget.value;
+    if(addr!=null && addr.length==42 && addr.startsWith("0x")){
+      this.onflash_event({data:addr});
+    }
+  }
+
+  burn(ticket: any) {
+    this.api.burn(ticket._id).subscribe((r)=>{
+      this.refresh(this.lastAddress);
     })
   }
 }

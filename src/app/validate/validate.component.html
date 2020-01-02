@@ -1,13 +1,23 @@
 
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="showScanner">
   <app-scanner [size]="300"
+               *ngIf="config.webcamsAvailable>0"
                (flash)="onflash_event($event)">
   </app-scanner>
+
+  <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
+    <input type="text" matInput
+           id="txtAddress"
+           title="Saisissez l'adresse de votre compte Ethereum"
+           placeholder="Adresse du compte"
+           (change)="update_addr($event)">
+  </mat-form-field>
 </div>
 
 <div style="width:100%;text-align: center;" *ngIf="to_burn.length>0">
   <div *ngFor="let ticket of to_burn">
-    <a href="{{ticket.to_burn}}">Burn</a><br>
+    Place: {{ticket.seat}} -
+    <button matButton mat-raised-button (click)="burn(ticket)">Burn</button>
   </div>
 </div>
 

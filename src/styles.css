@@ -48,7 +48,9 @@ body {
 
 .flyer {
   width: 200px;
-  height: 200px; }
+  margin: 3px;
+  height: 200px;
+  cursor: pointer; }
 
 .app-button {
   padding-left: 6px !important;

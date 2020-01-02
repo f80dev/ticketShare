@@ -62,6 +62,9 @@ export class HomeComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('address');
-    window.location.reload();
+  }
+
+  informe_copy() {
+    this.toast.open("Adresse copiée");
   }
 }
