@@ -10,14 +10,17 @@
            id="txtAddress"
            title="Saisissez l'adresse de votre compte Ethereum"
            placeholder="Adresse du compte"
+           [(ngModel)]="address"
            (change)="update_addr($event)">
   </mat-form-field>
+  <button mat-button mat-raised-button (click)="update_addr(address)">Rechercher</button>
 </div>
 
 <div style="width:100%;text-align: center;" *ngIf="to_burn.length>0">
   <div *ngFor="let ticket of to_burn">
     Place: {{ticket.seat}} -
-    <button matButton mat-raised-button (click)="burn(ticket)">Burn</button>
+    <button mat-button mat-raised-button (click)="burn(ticket)">Burn</button>
+    <br>
   </div>
 </div>
 
