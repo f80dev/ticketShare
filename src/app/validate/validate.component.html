@@ -1,6 +1,6 @@
-<div style="width:100%;text-align: center;" *ngIf="to_burn.length==0">
-  <app-scanner [size]="320"
-               filter="/home"
+
+<div style="width:100%;text-align: center;margin-top:10%;" *ngIf="showScanner">
+  <app-scanner [size]="300"
                (flash)="onflash_event($event)">
   </app-scanner>
 </div>

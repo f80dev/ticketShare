@@ -19,7 +19,7 @@ import {
   MatDialogModule,
   MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
   MatProgressSpinnerModule,
-  MatSelectModule, MatSnackBarModule, MatStepperModule,
+  MatSelectModule, MatSnackBarModule, MatSortModule, MatStepperModule,
   MatToolbarModule
 } from "@angular/material";
 import {HttpClientModule} from "@angular/common/http";
@@ -42,6 +42,7 @@ import { PromptComponent } from './prompt/prompt.component';
 import { PlacesComponent } from './places/places.component';
 import { ValidateComponent } from './validate/validate.component';
 import { ScannerComponent } from './scanner/scanner.component';
+import { AdminComponent } from './admin/admin.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -61,7 +62,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PromptComponent,
     PlacesComponent,
     ValidateComponent,
-    ScannerComponent
+    ScannerComponent,
+    AdminComponent
   ],
   entryComponents: [
     PromptComponent
@@ -71,7 +73,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PickerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     ImageCropperModule,
     SocketIoModule.forRoot(config),
     MatDialogModule,
@@ -98,7 +100,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ReactiveFormsModule,
     FormsModule,
     MatSnackBarModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    MatSortModule
   ],
   providers: [
     ApiService,TransPipe,SafePipe,ClipboardService,

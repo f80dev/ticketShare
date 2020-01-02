@@ -24,7 +24,7 @@ export class ApiService {
     return this.http.get(api("getusers/"+ADMIN_PASSWORD));
   }
 
-  getevents(userid:string){
+  getevents(userid:string=""){
     return this._get("events/"+userid);
   }
 

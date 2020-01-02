@@ -1,0 +1,11 @@
+<table matSort>
+  <tr>
+    <th mat-sort-header="name">Name</th>
+    <th mat-sort-header="dtCreate">dtCreate</th>
+  </tr>
+
+  <tr *ngFor="let evt of evts">
+    <td>{{evt.name}}</td>
+    <td>{{evt.dtCreate}}</td>
+  </tr>
+</table>
