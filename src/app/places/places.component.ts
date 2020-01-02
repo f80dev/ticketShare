@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ConfigService} from "../config.service";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-places',
@@ -15,6 +16,7 @@ export class PlacesComponent implements OnInit {
 
   constructor(public api: ApiService,
               public config:ConfigService,
+              private _location: Location,
               public route: ActivatedRoute) {
 
   }
@@ -32,6 +34,12 @@ export class PlacesComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+  }
+
+  buy(ticket:any){
+    this.api.buy(ticket._id).subscribe((r:any)=>{
+      this._location.back();
+    })
   }
 
 }

@@ -67,4 +67,8 @@ export class ApiService {
   burn(ticket: string) {
     return this._get("burn/"+ticket);
   }
+
+  buy(ticket: string) {
+    return this._get("buy/"+ticket);
+  }
 }

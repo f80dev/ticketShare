@@ -1,4 +1,5 @@
 <mat-spinner *ngIf="hourglass"></mat-spinner>
 <div *ngFor="let ticket of tickets">
-  Place <a href="{{ticket.to_buy}}">{{ticket.seat}}</a><br>
+  Place {{ticket.seat}} -
+  <button mat-button mat-flat-button (click)="buy(ticket)">Acheter</button><br>
 </div>

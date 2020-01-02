@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
               public route: ActivatedRoute) {
   }
 
+
+
+
   ngOnInit() {
     this.analyse_params((p: any) => {
       if (p.cmd == 'store') {
@@ -38,6 +41,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
 
 
   analyse_params(func) {
@@ -60,11 +64,19 @@ export class HomeComponent implements OnInit {
     func(this.config.params);
   }
 
+
+
+
   logout() {
     localStorage.removeItem('address');
+    this._location.back();
   }
+
+
 
   informe_copy() {
     this.toast.open("Adresse copiée");
   }
+
+
 }
