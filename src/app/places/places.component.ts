@@ -50,7 +50,9 @@ export class PlacesComponent implements OnInit {
 
   buy(ticket:any){
     var params:ParamMap=this.route.snapshot.queryParamMap;
+    this.hourglass=true;
     this.api.buy(localStorage.getItem("address"),ticket._id,params.get("event")).subscribe((r:any)=>{
+      this.hourglass=false;
       if(r!=null){
         this.toast.open("Achat confirmé");
         this.refresh();
