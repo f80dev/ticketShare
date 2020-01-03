@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfigService} from './config.service';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import {ApiService} from './api.service';
 export class AppComponent implements OnInit {
   title = 'ticketShare';
 
-  constructor(public config: ConfigService, public dialog: MatDialog, public api: ApiService) {
+  constructor(public config: ConfigService, public dialog: MatDialog, public api: ApiService,public toast:MatSnackBar,public _location: Location) {
     config.init();
     this.initUser();
   }
@@ -28,9 +29,16 @@ export class AppComponent implements OnInit {
           canEmoji: false
         }
       }).afterClosed().subscribe((result) => {
+        if(result==null){
+          this._location.go("cgu.html");
+        }
+          
         this.api.adduser(result).subscribe((r: any) => {
           this.config.user = r;
           localStorage.setItem('address', r._id);
+        },(err)=>{
+          this.toast.open("Adresse incorrecte");
+          this.initUser();
         });
       });
     } else {
