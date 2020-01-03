@@ -26,7 +26,17 @@ export class HomeComponent implements OnInit {
   }
 
 
+  refresh(){
+    if(localStorage.getItem("address")){
+      this.api.getuser(localStorage.getItem("address")).subscribe((r: any) => {
+        if(r!=null)
+          this.config.user=r;
+      });
+    }
+  }
+
   ngOnInit() {
+    this.refresh();
     this.analyse_params((p: any) => {
       if (p.cmd == 'store') {
         this.router.navigate(['store']);
@@ -67,7 +77,7 @@ export class HomeComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('address');
-    this._location.back();
+    window.location.reload();
   }
 
 

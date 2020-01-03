@@ -73,6 +73,7 @@
           "assets": [
             "src/404.html",
             "src/privacy.html",
+            "src/CNAME",
             "src/cgu.html",
             "src/style.css",
             "src/robots.txt",

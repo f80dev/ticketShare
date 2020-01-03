@@ -51,7 +51,8 @@ export class ValidateComponent implements OnInit {
   }
 
   burn(ticket: any) {
-    this.api.burn(ticket._id).subscribe((r)=>{
+    this.to_burn=[];
+    this.api.burn(ticket._id).subscribe((r:any)=>{
       this.refresh(this.lastAddress);
     })
   }
