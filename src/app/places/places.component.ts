@@ -3,6 +3,8 @@ import {ApiService} from "../api.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ConfigService} from "../config.service";
 import { Location } from '@angular/common';
+import {checkLogin} from "../tools";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-places',
@@ -15,6 +17,8 @@ export class PlacesComponent implements OnInit {
   hourglass=false;
 
   constructor(public api: ApiService,
+              public toast:MatSnackBar,
+              public router:Router,
               public config:ConfigService,
               private _location: Location,
               public route: ActivatedRoute) {
@@ -32,13 +36,25 @@ export class PlacesComponent implements OnInit {
     });
   }
 
+
+
+
+
   ngOnInit() {
+    checkLogin(this.router);
     this.refresh();
   }
 
+
+
+
   buy(ticket:any){
-    this.api.buy(ticket._id).subscribe((r:any)=>{
-      this._location.back();
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    this.api.buy(localStorage.getItem("address"),ticket._id,params.get("event")).subscribe((r:any)=>{
+      if(r!=null){
+        this.toast.open("Achat confirmé");
+        this.refresh();
+      }
     })
   }
 

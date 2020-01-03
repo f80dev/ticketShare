@@ -17,5 +17,12 @@
   <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['store'])">Store</button>
   <button mat-button mat-flat-button class="app-button" (click)="logout()">Logout</button>
 
+  <div *ngIf="config.user?._events?.length>0">
+    <h2>Vos billets</h2>
+    <div *ngFor="let _evt of config.user._events">
+      {{_evt.name}} le {{_evt.date}}
+    </div>
+  </div>
+
 </div>
 

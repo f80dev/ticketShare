@@ -70,6 +70,17 @@
           }
         },
         "serve": {
+          "assets": [
+            "src/404.html",
+            "src/privacy.html",
+            "src/cgu.html",
+            "src/style.css",
+            "src/robots.txt",
+            "src/sitemap.xml",
+            "src/favicon.ico",
+            "src/assets",
+            "src/manifest.json"
+          ],
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "ticketShare:build"

@@ -26,8 +26,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-
-
   ngOnInit() {
     this.analyse_params((p: any) => {
       if (p.cmd == 'store') {

@@ -549,8 +549,8 @@ export function exportToHTML(src:string,coupon:any,func:Function,color="darkred"
 }
 
 export function checkLogin(router: Router, params: any = null) {
-  if (!localStorage.getItem('user')) {
-    router.navigate(['login'], {queryParams: params});
+  if (!localStorage.getItem('address')) {
+    router.navigate(['home'], {queryParams: params});
     return false;
   } else {
     return true;

@@ -1,5 +1,8 @@
 <mat-spinner *ngIf="hourglass"></mat-spinner>
-<div *ngFor="let ticket of tickets">
-  Place {{ticket.seat}} -
-  <button mat-button mat-flat-button (click)="buy(ticket)">Acheter</button><br>
+<div *ngIf="!hourglass">
+  <div *ngFor="let ticket of tickets">
+    Place {{ticket.seat}} -
+    <button mat-button mat-flat-button (click)="buy(ticket)">Acheter</button><br>
+  </div>
+  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['home'])">Retour</button>
 </div>

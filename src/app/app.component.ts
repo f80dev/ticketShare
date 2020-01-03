@@ -35,7 +35,12 @@ export class AppComponent implements OnInit {
       });
     } else {
       this.api.getuser(address).subscribe((r: any) => {
-        this.config.user = r;
+        if(r.status==500){
+          localStorage.removeItem("address");
+          this.initUser();
+        }else{
+          this.config.user = r;
+        }
       });
     }
   }
