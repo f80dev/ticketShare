@@ -1,4 +1,9 @@
-<mat-spinner *ngIf="hourglass"></mat-spinner>
+<div *ngIf="hourglass">
+  <mat-spinner></mat-spinner>
+  Recherche des places disponibles
+</div>
+
+
 <div *ngIf="!hourglass">
   <div *ngFor="let ticket of tickets">
     Place {{ticket.seat}} -

@@ -4,6 +4,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,16 @@ import {Location} from "@angular/common";
 export class AppComponent implements OnInit {
   title = 'ticketShare';
 
-  constructor(public config: ConfigService, public dialog: MatDialog, public api: ApiService,public toast:MatSnackBar,public _location: Location) {
+  constructor(public config: ConfigService,
+              public dialog: MatDialog,
+              public api: ApiService,
+              public socket: Socket,
+              public toast:MatSnackBar,
+              public _location: Location) {
     config.init();
     this.initUser();
   }
+
 
   initUser() {
     const address = localStorage.getItem('address');
@@ -54,6 +61,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.socket.on('refresh', (data: any) => {
+      if (data.to == this.config.user._id) {
+        this.toast.open(data.message);
+      }
+    });
   }
 }

@@ -43,6 +43,7 @@ import { PlacesComponent } from './places/places.component';
 import { ValidateComponent } from './validate/validate.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { AdminComponent } from './admin/admin.component';
+import { HourglassComponent } from './hourglass/hourglass.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -63,7 +64,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PlacesComponent,
     ValidateComponent,
     ScannerComponent,
-    AdminComponent
+    AdminComponent,
+    HourglassComponent
   ],
   entryComponents: [
     PromptComponent

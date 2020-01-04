@@ -3,3 +3,12 @@
   <img [src]="event.visual" class="flyer" (click)="buy(event)"><br>
   <button mat-button mat-flat-button (click)="validate(event)">Validate</button>
 </div>
+
+<mat-spinner *ngIf="hourglass"></mat-spinner>
+
+<div *ngIf="events.length==0 && !hourglass">
+  Aucun événement disponible pour l'instant<br><br>
+  <button mat-button mat-raised-button (click)="fictif()">
+    En créer un fictif
+  </button>
+</div>

@@ -15,7 +15,7 @@ import {$$} from '../tools';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public socket: Socket,
+  constructor(
               public meta: Meta,
               public api: ApiService,
               public toast: MatSnackBar,
@@ -43,11 +43,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.socket.on('refresh', (data: any) => {
-      if (data.user == this.config.user._id) {
 
-      }
-    });
   }
 
 
