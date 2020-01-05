@@ -20,8 +20,9 @@
     </qr-code>
   </div>
   <br><br>
-  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['store'])">Store</button>
+  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['store'])">Boutique</button>
   <button mat-button mat-flat-button class="app-button" (click)="logout()">Logout</button>
+  <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
 
   <div *ngIf="config.user?._events?.length>0">
     <h2>Vos billets</h2>

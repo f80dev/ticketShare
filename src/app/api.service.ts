@@ -68,6 +68,10 @@ export class ApiService {
     return this._get("burn/"+ticket);
   }
 
+ resend(userid: string) {
+    return this._get("resend/"+userid);
+  }
+
   buy(buyer:string,ticket: string,event:string) {
     return this._get("buy/"+buyer+"/"+ticket+"/"+event);
   }

@@ -81,4 +81,9 @@ export class HomeComponent implements OnInit {
   }
 
 
+  send_codes() {
+    this.api.resend(this.config.user._id).subscribe(()=>{
+      this.toast.open("Consulter votre messagerie");
+    })
+  }
 }

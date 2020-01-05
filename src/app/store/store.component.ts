@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -14,7 +14,11 @@ export class StoreComponent implements OnInit {
   events=[];
   message="";
 
-  constructor(public api:ApiService,public config:ConfigService,public router:Router) {
+  constructor(public api:ApiService,
+              public config:ConfigService,
+              public route:ActivatedRoute,
+              public router:Router) {
+
   }
 
   refresh(){
@@ -24,7 +28,10 @@ export class StoreComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.refresh();
+    const params = this.route.snapshot.queryParamMap;
+    if(params.get("event"))
+      this.router.navigate(["places"],{queryParams:{event:params.get("event")}});
+    this.refresh();
   }
 
   buy(event: any) {
