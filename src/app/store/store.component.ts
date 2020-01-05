@@ -18,7 +18,6 @@ export class StoreComponent implements OnInit {
               public config:ConfigService,
               public route:ActivatedRoute,
               public router:Router) {
-
   }
 
   refresh(){

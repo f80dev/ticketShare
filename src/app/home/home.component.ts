@@ -6,7 +6,7 @@ import {MatSnackBar} from '@angular/material';
 import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {Socket} from 'ngx-socket-io';
-import {$$} from '../tools';
+import {$$, subscribe_socket} from '../tools';
 
 @Component({
   selector: 'app-home',
@@ -36,12 +36,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.config.refresh_callback=this.refresh;
     this.refresh();
     this.analyse_params((p: any) => {
       if (p.cmd == 'store') {
         this.router.navigate(['store']);
       }
     });
+    subscribe_socket(this,"refresh_event",this.refresh);
   }
 
 

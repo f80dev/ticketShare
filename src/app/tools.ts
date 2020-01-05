@@ -90,6 +90,25 @@ export function sendToPrint(section="print-section"){
   WindowPrt.print();
 }
 
+
+/**
+ *
+ * @param vm
+ * @param event_name
+ * @param func
+ */
+export function subscribe_socket(vm:any,event_name:string,func=null){
+  vm.socket.on(event_name, (data: any) => {
+    if (data.to == this.config.user._id) {
+      vm.toast.open(data.message);
+      if(func!=null)func(data);
+    }
+  });
+}
+
+
+
+
 export function $$(s: string, obj: any= null) {
   if(s!=null && s.startsWith("!")){
     debugger;

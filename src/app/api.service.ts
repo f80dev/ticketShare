@@ -72,6 +72,10 @@ export class ApiService {
     return this._get("resend/"+userid);
   }
 
+  removeEvt(userid: string,evtid:string) {
+    return this._get("remove_event/"+userid+"/"+evtid);
+  }
+
   buy(buyer:string,ticket: string,event:string) {
     return this._get("buy/"+buyer+"/"+ticket+"/"+event);
   }

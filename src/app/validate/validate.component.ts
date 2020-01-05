@@ -35,11 +35,13 @@ export class ValidateComponent implements OnInit {
   refresh(addr:string){
     this.lastAddress=addr;
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.message="Récupération des places du client"
-    this.api.use(addr,params.get("event")).subscribe((r:any)=>{
+    var evtid=params.get("event");
+    this.message="Récupération des places du client";
+    this.api.use(addr,evtid).subscribe((r:any)=>{
       this.message="";
       this.to_burn=r;
       if(this.to_burn.length==0){
+        this.api.removeEvt(addr,evtid).subscribe(()=>{});
         this.snackBar.open("Pas de ticket pour cet événement");
         this.showScanner=true;
       }
@@ -75,10 +77,10 @@ export class ValidateComponent implements OnInit {
     this.message="Validation du ticket";
 
     this.api.burn(ticket._id).subscribe((r:any)=>{
-      this.message="";
-      setTimeout(()=>{
-        this.refresh(this.lastAddress);
-      },500);
-    })
+      if(r.status==200){
+        this.message="";
+        setTimeout(()=>{this.refresh(this.lastAddress);},500);
+      }
+    });
   }
 }

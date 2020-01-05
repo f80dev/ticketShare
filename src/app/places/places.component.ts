@@ -3,7 +3,7 @@ import {ApiService} from "../api.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ConfigService} from "../config.service";
 import { Location } from '@angular/common';
-import {checkLogin} from "../tools";
+import {checkLogin, subscribe_socket} from "../tools";
 import {MatSnackBar} from "@angular/material";
 
 @Component({
@@ -43,6 +43,7 @@ export class PlacesComponent implements OnInit {
   ngOnInit() {
     checkLogin(this.router);
     this.refresh();
+    subscribe_socket(this,"refresh_buy",this.refresh);
   }
 
 

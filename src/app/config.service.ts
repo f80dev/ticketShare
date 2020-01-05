@@ -19,6 +19,7 @@ export class ConfigService {
   width_screen=300;
   params:any=null;
   user:any=null;
+  refresh_callback: () => void;
 
 
   constructor(private location: Location, private http: HttpClient,public platform:Platform){

@@ -5,6 +5,7 @@ import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
+import {subscribe_socket} from "./tools";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,6 @@ export class AppComponent implements OnInit {
   constructor(public config: ConfigService,
               public dialog: MatDialog,
               public api: ApiService,
-              public socket: Socket,
               public toast:MatSnackBar,
               public _location: Location) {
     config.init();
@@ -60,10 +60,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socket.on('refresh', (data: any) => {
-      if (data.to == this.config.user._id) {
-        this.toast.open(data.message);
-      }
-    });
+    subscribe_socket(this,"refresh_sell");
   }
 }
