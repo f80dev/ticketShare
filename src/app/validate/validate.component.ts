@@ -12,7 +12,7 @@ import {MatSnackBar} from "@angular/material";
 export class ValidateComponent implements OnInit {
   public to_burn=[];
   showScanner=true;
-  hourglass=false;
+  message="";
 
   lastAddress="";
 
@@ -20,6 +20,7 @@ export class ValidateComponent implements OnInit {
               public config:ConfigService,
               public snackBar:MatSnackBar,
               public route: ActivatedRoute) { }
+
 
 
   ngOnInit() {
@@ -32,19 +33,18 @@ export class ValidateComponent implements OnInit {
    * @param addr
    */
   refresh(addr:string){
-    debugger
     this.lastAddress=addr;
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.hourglass=true;
+    this.message="Récupération des places du client"
     this.api.use(addr,params.get("event")).subscribe((r:any)=>{
-      this.hourglass=false;
+      this.message="";
       this.to_burn=r;
       if(this.to_burn.length==0){
         this.snackBar.open("Pas de ticket pour cet événement");
         this.showScanner=true;
       }
     },()=>{
-      this.hourglass=false;
+      this.message="";
     })
   }
 
@@ -57,6 +57,9 @@ export class ValidateComponent implements OnInit {
     this.refresh($event.data);
   }
 
+
+
+
   update_addr($event) {
     const addr=$event.currentTarget.value;
     if(addr!=null && addr.length==42 && addr.startsWith("0x")){
@@ -64,10 +67,18 @@ export class ValidateComponent implements OnInit {
     }
   }
 
+
+
+
   burn(ticket: any) {
     this.to_burn=[];
+    this.message="Validation du ticket";
+
     this.api.burn(ticket._id).subscribe((r:any)=>{
-      this.refresh(this.lastAddress);
+      this.message="";
+      setTimeout(()=>{
+        this.refresh(this.lastAddress);
+      },500);
     })
   }
 }

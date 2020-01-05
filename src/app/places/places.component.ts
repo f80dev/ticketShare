@@ -14,7 +14,7 @@ import {MatSnackBar} from "@angular/material";
 export class PlacesComponent implements OnInit {
 
   tickets:any[]=[];
-  hourglass=false;
+  message="";
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
@@ -27,10 +27,10 @@ export class PlacesComponent implements OnInit {
 
 
   refresh(){
-    this.hourglass=true;
+    this.message="Récupération des places diponibles";
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.api.available(params.get("event"),localStorage.getItem("address")).subscribe((r:any)=>{
-      this.hourglass=false;
+      this.message="";
       if(r!=null)
         this.tickets=r;
     });
@@ -50,13 +50,16 @@ export class PlacesComponent implements OnInit {
 
   buy(ticket:any){
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.hourglass=true;
+    this.message="Validation de l'achat";
     this.api.buy(localStorage.getItem("address"),ticket._id,params.get("event")).subscribe((r:any)=>{
-      this.hourglass=false;
+      this.message="";
       if(r!=null){
         this.toast.open("Achat confirmé");
-        this.refresh();
+        setTimeout(()=>{this.refresh();},500);
       }
+    },(err)=>{
+      this.message="";
+      this.toast.open("Achat annulé");
     })
   }
 

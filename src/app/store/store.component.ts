@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class StoreComponent implements OnInit {
 
   events=[];
-  hourglass: boolean=false;
+  message="";
 
   constructor(public api:ApiService,public config:ConfigService,public router:Router) {
   }
@@ -36,9 +36,9 @@ export class StoreComponent implements OnInit {
   }
 
   fictif(){
-    this.hourglass=true;
+    this.message="Fabrication d'un événement fictif"
     this.api._get("test/event").subscribe(()=>{
-      this.hourglass=false;
+      this.message="";
       this.refresh();
     });
   }

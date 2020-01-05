@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
         data: {
           title: 'Email ou addresse de compte',
           question: 'Indiquer votre email ou l\'adresse de votre compte pour acheter des billets',
+          result:"hhoareau@gmail.com",
           onlyConfirm: false,
           canEmoji: false
         }
@@ -50,12 +51,10 @@ export class AppComponent implements OnInit {
       });
     } else {
       this.api.getuser(address).subscribe((r: any) => {
-        if(r.status==500){
-          localStorage.removeItem("address");
-          this.initUser();
-        }else{
-          this.config.user = r;
-        }
+        this.config.user = r;
+      },(err)=>{
+        localStorage.removeItem("address");
+        this.initUser();
       });
     }
   }

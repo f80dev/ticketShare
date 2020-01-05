@@ -1,13 +1,16 @@
-<div *ngIf="hourglass">
-  <mat-spinner></mat-spinner>
-  Recherche des places disponibles
-</div>
+<app-hourglass [message]="message"></app-hourglass>
 
-
-<div *ngIf="!hourglass">
+<div *ngIf="message?.length==0">
   <div *ngFor="let ticket of tickets">
     Place {{ticket.seat}} -
-    <button mat-button mat-flat-button (click)="buy(ticket)">Acheter</button><br>
+    <button mat-button mat-flat-button (click)="buy(ticket)">Acheter</button>
+    -
+    <div ngxClipboard style="cursor: pointer;display: inline-block;"
+         [cbContent]="ticket.address">
+      Copy
+    </div>
+
+    <br>
   </div>
   <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['home'])">Retour</button>
 </div>

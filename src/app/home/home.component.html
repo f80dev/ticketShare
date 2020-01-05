@@ -2,9 +2,11 @@
 
   <h2>{{config.values?.appname}}</h2>
   <h3>{{config.values?.claim}}</h3>
+  <br>
 
   <p>
-    hello {{config.user?.pseudo}}
+    hello {{config.user?.pseudo}}<br>
+    <span *ngIf="config.user?.ether>0">{{config.user?.ether}} ether</span>
   </p>
 
   <div *ngIf="config.user?._id?.length>0">

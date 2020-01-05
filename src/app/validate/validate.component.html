@@ -1,6 +1,6 @@
-<mat-progress-spinner *ngIf="hourglass"></mat-progress-spinner>
+<app-hourglass [message]="message"></app-hourglass>
 
-<div style="width:100%;text-align: center;margin-top:10%;" *ngIf="showScanner && !hourglass">
+<div style="width:100%;text-align: center;margin-top:10%;" *ngIf="showScanner && message.length==0">
   <app-scanner [size]="300"
                *ngIf="config.webcamsAvailable>0"
                (flash)="onflash_event($event)">
@@ -14,14 +14,18 @@
            [(ngModel)]="address"
            (change)="update_addr($event)">
   </mat-form-field>
-  <button mat-button mat-raised-button (click)="update_addr(address)">Rechercher</button>
+
+  <button mat-button mat-raised-button
+          (click)="update_addr(address)">
+    Rechercher
+  </button>
 </div>
 
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="to_burn.length>0">
   <div *ngFor="let ticket of to_burn">
     Place: {{ticket.seat}} -
     <button mat-button mat-raised-button (click)="burn(ticket)">Burn</button>
-    <br>
+    <br><br>
   </div>
 </div>
 
