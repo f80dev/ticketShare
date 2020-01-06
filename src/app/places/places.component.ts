@@ -70,6 +70,7 @@ export class PlacesComponent implements OnInit {
     this.message="Validation de l'achat";
     this.api.buy(localStorage.getItem("address"),rc,params.get("event")).subscribe((r:any)=>{
       this.message="";
+      debugger
       if(r!=null){
         this.toast.open("Achat confirmé");
         this.router.navigate(["home"]);
