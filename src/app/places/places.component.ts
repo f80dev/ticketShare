@@ -41,6 +41,9 @@ export class PlacesComponent implements OnInit {
           this.tickets=r;
         }
       }
+    },()=>{
+      this.toast.open("Cet événement n'est plus disponible");
+      this._location.back();
     });
   }
 
@@ -74,6 +77,7 @@ export class PlacesComponent implements OnInit {
     },(err)=>{
       this.message="";
       this.toast.open("Achat annulé");
+      this._location.back();
     })
   }
 

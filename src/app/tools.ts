@@ -98,13 +98,15 @@ export function sendToPrint(section="print-section"){
  * @param func
  */
 export function subscribe_socket(vm:any,event_name:string,refresh=true){
-  if(vm.socket!=null)
+  if(vm.socket!=null){
+    $$("Installation de la socket pour l'event "+event_name);
     vm.socket.on(event_name, (data: any) => {
-      if (data.to == vm.config.user._id) {
+      if (data.to == vm.config.user._id || data.to=="*") {
         if(vm.toast!=null && data.message!=null && data.message.length>0)vm.toast.open(data.message);
         if(refresh && vm.refresh!=null)vm.refresh();
       }
     });
+  }
 }
 
 

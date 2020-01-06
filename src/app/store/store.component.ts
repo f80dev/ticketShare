@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {subscribe_socket} from "../tools";
+import {Socket} from "ngx-socket-io";
+import {MatSnackBar} from "@angular/material";
 
 
 @Component({
@@ -16,6 +19,8 @@ export class StoreComponent implements OnInit {
 
   constructor(public api:ApiService,
               public config:ConfigService,
+              public socket:Socket,
+              public toast:MatSnackBar,
               public route:ActivatedRoute,
               public router:Router) {
   }
@@ -31,6 +36,7 @@ export class StoreComponent implements OnInit {
     if(params.get("event"))
       this.router.navigate(["places"],{queryParams:{event:params.get("event")}});
     this.refresh();
+    subscribe_socket(this,"refresh_store");
   }
 
   buy(event: any) {
