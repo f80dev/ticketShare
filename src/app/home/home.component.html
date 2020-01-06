@@ -26,7 +26,7 @@
 
   <div *ngIf="config.user?._events?.length>0">
     <h2>Vos billets</h2>
-    <div *ngFor="let _evt of config.user._events">
+    <div *ngFor="let _evt of config.user._events" (click)="openEvent(_evt)">
       {{_evt.name}} le {{_evt.date}}
     </div>
   </div>

@@ -44,6 +44,9 @@ import { ValidateComponent } from './validate/validate.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { AdminComponent } from './admin/admin.component';
 import { HourglassComponent } from './hourglass/hourglass.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { MyticketsComponent } from './mytickets/mytickets.component';
+import { EventComponent } from './event/event.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -65,7 +68,10 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ValidateComponent,
     ScannerComponent,
     AdminComponent,
-    HourglassComponent
+    HourglassComponent,
+    TicketComponent,
+    MyticketsComponent,
+    EventComponent
   ],
   entryComponents: [
     PromptComponent

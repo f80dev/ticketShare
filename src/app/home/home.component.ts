@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['store']);
       }
     });
-    subscribe_socket(this,"refresh_event",this.refresh);
+    subscribe_socket(this,"refresh_event");
   }
 
 
@@ -87,5 +87,9 @@ export class HomeComponent implements OnInit {
     this.api.resend(this.config.user._id).subscribe(()=>{
       this.toast.open("Consulter votre messagerie");
     })
+  }
+
+  openEvent(_evt) {
+    this.router.navigate(["mytickets"],{queryParams:{event:_evt._id}})
   }
 }

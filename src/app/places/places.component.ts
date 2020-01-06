@@ -5,6 +5,7 @@ import {ConfigService} from "../config.service";
 import { Location } from '@angular/common';
 import {checkLogin, subscribe_socket} from "../tools";
 import {MatSnackBar} from "@angular/material";
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-places',
@@ -18,6 +19,7 @@ export class PlacesComponent implements OnInit {
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
+              public socket:Socket,
               public router:Router,
               public config:ConfigService,
               private _location: Location,
@@ -31,8 +33,14 @@ export class PlacesComponent implements OnInit {
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.api.available(params.get("event"),localStorage.getItem("address")).subscribe((r:any)=>{
       this.message="";
-      if(r!=null)
-        this.tickets=r;
+      if(r!=null){
+        if(r.length==0){
+          this._location.back();
+          this.toast.open("Plus de place disponible");
+        } else {
+          this.tickets=r;
+        }
+      }
     });
   }
 
@@ -43,20 +51,25 @@ export class PlacesComponent implements OnInit {
   ngOnInit() {
     checkLogin(this.router);
     this.refresh();
-    subscribe_socket(this,"refresh_buy",this.refresh);
+    subscribe_socket(this,"refresh_buy");
   }
 
 
 
 
-  buy(ticket:any){
+  buy(tickets:any){
+    var rc=[];
+    for(let ticket of tickets)
+      rc.push(ticket.value)
+
+
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.message="Validation de l'achat";
-    this.api.buy(localStorage.getItem("address"),ticket._id,params.get("event")).subscribe((r:any)=>{
+    this.api.buy(localStorage.getItem("address"),rc,params.get("event")).subscribe((r:any)=>{
       this.message="";
       if(r!=null){
         this.toast.open("Achat confirmé");
-        setTimeout(()=>{this.refresh();},500);
+        this.router.navigate(["home"]);
       }
     },(err)=>{
       this.message="";

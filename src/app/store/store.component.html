@@ -1,8 +1,8 @@
-<div *ngFor="let event of events">
-  <h2>{{event.name}}</h2><br>
-  <img [src]="event.visual" class="flyer" (click)="buy(event)"><br>
-  <button mat-button mat-flat-button (click)="validate(event)">Validate</button>
-</div>
+<h1>Liste des événements disponibles</h1>
+<app-event *ngFor="let event of events" [event]="event">
+  <button mat-button mat-flat-button (click)="buy(event)">Acheter</button>
+  <button mat-button mat-flat-button (click)="validate(event)">Valider</button>
+</app-event>
 
 <app-hourglass [message]="message"></app-hourglass>
 

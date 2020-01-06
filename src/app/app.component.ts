@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
               public dialog: MatDialog,
               public api: ApiService,
               public toast:MatSnackBar,
+              public socket:Socket,
               public _location: Location) {
     config.init();
     this.initUser();

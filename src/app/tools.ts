@@ -97,13 +97,14 @@ export function sendToPrint(section="print-section"){
  * @param event_name
  * @param func
  */
-export function subscribe_socket(vm:any,event_name:string,func=null){
-  vm.socket.on(event_name, (data: any) => {
-    if (data.to == this.config.user._id) {
-      vm.toast.open(data.message);
-      if(func!=null)func(data);
-    }
-  });
+export function subscribe_socket(vm:any,event_name:string,refresh=true){
+  if(vm.socket!=null)
+    vm.socket.on(event_name, (data: any) => {
+      if (data.to == vm.config.user._id) {
+        if(vm.toast!=null && data.message!=null && data.message.length>0)vm.toast.open(data.message);
+        if(refresh && vm.refresh!=null)vm.refresh();
+      }
+    });
 }
 
 

@@ -42,7 +42,6 @@ export class ApiService {
     return this.http.get(api("checkcode/"+userid+"/"+code+"/"+field));
   }
 
-
   convert(url:string) {
     return this.http.post(api("convert"),url);
   }
@@ -76,7 +75,8 @@ export class ApiService {
     return this._get("remove_event/"+userid+"/"+evtid);
   }
 
-  buy(buyer:string,ticket: string,event:string) {
+  buy(buyer:string,tickets: string[],event:string) {
+    var ticket=tickets.join(",");
     return this._get("buy/"+buyer+"/"+ticket+"/"+event);
   }
 }
