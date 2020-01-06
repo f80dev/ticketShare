@@ -7,6 +7,7 @@ import {PlacesComponent} from "./places/places.component";
 import {ValidateComponent} from "./validate/validate.component";
 import {AdminComponent} from "./admin/admin.component";
 import {MyticketsComponent} from "./mytickets/mytickets.component";
+import {ShareComponent} from "./share/share.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'places', component: PlacesComponent},
   { path: 'mytickets', component: MyticketsComponent},
+  { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'validate', component: ValidateComponent},
   { path: '', component: HomeComponent},

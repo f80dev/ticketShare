@@ -47,6 +47,7 @@ import { HourglassComponent } from './hourglass/hourglass.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { MyticketsComponent } from './mytickets/mytickets.component';
 import { EventComponent } from './event/event.component';
+import { ShareComponent } from './share/share.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -71,7 +72,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     HourglassComponent,
     TicketComponent,
     MyticketsComponent,
-    EventComponent
+    EventComponent,
+    ShareComponent
   ],
   entryComponents: [
     PromptComponent

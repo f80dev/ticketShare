@@ -11,7 +11,6 @@ export class AboutComponent implements OnInit {
   constructor(public config:ConfigService) { }
 
   visible=false;
-  @Input("user") user:any;
   @Input("withlogo") withlogo=true;
   @Input("logosize") logosize="150px";
   @Output('open') onopen: EventEmitter<any>=new EventEmitter();

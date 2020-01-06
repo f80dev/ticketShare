@@ -1,5 +1,4 @@
 <div class="app-card" style="text-align: center">
-
   <h2>{{config.values?.appname}}</h2>
   <h3>{{config.values?.claim}}</h3>
   <br>
@@ -24,15 +23,13 @@
   <button mat-button mat-flat-button class="app-button" (click)="logout()">Logout</button>
   <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
 
+  <br>
   <div *ngIf="config.user?._events?.length>0">
-    <h2>Vos billets</h2>
+    <h2>Vos prochains concerts</h2>
     <div *ngFor="let _evt of config.user._events" (click)="openEvent(_evt)">
-      {{_evt.name}} le {{_evt.date}}
+      {{_evt.name}} le {{_evt.date*1000 | date:'dd/MM'}}
     </div>
   </div>
-
-  <br>
-  <small>Version:{{config.values.version}}</small>
-
 </div>
+<app-about></app-about>
 
