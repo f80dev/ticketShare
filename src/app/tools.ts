@@ -102,7 +102,7 @@ export function subscribe_socket(vm:any,event_name:string,refresh=true){
     $$("Installation de la socket pour l'event "+event_name);
     vm.socket.on(event_name, (data: any) => {
       if (data.to == vm.config.user._id || data.to=="*") {
-        if(vm.toast!=null && data.message!=null && data.message.length>0)vm.toast.open(data.message);
+        if(vm.toast!=null && data.message!=null && data.message.length>0)showMessage(this,data.message);
         if(refresh && vm.refresh!=null)vm.refresh();
       }
     });
@@ -220,7 +220,8 @@ export function showMessage(vm:any,s:string="",duration=2000){
   } else {
     //Affichage en mode toaster
     var toaster:MatSnackBar=vm.toast || vm.snackBar;
-    toaster.open(s,"",{duration:duration});
+    if(toaster!=null)
+      toaster.open(s,"",{duration:duration});
   }
 }
 

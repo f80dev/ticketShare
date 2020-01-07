@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
         data: {
           title: 'Email ou addresse de compte',
           question: 'Indiquer votre email ou l\'adresse de votre compte pour acheter des billets',
-          result:"hhoareau@gmail.com",
+          result:"567E753E69EB31B532272697D687B6D607BBE86A0A699148F9A81541582724C8",
           onlyConfirm: false,
           canEmoji: false
         }

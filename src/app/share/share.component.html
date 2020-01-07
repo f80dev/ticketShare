@@ -1,23 +1,26 @@
+<app-hourglass [message]="message"></app-hourglass>
 <div style="width: 100%;text-align: center">
   <h2>Destinataire</h2>
   <app-scanner [size]="320"
                *ngIf="config.webcamsAvailable>0"
                (flash)="onflash($event)"></app-scanner>
-</div>
+
 <br>
 <br>
-<mat-form-field class="form-field-style" style="width: 60%;margin-right: 2%;">
+<mat-form-field class="form-field-style" style="width: 90%;margin-right: 5%;">
   <input type="text" matInput
          id="txtAddress"
          title="Saisissez l'adresse de votre compte Ethereum"
          placeholder="Adresse du destinataire"
          [(ngModel)]="address"
-         (change)="onenter($event)">
+         (keypress)="onenter($event)">
 </mat-form-field>
-&nbsp;
+<br>
+<br>
 <button mat-button mat-raised-button
         (click)="transfert(address)">
-  Rechercher
+  Envoyer
 </button>
 
 
+</div>

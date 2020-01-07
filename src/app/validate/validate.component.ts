@@ -72,10 +72,9 @@ export class ValidateComponent implements OnInit {
 
 
 
-  burn(ticket: any) {
+  burn(ticket=null) {
     this.to_burn=[];
     this.message="Validation du ticket";
-
     this.api.burn(ticket._id).subscribe((r:any)=>{
       if(r.status==200){
         this.message="";

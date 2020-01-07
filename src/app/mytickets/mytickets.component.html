@@ -1,5 +1,7 @@
 <app-event [event]="_event">
-  <app-ticket *ngFor="let ticket of tickets" [ticket]="ticket"></app-ticket>
+  <h2>Vos billets</h2><br>
+  <app-ticket *ngFor="let ticket of tickets" [ticket]="ticket">
+  </app-ticket>
   <app-hourglass [message]="message"></app-hourglass>
 </app-event>
 <br>

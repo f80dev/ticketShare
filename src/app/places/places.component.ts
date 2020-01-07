@@ -21,6 +21,7 @@ export class PlacesComponent implements OnInit {
   categories={};
   l_categories:string[]=[];
   nb_places=0;
+  sel_tickets: any;
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
@@ -47,6 +48,8 @@ export class PlacesComponent implements OnInit {
           for(let _t of r){
             if(_t.seat==null && _t.ref!=null){
               if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
+              this.categories[_t.price].description=_t.description;
+              this.categories[_t.price].visual=_t.visual;
               this.categories[_t.price].to_buy++;
               this.categories[_t.price].tickets.push(_t);
               r=arrayRemove(r,_t);
@@ -76,12 +79,12 @@ export class PlacesComponent implements OnInit {
 
 
 
-  buy(tickets:any){
+  buy(){
     var rc=[];
-    debugger
-    if(tickets!=null){
-      for(let ticket of tickets)
+    if(this.sel_tickets!=null){
+      for(let ticket of this.sel_tickets) {
         rc.push(ticket.value)
+      }
     }
 
     for(let cat of Object.keys(this.categories)) {
@@ -112,6 +115,7 @@ export class PlacesComponent implements OnInit {
   update_total(tickets:any=null) {
     this.total=0;this.nb_places=0;
     if(tickets!=null){
+      this.sel_tickets=tickets;
       this.nb_places=tickets.length;
       for(let t of tickets){
         for(let r of this.tickets){

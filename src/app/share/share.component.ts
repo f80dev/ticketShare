@@ -15,6 +15,7 @@ import {$$,showMessage} from '../tools';
 export class ShareComponent implements OnInit {
   ticketid: string = "";
   address="";
+  message: string="";
 
   constructor(public config:ConfigService,
               public toast:MatSnackBar,
@@ -27,7 +28,9 @@ export class ShareComponent implements OnInit {
   }
 
   transfert(_to:string){
+    this.message="Transfert en cours";
     this.api.transfert(this.config.user._id,_to,this.ticketid).subscribe((r)=>{
+      this.message="";
       if(r){
         showMessage(this,"Transfert effectué");
         this._location.back();
@@ -44,8 +47,11 @@ export class ShareComponent implements OnInit {
   }
 
   onenter(evt){
-    if(evt.target.value!=null && evt.target.value.length>10)
-      this.transfert(evt.target.value);
+    if(evt.target.value==13){
+      if(this.address!=null && this.address.length>10)
+        this.transfert(evt.target.value);
+    }
+
   }
 
 }

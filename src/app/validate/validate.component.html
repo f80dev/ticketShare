@@ -1,31 +1,40 @@
 <app-hourglass [message]="message"></app-hourglass>
-
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="showScanner && message.length==0">
+  <h2>Validation des entrées</h2>
+
   <app-scanner [size]="300"
                *ngIf="config.webcamsAvailable>0"
                (flash)="onflash_event($event)">
   </app-scanner>
 
-  <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
+  <mat-form-field class="form-field-style" style="width: 90%;margin-right: 5%;">
     <input type="text" matInput
            id="txtAddress"
            title="Saisissez l'adresse de votre compte Ethereum"
-           placeholder="Adresse du compte"
+           placeholder="Adresse du wallet"
            [(ngModel)]="address"
            (change)="update_addr($event)">
   </mat-form-field>
+  <br>
 
   <button mat-button mat-raised-button
           (click)="update_addr(address)">
-    Rechercher
+    Recherche des places
   </button>
 </div>
 
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="to_burn.length>0">
-  <div *ngFor="let ticket of to_burn">
-    Place: {{ticket.seat}} -
-    <button mat-button mat-raised-button (click)="burn(ticket)">Burn</button>
-    <br><br>
-  </div>
+  <h2>{{to_burn.length}} entrée(s) valable(s)</h2>
+  <button mat-button mat-raised-button (click)="burn()">Tout utiliser</button>
+
+  <mat-selection-list #select>
+    <mat-list-option *ngFor="let ticket of to_burn"
+                     [value]="ticket._id"
+                     (click)="burn(select?.selectedOptions?.selected)">
+      <mat-icon matListIcon>event_seat</mat-icon>
+      <h3 matLine>#{{ticket.seat || ticket.ref}}</h3>
+    </mat-list-option>
+  </mat-selection-list>
+
 </div>
 
