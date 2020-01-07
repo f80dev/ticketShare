@@ -1,0 +1,23 @@
+<div style="width: 100%;text-align: center">
+  <h2>Destinataire</h2>
+  <app-scanner [size]="320"
+               *ngIf="config.webcamsAvailable>0"
+               (flash)="onflash($event)"></app-scanner>
+</div>
+<br>
+<br>
+<mat-form-field class="form-field-style" style="width: 60%;margin-right: 2%;">
+  <input type="text" matInput
+         id="txtAddress"
+         title="Saisissez l'adresse de votre compte Ethereum"
+         placeholder="Adresse du destinataire"
+         [(ngModel)]="address"
+         (change)="onenter($event)">
+</mat-form-field>
+&nbsp;
+<button mat-button mat-raised-button
+        (click)="transfert(address)">
+  Rechercher
+</button>
+
+

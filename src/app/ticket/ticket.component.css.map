@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAa;EACX,SAAS,EAAE,KAAK;EAChB,OAAO,EAAE,YAAY;EACrB,MAAM,EAAE,GAAG",
+"sources": ["ticket.component.sass"],
+"names": [],
+"file": "ticket.component.css"
+}

@@ -3,9 +3,10 @@ import {ApiService} from "../api.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ConfigService} from "../config.service";
 import { Location } from '@angular/common';
-import {checkLogin, subscribe_socket} from "../tools";
+import {arrayRemove, checkLogin, subscribe_socket} from "../tools";
 import {MatSnackBar} from "@angular/material";
 import {Socket} from "ngx-socket-io";
+import {$$,showMessage} from '../tools';
 
 @Component({
   selector: 'app-places',
@@ -16,6 +17,10 @@ export class PlacesComponent implements OnInit {
 
   tickets:any[]=[];
   message="";
+  total=0;
+  categories={};
+  l_categories:string[]=[];
+  nb_places=0;
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
@@ -36,13 +41,24 @@ export class PlacesComponent implements OnInit {
       if(r!=null){
         if(r.length==0){
           this._location.back();
-          this.toast.open("Plus de place disponible");
+          showMessage(this,"Plus de place disponible");
         } else {
+          this.categories={};
+          for(let _t of r){
+            if(_t.seat==null && _t.ref!=null){
+              if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
+              this.categories[_t.price].to_buy++;
+              this.categories[_t.price].tickets.push(_t);
+              r=arrayRemove(r,_t);
+            }
+          }
+          this.l_categories=Object.keys(this.categories);
+
           this.tickets=r;
         }
       }
     },()=>{
-      this.toast.open("Cet événement n'est plus disponible");
+      showMessage(this,"Cet événement n'est plus disponible");
       this._location.back();
     });
   }
@@ -62,23 +78,50 @@ export class PlacesComponent implements OnInit {
 
   buy(tickets:any){
     var rc=[];
-    for(let ticket of tickets)
-      rc.push(ticket.value)
+    debugger
+    if(tickets!=null){
+      for(let ticket of tickets)
+        rc.push(ticket.value)
+    }
 
+    for(let cat of Object.keys(this.categories)) {
+      var item=this.categories[cat];
+      while(item.buy>0){
+        rc.push(item.tickets[item.buy-1]._id)
+        item.buy--;
+      }
+    }
 
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.message="Validation de l'achat";
     this.api.buy(localStorage.getItem("address"),rc,params.get("event")).subscribe((r:any)=>{
       this.message="";
       if(r!=null){
-        this.toast.open("Achat confirmé");
+        showMessage(this,"Achat confirmé");
         this.router.navigate(["home"]);
       }
     },(err)=>{
       this.message="";
-      this.toast.open("Achat annulé");
+      showMessage(this,"Achat annulé");
       this._location.back();
     })
   }
 
+
+
+  update_total(tickets:any=null) {
+    this.total=0;this.nb_places=0;
+    if(tickets!=null){
+      this.nb_places=tickets.length;
+      for(let t of tickets){
+        for(let r of this.tickets){
+          if(t.value==r._id)this.total=this.total+r.price;
+        }
+      }
+    }
+    for(let cat of Object.keys(this.categories)){
+      this.nb_places=this.nb_places+this.categories[cat].buy;
+      this.total=this.total+Number(cat)*this.categories[cat].buy;
+    }
+  }
 }

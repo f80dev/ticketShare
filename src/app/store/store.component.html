@@ -1,8 +1,6 @@
-<h1>Liste des événements disponibles</h1>
-
+<div style="position: relative;height: 100vh;vertical-align: text-top;">
   <app-event *ngFor="let event of events" [event]="event">
-    <div *ngIf="event.description?.length>0"
-         style="font-size: small;color:gray;max-height: 200px;overflow: hidden;">
+    <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
       {{event.description}}
     </div>
 
@@ -13,11 +11,12 @@
 
   </app-event>
 
-<app-hourglass [message]="message"></app-hourglass>
+  <app-hourglass [message]="message"></app-hourglass>
 
-<div *ngIf="events.length==0 && message.length==0">
-  Aucun événement disponible pour l'instant<br><br>
-  <button mat-button mat-raised-button (click)="fictif()">
-    En créer un fictif
-  </button>
+  <div *ngIf="events.length==0 && message.length==0">
+    Aucun événement disponible pour l'instant<br><br>
+    <button mat-button mat-raised-button (click)="fictif()">
+      En créer un fictif
+    </button>
+  </div>
 </div>

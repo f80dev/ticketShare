@@ -208,7 +208,7 @@ export function getMarkerLayer(map:any):any {
  * @param s
  * @param duration
  */
-export function showMessage(vm:any,s:string="",duration=20000){
+export function showMessage(vm:any,s:string="",duration=2000){
   if(s==null || s.length==0)return false;
   s=s+"";
   $$("Affichage du message :",s)
@@ -589,6 +589,12 @@ export function openGraphForShop(idshop:string,_type="coupon"){
     "&limit=5000&pca=1&processors=2&title=Distribution_des_coupons_de_votre_point_de_vente";
   $$("url=",url);
   return url;
+}
+
+export function arrayRemove(arr, value) {
+  return arr.filter((ele)=>{
+    return ele != value;
+  });
 }
 
 export function fixTagPage(meta:any,coupon:any){

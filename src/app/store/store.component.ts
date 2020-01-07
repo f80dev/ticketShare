@@ -6,7 +6,6 @@ import {subscribe_socket} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatSnackBar} from "@angular/material";
 
-
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',

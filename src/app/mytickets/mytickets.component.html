@@ -1,0 +1,9 @@
+<app-event [event]="_event">
+  <app-ticket *ngFor="let ticket of tickets" [ticket]="ticket"></app-ticket>
+  <app-hourglass [message]="message"></app-hourglass>
+</app-event>
+<br>
+<button mat-button mat-raised-button (click)="_location.back()">
+  Retour
+</button>
+

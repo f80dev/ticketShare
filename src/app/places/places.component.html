@@ -1,23 +1,54 @@
-<app-hourglass [message]="message"></app-hourglass>
-
-<div *ngIf="message?.length==0">
+<!--Panel de commande-->
+<div *ngIf="message?.length==0" style="width: 100%;">
+  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['home'])">Retour</button>
   <button mat-button mat-flat-button
-          *ngIf="select.selectedOptions.selected.length>0"
-          class="app-button" (click)="buy(select.selectedOptions.selected)">
-    Buy
+          *ngIf="total>0"
+          class="app-button" (click)="buy(select?.selectedOptions?.selected)">
+    Acheter
   </button>
 
-  <mat-selection-list #select>
-    <mat-list-option *ngFor="let ticket of tickets" [value]="ticket._id">
+  <span *ngIf="nb_places>0">
+    {{nb_places}} places
+  </span>
 
+  <span *ngIf="total>0">pour un total de {{total}}€</span>
+</div>
+
+<app-hourglass [message]="message"></app-hourglass>
+
+<div *ngIf="tickets?.length>0">
+  <h3>Entrées placées</h3>
+  <mat-selection-list #select>
+    <mat-list-option *ngFor="let ticket of tickets"
+                     [value]="ticket._id"
+                     (click)="update_total(select?.selectedOptions?.selected)">
         <mat-icon matListIcon>event_seat</mat-icon>
-        <h3 matLine> Place {{ticket.seat}} </h3>
+        <h3 matLine>Place {{ticket.seat}}</h3>
         <p matLine>
           <span>{{ticket.price}}</span>€
           <mat-icon ngxClipboard style="cursor: pointer;display: inline-block;" [cbContent]="ticket.address">copy</mat-icon>
         </p>
     </mat-list-option>
   </mat-selection-list>
-
-  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['home'])">Retour</button>
 </div>
+
+
+<div *ngIf="l_categories.length>0">
+  <h3>Entrées non placées</h3>
+  <div *ngFor="let cat of l_categories">
+    <div *ngIf="categories[cat].to_buy>0">
+      &nbsp;{{categories[cat].buy}} Places à {{cat}}€ :
+      <mat-slider
+        style="width:50%;"
+        thumbLabel
+        (valueChange)="update_total(select?.selectedOptions?.selected)"
+        tickInterval="1"
+        [(ngModel)]="categories[cat].buy"
+        min="0"
+        max="{{categories[cat].to_buy}}">
+      </mat-slider>
+      <br>
+    </div>
+  </div>
+</div>
+

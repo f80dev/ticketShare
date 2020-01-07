@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,WAAW;EACT,SAAS,EAAE,KAAK;EAChB,OAAO,EAAE,YAAY;EACrB,MAAM,EAAE,IAAI;;AAEd,aAAa;EACX,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,IAAI;EAChB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK",
+"sources": ["event.component.sass"],
+"names": [],
+"file": "event.component.css"
+}

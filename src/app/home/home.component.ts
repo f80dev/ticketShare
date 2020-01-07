@@ -5,8 +5,7 @@ import {ConfigService} from '../config.service';
 import {MatSnackBar} from '@angular/material';
 import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
-import {Socket} from 'ngx-socket-io';
-import {$$, subscribe_socket} from '../tools';
+import {$$, subscribe_socket,showMessage} from '../tools';
 
 @Component({
   selector: 'app-home',
@@ -79,13 +78,13 @@ export class HomeComponent implements OnInit {
 
 
   informe_copy() {
-    this.toast.open("Adresse copiée");
+    showMessage(this,"Adresse copiée");
   }
 
 
   send_codes() {
     this.api.resend(this.config.user._id).subscribe(()=>{
-      this.toast.open("Consulter votre messagerie");
+      showMessage(this,"Consulter votre messagerie");
     })
   }
 

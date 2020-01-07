@@ -19,7 +19,7 @@ import {
   MatDialogModule,
   MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
   MatProgressSpinnerModule,
-  MatSelectModule, MatSnackBarModule, MatSortModule, MatStepperModule,
+  MatSelectModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule,
   MatToolbarModule
 } from "@angular/material";
 import {HttpClientModule} from "@angular/common/http";
@@ -48,6 +48,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { MyticketsComponent } from './mytickets/mytickets.component';
 import { EventComponent } from './event/event.component';
 import { ShareComponent } from './share/share.component';
+import { FilterPipe } from './filter.pipe';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -73,13 +74,15 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     TicketComponent,
     MyticketsComponent,
     EventComponent,
-    ShareComponent
+    ShareComponent,
+    FilterPipe
   ],
   entryComponents: [
     PromptComponent
   ],
   imports: [
     BrowserModule,
+    MatSliderModule,
     PickerModule,
     AppRoutingModule,
     BrowserAnimationsModule,

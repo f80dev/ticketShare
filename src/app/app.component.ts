@@ -5,7 +5,7 @@ import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
-import {subscribe_socket} from "./tools";
+import {subscribe_socket,$$,showMessage} from "./tools";
 
 @Component({
   selector: 'app-root',
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
           this.config.user = r;
           localStorage.setItem('address', r._id);
         },(err)=>{
-          this.toast.open("Adresse incorrecte");
+          showMessage(this,"Adresse incorrecte");
           this.initUser();
         });
       });

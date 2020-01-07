@@ -1,0 +1,22 @@
+<mat-card class="event-card">
+
+  <mat-card-header>
+    <mat-icon mat-card-avatar>house</mat-icon>
+    <mat-card-title>{{_event.name}}</mat-card-title>
+    <mat-card-subtitle>{{_event.salle}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <div style="width: 100%;height: 200px;">
+    <img class="visual-event" [src]="_event.visual" alt="Visuel du ticket">
+  </div>
+  <br>
+  <mat-card-content>
+    <ng-content></ng-content>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="showAction">
+    <button mat-button mat-flat-button>LIKE</button>
+    <button mat-button mat-flat-button (click)="openMap()">Y ALLER</button>
+    <button mat-button mat-flat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
