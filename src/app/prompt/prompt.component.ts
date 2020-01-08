@@ -8,6 +8,8 @@ export interface DialogData {
   question:string;
   onlyConfirm:boolean;
   emojis:boolean;
+  lbl_ok:string,
+  lbl_cancel:string
 }
 
 
