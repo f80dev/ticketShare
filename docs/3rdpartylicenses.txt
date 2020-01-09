@@ -103,6 +103,8 @@ THE SOFTWARE.
 
 @angular/material/progress-spinner
 
+@angular/material/sidenav
+
 @angular/material/slider
 
 @angular/material/snack-bar

@@ -19,7 +19,7 @@ import {
   MatDialogModule,
   MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
   MatProgressSpinnerModule,
-  MatSelectModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule,
+  MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule,
   MatToolbarModule
 } from "@angular/material";
 import {HttpClientModule} from "@angular/common/http";
@@ -82,6 +82,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   ],
   imports: [
     BrowserModule,
+    MatSidenavModule,
     MatSliderModule,
     PickerModule,
     AppRoutingModule,

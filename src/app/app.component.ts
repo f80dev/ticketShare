@@ -13,7 +13,7 @@ import {subscribe_socket,$$,showMessage} from "./tools";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ticketShare';
+  showFiller = false;
 
   constructor(public config: ConfigService,
               public dialog: MatDialog,
