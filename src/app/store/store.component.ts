@@ -48,7 +48,7 @@ export class StoreComponent implements OnInit {
 
   fictif(){
     this.message="Fabrication d'un événement fictif"
-    this.api._get("test/event").subscribe(()=>{
+    this.api._get("add_event/demo").subscribe(()=>{
       this.message="";
       this.refresh();
     });
