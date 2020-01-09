@@ -14,12 +14,27 @@
              [value]="config.user._id">
     </qr-code>
   </div>
-
+  <br>
+  <br>
   <mat-nav-list>
+    <a mat-list-item routerLink="myevents">
+      <mat-icon>event_seat</mat-icon>
+      &nbsp;&nbsp;Vos places
+    </a>
+
     <a mat-list-item routerLink="store">
       <mat-icon>shopping_cart</mat-icon>
       &nbsp;&nbsp;Store
     </a>
+
+  <br>
+
+   <a mat-list-item routerLink="admin">
+      <mat-icon>build</mat-icon>
+      &nbsp;&nbsp;Admin
+  </a>
+
+
   </mat-nav-list>
 
 

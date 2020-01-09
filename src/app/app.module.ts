@@ -49,6 +49,7 @@ import { MyticketsComponent } from './mytickets/mytickets.component';
 import { EventComponent } from './event/event.component';
 import { ShareComponent } from './share/share.component';
 import { FilterPipe } from './filter.pipe';
+import { MyeventsComponent } from './myevents/myevents.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -75,7 +76,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MyticketsComponent,
     EventComponent,
     ShareComponent,
-    FilterPipe
+    FilterPipe,
+    MyeventsComponent
   ],
   entryComponents: [
     PromptComponent

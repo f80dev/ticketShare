@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {ConfigService} from './config.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
@@ -6,6 +6,7 @@ import {ApiService} from './api.service';
 import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
 import {subscribe_socket,$$,showMessage} from "./tools";
+import Web3 from "web3";
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
               public api: ApiService,
               public toast:MatSnackBar,
               public socket:Socket,
+              //@Inject(WEB3) private web3: Web3,
               public _location: Location) {
     config.init();
     this.initUser();
@@ -79,6 +81,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     subscribe_socket(this,"refresh_sell");
+
+    //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
+    // if ('enable' in this.web3.currentProvider) {
+    //   this.web3.currentProvider.enable();
+    // }
+    // const accounts = this.web3.eth.getAccounts();
+
   }
 
   logout() {

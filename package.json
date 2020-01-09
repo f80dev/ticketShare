@@ -43,6 +43,7 @@
     "ngx-webcam": "^0.2.6",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
+    "web3": "^1.2.4",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

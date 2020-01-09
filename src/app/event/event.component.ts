@@ -8,11 +8,13 @@ import { Component, Input,OnInit } from '@angular/core';
 export class EventComponent implements OnInit {
 
   @Input("event") _event:any;
+  @Input("width") width="150px";
   @Input("showAction") showAction=false;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
   openMap(){

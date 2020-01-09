@@ -101,8 +101,9 @@ export function subscribe_socket(vm:any,event_name:string,refresh=true){
   if(vm.socket!=null){
     $$("Installation de la socket pour l'event "+event_name);
     vm.socket.on(event_name, (data: any) => {
+      debugger
       if (data.to == vm.config.user._id || data.to=="*") {
-        if(vm.toast!=null && data.message!=null && data.message.length>0)showMessage(this,data.message);
+        if(vm.toast!=null && data.message!=null && data.message.length>0)showMessage(vm,data.message);
         if(refresh && vm.refresh!=null)vm.refresh();
       }
     });

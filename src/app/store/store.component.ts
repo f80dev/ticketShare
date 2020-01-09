@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {subscribe_socket} from "../tools";
+import {subscribe_socket,tirage} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatSnackBar} from "@angular/material";
 
@@ -46,9 +46,13 @@ export class StoreComponent implements OnInit {
     this.router.navigate(["validate"],{queryParams:{event:event._id}})
   }
 
+  /**
+   *
+   */
   fictif(){
-    this.message="Fabrication d'un événement fictif"
-    this.api._get("add_event/demo").subscribe(()=>{
+    this.message="Fabrication d'un événement fictif. Cela peut être long ..."
+    var lst_events=["demo","bicep","foot","musee","pixies"][tirage(4)]
+    this.api._get("add_event/demo?format=json").subscribe(()=>{
       this.message="";
       this.refresh();
     });

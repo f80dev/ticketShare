@@ -30,11 +30,13 @@ export class MyticketsComponent implements OnInit {
 
   ngOnInit() {
     if(this.config.user==null)this.router.navigate(["home"]);
+
     var params:ParamMap=this.route.snapshot.queryParamMap;
     for(let evt of this.config.user._events){
       if(evt._id==params.get("event"))
         this._event=evt;
     }
+
     this.refresh();
   }
 
