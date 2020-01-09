@@ -1,14 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<button type="button" mat-button mat-icon-button (click)="drawer.toggle()">
-  <mat-icon>menu</mat-icon>
-</button>
-<a [routerLink]="['home']"><mat-icon>home</mat-icon></a>
-<a [routerLink]="['store']"><mat-icon>shopping_cart</mat-icon></a>
-<a [routerLink]="['validate']"><mat-icon>check_circle</mat-icon></a>
-<a [routerLink]="['admin']"><mat-icon>build</mat-icon></a>
+<mat-toolbar style="height:40px;">
+  <button mat-button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>TICKETSHARE</span>
+  <span class="example-fill-remaining-space"></span>
+
+  <button mat-button mat-icon-button (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+
+</mat-toolbar>
+
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-   menu
+    <app-home></app-home>
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -16,5 +22,6 @@
   </div>
 
 </mat-drawer-container>
+
 
 

@@ -80,4 +80,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     subscribe_socket(this,"refresh_sell");
   }
+
+  logout() {
+    localStorage.removeItem('address');
+    window.location.reload();
+  }
 }

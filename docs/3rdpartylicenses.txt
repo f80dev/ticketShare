@@ -111,6 +111,8 @@ THE SOFTWARE.
 
 @angular/material/sort
 
+@angular/material/toolbar
+
 @angular/platform-browser
 MIT
 

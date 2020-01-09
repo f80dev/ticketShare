@@ -1,8 +1,4 @@
 <div class="app-card" style="text-align: center">
-  <h2>{{config.values?.appname}}</h2>
-  <h3>{{config.values?.claim}}</h3>
-  <br>
-
   <p>
     hello {{config.user?.pseudo}}<br>
     <span *ngIf="config.user?.ether>0">{{config.user?.ether}} ether</span>
@@ -18,9 +14,16 @@
              [value]="config.user._id">
     </qr-code>
   </div>
-  <br><br>
-  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['store'])">Boutique</button>
-  <button mat-button mat-flat-button class="app-button" (click)="logout()">Logout</button>
+
+  <mat-nav-list>
+    <a mat-list-item routerLink="store">
+      <mat-icon>shopping_cart</mat-icon>
+      &nbsp;&nbsp;Store
+    </a>
+  </mat-nav-list>
+
+
+  <br>
   <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
 
   <br>

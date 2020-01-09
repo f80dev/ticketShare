@@ -70,10 +70,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  logout() {
-    localStorage.removeItem('address');
-    window.location.reload();
-  }
+
 
 
 
