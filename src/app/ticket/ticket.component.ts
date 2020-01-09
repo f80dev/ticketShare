@@ -10,6 +10,7 @@ import {$$,showMessage} from '../tools';
 export class TicketComponent implements OnInit {
 
   @Input("ticket") ticket:any;
+  @Input("width") width="150px";
 
   constructor(
     public router:Router

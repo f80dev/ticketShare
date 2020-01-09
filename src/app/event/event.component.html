@@ -6,7 +6,7 @@
     <mat-card-subtitle>{{_event.salle}}</mat-card-subtitle>
   </mat-card-header>
 
-  <div style="width: 100%;height: 200px;">
+  <div [ngStyle]="{'width': '100%','min-height': height}">
     <img class="visual-event" [src]="_event.visual" alt="Visuel du ticket">
   </div>
   <br>

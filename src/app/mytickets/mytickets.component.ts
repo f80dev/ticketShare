@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, Input, SimpleChanges} from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
@@ -9,8 +9,8 @@ import { Location } from '@angular/common';
   templateUrl: './mytickets.component.html',
   styleUrls: ['./mytickets.component.sass']
 })
-export class MyticketsComponent implements OnInit {
-  _event: any;
+export class MyticketsComponent implements  OnChanges {
+  @Input("event") _event: any;
   tickets: any[];
   message="";
 
@@ -28,16 +28,9 @@ export class MyticketsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    if(this.config.user==null)this.router.navigate(["home"]);
-
-    var params:ParamMap=this.route.snapshot.queryParamMap;
-    for(let evt of this.config.user._events){
-      if(evt._id==params.get("event"))
-        this._event=evt;
-    }
-
-    this.refresh();
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this._event!=null)
+      this.refresh();
   }
 
 }

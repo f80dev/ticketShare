@@ -51,8 +51,9 @@ export class StoreComponent implements OnInit {
    */
   fictif(){
     this.message="Fabrication d'un événement fictif. Cela peut être long ..."
-    var lst_events=["demo","bicep","foot","musee","pixies"][tirage(4)]
-    this.api._get("add_event/demo?format=json").subscribe(()=>{
+    var index=tirage(4);
+    var event=["demo","bicep","foot","musee","pixies"][index];
+    this.api._get("add_event/"+event+"?format=json").subscribe(()=>{
       this.message="";
       this.refresh();
     });

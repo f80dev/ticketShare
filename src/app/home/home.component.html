@@ -40,14 +40,7 @@
 
   <br>
   <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
-
   <br>
-  <div *ngIf="config.user?._events?.length>0">
-    <h2>Vos prochains concerts</h2>
-    <div *ngFor="let _evt of config.user._events" (click)="openEvent(_evt)">
-      {{_evt.name}} le {{_evt.date*1000 | date:'dd/MM'}}
-    </div>
-  </div>
 </div>
 <app-about></app-about>
 

@@ -3,7 +3,7 @@
     Evénément fictif
   </button><br>
 
-  <app-event *ngFor="let event of events" [event]="event">
+  <app-event width="200px" *ngFor="let event of events" [event]="event">
     <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
       {{event.description}}
     </div>
