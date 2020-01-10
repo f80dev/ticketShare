@@ -63,8 +63,8 @@ export class ApiService {
     return this._get("use/"+address+"/"+event);
   }
 
-  burn(ticket: string) {
-    return this._get("burn/"+ticket);
+  burn(tickets: string) {
+    return this._get("burn/"+tickets);
   }
 
  resend(userid: string) {

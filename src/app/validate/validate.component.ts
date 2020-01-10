@@ -10,16 +10,17 @@ import {MatSnackBar} from "@angular/material";
   styleUrls: ['./validate.component.sass']
 })
 export class ValidateComponent implements OnInit {
-  public to_burn=[];
+  to_burn=[];
   showScanner=true;
   message="";
 
   lastAddress="";
+  tickets=[];
 
   constructor(public api: ApiService,
               public config:ConfigService,
               public snackBar:MatSnackBar,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute) {}
 
 
 
@@ -39,8 +40,8 @@ export class ValidateComponent implements OnInit {
     this.message="Récupération des places du client";
     this.api.use(addr,evtid).subscribe((r:any)=>{
       this.message="";
-      this.to_burn=r;
-      if(this.to_burn.length==0){
+      this.tickets=r;
+      if(this.tickets.length==0){
         this.api.removeEvt(addr,evtid).subscribe(()=>{});
         this.snackBar.open("Pas de ticket pour cet événement");
         this.showScanner=true;
@@ -70,12 +71,18 @@ export class ValidateComponent implements OnInit {
   }
 
 
+  update_toburn(tickets:any){
+    this.to_burn=tickets;
+  }
 
-
-  burn(ticket=null) {
-    this.to_burn=[];
+  burn(all=false) {
+    if(all)this.to_burn=this.tickets;
     this.message="Validation du ticket";
-    this.api.burn(ticket._id).subscribe((r:any)=>{
+    var tickets="";
+    for(let t of this.to_burn)
+      tickets=tickets+t.value+","
+
+    this.api.burn(tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
       if(r.status==200){
         this.message="";
         setTimeout(()=>{this.refresh(this.lastAddress);},500);
