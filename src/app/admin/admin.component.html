@@ -4,7 +4,7 @@
     <th mat-sort-header="dtCreate">dtCreate</th>
   </tr>
 
-  <tr *ngFor="let evt of evts">
+  <tr *ngFor="let evt of config.user._events">
     <td>{{evt.name}}</td>
     <td>{{evt.dtCreate}}</td>
   </tr>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-admin',
@@ -8,15 +9,10 @@ import {ApiService} from "../api.service";
 })
 export class AdminComponent implements OnInit {
 
-  evts=[];
-
-  constructor(public api:ApiService) { }
+  constructor(public api:ApiService,
+              public config:ConfigService) { }
 
   ngOnInit() {
-    this.api.getevents("1").subscribe((r:any)=>{
-
-      this.evts=r;
-    });
   }
 
 }

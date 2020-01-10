@@ -1,9 +1,10 @@
-<div *ngIf="config.user?._events.length==0" style="margin-top:30%;">
+<div *ngIf="config.user?._events?.length==0" style="margin-top:30%;">
   Vous n'avez pas de billets
 </div>
 
-<app-event width="40vw" height="0" *ngFor="let event of config.user?._events" [event]="event">
 
+<!--Affichage de l'événement-->
+<app-event width="40vw" height="0" *ngFor="let event of config.user?._events" [event]="event">
 
   <div style="width: 100%;text-align: center;font-size: large;margin-top: 15px;">
     <br>
