@@ -22,6 +22,7 @@ export class PlacesComponent implements OnInit {
   l_categories:string[]=[];
   nb_places=0;
   sel_tickets: any;
+  etherprice=0;
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
@@ -37,6 +38,7 @@ export class PlacesComponent implements OnInit {
   refresh(){
     this.message="Récupération des places diponibles";
     var params:ParamMap=this.route.snapshot.queryParamMap;
+    this.etherprice=Number(params.get("etherprice"));
 
     const addr=localStorage.getItem("address");
     this.api.available(params.get("event"),addr).subscribe((r:any)=>{

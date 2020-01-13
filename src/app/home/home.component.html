@@ -1,7 +1,7 @@
 <div class="app-card" style="text-align: center">
   <p>
     hello {{config.user?.pseudo}}<br>
-    <span *ngIf="config.user?.ether>0">{{config.user?.ether}} ether</span>
+    <span *ngIf="config.user?.ether>0">{{config.user?.ether |number:'1.1-5'}} ether</span>
   </p>
 
   <div *ngIf="config.user?._id?.length>0">

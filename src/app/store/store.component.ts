@@ -39,7 +39,7 @@ export class StoreComponent implements OnInit {
   }
 
   buy(event: any) {
-    this.router.navigate(["places"],{queryParams:{event:event._id}});
+    this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
   }
 
   validate(event:any){

@@ -9,12 +9,12 @@
           class="app-button" (click)="buy()">
     &nbsp;&nbsp;Acheter &nbsp;&nbsp;
   </button>
-
+  &nbsp;
   <span *ngIf="nb_places>0">
     {{nb_places}} places
   </span>
 
-  <span *ngIf="total>0">pour un total de {{total}}€</span>
+  <span *ngIf="total>0">pour un total de {{total}}€, soit {{total/etherprice |number:'1.1-5'}} ether</span>
 </div>
 
 <app-hourglass [message]="message"></app-hourglass>
