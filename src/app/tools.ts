@@ -101,7 +101,6 @@ export function subscribe_socket(vm:any,event_name:string,refresh=true){
   if(vm.socket!=null){
     $$("Installation de la socket pour l'event "+event_name);
     vm.socket.on(event_name, (data: any) => {
-      debugger
       if (data.to == vm.config.user._id || data.to=="*") {
         if(vm.toast!=null && data.message!=null && data.message.length>0)showMessage(vm,data.message);
         if(refresh && vm.refresh!=null)vm.refresh();
@@ -570,6 +569,17 @@ export function exportToHTML(src:string,coupon:any,func:Function,color="darkred"
   setTimeout(()=>{func(fields)},10);
 
   return normeString(code);
+}
+
+export function checkConfig(vm:any) {
+  if(vm.config==null || vm.config.user==null){
+    if(vm.router!=null)
+      vm.router.navigate(["home"]);
+    else {
+      $$("Tentative de retour à la page principale");
+      window.location.reload();
+    }
+  }
 }
 
 export function checkLogin(router: Router, params: any = null) {

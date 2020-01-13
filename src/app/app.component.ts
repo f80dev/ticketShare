@@ -32,47 +32,67 @@ export class AppComponent implements OnInit {
       this.config.user = r;
       localStorage.setItem('address', r._id);
     },(err)=>{
-      showMessage(this,"Adresse incorrecte");
-      this.initUser();
+      if(err.status==404)
+        showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard");
+      else{
+        showMessage(this,"Adresse incorrecte "+err.message);
+        this.initUser();
+      }
     });
   }
 
-  initUser() {
+  linkEmail(func){
+    this.dialog.open(PromptComponent, {width: '250px',
+      data: {
+        title: 'Indiquer votre mail',
+        question: "Je dois vous envoyez certaines informations confidentielles sur votre nouveu wallet. Pouvez-vous m'indiquer votre mail",
+        result:"hhoareau@gmail.com",
+        onlyConfirm: false,
+        canEmoji: false,
+        lbl_ok:"Envoyer",
+        lbl_cancel:""
+      }
+    }).afterClosed().subscribe((result_email) => {
+      func(result_email);
+    });
+  }
+
+  /**
+   * Rattache un wallet existant
+   * @param func callback
+   */
+  linkWallet(func){
+    this.dialog.open(PromptComponent, {width: '250px',
+      data: {
+        title: 'Rattachez un wallet',
+        question: "Si vous n'avez pas de wallet ou que vous souhaitez un wallet dédié à vos billets, choississez créer, sinon renseigné votre clé privée pour utiliser votre wallet habituel",
+        result:"567E753E69EB31B532272697D687B6D607BBE86A0A699148F9A81541582724C8",
+        onlyConfirm: false,
+        canEmoji: false,
+        lbl_ok:"Existant",
+        lbl_cancel:"Nouveau"
+      }
+    }).afterClosed().subscribe((result_key) => {
+      func(result_key);
+    });
+  }
+
+
+  /**
+   *
+   */
+  initUser():void {
     const address = localStorage.getItem('address');
-    if (!address) {
-      this.dialog.open(PromptComponent, {width: '250px',
-        data: {
-          title: 'Rattachez un wallet',
-          question: "Si vous n'avez pas de wallet ou que vous souhaitez un wallet dédié à vos billets, choississez créer, sinon renseigné votre clé privée pour utiliser votre wallet habituel",
-          result:"567E753E69EB31B532272697D687B6D607BBE86A0A699148F9A81541582724C8",
-          onlyConfirm: false,
-          canEmoji: false,
-          lbl_ok:"Existant",
-          lbl_cancel:"Nouveau"
-        }
-      }).afterClosed().subscribe((result_key) => {
-        if(result_key=="no"){
-          this.dialog.open(PromptComponent, {width: '250px',
-            data: {
-              title: 'Indiquer votre mail',
-              question: "Je dois vous envoyez certaines informations confidentielles sur votre nouveu wallet. Pouvez-vous m'indiquer votre mail",
-              result:"hhoareau@gmail.com",
-              onlyConfirm: false,
-              canEmoji: false,
-              lbl_ok:"Envoyer",
-              lbl_cancel:""
-            }
-          }).afterClosed().subscribe((result_email) => {
-            this.create_user(result_email);
-          })
-        } else {
-          this.create_user(result_key);
-        }
-      });
+    if (!address){
+      //TODO: intégrer la problématique d'obsolescence des cookies
+      $$("Pas de compte connu sur ce device")
+      this.create_user("");
     } else {
+      $$("Récupération du compte "+address)
       this.api.getuser(address).subscribe((r: any) => {
         this.config.user = r;
       },(err)=>{
+        $$("Le compte à été supprimé de la base de donnée");
         localStorage.removeItem("address");
         this.initUser();
       });

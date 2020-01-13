@@ -37,7 +37,9 @@ export class PlacesComponent implements OnInit {
   refresh(){
     this.message="Récupération des places diponibles";
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.api.available(params.get("event"),localStorage.getItem("address")).subscribe((r:any)=>{
+
+    const addr=localStorage.getItem("address");
+    this.api.available(params.get("event"),addr).subscribe((r:any)=>{
       this.message="";
       if(r!=null){
         if(r.length==0){
@@ -60,8 +62,8 @@ export class PlacesComponent implements OnInit {
           this.tickets=r;
         }
       }
-    },()=>{
-      showMessage(this,"Cet événement n'est plus disponible");
+    },(err)=>{
+      showMessage(this,err.message);
       this._location.back();
     });
   }
@@ -97,7 +99,9 @@ export class PlacesComponent implements OnInit {
 
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.message="Validation de l'achat";
-    this.api.buy(localStorage.getItem("address"),rc,params.get("event")).subscribe((r:any)=>{
+    const address=localStorage.getItem("address");
+
+    this.api.buy(address,rc,params.get("event")).subscribe((r:any)=>{
       this.message="";
       if(r!=null){
         showMessage(this,"Achat confirmé");

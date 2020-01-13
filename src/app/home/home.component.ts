@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
 import {Location} from '@angular/common';
 import {ConfigService} from '../config.service';
 import {MatSnackBar} from '@angular/material';
@@ -13,6 +13,7 @@ import {$$, subscribe_socket,showMessage} from '../tools';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
+  private routeData;
 
   constructor(
               public meta: Meta,
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
   }
 
 
+
+
   refresh(){
     if(localStorage.getItem("address")){
       this.api.getuser(localStorage.getItem("address")).subscribe((r: any) => {
@@ -35,35 +38,30 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.config.refresh_callback=this.refresh;
-    this.refresh();
-    this.analyse_params((p: any) => {
-      if (p.cmd == 'store') {
-        this.router.navigate(['store']);
-      }
-    });
-    subscribe_socket(this,"refresh_event");
+      this.analyse_params((p: any) => {
+        this.config.refresh_callback=this.refresh;
+        this.refresh();
+        subscribe_socket(this,"refresh_event");
+      });
   }
 
 
 
   analyse_params(func) {
-    const params = this.route.snapshot.queryParamMap;
-
-    localStorage.setItem('firsturl', this._location.path());
-    $$('Récupération des paramètres', params);
-
-    if (this.config.params == null) {
-      this.config.params = {
-        cmd: params.get('cmd') || '',
-        user: params.get('user') || '',
-        event: params.get('event') || '',
-      };
-
-      $$('Netoyage de l\'url de lancement:' + this._location.path());
-      this._location.replaceState(this._location.path().split('?')[0], '');
-      this._location.replaceState(this._location.path().split('/home')[0], '');
+    var url=this._location.path();
+    localStorage.setItem('firsturl', url);
+    if(url!=null && url.indexOf("?")>0) {
+      url= this._location.path().split("?")[1];
+      $$('Récupération des paramètres', url);
+      if (this.config.params == null) {
+        this.config.params = {};
+        if(url.indexOf("event=")>-1)this.config.params["event"]=url.split("event=")[1].split("&")[0];
+      }
     }
+    $$('Netoyage de l\'url de lancement:' + this._location.path());
+    this._location.replaceState(this._location.path().split('?')[0], '');
+    this._location.replaceState(this._location.path().split('/home')[0], '');
+
     func(this.config.params);
   }
 

@@ -12,6 +12,7 @@ import {MyeventsComponent} from "./myevents/myevents.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
+  { path: 'home', component: StoreComponent},
   { path: 'about', component: AboutComponent},
   { path: 'myevents', component: MyeventsComponent},
   { path: 'places', component: PlacesComponent},
