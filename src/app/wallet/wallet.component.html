@@ -1,0 +1,34 @@
+<div style="width: 100%;text-align: center;">
+  <h1>Votre portefeuille spectacles</h1>
+  <br>
+  <span style="font-size: 2em;">{{config.user?.ether}} ether</span>
+  <br>
+  Vous pouvez les utiliser<br>
+  pour acheter des places
+
+  <br><br>
+
+  <h4>Adresse ethereum</h4>
+  <div ngxClipboard [cbContent]="config.user?._id"
+       (click)="informe_copy()" style="cursor: pointer;width:80%;display: inline-block;">
+    {{config.user?._id}}
+  </div>
+  <br>
+
+  <br><br><br>
+
+  <h4>Clé privée</h4>
+  <div ngxClipboard [cbContent]="config.user?.private_key" (click)="informe_copy()"
+       style="cursor: pointer;width:70%;display: inline-block;">
+    {{config.user?.private_key}}
+  </div>
+
+  <br><br><br>
+  <a [href]="config.user?.refunding" target="_blank">Rechargement</a><br>
+  <a [href]="config.user?.etherscan" target="_blank">Transactions</a><br>
+
+
+  <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
+
+
+</div>
