@@ -22,6 +22,11 @@
       &nbsp;&nbsp;Vos places
     </a>
 
+    <a mat-list-item routerLink="wallet">
+      <mat-icon>attach_money</mat-icon>
+      &nbsp;&nbsp;Wallet
+    </a>
+
     <a mat-list-item routerLink="store">
       <mat-icon>shopping_cart</mat-icon>
       &nbsp;&nbsp;Store
@@ -29,18 +34,14 @@
 
   <br>
 
-   <a mat-list-item routerLink="admin">
-      <mat-icon>build</mat-icon>
-      &nbsp;&nbsp;Admin
-  </a>
+   <!--<a mat-list-item routerLink="admin">-->
+      <!--<mat-icon>build</mat-icon>-->
+      <!--&nbsp;&nbsp;Admin-->
+  <!--</a>-->
 
 
   </mat-nav-list>
 
-
-  <br>
-  <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
-  <br>
 </div>
 <app-about></app-about>
 

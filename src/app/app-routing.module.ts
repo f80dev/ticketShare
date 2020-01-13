@@ -9,6 +9,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {MyticketsComponent} from "./mytickets/mytickets.component";
 import {ShareComponent} from "./share/share.component";
 import {MyeventsComponent} from "./myevents/myevents.component";
+import {WalletComponent} from "./wallet/wallet.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'mytickets', component: MyticketsComponent},
   { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
+  { path: 'wallet', component: WalletComponent},
   { path: 'validate', component: ValidateComponent},
   { path: '', component: StoreComponent},
 ];

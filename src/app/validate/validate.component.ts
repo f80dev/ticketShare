@@ -17,6 +17,7 @@ export class ValidateComponent implements OnInit {
 
   lastAddress="";
   tickets=[];
+  address="";
   _event:any;
 
   //http://localhost:4200/validate?event=1578905752
@@ -55,6 +56,7 @@ export class ValidateComponent implements OnInit {
     if(addr.length>0){
       this.message="Récupération des places du client";
       this.api.use(addr,this._event["_id"]).subscribe((r:any)=>{
+        this.address="";
         this.message="";
         this.tickets=r;
         if(this.tickets.length==0){
@@ -107,6 +109,7 @@ export class ValidateComponent implements OnInit {
     }
 
     this.api.burn(tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
+      this.address="";
       if(r.status==200){
         showMessage(this,"Validation des "+this.to_burn.length+" ticket(s) effectué");
         this.message="";

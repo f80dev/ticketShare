@@ -1,10 +1,13 @@
 <!--Panel de commande-->
 <div *ngIf="message?.length==0" style="width: 100%;">
-  <button mat-button mat-flat-button class="app-button" (click)="router.navigate(['home'])">Retour</button>
+  <button mat-button mat-icon-button class="app-button" (click)="router.navigate(['home'])">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
   <button mat-button mat-flat-button
           *ngIf="total>0"
+          style="background-color: darkred;color:white;"
           class="app-button" (click)="buy()">
-    Acheter
+    &nbsp;&nbsp;Acheter &nbsp;&nbsp;
   </button>
 
   <span *ngIf="nb_places>0">

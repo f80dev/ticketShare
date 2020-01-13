@@ -68,20 +68,11 @@ export class HomeComponent implements OnInit {
 
 
 
-
-
-
-
   informe_copy() {
     showMessage(this,"Adresse copiée");
   }
 
 
-  send_codes() {
-    this.api.resend(this.config.user._id).subscribe(()=>{
-      showMessage(this,"Consulter votre messagerie");
-    })
-  }
 
   openEvent(_evt) {
     this.router.navigate(["mytickets"],{queryParams:{event:_evt._id}})
