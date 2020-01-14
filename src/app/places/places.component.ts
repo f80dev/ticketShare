@@ -49,7 +49,9 @@ export class PlacesComponent implements OnInit {
           showMessage(this,"Plus de place disponible");
         } else {
           this.categories={};
+          this.etherprice=0;
           for(let _t of r){
+            this.etherprice=this.etherprice+_t.etherprice;
             if(_t.seat==null && _t.ref!=null){
               if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
               this.categories[_t.price].description=_t.description;
