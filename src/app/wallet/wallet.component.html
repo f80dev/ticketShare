@@ -1,14 +1,16 @@
 <div style="width: 100%;text-align: center;">
   <h1>Votre portefeuille spectacles</h1>
   <br>
-  <span style="font-size: 2em;">{{config.user?.ether}} ether</span>
-  <br>
-  Vous pouvez les utiliser<br>
-  pour acheter des places
+  <div *ngIf="config.user?.ether>0">
+    <span style="font-size: 2em;">{{config.user?.ether}} ether</span>
+    <br>
+    Vous pouvez les utiliser<br>
+    pour acheter des places
 
-  <br><br>
+    <br><br>
+  </div>
 
-  <h4>Adresse ethereum</h4>
+  <h4>Adresse de votre wallet</h4>
   <div ngxClipboard [cbContent]="config.user?._id"
        (click)="informe_copy()" style="cursor: pointer;width:80%;display: inline-block;">
     {{config.user?._id}}
@@ -26,9 +28,13 @@
   <br><br><br>
   <a [href]="config.user?.refunding" target="_blank">Rechargement</a><br>
   <a [href]="config.user?.etherscan" target="_blank">Transactions</a><br>
+  <a [href]="config.user?.marketplace" target="_blank">Marketplace</a><br>
 
-
-  <button mat-button mat-flat-button class="app-button" (click)="send_codes()">Codes</button>
-
+  <br><br>
+  <button mat-button mat-flat-button
+          class="app-button"
+          (click)="send_codes()">
+    Recevoir les codes
+  </button>
 
 </div>
