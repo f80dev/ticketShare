@@ -1,6 +1,6 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ConfigService} from './config.service';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSidenav, MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
@@ -15,6 +15,7 @@ import Web3 from "web3";
 })
 export class AppComponent implements OnInit {
   showFiller = false;
+  @ViewChild('drawer', {static: false}) drawer: MatSidenav;
 
   constructor(public config: ConfigService,
               public dialog: MatDialog,

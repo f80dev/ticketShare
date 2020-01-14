@@ -1,7 +1,7 @@
 {
   "appname": "TicketShare",
   "title": "TicketShare",
-  "version": "0.0.6-beta",
+  "version": "0.0.7-beta",
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
@@ -14,12 +14,12 @@
   },
   "bkcolor": "#2a002a",
   "news": "Classement des meilleurs vendeurs",
-  "logo": "./assets/img/logo.png",
+  "logo": "./assets/logo.png",
   "claim": "Achetez vos billets en toute sécurité",
   "support": {
     "forum": "http://reducshare.les-forums.com/",
-    "email": "contact@reducshare.com",
-    "facebook": "https://www.facebook.com/reducshare/",
+    "email": "contact@f80.fr",
+    "facebook": "https://www.facebook.com/ticketshare/",
     "faq": "https://web.reducshare.com/faq.html?from=appli",
     "website": "https://web.reducshare.com/index.html?from=appli"
   },

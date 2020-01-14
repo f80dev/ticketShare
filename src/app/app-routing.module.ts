@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'mytickets', component: MyticketsComponent},
   { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
+  { path: 'about', component: AboutComponent},
+  { path: 'FAQ', redirectTo: "https://faq.ticketshare.f80.fr"},
   { path: 'wallet', component: WalletComponent},
   { path: 'validate', component: ValidateComponent},
   { path: '', component: StoreComponent},

@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,SAAS;EACP,OAAO,EAAE,GAAG;EACZ,MAAM,EAAE,GAAG",
+"sources": ["wallet.component.sass"],
 "names": [],
 "file": "wallet.component.css"
 }

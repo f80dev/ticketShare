@@ -1,5 +1,5 @@
 <div style="width: 100%;text-align: center;">
-  <h1>Votre portefeuille spectacles</h1>
+  <h2>Votre portefeuille spectacles</h2>
   <br>
   <div *ngIf="config.user?.ether>0">
     <span style="font-size: 2em;">{{config.user?.ether}} ether</span>
@@ -11,19 +11,41 @@
   </div>
 
   <h4>Adresse de votre wallet</h4>
-  <div ngxClipboard [cbContent]="config.user?._id"
-       (click)="informe_copy()" style="cursor: pointer;width:80%;display: inline-block;">
-    {{config.user?._id}}
-  </div>
+
+        <div ngxClipboard [cbContent]="config.user?._id"
+             (click)="informe_copy()"
+             style="cursor: pointer;width:80%;display: inline-block;margin:10px;">
+          {{public_key}}
+        </div>
+<br>
+        <qr-code [size]="150"
+                 style="margin:10px;display: inline-block;vertical-align: middle;"
+                 title="Le QRCode de votre clé de sécurité"
+                 [value]="config.user?._id">
+        </qr-code>
+
+
+
   <br>
 
-  <br><br><br>
+  <br>
 
   <h4>Clé privée</h4>
-  <div ngxClipboard [cbContent]="config.user?.private_key" (click)="informe_copy()"
-       style="cursor: pointer;width:70%;display: inline-block;">
-    {{config.user?.private_key}}
-  </div>
+
+        <div ngxClipboard [cbContent]="config.user?.private_key" (click)="informe_copy()"
+             style="cursor: pointer;width:70%;display: inline-block;margin:10px;">
+          {{private_key1}}<br>
+          {{private_key2}}
+        </div>
+        <br>
+        <qr-code [size]="150"
+                 style="display: inline-block;vertical-align: middle;margin:10px;"
+                 title="Le QRCode de votre clé de sécurité"
+                 [value]="config.user?.private_key">
+        </qr-code>
+
+
+
 
   <br><br><br>
   <a [href]="config.user?.refunding" target="_blank">Rechargement</a><br>

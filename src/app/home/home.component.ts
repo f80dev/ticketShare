@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
 import {Location} from '@angular/common';
 import {ConfigService} from '../config.service';
-import {MatSnackBar} from '@angular/material';
+import {MatSidenav, MatSnackBar} from '@angular/material';
 import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {$$, subscribe_socket,showMessage} from '../tools';
@@ -13,7 +13,7 @@ import {$$, subscribe_socket,showMessage} from '../tools';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  private routeData;
+
 
   constructor(
               public meta: Meta,

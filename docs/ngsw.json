@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1579021755276,
+  "timestamp": 1579032492611,
   "index": "https://ticketshare.f80.fr/index.html",
   "assetGroups": [
     {
@@ -10,7 +10,7 @@
       "urls": [
         "https://ticketshare.f80.fr/favicon.ico",
         "https://ticketshare.f80.fr/index.html",
-        "https://ticketshare.f80.fr/main.737d96ac521628bd32c1.js",
+        "https://ticketshare.f80.fr/main.7bdccc306cac00e3d1b2.js",
         "https://ticketshare.f80.fr/polyfills-es5.bdb696aa16209fa3775d.js",
         "https://ticketshare.f80.fr/polyfills.555006da7c1cb39a1bbc.js",
         "https://ticketshare.f80.fr/runtime.a8ef3a8272419c2e2c66.js",
@@ -32,6 +32,7 @@
         "https://ticketshare.f80.fr/assets/icons/icon-512x512.png",
         "https://ticketshare.f80.fr/assets/icons/icon-72x72.png",
         "https://ticketshare.f80.fr/assets/icons/icon-96x96.png",
+        "https://ticketshare.f80.fr/assets/logo.png",
         "https://ticketshare.f80.fr/assets/logo.svg"
       ],
       "patterns": []
@@ -39,7 +40,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://ticketshare.f80.fr/assets/config.json": "3904b87ad926a4d994a5c0bfbb19dd02d85d6f0b",
+    "https://ticketshare.f80.fr/assets/config.json": "cf2a8e3cd1f96cca1be3aa06ebca4b8f087dfa61",
     "https://ticketshare.f80.fr/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://ticketshare.f80.fr/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "https://ticketshare.f80.fr/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -48,10 +49,11 @@
     "https://ticketshare.f80.fr/assets/icons/icon-512x512.png": "cd469d4948092031cff99d0a7287a8d9f1b9e613",
     "https://ticketshare.f80.fr/assets/icons/icon-72x72.png": "ad61d88d376b496a7a803a9bbd173fdaad509b5a",
     "https://ticketshare.f80.fr/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://ticketshare.f80.fr/assets/logo.png": "cd469d4948092031cff99d0a7287a8d9f1b9e613",
     "https://ticketshare.f80.fr/assets/logo.svg": "8f4ed04c5d02b15e0325a5af8dbe460d2765ed02",
     "https://ticketshare.f80.fr/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "https://ticketshare.f80.fr/index.html": "8d4a7af65654a83d83daecee0526fee7a26b85a0",
-    "https://ticketshare.f80.fr/main.737d96ac521628bd32c1.js": "426af75dc64b98445a6ee9acb4ed1a30d654d00d",
+    "https://ticketshare.f80.fr/index.html": "b49eb567543a75849c9d48e004631d9ff73df85d",
+    "https://ticketshare.f80.fr/main.7bdccc306cac00e3d1b2.js": "ade0d90ce05f441ff68e23d8f85ddc99a1526985",
     "https://ticketshare.f80.fr/polyfills-es5.bdb696aa16209fa3775d.js": "dcba21e0e10b3b854d5e05ef3d35644b4bc662e2",
     "https://ticketshare.f80.fr/polyfills.555006da7c1cb39a1bbc.js": "922d5bb9babdb3ce96f8d00b80e07d03d3fde986",
     "https://ticketshare.f80.fr/runtime.a8ef3a8272419c2e2c66.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",

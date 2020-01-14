@@ -14,7 +14,7 @@
 
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <app-home></app-home>
+    <app-home (click)="drawer.close()"></app-home>
   </mat-drawer>
 
   <div class="example-sidenav-content">
