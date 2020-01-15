@@ -158,11 +158,9 @@ export class LoginComponent implements OnInit {
     }else if(socialPlatform == "google"){
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_TYPE;
     }
-
     $$("Appel de la plateforme d'authentification "+socialPlatform);
-
     this.socialAuthService.signIn(socialPlatformProvider).then((socialUser) => {
-
+      $$("Resultat de l'authentification ",socialUser);
         this.initUser({"email":socialUser.email,"firstname":socialUser.name.split(" ")[0],"photo":socialUser.image});
       },
       (err)=>{showError(this,err);}

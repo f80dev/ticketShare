@@ -1,3 +1,20 @@
-<ngx-json-viewer [json]="infos"
-                 style="margin:10px;">
-</ngx-json-viewer>
+
+<h2>
+  Jobs
+  <button mat-button mat-raised-button (click)="job()">Execute</button>
+</h2>
+<div style="max-width:75vw;margin-left:2vw;overflow: hidden;">
+  <ngx-json-viewer [json]="jobs"
+                   style="max-height:400px;margin:5px;">
+  </ngx-json-viewer>
+</div>
+
+<br>
+
+
+
+<h2>Infos du serveur</h2>
+<div style="max-width:75vw;margin-left:2vw;overflow: hidden;">
+  <ngx-json-viewer [json]="infos"></ngx-json-viewer>
+</div>
+

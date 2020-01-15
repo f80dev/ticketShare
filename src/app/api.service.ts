@@ -24,6 +24,10 @@ export class ApiService {
     return this.http.get(api("getusers/"+ADMIN_PASSWORD));
   }
 
+  job(iter=0) {
+    return this.http.get(api("job/"+iter));
+  }
+
   getevents(userid:string=""){
     return this._get("events/"+userid);
   }

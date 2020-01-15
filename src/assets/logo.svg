@@ -27,7 +27,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="235.18011"
-     inkscape:cy="432.0644"
+     inkscape:cy="329.36523"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -64,7 +64,7 @@
        inkscape:export-ydpi="23.040001" />
     <g
        id="g4531"
-       transform="translate(-1.8708867,-2.80633)"
+       transform="translate(-2.6726953,-2.9399648)"
        inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-72x72.png"
        inkscape:export-xdpi="23.040001"
        inkscape:export-ydpi="23.040001">
@@ -75,15 +75,57 @@
          style="opacity:1;fill:#aa0044;fill-opacity:1;stroke:none;stroke-width:6.76499987;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <text
          id="text4497"
-         y="196.04016"
-         x="43.27597"
-         style="font-style:normal;font-weight:normal;font-size:8.29466152px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         y="161.36452"
+         x="40.336002"
+         style="font-style:normal;font-weight:normal;font-size:12.17953682px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
          xml:space="preserve"><tspan
            style="fill:#ffffff;stroke-width:0.26458332"
-           y="196.04016"
-           x="43.27597"
+           y="161.36452"
+           x="40.336002"
            id="tspan4495"
-           sodipodi:role="line">TICKETSHARE</tspan></text>
+           sodipodi:role="line">TICKET</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.18163109px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="151.57172"
+         y="-94.711388"
+         id="text4499"
+         transform="rotate(90)"><tspan
+           sodipodi:role="line"
+           id="tspan4497"
+           x="151.57172"
+           y="-94.711388"
+           style="fill:#ffffff;stroke-width:0.26458332">SHARE</tspan></text>
     </g>
+    <path
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.565;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.56499997, 2.25999988;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 88.867117,147.27806 -0.26727,50.74958"
+       id="path4495"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       id="text4507"
+       y="245.14737"
+       x="64.427406"
+       style="font-style:normal;font-weight:normal;font-size:19.04854584px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#aa0044;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       xml:space="preserve"><tspan
+         style="fill:#aa0044;fill-opacity:1;stroke-width:0.26458332;"
+         y="245.14737"
+         x="64.427406"
+         id="tspan4505"
+         sodipodi:role="line"><tspan
+   style="fill:#000000"
+   id="tspan4523">ICK</tspan>ETH</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:32.05872726px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458329"
+       x="34.480194"
+       y="249.29239"
+       id="text4517"><tspan
+         sodipodi:role="line"
+         id="tspan4515"
+         x="34.480194"
+         y="249.29239"
+         style="stroke-width:0.26458329">W</tspan></text>
   </g>
 </svg>

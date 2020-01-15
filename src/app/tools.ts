@@ -390,7 +390,7 @@ export function resizeBase64Img(base64, maxsize,quality,func) {
 export function getAuthServiceConfigs() {
   let config = new SocialServiceConfig()
     .addFacebook("1746089735526674")
-    .addGoogle("794055474370-pgpk3pggejpv59ioss798a744sup3pll.apps.googleusercontent.com")
+    .addGoogle("1075601969790-d4dujm30k9lebicc1k2uudacbijj84of.apps.googleusercontent.com")
     .addLinkedIn("86cnm1fo8cffax")
   return config;
 }
