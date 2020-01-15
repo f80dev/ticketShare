@@ -27,7 +27,7 @@ import {ImageCropperModule} from "ngx-image-cropper";
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {FlipModule} from "ngx-flip";
 import {ClipboardModule, ClipboardService} from "ngx-clipboard";
-import {NgxSocialButtonModule} from "ngx-social-button";
+import {NgxSocialButtonModule, SocialServiceConfig} from "ngx-social-button";
 import {WebcamModule} from "ngx-webcam";
 import {QRCodeModule} from "angular2-qrcode";
 import { AboutComponent } from './about/about.component';
@@ -52,6 +52,8 @@ import { FilterPipe } from './filter.pipe';
 import { MyeventsComponent } from './myevents/myevents.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { LoginComponent } from './login/login.component';
+import {NgxJsonViewerModule} from "ngx-json-viewer";
+import {getAuthServiceConfigs} from "./tools";
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -88,6 +90,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   ],
   imports: [
     BrowserModule,
+    NgxJsonViewerModule,
     MatSidenavModule,
     MatSliderModule,
     PickerModule,
@@ -125,6 +128,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   ],
   providers: [
     ApiService,TransPipe,SafePipe,ClipboardService,
+    {provide: SocialServiceConfig,useFactory: getAuthServiceConfigs},
     {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]

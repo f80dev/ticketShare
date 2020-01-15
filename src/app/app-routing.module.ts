@@ -10,6 +10,7 @@ import {MyticketsComponent} from "./mytickets/mytickets.component";
 import {ShareComponent} from "./share/share.component";
 import {MyeventsComponent} from "./myevents/myevents.component";
 import {WalletComponent} from "./wallet/wallet.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'mytickets', component: MyticketsComponent},
   { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
+  { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent},
   { path: 'FAQ', redirectTo: "https://faq.ticketshare.f80.fr"},
   { path: 'wallet', component: WalletComponent},

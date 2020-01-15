@@ -47,6 +47,11 @@ export class ApiService {
   }
 
 
+  setuser(id:string,body:any) {
+    return this.http.post(api("setuser/"+id),body);
+  }
+
+
   adduser(result: string) {
     return this._get("adduser/"+result);
   }
@@ -69,6 +74,10 @@ export class ApiService {
 
   burn(tickets: string) {
     return this._get("burn/"+tickets);
+  }
+
+  infos() {
+    return this._get("infos/");
   }
 
  resend(userid: string) {

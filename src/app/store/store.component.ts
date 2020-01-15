@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {subscribe_socket,tirage} from "../tools";
+import {showMessage, subscribe_socket, tirage} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatSnackBar} from "@angular/material";
 
@@ -53,9 +53,12 @@ export class StoreComponent implements OnInit {
     this.message="Fabrication d'un événement fictif. Cela peut être long ..."
     var index=tirage(4);
     var event=["demo","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?format=json").subscribe(()=>{
+    this.api._get("add_event/"+event+"?format=json").subscribe((r:any)=>{
       this.message="";
       this.refresh();
+    },(err)=>{
+      this.message="";
+      showMessage(this,err.message);
     });
   }
 }

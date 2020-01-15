@@ -7,10 +7,19 @@ import {ConfigService} from "../config.service";
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.sass']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
+  infos: any={};
 
   constructor(public api:ApiService,
               public config:ConfigService) {
   }
+
+  ngOnInit(): void {
+    this.api.infos().subscribe((r:any)=>{
+      if(r!=null)this.infos=r;
+    })
+  }
+
+
 
 }

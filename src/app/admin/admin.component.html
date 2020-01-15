@@ -1,11 +1,3 @@
-<table matSort>
-  <tr>
-    <th mat-sort-header="name">Name</th>
-    <th mat-sort-header="dtCreate">dtCreate</th>
-  </tr>
-
-  <tr *ngFor="let evt of config.user._events">
-    <td>{{evt.name}}</td>
-    <td>{{evt.dtCreate}}</td>
-  </tr>
-</table>
+<ngx-json-viewer [json]="infos"
+                 style="margin:10px;">
+</ngx-json-viewer>
