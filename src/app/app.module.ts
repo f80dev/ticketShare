@@ -51,6 +51,7 @@ import { ShareComponent } from './share/share.component';
 import { FilterPipe } from './filter.pipe';
 import { MyeventsComponent } from './myevents/myevents.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { LoginComponent } from './login/login.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -79,7 +80,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ShareComponent,
     FilterPipe,
     MyeventsComponent,
-    WalletComponent
+    WalletComponent,
+    LoginComponent
   ],
   entryComponents: [
     PromptComponent
