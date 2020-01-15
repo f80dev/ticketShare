@@ -19,7 +19,7 @@
 
 <app-hourglass [message]="message"></app-hourglass>
 
-<div *ngIf="tickets?.length>0" style="margin:10px;">
+<div *ngIf="tickets?.length>0 && message?.length==0" style="margin:10px;">
   <h3>Billets placées</h3>
   <mat-selection-list #select>
     <mat-list-option *ngFor="let ticket of tickets"

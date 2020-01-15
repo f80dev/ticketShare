@@ -1,6 +1,9 @@
 <div style="width: 100%;text-align: center;">
   <h2>Votre portefeuille spectacles</h2>
+  <small>({{config.infos_server?.network}} network)</small>
   <br>
+
+
   <div *ngIf="config.user?.ether>0">
     <span style="font-size: 2em;">{{config.user?.ether}} ether</span>
     <br>

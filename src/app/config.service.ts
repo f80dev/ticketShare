@@ -12,6 +12,7 @@ export class ConfigService {
 
   visibleTuto=false;
   values:any={};
+  infos_server:any={};
   activeBrand=1;
   config:any=null;
   waiting:boolean=false;

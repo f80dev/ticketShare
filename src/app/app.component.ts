@@ -7,6 +7,7 @@ import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
 import {subscribe_socket,$$,showMessage} from "./tools";
 import Web3 from "web3";
+import set = Reflect.set;
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,11 @@ export class AppComponent implements OnInit {
               public socket:Socket,
               //@Inject(WEB3) private web3: Web3,
               public _location: Location) {
-    config.init();
+    config.init(()=>{
+      this.api.infos().subscribe((infos:any)=>{
+        config.infos_server=infos;
+      })
+    });
     this.initUser();
   }
 
@@ -109,10 +114,19 @@ export class AppComponent implements OnInit {
     // }
     // const accounts = this.web3.eth.getAccounts();
 
+    setTimeout(()=>{
+      if(this.config.width_screen>=400 && this.drawer!=null)this.drawer.open();
+    },500);
+
+
   }
 
   logout() {
     localStorage.removeItem('address');
     window.location.reload();
+  }
+
+  closeMenu(){
+    if(this.config.width_screen<400)this.drawer.close();
   }
 }
