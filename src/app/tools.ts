@@ -5,6 +5,7 @@ import {
 } from "ngx-social-button";
 import {WebcamUtil} from "ngx-webcam";
 import {MatSnackBar} from "@angular/material";
+import {stringify} from "querystring";
 
 export const ADMIN_PASSWORD="hh4271";
 
@@ -97,13 +98,19 @@ export function sendToPrint(section="print-section"){
  * @param event_name
  * @param func
  */
-export function subscribe_socket(vm:any,event_name:string,refresh=true){
+export function subscribe_socket(vm:any,event_name:string,func=null){
   if(vm.socket!=null){
     $$("Installation de la socket pour l'event "+event_name);
     vm.socket.on(event_name, (data: any) => {
+      $$("Réception de "+event_name+" avec data=",data);
       if (data.to == vm.config.user._id || data.to=="*") {
         if(vm.toast!=null && data.message!=null && data.message.length>0)showMessage(vm,data.message);
-        if(refresh && vm.refresh!=null)vm.refresh();
+        if(func==null) {
+          if (vm.refresh != null) vm.refresh();
+        }else{
+          func(event_name);
+        }
+
       }
     });
   }

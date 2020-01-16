@@ -16,7 +16,7 @@ export class MyeventsComponent implements OnInit {
 
   ngOnInit() {
     checkConfig(this);
-    subscribe_socket(this,"refresh_burn",false);
+    subscribe_socket(this,"refresh_burn",()=>{});
   }
 
   myplaces(event) {

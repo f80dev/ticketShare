@@ -107,6 +107,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     subscribe_socket(this,"refresh_sell");
+    subscribe_socket(this,"refresh_buy",()=>{
+      this.initUser();
+      localStorage.removeItem("dtBuy");
+    });
 
     //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
     // if ('enable' in this.web3.currentProvider) {

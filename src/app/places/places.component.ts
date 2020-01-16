@@ -7,6 +7,7 @@ import {arrayRemove, checkLogin, subscribe_socket} from "../tools";
 import {MatSnackBar} from "@angular/material";
 import {Socket} from "ngx-socket-io";
 import {$$,showMessage} from '../tools';
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-places',
@@ -79,7 +80,15 @@ export class PlacesComponent implements OnInit {
   ngOnInit() {
     checkLogin(this.router);
     this.refresh();
-    subscribe_socket(this,"refresh_buy");
+    if(localStorage.getItem("dtBuy")!=null){
+      var delay=new Date().getTime()-Number(localStorage.getItem("dtBuy"));
+      debugger;
+      this.message="En attente de validation d'achat";
+    }
+    subscribe_socket(this,"refresh_buy",()=>{
+      localStorage.removeItem("dtBuy");
+      this.refresh();
+    });
   }
 
 
@@ -102,21 +111,22 @@ export class PlacesComponent implements OnInit {
     }
 
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.message="Validation de l'achat";
+    const idEvent=params.get("event");
     const address=localStorage.getItem("address");
+    this.message="Fabrication de la demande d'achat";
 
-    this.api.buy(address,rc,params.get("event")).subscribe((r:any)=>{
-      this.message="";
+    this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
+      debugger;
       if(r!=null){
-        this.api.getuser(this.config.user._id).subscribe((r: any) => {if(r!=null)this.config.user = r;});
-        showMessage(this,"Achat confirmé");
-        this.router.navigate(["home"]);
+        localStorage.setItem("dtBuy",stringify(new Date().getTime()));
+        this.message="Demande d'achat en cours";
       }
-    },(err)=>{
+    }
+    ,(err)=>{
       this.message="";
-      showMessage(this,"Achat annulé");
-      this._location.back();
-    })
+      showMessage(this,"Demande d'achat non transmise");
+    }
+    )
   }
 
 
