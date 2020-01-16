@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
+import {Location} from "@angular/common";
 import {ConfigService} from "../config.service";
 import {showMessage} from "../tools";
 import {MatSnackBar} from "@angular/material";
@@ -14,6 +15,7 @@ export class AdminComponent implements OnInit {
   jobs: any={};
 
   constructor(public api:ApiService,
+              public _location:Location,
               public toast:MatSnackBar,
               public config:ConfigService) {
   }
@@ -28,6 +30,18 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.refresh();
   }
+
+  raz(){
+    this.api.raz().subscribe(()=>{
+      this._location.go("https://ticketshare.f80.fr");
+    });
+  }
+
+
+  log(){
+    open("https://server.f80.fr:6800/api/infos/log","_blank");
+  }
+
 
 
   job() {

@@ -1,4 +1,4 @@
-<div *ngIf="config.user?._events?.length==0" style="margin-top:30%;text-align: center;">
+<div *ngIf="config.user?._events==null || config.user?._events?.length==0" style="margin-top:30%;text-align: center;">
   Vous n'avez pas de billets
   <br><br>
   <button mat-button mat-raised-button (click)="router.navigate(['store'])">En Trouver</button>

@@ -107,7 +107,6 @@ export class PlacesComponent implements OnInit {
 
     this.api.buy(address,rc,params.get("event")).subscribe((r:any)=>{
       this.message="";
-      debugger
       if(r!=null){
         this.api.getuser(this.config.user._id).subscribe((r: any) => {if(r!=null)this.config.user = r;});
         showMessage(this,"Achat confirmé");

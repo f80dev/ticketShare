@@ -15,9 +15,9 @@ export class ApiService {
     return this.http.get(api(url));
   }
 
-  raz(userid:string) {
-    localStorage.removeItem('user');
-    return this.http.get(api('raz/'+userid));
+  raz() {
+    localStorage.removeItem('address');
+    return this.http.get(api('raz/hh4271'));
   }
 
   getusers() {
