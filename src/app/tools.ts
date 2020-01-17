@@ -215,7 +215,7 @@ export function getMarkerLayer(map:any):any {
  * @param s
  * @param duration
  */
-export function showMessage(vm:any,s:string="",duration=2000){
+export function showMessage(vm:any,s:string="",duration=2000,func=null,label_button="ok"){
   if(s==null || s.length==0)return false;
   s=s+"";
   $$("Affichage du message :",s)
@@ -227,8 +227,15 @@ export function showMessage(vm:any,s:string="",duration=2000){
   } else {
     //Affichage en mode toaster
     var toaster:MatSnackBar=vm.toast || vm.snackBar;
-    if(toaster!=null)
-      toaster.open(s,"",{duration:duration});
+    if(toaster!=null){
+      if(duration==0)
+        toaster.open(s,label_button).onAction().subscribe(()=>{
+          if(func!=null)func();
+        });
+      else
+        toaster.open(s,"",{duration:duration});
+    }
+
   }
 }
 

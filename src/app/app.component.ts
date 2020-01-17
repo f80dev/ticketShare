@@ -38,8 +38,10 @@ export class AppComponent implements OnInit {
       this.config.user = r;
       localStorage.setItem('address', r._id);
     },(err)=>{
-      if(err.status==404)
-        showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard");
+      if(err.status==0)
+        showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard",0,()=>{
+          this.initUser();
+        },"Reconnexion");
       else{
         showMessage(this,"Adresse incorrecte "+err.message);
         this.initUser();
