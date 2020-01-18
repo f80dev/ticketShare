@@ -7,7 +7,7 @@ import {
 
 import {$$, showError, showMessage} from "../tools";
 import {ApiService} from "../api.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material";
 import {ConfigService} from "../config.service";
 
@@ -19,7 +19,8 @@ import {ConfigService} from "../config.service";
 export class LoginComponent implements OnInit {
 
   email = 'paul.dudule@gmail.com';
-  message="L'authentification va permettre d'utiliser un même compte sur plusieurs appareils. Elle permet également de rendre vos promotions publiques donc visible sur la carte des promotions localisées";
+  message="";
+  redirect=null;
 
   shareObj = {
     href: "FACEBOOK-SHARE-LINK",
@@ -30,12 +31,16 @@ export class LoginComponent implements OnInit {
               public router: Router,
               public toast:MatSnackBar,
               public config:ConfigService,
+              public route:ActivatedRoute,
               private socialAuthService: SocialService) {
 
   }
 
 
   ngOnInit() {
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    this.redirect=params.get("redirect");
+    this.message=params.get("message");
   }
 
 
@@ -106,7 +111,12 @@ export class LoginComponent implements OnInit {
   initUser(data:any,askForCode=false){
     this.api.setuser(this.config.user._id,{"email":data.email,"pseudo":data.firstname}).subscribe((r:any)=>{
       if(r!=null && r._id!=null){
-        showMessage(this,"Profil mis à jour")
+        showMessage(this,"Profil mis à jour");
+        debugger
+        if(this.redirect==null)
+          this.router.navigate(["store"]);
+        else
+          this.router.navigateByUrl(this.redirect);
         this.config.user=r;
       }
 

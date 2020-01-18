@@ -108,7 +108,7 @@ export class ValidateComponent implements OnInit {
       }
     }
 
-    this.api.burn(tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
+    this.api.burn(this._event["_id"],tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
       this.address="";
       if(r.status==200){
         showMessage(this,"Validation des "+this.to_burn.length+" ticket(s) effectué");

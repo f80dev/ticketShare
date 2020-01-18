@@ -76,8 +76,8 @@ export class ApiService {
     return this._get("use/"+address+"/"+event);
   }
 
-  burn(tickets: string) {
-    return this._get("burn/"+tickets);
+  burn(eventid:string,tickets: string) {
+    return this._get("burn/"+eventid+"/"+tickets);
   }
 
   infos() {

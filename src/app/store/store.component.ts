@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {showMessage, subscribe_socket, tirage} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatSnackBar} from "@angular/material";
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-store',
@@ -39,7 +40,16 @@ export class StoreComponent implements OnInit {
   }
 
   buy(event: any) {
-    this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
+    if(this.config.user.email==""){
+      this.router.navigate(["login"],{queryParams:
+          {
+            message:"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",
+            redirect:"/places?event="+event._id+"&etherprice="+event.etherprice
+          }
+      });
+    } else {
+      this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
+    }
   }
 
   validate(event:any){

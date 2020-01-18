@@ -33,7 +33,7 @@
     </a>
 
 
-    <a mat-list-item routerLink="login">
+    <a mat-list-item routerLink="login" *ngIf="config.user?.email==''">
       <mat-icon>email</mat-icon>
       &nbsp;&nbsp;Login
     </a>
