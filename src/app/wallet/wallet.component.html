@@ -47,6 +47,12 @@
                  [value]="config.user?.private_key">
         </qr-code>
 
+  <br>
+  <button mat-button mat-flat-button
+          (click)="change_wallet()">
+    Changer
+  </button>
+
 
 
 
@@ -57,7 +63,6 @@
 
   <br><br>
   <button mat-button mat-flat-button
-          class="app-button"
           (click)="send_codes()">
     Recevoir les codes
   </button>
