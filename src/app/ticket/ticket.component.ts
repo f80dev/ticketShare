@@ -20,6 +20,6 @@ export class TicketComponent implements OnInit {
   }
 
   openShare(ticket: any) {
-    this.router.navigate(["share"],{queryParams:{ticket:ticket._id}});
+    this.router.navigate(["share"],{queryParams:{ticket:ticket._id,event:ticket.event}});
   }
 }

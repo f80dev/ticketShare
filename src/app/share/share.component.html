@@ -3,9 +3,9 @@
   <h2>Destinataire</h2>
   <app-scanner [size]="320"
                *ngIf="config.webcamsAvailable>0"
-               (flash)="onflash($event)"></app-scanner>
+               (flash)="onflash($event)">
+  </app-scanner>
 
-<br>
 <br>
 <mat-form-field class="form-field-style" style="width: 90%;margin-right: 5%;">
   <input type="text" matInput

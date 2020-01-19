@@ -92,8 +92,8 @@ export class ApiService {
     return this._get("remove_event/"+userid+"/"+evtid);
   }
 
-  transfert(_from:string,_to: string,ticketid:string) {
-    return this._get("transfer/"+_from+"/"+_to+"/"+ticketid);
+  transfert(_from:string,_to: string,eventid:string,ticketid:string) {
+    return this._get("transfer/"+_from+"/"+_to+"/"+eventid+"/"+ticketid);
   }
 
   buy(buyer:string,tickets: string[],event:string) {

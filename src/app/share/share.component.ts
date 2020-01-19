@@ -14,6 +14,7 @@ import {$$,showMessage} from '../tools';
 })
 export class ShareComponent implements OnInit {
   ticketid: string = "";
+  eventid: string = "";
   address="";
   message: string="";
 
@@ -25,11 +26,12 @@ export class ShareComponent implements OnInit {
 
   ngOnInit() {
     this.ticketid= this.route.snapshot.queryParamMap.get("ticket");
+    this.eventid= this.route.snapshot.queryParamMap.get("event");
   }
 
   transfert(_to:string){
     this.message="Transfert en cours";
-    this.api.transfert(this.config.user._id,_to,this.ticketid).subscribe((r)=>{
+    this.api.transfert(this.config.user._id,_to,this.eventid,this.ticketid).subscribe((r)=>{
       this.message="";
       if(r){
         showMessage(this,"Transfert effectué");
@@ -51,7 +53,6 @@ export class ShareComponent implements OnInit {
       if(this.address!=null && this.address.length>10)
         this.transfert(evt.target.value);
     }
-
   }
 
 }
