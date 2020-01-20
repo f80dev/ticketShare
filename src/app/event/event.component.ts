@@ -10,6 +10,7 @@ export class EventComponent implements OnInit {
   @Input("event") _event:any;
   @Input("height") height="200px";
   @Input("width") width="150px";
+  @Input("maxwidth") maxWidth="500px";
   @Input("showAction") showAction=false;
 
   constructor() { }

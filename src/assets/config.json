@@ -1,7 +1,7 @@
 {
   "appname": "TicketShare",
   "title": "TicketShare",
-  "version": "0.0.93-beta",
+  "version": "0.0.95-beta",
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
@@ -41,48 +41,13 @@
       "id":"buildPromo",
       "title": "Comment faire une promotion ?",
       "content": "./faqs/build_promo.html"
-    },
-    {
-      "id":"buildPdV",
-      "title": "Qu'est qu'un point de vente ?",
-      "content": "Dans reducShare, un point de vente n'est pas nécéssairement un commerce. Cela peut être le domicile d'un indépendant par exemple.<br>Il s'agit surtout d'une adresse ou le client doit se rendre pour bénéficier de sa promotion. Cette adresse permet également de positionner les promotions sur une carte"
-    },
-    {
-      "id":"tarif",
-      "title": "Combien coûte REDUCSHARE ?",
-      "content": "Pour un acheteur, le service sera toujours gratuit.<br><br>Pour les 1000 premiers vendeurs à utiliser le REDUCSHARE, le service sera intégralement gratuit. Pour les suivants (mais on en est pas encore là !), certaines fonctions 'premium' seront payantes et le nombre de promotion par mois sera limité.<br><br>Pour les associations et établissements publics le service restera intégralement gratuit"
-    },
-    {
-      "id":"variable_reduc",
-      "title": "Pourquoi dit-on que l'avantage augmente ?",
-      "content": "La particularité des coupons de REDUCSHARE vient du fait que le montant de l'avantage du client augmente lorsque le client redistribue le coupon ou lorsque lui ou la personne à qui il a envoyé le coupon utilise celui-ci. Cette augmentation est fixée par le vendeur à la fabrication du coupon"
-    },
-    {
-      "id":"profil",
-      "title": "Doit-on s'authentifier pour utiliser REDUCSHARE ?",
-      "content": "Absolument pas !<br> REDUCSHARE fonctionne parfaitement avec un profil anonyme. <br>L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
-    },
-    {
-      "id":"delegate",
-      "title": "Peut on déléguer la validation des réductions à ses employés ?",
-      "content": "Oui, rien de plus simple.<br>En effet, celui qui fait fabrique la promotion ne peut pas forcément être toujours présent sur le point de vente pour valider les promotions<br>Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
-    },
-    {
-      "id":"getReduc",
-      "title": "Comment récupérer des réductions ?",
-      "content": "Il existe plusieurs façons de récupérer des réductions :<br><ul><li>Flasher les réductions affichés dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
-    },
-    {
-      "id":"shareReduc",
-      "title": "Comment partager ses réductions ?",
-      "content": "Pour partager une réduction, il suffit d'ouvrir celle-ci et d'utiliser le bouton partage. Sur un ordinateur, l'usage du bouton copie dans le presse papier le lien de la promotion qu'il suffit ensuite d'envoyer par n'importe quelle messagerie. <br>Sur un mobile et pour la plupart des navigateurs, la boite de partage propose toutes les applications susceptible d'envoyer le lien<br>Une autre méthode consiste à faire flasher le QRCode de la promotion par les personnes qui souhaite la récupérer. Enfin les sites d'annonces interdisent l'insertion de lien internet mais il est possible d'inserer l'image du QRCode dans les visuels de votre annonce"
     }
   ],
 
   "cgu":{
     "dtModif":1570395953,
     "online":false,
-    "content":"https://reducshare.com/cgu.html"
+    "content":"https://ticketshare.f80.fr/cgu.html"
   },
 
   "socket":true,

@@ -17,7 +17,10 @@ export class MyeventsComponent implements OnInit {
   }
 
   refresh(){
-    this.config.reload_user();
+    this.config.reload_user(()=>{
+      if(this.config.user._events.length==1)
+        this.myplaces(this.config.user._events[0]);
+    });
   }
 
   ngOnInit() {

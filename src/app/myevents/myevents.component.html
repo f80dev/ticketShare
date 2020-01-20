@@ -6,7 +6,7 @@
 
 
 <!--Affichage de l'événement-->
-<app-event width="40vw" height="0" *ngFor="let event of config.user?._events" [event]="event">
+<app-event width="90%" maxwidth="600px" height="0" *ngFor="let event of config.user?._events" [event]="event">
 
     <div style="width: 100%;text-align: center;font-size: large;margin-top: 15px;" *ngIf="event.date">
       <br>
