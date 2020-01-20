@@ -18,19 +18,22 @@ export class MyticketsComponent implements  OnChanges {
               public config:ConfigService,
               public router:Router,
               public _location:Location,
-              public route:ActivatedRoute) { }
+              public route:ActivatedRoute) {
+  }
 
   refresh(){
     this.message="Récupération de vos billets";
-    this.api.use(this.config.user._id,this._event._id).subscribe((r:any)=>{
+    var idevent="";
+    if(this._event!=null)idevent=this._event._id;
+
+    this.api.use(this.config.user.address,idevent).subscribe((r:any)=>{
       this.message="";
       this.tickets=r;
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this._event!=null)
-      this.refresh();
+    if(this._event!=null)this.refresh();
   }
 
 }

@@ -38,32 +38,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.analyse_params((p: any) => {
         this.config.refresh_callback=this.refresh;
         this.refresh();
         subscribe_socket(this,"refresh_event");
-      });
   }
 
 
 
-  analyse_params(func) {
-    var url=this._location.path();
-    localStorage.setItem('firsturl', url);
-    if(url!=null && url.indexOf("?")>0) {
-      url= this._location.path().split("?")[1];
-      $$('Récupération des paramètres', url);
-      if (this.config.params == null) {
-        this.config.params = {};
-        if(url.indexOf("event=")>-1)this.config.params["event"]=url.split("event=")[1].split("&")[0];
-      }
-    }
-    $$('Netoyage de l\'url de lancement:' + this._location.path());
-    this._location.replaceState(this._location.path().split('?')[0], '');
-    this._location.replaceState(this._location.path().split('/home')[0], '');
-
-    func(this.config.params);
-  }
 
 
 

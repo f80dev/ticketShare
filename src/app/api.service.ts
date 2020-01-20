@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { timeout} from 'rxjs/operators';
 import {api,ADMIN_PASSWORD} from './tools';
 
 @Injectable({
@@ -11,8 +12,8 @@ export class ApiService {
 
   user:any=null;
 
-  _get(url){
-    return this.http.get(api(url));
+  _get(url,_timeoutInSec=60){
+    return this.http.get(api(url)).pipe(timeout(_timeoutInSec*1000));
   }
 
   raz() {
@@ -60,8 +61,8 @@ export class ApiService {
     return this._get("adduser/"+result);
   }
 
-  getuser(address: string) {
-    return this._get("getuser/"+address);
+  getuser(address: string,timeoutInSec=30) {
+    return this._get("getuser/"+address,timeoutInSec);
   }
 
   available(event:string,buyer: string) {

@@ -15,7 +15,7 @@
 
   <h4>Adresse de votre wallet</h4>
 
-        <div ngxClipboard [cbContent]="config.user?._id"
+        <div ngxClipboard [cbContent]="config.user?.address"
              (click)="informe_copy()"
              style="cursor: pointer;width:80%;display: inline-block;margin:10px;">
           {{public_key}}
@@ -24,7 +24,7 @@
         <qr-code [size]="150"
                  style="margin:10px;display: inline-block;vertical-align: middle;"
                  title="Le QRCode de votre clé de sécurité"
-                 [value]="config.user?._id">
+                 [value]="config.user?.address">
         </qr-code>
 
 
@@ -32,20 +32,21 @@
   <br>
 
   <br>
+  <div *ngIf="config.user?.private_key?.length>0">
+    <h4>Clé privée</h4>
 
-  <h4>Clé privée</h4>
-
-        <div ngxClipboard [cbContent]="config.user?.private_key" (click)="informe_copy()"
-             style="cursor: pointer;width:70%;display: inline-block;margin:10px;">
-          {{private_key1}}<br>
-          {{private_key2}}
-        </div>
-        <br>
-        <qr-code [size]="150"
-                 style="display: inline-block;vertical-align: middle;margin:10px;"
-                 title="Le QRCode de votre clé de sécurité"
-                 [value]="config.user?.private_key">
-        </qr-code>
+    <div ngxClipboard [cbContent]="config.user?.private_key" (click)="informe_copy()"
+         style="cursor: pointer;width:70%;display: inline-block;margin:10px;">
+      {{private_key1}}<br>
+      {{private_key2}}
+    </div>
+    <br>
+    <qr-code [size]="150"
+             style="display: inline-block;vertical-align: middle;margin:10px;"
+             title="Le QRCode de votre clé de sécurité"
+             [value]="config.user?.private_key">
+    </qr-code>
+  </div>
 
   <br>
   <button mat-button mat-flat-button

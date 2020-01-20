@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import {environment} from '../environments/environment';
 import {initAvailableCameras} from "./tools";
 import {Platform} from "@angular/cdk/platform";
+import {ApiService} from "./api.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +20,16 @@ export class ConfigService {
   waiting:boolean=false;
   webcamsAvailable:number=0;
   width_screen=300;
-  params:any=null;
+  params:any={};
   user:any=null;
   refresh_callback: () => void;
 
 
-  constructor(private location: Location, private http: HttpClient,public platform:Platform){
+  constructor(private location: Location,
+              private http: HttpClient,
+              public platform:Platform,
+              public api:ApiService){
+
     if(localStorage.getItem("activeBrand")!=null)
       this.activeBrand=Number(localStorage.getItem("activeBrand"));
   }
@@ -72,10 +78,23 @@ export class ConfigService {
     });
   }
 
+
+  reload_user(func=null){
+    if(this.user!=null){
+      this.api.getuser(this.user.address).subscribe((r:any)=>{
+        if(r!=null)this.user=r;
+        if(func)func(r);
+      });
+    }
+  }
+
+
+
   private async getConfig(): Promise<any> {
     if (!this.config) {
       this.config = (await this.http.get(this.location.prepareExternalUrl(environment.config_file)).toPromise());
     }
     return Promise.resolve(this.config);
   }
+
 }

@@ -82,7 +82,6 @@ export class PlacesComponent implements OnInit {
     this.refresh();
     if(localStorage.getItem("dtBuy")!=null){
       var delay=new Date().getTime()-Number(localStorage.getItem("dtBuy"));
-      debugger;
       this.message="En attente de validation d'achat";
     }
     subscribe_socket(this,"refresh_buy",()=>{
@@ -116,7 +115,6 @@ export class PlacesComponent implements OnInit {
     this.message="Fabrication de la demande d'achat";
 
     this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
-      debugger;
       if(r!=null){
         localStorage.setItem("dtBuy",stringify(new Date().getTime()));
         this.message="Demande d'achat en cours";

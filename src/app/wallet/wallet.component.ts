@@ -25,7 +25,7 @@ export class WalletComponent implements OnInit {
   ngOnInit() {
     checkConfig(this);
     if(this.config.user!=null)
-      this.public_key=this.config.user._id;
+      this.public_key=this.config.user.address;
 
     if(this.config.user!=null && this.config.user.private_key!=null && this.config.user.private_key.length>20){
       this.private_key1=this.config.user.private_key.substr(0,this.config.user.private_key.length/2);
@@ -35,7 +35,7 @@ export class WalletComponent implements OnInit {
   }
 
   send_codes() {
-    this.api.resend(this.config.user._id).subscribe(()=>{
+    this.api.resend(this.config.user.address).subscribe(()=>{
       showMessage(this,"Consulter votre messagerie");
     })
   }
@@ -63,7 +63,7 @@ export class WalletComponent implements OnInit {
       }).afterClosed().subscribe((result_key) => {
         if(result_key!=null && result_key.length>0){
           this.api.adduser(result_key).subscribe((u:any)=>{
-            localStorage.setItem("address",u._id);
+            localStorage.setItem("address",u.address);
             window.location.reload();
           })
         }

@@ -1,6 +1,6 @@
 <div *ngIf="config.user?._events==null || config.user?._events?.length==0" style="margin-top:30%;text-align: center;">
   Vous n'avez pas de billets
-  <br><br>
+  <br><br><br>
   <button mat-button mat-raised-button (click)="router.navigate(['store'])">En Trouver</button>
 </div>
 
@@ -8,10 +8,14 @@
 <!--Affichage de l'événement-->
 <app-event width="40vw" height="0" *ngFor="let event of config.user?._events" [event]="event">
 
-
-    <div style="width: 100%;text-align: center;font-size: large;margin-top: 15px;">
+    <div style="width: 100%;text-align: center;font-size: large;margin-top: 15px;" *ngIf="event.date">
       <br>
       Le {{event.date*1000 | date:'dd/MM'}}
+    </div>
+
+    <div style="width: 100%;text-align: center;font-size: large;" *ngIf="event.date==null && event.until!=null">
+      <br>
+      Valable jusqu'au {{event.until*1000 | date:'dd/MM'}}
     </div>
 
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">

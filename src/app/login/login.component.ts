@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
   updateUser(){
     // this.api.setuser(this.data.user).subscribe((res:any)=>{
-    //   localStorage.setItem("user",res.user._id);
+    //   localStorage.setItem("user",res.user.address);
     //   this.dialogRef.close({user:res.user,message:"Vous êtes maintenant authentifier",code:200,force_refresh:true});
     // },(err)=>{showError(this,err)});
   }
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     // this.dialog.open(PromptComponent,{
     //   width:'90vw',data: {title:"Authentification par email",question:"Renseigner votre adresse mail pour recevoir le code de connexion"}}).afterClosed().subscribe((email:any) => {
     //   if(email){
-    //     this.api.askforemail(email,this.data.user._id).subscribe((res:any)=>{
+    //     this.api.askforemail(email,this.data.user.address).subscribe((res:any)=>{
     //       if(res==null){
     //         this.dialogRef.close({"message":"Cette adresse mail n'est pas valide"});
     //       } else {
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     //           this.dialog.open(PromptComponent,{
     //             width:'90vw',data: {title:"Renseigner le code reçu"}})
     //             .afterClosed().subscribe((code:any) => {
-    //             this.api.checkCode(this.data.user._id,code,"code").subscribe((res_auth:any)=>{
+    //             this.api.checkCode(this.data.user.address,code,"code").subscribe((res_auth:any)=>{
     //               if(res_auth.status==200){
     //                 this.data.user.email=email;
     //                 this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
@@ -109,17 +109,17 @@ export class LoginComponent implements OnInit {
   }
 
   initUser(data:any,askForCode=false){
-    this.api.setuser(this.config.user._id,{"email":data.email,"pseudo":data.firstname}).subscribe((r:any)=>{
+    this.api.setuser(this.config.user.address,{"email":data.email,"pseudo":data.firstname}).subscribe((r:any)=>{
       if(r!=null && r._id!=null){
         showMessage(this,"Profil mis à jour");
-        debugger
         if(this.redirect==null)
           this.router.navigate(["store"]);
         else
           this.router.navigateByUrl(this.redirect);
         this.config.user=r;
       }
-
+    },()=>{
+      showMessage(this,"Problème de mise a jour, réessayez");
     })
     // this.api.getuser(email).subscribe((u:any)=>{
     //   if(u.code==500){

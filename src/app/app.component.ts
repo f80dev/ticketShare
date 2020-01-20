@@ -6,8 +6,7 @@ import {ApiService} from './api.service';
 import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
 import {subscribe_socket,$$,showMessage} from "./tools";
-import Web3 from "web3";
-import set = Reflect.set;
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -23,20 +22,30 @@ export class AppComponent implements OnInit {
               public api: ApiService,
               public toast:MatSnackBar,
               public socket:Socket,
+              public route:ActivatedRoute,
+              public router:Router,
               //@Inject(WEB3) private web3: Web3,
               public _location: Location) {
+
     config.init(()=>{
       this.api.infos().subscribe((infos:any)=>{
         config.infos_server=infos;
       })
     });
-    this.initUser();
+
   }
 
-  create_user(result){
+
+  /**
+   *
+   * @param result
+   */
+  create_user(result,func){
+    if(result==null)result="";
     this.api.adduser(result).subscribe((r: any) => {
       this.config.user = r;
-      localStorage.setItem('address', r._id);
+      localStorage.setItem('address', r.address);
+      func(r);
     },(err)=>{
       if(err.status==0)
         showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard",0,()=>{
@@ -48,6 +57,9 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+
+
 
   linkEmail(func){
     this.dialog.open(PromptComponent, {width: '250px',
@@ -65,32 +77,71 @@ export class AppComponent implements OnInit {
     });
   }
 
+
   /**
    *
+   * @param func
    */
-  initUser():void {
+  analyse_params(func) {
+    var url=this._location.path(); //Ne récupére pas le domaine de l'url
+    localStorage.setItem('firsturl', url);
+    var params={};
+    if(url!=null && url.indexOf("?")>=0) {
+      url= this._location.path().split("?")[1];
+      $$('Récupération des paramètres', url);
+      if(url.indexOf("event=")>-1)params["event"]=url.split("event=")[1].split("&")[0];
+      if(url.indexOf("privatekey=")>-1)params["privatekey"]=url.split("privatekey=")[1].split("&")[0];
+      if(url.indexOf("address=")>-1)params["address"]=url.split("address=")[1].split("&")[0];
+    }
+    $$('Netoyage de l\'url de lancement:' + this._location.path());
+    this._location.replaceState(this._location.path().split('?')[0], '');
+    this._location.replaceState(this._location.path().split('/home')[0], '');
+
+    $$("Appel du callback avec params=",params);
+    this.config.params=params;
+    func(params);
+  }
+
+
+
+  /**
+   * Chargement du cookier pour restauration du compte du device
+   */
+  initUser(text=""):void {
+    $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
     const address = localStorage.getItem('address');
+
+    $$("Address récupérée sur le device ",address);
     if (!address){
       //TODO: intégrer la problématique d'obsolescence des cookies
       $$("Pas de compte connu sur ce device")
-      this.create_user("");
+      $$("Appel de create_user avec text=",text);
+      this.create_user(text,(u)=>{
+        showMessage(this,"Nouveau compte créé");
+      });
+
     } else {
-      $$("Récupération du compte "+address)
-      this.api.getuser(address).subscribe((r: any) => {
+      $$("Récupération du compte "+address);
+      this.api.getuser(address,30).subscribe((r: any) => {
         this.config.user = r;
       },(err)=>{
-        $$("Le compte à été supprimé de la base de donnée");
-        localStorage.removeItem("address");
-        this.initUser();
+        if(err.status==400){
+          $$("Le compte à été supprimé de la base de donnée, on le supprime du device");
+          localStorage.removeItem("address");
+          this.initUser();
+        } else
+          showMessage(this,err.message);
       });
     }
   }
 
   ngOnInit(): void {
     subscribe_socket(this,"refresh_sell");
-    subscribe_socket(this,"refresh_buy",()=>{
-      this.initUser();
+    subscribe_socket(this,"refresh_buy",(mes,data)=>{
       localStorage.removeItem("dtBuy");
+      this.config.reload_user(()=>{
+        this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
+      });
     });
 
     //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
@@ -100,6 +151,19 @@ export class AppComponent implements OnInit {
     // const accounts = this.web3.eth.getAccounts();
 
     setTimeout(()=>{
+      this.analyse_params((p:any)=>{
+        if(p["privatekey"]!=null)
+          this.initUser(p["privatekey"]);
+        else{
+          if(p["address"]!=null){
+            this.initUser(p["address"]);
+          } else {
+            this.initUser();
+          }
+        }
+
+      });
+
       if(this.config.width_screen>=400 && this.drawer!=null)this.drawer.open();
     },500);
 
