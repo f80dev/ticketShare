@@ -95,6 +95,13 @@ export class ValidateComponent implements OnInit {
   }
 
 
+  reload(){
+    this.message="";
+    this.showScanner=true;
+    this.to_burn=[];
+    this.tickets=[];
+    this.refresh("");
+  }
 
   burn(all=false) {
     if(all)this.to_burn=this.tickets;
@@ -108,16 +115,15 @@ export class ValidateComponent implements OnInit {
       }
     }
 
-    this.api.burn(this._event["_id"],tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
+    this.api.burn(this.lastAddress,this._event["_id"],tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
       this.address="";
       if(r.status==200){
         showMessage(this,"Validation des "+this.to_burn.length+" ticket(s) effectué");
-        this.message="";
-        this.showScanner=true;
-        this.to_burn=[];
-        this.tickets=[];
-        this.refresh("");
+        this.reload();
       }
+    },(err)=>{
+      showMessage(this,err.message);
+      this.reload();
     });
   }
 }

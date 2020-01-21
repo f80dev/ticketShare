@@ -16,7 +16,11 @@
 
     <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
       <button mat-button mat-flat-button (click)="buy(event)">Acheter</button>
-      <button mat-button mat-flat-button (click)="validate(event)">Valider</button>
+      <button mat-button mat-flat-button
+              *ngIf="event.checkers?.indexOf(config.user?.address)>-1"
+              (click)="validate(event)">
+        Valider
+      </button>
     </div>
 
     <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
