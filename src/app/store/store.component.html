@@ -1,21 +1,31 @@
 <div style="position: relative;height: 100vh;vertical-align: text-top;text-align: center;width:100%;">
   <button style="margin-top: 10px;" mat-button mat-raised-button (click)="fictif()">
     Ajouter un événement fictif
-  </button><br>
+  </button>
+  &nbsp;
+  <button style="margin-top: 10px;" mat-button mat-raised-button (click)="job()">
+    Envoyer dans la blockchain
+  </button>
+  <br>
+  <br>
 
   <app-event width="300px" *ngFor="let event of events" [event]="event">
     <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
       {{event.description}}
     </div>
 
-    <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state!='draft'">
+    <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
       <button mat-button mat-flat-button (click)="buy(event)">Acheter</button>
       <button mat-button mat-flat-button (click)="validate(event)">Valider</button>
     </div>
+
     <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
       <button mat-button mat-flat-button (click)="publish(event)">Publier</button>
-      <button mat-button mat-flat-button (click)="edit(event)">Editer</button>
+      <button mat-button mat-flat-button (click)="delete(event)">Supprimer</button>
     </div>
+
+    <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='ready'">En attente de publication</div>
+    <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='in treatment'">En cours de traitement</div>
 
   </app-event>
 

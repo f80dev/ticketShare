@@ -56,9 +56,17 @@ export class ApiService {
     return this.http.post(api("setuser/"+id),body);
   }
 
+  setevent(id:string,body:any) {
+    return this.http.post(api("setevent/"+id),body);
+  }
+
 
   adduser(result: string) {
     return this._get("adduser/"+result);
+  }
+
+  delevent(id: string) {
+    return this._get("delevent/"+id);
   }
 
   getuser(address: string,timeoutInSec=30) {

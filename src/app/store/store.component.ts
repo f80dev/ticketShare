@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {showMessage, subscribe_socket, tirage} from "../tools";
+import {$$, showMessage, subscribe_socket, tirage} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
@@ -64,7 +64,7 @@ export class StoreComponent implements OnInit {
     this.message="Fabrication d'un événement fictif. Cela peut être long ..."
     var index=tirage(4);
     var event=["demo","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?execute&format=json").subscribe((r:any)=>{
+    this.api._get("add_event/"+event+"?format=json&owner="+this.config.user.address).subscribe((r:any)=>{
       this.message="";
       this.refresh();
     },(err)=>{
@@ -72,4 +72,24 @@ export class StoreComponent implements OnInit {
       showMessage(this,err.message);
     });
   }
+
+
+  job(){
+    $$("Lancement du traitement des événements");
+    window.open(environment.root_api+"/job/1","_blank");
+  }
+
+  publish(event:any){
+    this.api.setevent(event["_id"],{"state":"ready"}).subscribe(()=>{
+      showMessage(this,"Votre évémenement est prêt à être mise en ligne");
+      this.refresh();
+    })
+  }
+
+  delete(event:any){
+    this.api.delevent(event["_id"]).subscribe(()=>{
+      this.refresh();
+    })
+  }
+
 }
