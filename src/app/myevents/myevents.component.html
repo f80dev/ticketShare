@@ -1,7 +1,19 @@
-<div *ngIf="config.user?._events==null || config.user?._events?.length==0" style="margin-top:30%;text-align: center;">
-  Vous n'avez pas de billets
-  <br><br><br>
+<div *ngIf="config.user?._events==null || config.user?._events?.length==0"
+     style="text-align: center;">
+  <br>Vous n'avez pas de billets
+  <br><br>
   <button mat-button mat-raised-button (click)="router.navigate(['store'])">En Trouver</button>
+
+  <br><br><br>
+  en recevoir directement<br><br>
+  <qr-code [size]="150"
+           style="display: inline-block;vertical-align: middle;"
+           title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
+           ngxClipboard
+           [cbContent]="config.user?.address"
+           [value]="config.user?.address">
+  </qr-code>
+
 </div>
 
 

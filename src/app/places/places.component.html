@@ -29,13 +29,13 @@
 
   <!--Zone de filtre-->
   <div style="width: 100%;text-align: center;" *ngIf="cats!=null">
-
+    <h4>Filtres</h4>
     &nbsp;
     <mat-form-field style="width:200px;">
       <mat-label>Date</mat-label>
       <mat-select [(value)]="selectDate" (valueChange)="refresh()">
         <mat-option *ngFor="let dt of _dates" [value]="dt">
-          {{dt*1000| date:'dd/MM/yyyy'}} à {{dt*1000| date:'hh:mm'}}
+          {{dt*1000| date:'dd/MM/yyyy'}} à {{dt*1000| date:'HH:mm'}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -82,8 +82,8 @@
           <mat-grid-tile style="text-align: left;">
             <div *ngIf="categories[cat].to_buy>0" style="line-height: 95%;">
               <strong>{{categories[cat].description}}</strong><br>
-              <small>{{categories[cat].to_buy-categories[cat].buy}} places disponibles<br></small><br>
-              <small>Prix {{cat}}€</small>
+              <small>{{categories[cat].to_buy-categories[cat].buy}} places disponibles<br></small>
+              Prix {{cat}}€
             </div>
 
           </mat-grid-tile>

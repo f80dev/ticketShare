@@ -74,14 +74,16 @@ export class PlacesComponent implements OnInit {
         this.etherprice=0;
         $$("On parcours l'ensemble des tickets pour identifier les catégories");
         for(let _t of this.tickets){
-          this.etherprice=this.etherprice+_t.etherprice;
-          if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
-          this.categories[_t.price].description=_t.description;
-          this.categories[_t.price].visual=_t.visual;
-          this.categories[_t.price].value=_t.price;
-          this.categories[_t.price].to_buy++;
-          this.categories[_t.price].range=range(1,this.categories[_t.price].to_buy)
-          this.categories[_t.price].tickets.push(_t);
+          if(_t.date==this.selectDate){
+            this.etherprice=this.etherprice+_t.etherprice;
+            if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
+            this.categories[_t.price].description=_t.description;
+            this.categories[_t.price].visual=_t.visual;
+            this.categories[_t.price].value=_t.price;
+            this.categories[_t.price].to_buy++;
+            this.categories[_t.price].range=range(1,this.categories[_t.price].to_buy)
+            this.categories[_t.price].tickets.push(_t);
+          }
         }
         this.l_categories=Object.keys(this.categories);
         this.cats=Object.values(this.categories);

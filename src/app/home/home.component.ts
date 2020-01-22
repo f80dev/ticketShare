@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ConfigService} from '../config.service';
-import {MatSidenav, MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {$$, subscribe_socket,showMessage} from '../tools';
@@ -26,9 +26,8 @@ export class HomeComponent implements OnInit {
   }
 
 
-
-
   refresh(){
+    $$("Récupération du client");
     if(localStorage.getItem("address")){
       this.api.getuser(localStorage.getItem("address")).subscribe((r: any) => {
         if(r!=null)

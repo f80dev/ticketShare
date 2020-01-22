@@ -1,6 +1,6 @@
 <mat-card class="example-card" [ngStyle]="{'width':width}">
   <mat-card-header>
-    <mat-card-title>
+    <mat-card-title style="line-height: 80% !important;">
       <small>{{ticket.title}}</small>
     </mat-card-title>
     <mat-card-subtitle>
@@ -16,7 +16,6 @@
     <div *ngIf="ticket.seat==null">
       #{{ticket.ref}}
     </div>
-    <br>
     <small>{{ticket.date | date:'HH:mm'}}</small>
 
 
