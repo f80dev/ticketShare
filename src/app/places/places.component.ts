@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../api.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ConfigService} from "../config.service";
 import { Location } from '@angular/common';
-import {arrayRemove, checkLogin, subscribe_socket} from "../tools";
+import {range, checkLogin, subscribe_socket} from "../tools";
 import {MatSnackBar} from "@angular/material";
 import {Socket} from "ngx-socket-io";
 import {$$,showMessage} from '../tools';
@@ -21,9 +21,15 @@ export class PlacesComponent implements OnInit {
   total=0;
   categories={};
   l_categories:string[]=[];
+  cats:any[]=[];
+  _dates:number[]=[];
   nb_places=0;
   sel_tickets: any;
   etherprice=0;
+  breakpoint: number;
+  selectDate=0;
+  selectCategorie="*";
+
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
@@ -36,50 +42,65 @@ export class PlacesComponent implements OnInit {
   }
 
 
-  refresh(){
+  /**
+   * Chargement des tickets
+   */
+  load_tickets(func,func_error){
     this.message="Récupération des places diponibles";
-    var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.etherprice=Number(params.get("etherprice"));
-
     const addr=localStorage.getItem("address");
+    var params:ParamMap=this.route.snapshot.queryParamMap;
     this.api.available(params.get("event"),addr).subscribe((r:any)=>{
       this.message="";
-      if(r!=null){
-        if(r.length==0){
-          this._location.back();
-          showMessage(this,"Plus de place disponible");
-        } else {
-          this.categories={};
-          this.etherprice=0;
-          for(let _t of r){
-            this.etherprice=this.etherprice+_t.etherprice;
-            if(_t.seat==null && _t.ref!=null){
-              if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
-              this.categories[_t.price].description=_t.description;
-              this.categories[_t.price].visual=_t.visual;
-              this.categories[_t.price].to_buy++;
-              this.categories[_t.price].tickets.push(_t);
-              r=arrayRemove(r,_t);
-            }
-          }
-          this.l_categories=Object.keys(this.categories);
-
-          this.tickets=r;
-        }
+      this.tickets=r;
+      this._dates=[];
+      for(let _t of this.tickets){
+        if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
       }
-    },(err)=>{
-      showMessage(this,err.message);
-      this._location.back();
-    });
+      func();
+    },(err)=>{func_error(err)});
   }
 
 
 
+  refresh(){
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    this.etherprice=Number(params.get("etherprice"));
+      this.message="";
+      if(this.tickets.length==0){
+        this._location.back();
+        showMessage(this,"Plus de place disponible");
+      } else {
+        this.categories={};
+        this.etherprice=0;
+        $$("On parcours l'ensemble des tickets pour identifier les catégories");
+        for(let _t of this.tickets){
+          this.etherprice=this.etherprice+_t.etherprice;
+          if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
+          this.categories[_t.price].description=_t.description;
+          this.categories[_t.price].visual=_t.visual;
+          this.categories[_t.price].value=_t.price;
+          this.categories[_t.price].to_buy++;
+          this.categories[_t.price].range=range(1,this.categories[_t.price].to_buy)
+          this.categories[_t.price].tickets.push(_t);
+        }
+        this.l_categories=Object.keys(this.categories);
+        this.cats=Object.values(this.categories);
+      }
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 500) ? 1 : 3;
+  }
+
 
 
   ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 500) ? 1 : 3;
     checkLogin(this.router);
-    this.refresh();
+    this.load_tickets(()=>{
+      this.selectDate=this._dates[0];
+      this.refresh();
+    },(err)=>{showMessage(this, err.message);this._location.back();});
     if(localStorage.getItem("dtBuy")!=null){
       var delay=new Date().getTime()-Number(localStorage.getItem("dtBuy"));
       this.message="En attente de validation d'achat";

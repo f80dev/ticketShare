@@ -1,22 +1,26 @@
 <mat-card class="example-card" [ngStyle]="{'width':width}">
   <mat-card-header>
     <mat-card-title>
-      <small>{{ticket.description}}</small>
+      <small>{{ticket.title}}</small>
     </mat-card-title>
     <mat-card-subtitle>
-      <div *ngIf="ticket.seat!=null">
-        <mat-icon>event_seat</mat-icon>&nbsp;
-        {{ticket.seat}}
-      </div>
-      <div *ngIf="ticket.seat==null">
-        #{{ticket.ref}}
-      </div>
+      {{ticket.date | date:'dd/MM/yy'}}
     </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="ticket.visual" alt="Visuel du ticket">
   <mat-card-content>
+    <div *ngIf="ticket.seat!=null">
+      <mat-icon>event_seat</mat-icon>&nbsp;
+      {{ticket.seat}}
+    </div>
+    <div *ngIf="ticket.seat==null">
+      #{{ticket.ref}}
+    </div>
+    <br>
+    <small>{{ticket.date | date:'HH:mm'}}</small>
 
-      <ng-content></ng-content>
+
+    <ng-content></ng-content>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button mat-flat-button

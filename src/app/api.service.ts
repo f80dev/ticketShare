@@ -73,8 +73,9 @@ export class ApiService {
     return this._get("getuser/"+address,timeoutInSec);
   }
 
-  available(event:string,buyer: string) {
-    return this._get("available/"+event+"/"+buyer);
+  available(event:string,buyer: string="") {
+    if(buyer.length>0)buyer="/"+buyer;
+    return this._get("available/"+event+buyer);
   }
 
   getevent(_id:string){

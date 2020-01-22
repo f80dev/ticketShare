@@ -1,21 +1,61 @@
-<div style="position: relative;height: 100vh;vertical-align: text-top;text-align: center;width:100%;">
-  <button style="margin-top: 10px;" mat-button mat-raised-button (click)="fictif()">
+<div style="position: relative;height: 100vh;vertical-align: text-top;text-align: center;">
+  <button style="margin-top: 10px;" mat-button mat-raised-button
+          (click)="fictif()">
     Ajouter un événement fictif
   </button>
   &nbsp;
-  <button style="margin-top: 10px;" mat-button mat-raised-button (click)="job()">
+  <button style="margin-top: 10px;" mat-button mat-raised-button
+          (click)="job()">
     Envoyer dans la blockchain
   </button>
   <br>
   <br>
 
   <app-event width="300px" *ngFor="let event of events" [event]="event">
-    <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
-      {{event.description}}
+    <div *ngIf="event.preview || event.owner!=config.user?.address">
+      <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
+        {{event.description}}
+      </div>
+    </div>
+
+    <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">
+      Il reste <br><br>
+      <table style="width:100%;text-align: center;">
+        <tr *ngFor="let r of event.rows">
+          <td>
+            {{r.free}}
+          </td>
+          <td>
+            places à
+          </td>
+          <td>
+            {{r.price}}€
+          </td>
+        </tr>
+      </table>
+
     </div>
 
     <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
-      <button mat-button mat-flat-button (click)="buy(event)">Acheter</button>
+      <button mat-button mat-flat-button
+              *ngIf="event.checkers?.indexOf(config.user?.address)==-1"
+              (click)="buy(event)">
+        Acheter
+      </button>
+
+      <button mat-button mat-flat-button
+              *ngIf="event.owner==config.user?.address && !event.preview"
+              (click)="preview(event)">
+        Preview
+      </button>
+
+      <button mat-button mat-flat-button
+              *ngIf="event.owner==config.user?.address && event.preview"
+              (click)="sales(event)">
+        Ventes
+      </button>
+
+
       <button mat-button mat-flat-button
               *ngIf="event.checkers?.indexOf(config.user?.address)>-1"
               (click)="validate(event)">

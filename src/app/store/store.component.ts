@@ -25,22 +25,36 @@ export class StoreComponent implements OnInit {
               public router:Router) {
   }
 
+
   refresh(){
-    this.api.getevents(localStorage.getItem("address")).subscribe((r:any)=>{
-      this.events=r;
+    this.api.getevents(localStorage.getItem("address")).subscribe((l_events:any)=>{
+      this.events=[];
+      for(let e of l_events){
+        e["preview"]=true;
+        this.events.push(e);
+      }
     });
   }
+
+
+
 
   ngOnInit() {
     const params = this.route.snapshot.queryParamMap;
     if(params.get("event"))
-      this.router.navigate(["places"],{queryParams:{event:params.get("event")}});
+      this.router.navigate(
+        ["places"],
+        {queryParams:{event:params.get("event")}}
+        );
     this.refresh();
     subscribe_socket(this,"refresh_store");
   }
 
+
+
+
   buy(event: any) {
-    if(this.config.user.email==""){
+    if(this.config.user!=null && this.config.user.email==""){
       this.router.navigate(["login"],{queryParams:
           {
             message:"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",
@@ -52,10 +66,37 @@ export class StoreComponent implements OnInit {
     }
   }
 
+
+  preview(event:any){
+    event.preview=true;
+  }
+
+
+  sales(event:any){
+    event.resume={};
+    this.api.available(event._id).subscribe((places:any[])=>{
+      for(let p of places){
+        var price=p["price"];
+        if(!event.resume.hasOwnProperty(p["price"]))event.resume[price]={"price":price,"free":0};
+        event.resume[price]={"price":price,"free":event.resume[price]["free"]+1}
+      }
+      event.rows=Object.values(event.resume);
+      event.preview=false;
+    });
+  }
+
+
+
   validate(event:any){
     localStorage.setItem("validation",event._id);
-    this.router.navigate(["validate"],{queryParams:{event:event._id}})
+    this.router.navigate(
+      ["validate"],
+      {queryParams:{event:event._id}}
+      );
   }
+
+
+
 
   /**
    *
@@ -74,10 +115,15 @@ export class StoreComponent implements OnInit {
   }
 
 
+
+
   job(){
     $$("Lancement du traitement des événements");
     window.open(environment.root_api+"/job/1","_blank");
   }
+
+
+
 
   publish(event:any){
     this.api.setevent(event["_id"],{"state":"ready"}).subscribe(()=>{
@@ -85,6 +131,8 @@ export class StoreComponent implements OnInit {
       this.refresh();
     })
   }
+
+
 
   delete(event:any){
     this.api.delevent(event["_id"]).subscribe(()=>{

@@ -163,8 +163,7 @@ export class AppComponent implements OnInit {
         }
 
       });
-
-      if(this.config.width_screen>=400 && this.drawer!=null)this.drawer.open();
+      if(this.config.width_screen>=500 && this.drawer!=null)this.drawer.open();
     },500);
 
 

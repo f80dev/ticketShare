@@ -23,6 +23,14 @@ export function brand_text(text:string,config:any){
   return text;
 }
 
+export function range(start=0, end) {
+  var ans = [];
+  for (let i = start; i <= end; i++) {
+    ans.push(i);
+  }
+  return ans;
+}
+
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   service=service.replace("//","/");
   if (encode) { param = encodeURI(param); }

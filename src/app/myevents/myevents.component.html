@@ -8,16 +8,6 @@
 <!--Affichage de l'événement-->
 <app-event width="90%" maxwidth="600px" height="0" *ngFor="let event of config.user?._events" [event]="event">
 
-    <div style="width: 100%;text-align: center;font-size: large;margin-top: 15px;" *ngIf="event.date">
-      <br>
-      Le {{event.date*1000 | date:'dd/MM'}}
-    </div>
-
-    <div style="width: 100%;text-align: center;font-size: large;" *ngIf="event.date==null && event.until!=null">
-      <br>
-      Valable jusqu'au {{event.until*1000 | date:'dd/MM'}}
-    </div>
-
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
       <button mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
     </div>
