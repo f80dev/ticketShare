@@ -43,8 +43,8 @@ export class ApiService {
     return this.http.get(url,{'headers':{"access_token":token}});
   }
 
-  checkCode(userid: string, code: string,field:string) {
-    return this.http.get(api("checkcode/"+userid+"/"+code+"/"+field));
+  checkCode(email: string, code: string) {
+    return this.http.get(api("checkcode/"+email+"/"+code));
   }
 
   convert(url:string) {

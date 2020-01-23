@@ -92,6 +92,7 @@ export class AppComponent implements OnInit {
       if(url.indexOf("event=")>-1)params["event"]=url.split("event=")[1].split("&")[0];
       if(url.indexOf("privatekey=")>-1)params["privatekey"]=url.split("privatekey=")[1].split("&")[0];
       if(url.indexOf("address=")>-1)params["address"]=url.split("address=")[1].split("&")[0];
+      if(url.indexOf("email=")>-1)params["email"]=url.split("email=")[1].split("&")[0];
     }
     $$('Netoyage de l\'url de lancement:' + this._location.path());
     this._location.replaceState(this._location.path().split('?')[0], '');
@@ -108,6 +109,7 @@ export class AppComponent implements OnInit {
    * Chargement du cookier pour restauration du compte du device
    */
   initUser(text=""):void {
+    //TODO: tous les paramètres transmis ici doivent être encrypté
     $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
     const address = localStorage.getItem('address');
 
@@ -152,15 +154,48 @@ export class AppComponent implements OnInit {
 
     setTimeout(()=>{
       this.analyse_params((p:any)=>{
-        if(p["privatekey"]!=null)
-          this.initUser(p["privatekey"]);
-        else{
-          if(p["address"]!=null){
-            this.initUser(p["address"]);
-          } else {
-            this.initUser();
-          }
+        if(localStorage.getItem("address")!=null){
+          $$("Avant toute tentative de connexion via les paramétres c'est le device qui prime");
+          this.initUser();
         }
+        else{
+          if(p["email"]!=null){
+            $$("A priori on cherche une connexion par email "+p["email"]);
+            this.dialog.open(PromptComponent, {width: '250px',
+              data: {
+                title: 'Récupération du compte',
+                question: "Veuillez renseigner votre code à 6 chiffres pour récupérer votre wallet associé à "+p["email"],
+                onlyConfirm: false,
+                canEmoji: false,
+                lib_ok:"Envoyer",
+                lib_cancel:"Annuler"
+              }
+            }).afterClosed().subscribe((code) => {
+              this.api.checkCode(p["email"],code).subscribe((r)=>{
+                if(r!=null){
+                  localStorage.setItem("address",r["address"]);
+                  this.initUser();
+                }
+              },(err)=>{
+                showMessage(this,"Connexion sur un nouveau compte");
+                this.initUser();
+              });
+            });
+          }
+
+          if(p["privatekey"]!=null){
+            this.initUser(p["privatekey"]);
+          }
+          else{
+            if(p["address"]!=null){
+              this.initUser(p["address"]);
+            } else {
+              this.initUser();
+            }
+          }
+
+        }
+
 
       });
       if(this.config.width_screen>=500 && this.drawer!=null)this.drawer.open();

@@ -144,8 +144,9 @@ export class PlacesComponent implements OnInit {
       }
     }
     ,(err)=>{
+      debugger;
       this.message="";
-      showMessage(this,"Demande d'achat non transmise");
+      showMessage(this,"Enregistrement de la tansaction dans la blockchain")
     }
     )
   }

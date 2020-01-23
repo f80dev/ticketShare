@@ -1,6 +1,8 @@
 <app-hourglass [message]="message"></app-hourglass>
 <div style="width: 100%;text-align: center">
   <h2>Destinataire</h2>
+  Attention, le transfert d'un billet est définitif. En cas d'erreur vous ne pourrez le récupérer que si le destinataire accepte de vous le renvoyer
+
   <app-scanner [size]="320"
                *ngIf="config.webcamsAvailable>0"
                (flash)="onflash($event)">

@@ -28,7 +28,7 @@
   <app-hourglass [message]="message"></app-hourglass>
 
   <!--Zone de filtre-->
-  <div style="width: 100%;text-align: center;" *ngIf="cats!=null">
+  <div style="width: 100%;text-align: center;" *ngIf="cats!=null && message.length==0">
     <h4>Filtres</h4>
     &nbsp;
     <mat-form-field style="width:200px;">
