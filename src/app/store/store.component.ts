@@ -55,6 +55,8 @@ export class StoreComponent implements OnInit {
 
 
 
+
+
   buy(event: any) {
     if(this.config.user!=null && this.config.user.email==""){
       this.router.navigate(["login"],{queryParams:
