@@ -4,7 +4,7 @@
       <small>{{ticket.title}}</small>
     </mat-card-title>
     <mat-card-subtitle>
-      {{ticket.date | date:'dd/MM/yy'}}
+      {{ticket.date | date:'dd/mm/yy'}}
     </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="ticket.visual" alt="Visuel du ticket">
@@ -16,7 +16,7 @@
     <div *ngIf="ticket.seat==null">
       #{{ticket.ref}}
     </div>
-    <small>{{ticket.date | date:'HH:mm'}}</small>
+    <small>{{ticket.date | date:'HH:MM'}}</small>
 
 
     <ng-content></ng-content>
