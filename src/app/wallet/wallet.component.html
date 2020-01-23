@@ -5,7 +5,7 @@
 
 
   <div *ngIf="config.user?.ether>0">
-    <span style="font-size: 2em;">{{config.user?.ether}} ether</span>
+    <span style="font-size: 2em;">{{config.user?.ether | number:'1.1-3'}} ether</span>
     <br>
     Vous pouvez les utiliser<br>
     pour acheter des places

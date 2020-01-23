@@ -19,7 +19,7 @@
       <td>
         <span *ngIf="nb_places>0">{{nb_places}} places</span>
         <span *ngIf="total>0">&nbsp;pour un total de {{total}}€</span>
-        <span *ngIf="etherprice>0">, soit {{total/etherprice |number:'1.1-5'}} ether</span>
+        <span *ngIf="total>0 && etherprice>0">, soit {{total/etherprice | number:'1.1-3'}} ether</span>
       </td>
     </tr></table>
 

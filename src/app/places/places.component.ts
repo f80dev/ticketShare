@@ -71,11 +71,9 @@ export class PlacesComponent implements OnInit {
         showMessage(this,"Plus de place disponible");
       } else {
         this.categories={};
-        this.etherprice=0;
         $$("On parcours l'ensemble des tickets pour identifier les catégories");
         for(let _t of this.tickets){
           if(_t.date==this.selectDate){
-            this.etherprice=this.etherprice+_t.etherprice;
             if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
             this.categories[_t.price].description=_t.description;
             this.categories[_t.price].visual=_t.visual;
@@ -144,7 +142,6 @@ export class PlacesComponent implements OnInit {
       }
     }
     ,(err)=>{
-      debugger;
       this.message="";
       showMessage(this,"Enregistrement de la tansaction dans la blockchain")
     }
