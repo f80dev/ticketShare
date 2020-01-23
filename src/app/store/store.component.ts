@@ -30,6 +30,8 @@ export class StoreComponent implements OnInit {
     this.api.getevents(localStorage.getItem("address")).subscribe((l_events:any)=>{
       this.events=[];
       for(let e of l_events){
+        e["width"]="300px";
+        if(e.state=="draft")e["width"]="100%";
         e["preview"]=true;
         this.events.push(e);
       }

@@ -30,7 +30,7 @@ export class ShareComponent implements OnInit {
   }
 
   transfert(_to:string){
-    this.message="Transfert en cours";
+    this.message="Transfert en cours vers "+_to;
     this.api.transfert(this.config.user.address,_to,this.eventid,this.ticketid).subscribe((r)=>{
       this.message="";
       if(r){
@@ -50,8 +50,9 @@ export class ShareComponent implements OnInit {
 
   onenter(evt){
     if(evt.target.value==13){
-      if(this.address!=null && this.address.length>10)
+      if(this.address!=null && this.address.length>3){
         this.transfert(evt.target.value);
+      }
     }
   }
 

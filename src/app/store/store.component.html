@@ -11,8 +11,17 @@
   <br>
   <br>
 
-  <app-event width="300px" *ngFor="let event of events" [event]="event">
-    <div *ngIf="event.preview || event.owner!=config.user?.address">
+  <app-event *ngFor="let event of events" [event]="event" [width]="event.width">
+
+    <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
+          style="width:100%;text-align: left;">
+      <h4>Vérifier votre événement avant de le mettre en ligne :</h4>
+      Si certaines informations ne sont pas correctes, vous supprimez cette version, corriger votre fichier de configuration et le renvoyer<br><br>
+      <ngx-json-viewer [json]="event" [expanded]="false"></ngx-json-viewer>
+    </div>
+
+
+    <div *ngIf="state=='online' && (event.preview || event.owner!=config.user?.address)">
       <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
         {{event.description}}
       </div>
