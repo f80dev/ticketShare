@@ -54,8 +54,10 @@ export class PlacesComponent implements OnInit {
       this.tickets=[];
       this._dates=[];
       for(let _t of r){
-        if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
-        if(_t.status=="available")this.tickets.push(_t);
+        if(_t.state=="available"){
+          if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
+          this.tickets.push(_t);
+        }
       }
       func();
     },(err)=>{func_error(err)});
@@ -137,7 +139,6 @@ export class PlacesComponent implements OnInit {
     this.message="Fabrication de la demande d'achat";
 
     this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
-      debugger
       if(r!=null){
         localStorage.setItem("dtBuy",stringify(new Date().getTime()));
       }
