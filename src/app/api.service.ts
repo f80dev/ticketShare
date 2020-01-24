@@ -108,6 +108,6 @@ export class ApiService {
 
   buy(buyer:string,tickets: string[],event:string) {
     var ticket=tickets.join(",");
-    return this._get("buy/"+buyer+"/"+ticket+"/"+event);
+    return this._get("buy/"+buyer+"/"+ticket+"/"+event,1);
   }
 }

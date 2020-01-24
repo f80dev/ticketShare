@@ -1,7 +1,7 @@
 {
   "appname": "TicketShare",
   "title": "TicketShare",
-  "version": "0.0.97-beta",
+  "version": "0.0.98-beta",
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
@@ -20,7 +20,7 @@
     "forum": "http://reducshare.les-forums.com/",
     "email": "contact@f80.fr",
     "facebook": "https://www.facebook.com/ticketshare/",
-    "faq": "https://web.reducshare.com/faq.html?from=appli",
+    "faq": "https://ticketshare.f80.fr/faq.html?from=appli",
     "website": "https://web.reducshare.com/index.html?from=appli"
   },
 
@@ -38,8 +38,13 @@
 
   "faqs": [
     {
-      "id":"buildPromo",
-      "title": "Comment faire une promotion ?",
+      "id":"buildEvent",
+      "title": "N'importe qui peut il créé un événement",
+      "content": "Oui ! TicketShare est un système de billeterie sécurisé ouvert à tous."
+    },
+    {
+      "id":"buildEvent",
+      "title": "N'importe qui peut il créé un événement",
       "content": "./faqs/build_promo.html"
     }
   ],

@@ -51,10 +51,11 @@ export class PlacesComponent implements OnInit {
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.api.available(params.get("event"),addr).subscribe((r:any)=>{
       this.message="";
-      this.tickets=r;
+      this.tickets=[];
       this._dates=[];
-      for(let _t of this.tickets){
+      for(let _t of r){
         if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
+        if(_t.status=="available")this.tickets.push(_t);
       }
       func();
     },(err)=>{func_error(err)});
@@ -136,14 +137,15 @@ export class PlacesComponent implements OnInit {
     this.message="Fabrication de la demande d'achat";
 
     this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
+      debugger
       if(r!=null){
         localStorage.setItem("dtBuy",stringify(new Date().getTime()));
-        this.message="Demande d'achat en cours";
       }
     }
     ,(err)=>{
       this.message="";
-      showMessage(this,"Enregistrement de la tansaction dans la blockchain")
+      showMessage(this,"Enregistrement de la tansaction dans la blockchain");
+      this.router.navigate(["store"]);
     }
     )
   }

@@ -23,11 +23,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
+              "src/js",
               "src/404.html",
               "src/CNAME",
               "src/privacy.html",
               "src/cgu.html",
               "src/privacy.html",
+              "src/faq.html",
               "src/style.css",
               "src/robots.txt",
               "src/sitemap.xml",
