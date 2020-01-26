@@ -138,6 +138,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    $$("Vérification de la connexion")
+    this.api.infos().subscribe((r:any)=>{
+      $$("Infos du serveur : ",r);
+    })
+
+
     subscribe_socket(this,"refresh_sell");
     subscribe_socket(this,"refresh_buy",(mes,data)=>{
       localStorage.removeItem("dtBuy");

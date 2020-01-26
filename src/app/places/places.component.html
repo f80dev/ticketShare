@@ -79,23 +79,21 @@
       <div *ngFor="let cat of l_categories">
 
         <div *ngIf="selectCategorie=='*' || cat==selectCategorie" style="width:100%;text-align: left;">
-          <mat-grid-tile style="text-align: left;">
-            <div *ngIf="categories[cat].to_buy>0" style="line-height: 95%;">
-              <strong>{{categories[cat].description}}</strong><br>
-              <small>{{categories[cat].to_buy-categories[cat].buy}} places disponibles<br></small>
-              Prix {{cat}}€
-            </div>
-
-          </mat-grid-tile>
-
           <mat-grid-tile>
-            <div *ngIf="categories[cat].to_buy>0" style="width:100%;">
+            <div *ngIf="categories[cat].to_buy>0">
               <img [src]="categories[cat].visual" style="margin:5px;width: 80%;height: 125px;object-fit: cover;">
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile>
-            <div *ngIf="categories[cat].to_buy>0">
+          <mat-grid-tile style="text-align: left;line-height: 95%;" *ngIf="categories[cat].to_buy>0">
+
+              <strong>{{categories[cat].description}}</strong><br>
+              <small>{{categories[cat].to_buy-categories[cat].buy}} places disponibles<br></small>
+              Prix {{cat}}€
+
+          </mat-grid-tile>
+
+          <mat-grid-tile *ngIf="categories[cat].to_buy>0">
               <mat-form-field style="width: 100px;">
                 <mat-label>Places</mat-label>
                 <mat-select [(value)]="categories[cat].buy" (valueChange)="update_total()">
@@ -104,7 +102,6 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
           </mat-grid-tile>
 
         </div>
