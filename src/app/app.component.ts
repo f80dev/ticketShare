@@ -7,6 +7,19 @@ import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
 import {subscribe_socket,$$,showMessage} from "./tools";
 import {ActivatedRoute, Router} from "@angular/router";
+import Web3 from 'web3';
+
+export const WEB3 = new InjectionToken<Web3>('web3', {
+  providedIn: 'root',
+  factory: () => {
+    try {
+      const provider = ('ethereum' in window) ? window['ethereum'] : Web3.givenProvider;
+      return new Web3(provider);
+    } catch (err) {
+      throw new Error('Non-Ethereum browser detected. You should consider trying Mist or MetaMask!');
+    }
+  }
+});
 
 @Component({
   selector: 'app-root',
@@ -24,7 +37,7 @@ export class AppComponent implements OnInit {
               public socket:Socket,
               public route:ActivatedRoute,
               public router:Router,
-              //@Inject(WEB3) private web3: Web3,
+              @Inject(WEB3) private web3: Web3,
               public _location: Location) {
 
     config.init(()=>{
@@ -148,9 +161,8 @@ export class AppComponent implements OnInit {
     subscribe_socket(this,"refresh_sell");
     subscribe_socket(this,"refresh_buy",(mes,data)=>{
       localStorage.removeItem("dtBuy");
-      this.config.reload_user(()=>{
-        this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
-      });
+      this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
+      //this.config.reload_user(()=>{  });
     });
 
     //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892

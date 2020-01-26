@@ -30,13 +30,10 @@ export class ShareComponent implements OnInit {
   }
 
   transfert(_to:string){
-    this.message="Transfert en cours vers "+_to;
+    this.message="Demande de transfert en cours vers "+_to;
     this.api.transfert(this.config.user.address,_to,this.eventid,this.ticketid).subscribe((r)=>{
       this.message="";
-      if(r){
-        showMessage(this,"Transfert effectué");
-        this._location.back();
-      }
+      this._location.back();
     },()=>{
       showMessage(this,"Ticket non transmis, problème technique");
       this._location.back();

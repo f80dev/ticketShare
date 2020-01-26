@@ -92,13 +92,13 @@ export class PlacesComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 500) ? 1 : 3;
+    this.breakpoint = (event.target.innerWidth <= 500) ? 1 : 2;
   }
 
 
 
   ngOnInit() {
-    this.breakpoint = (window.innerWidth <= 500) ? 1 : 3;
+    this.breakpoint = (window.innerWidth <= 500) ? 1 : 2;
     checkLogin(this.router);
     this.load_tickets(()=>{
       this.selectDate=this._dates[0];
@@ -106,12 +106,8 @@ export class PlacesComponent implements OnInit {
     },(err)=>{showMessage(this, err.message);this._location.back();});
     if(localStorage.getItem("dtBuy")!=null){
       var delay=new Date().getTime()-Number(localStorage.getItem("dtBuy"));
-      this.message="En attente de validation d'achat";
+      this.message="Recherche des places disponibles";
     }
-    subscribe_socket(this,"refresh_buy",()=>{
-      localStorage.removeItem("dtBuy");
-      this.refresh();
-    });
   }
 
 
@@ -136,15 +132,15 @@ export class PlacesComponent implements OnInit {
     var params:ParamMap=this.route.snapshot.queryParamMap;
     const idEvent=params.get("event");
     const address=localStorage.getItem("address");
-    this.message="Fabrication de la demande d'achat";
 
     this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
       if(r!=null){
         localStorage.setItem("dtBuy",stringify(new Date().getTime()));
+        showMessage(this,"Enregistrement de la tansaction dans la blockchain");
+        this.router.navigate(["store"]);
       }
     }
     ,(err)=>{
-      this.message="";
       showMessage(this,"Enregistrement de la tansaction dans la blockchain");
       this.router.navigate(["store"]);
     }

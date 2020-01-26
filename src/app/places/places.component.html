@@ -72,38 +72,40 @@
   <div *ngIf="l_categories.length>0 && message.length==0 && selectDate!=null" style="margin: 10px;width:100%;">
     <mat-grid-list
       [cols]="breakpoint"
-      rowHeight="100px"
+      rowHeight="200px"
       (window:resize)="onResize($event)"
       style="width: 100%;">
 
       <div *ngFor="let cat of l_categories">
 
-        <div *ngIf="selectCategorie=='*' || cat==selectCategorie" style="width:100%;text-align: left;">
+        <div *ngIf="selectCategorie=='*' || cat==selectCategorie"
+             style="width:100%;text-align: center;">
           <mat-grid-tile>
             <div *ngIf="categories[cat].to_buy>0">
-              <img [src]="categories[cat].visual" style="margin:5px;width: 80%;height: 125px;object-fit: cover;">
+              <img [src]="categories[cat].visual" style="width: 80%;max-width:600px;;object-fit: cover;">
             </div>
           </mat-grid-tile>
 
-          <mat-grid-tile style="text-align: left;line-height: 95%;" *ngIf="categories[cat].to_buy>0">
-
-              <strong>{{categories[cat].description}}</strong><br>
-              <small>{{categories[cat].to_buy-categories[cat].buy}} places disponibles<br></small>
-              Prix {{cat}}€
-
+          <mat-grid-tile style="text-align: left;line-height: 95%;vertical-align: text-top;" *ngIf="categories[cat].to_buy>0">
+            <table style="width:90%;text-align: center;vertical-align: top;"><tr>
+              <td style="width: 50%;">
+                <strong>{{categories[cat].description}}</strong><br>
+                <small>{{categories[cat].to_buy-categories[cat].buy}} places disponibles<br></small>
+                Prix {{cat}}€
+              </td>
+              <td style="width: 50%;">
+                <mat-form-field style="width: 100px;">
+                  <mat-label>Places</mat-label>
+                  <mat-select [(value)]="categories[cat].buy" (valueChange)="update_total()">
+                    <mat-option *ngFor="let i of categories[cat].range" [value]="i">
+                      {{i}} place(s)
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr></table>
           </mat-grid-tile>
-
-          <mat-grid-tile *ngIf="categories[cat].to_buy>0">
-              <mat-form-field style="width: 100px;">
-                <mat-label>Places</mat-label>
-                <mat-select [(value)]="categories[cat].buy" (valueChange)="update_total()">
-                  <mat-option *ngFor="let i of categories[cat].range" [value]="i">
-                    {{i}} place(s)
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </mat-grid-tile>
-
+        <br>
         </div>
       </div>
 

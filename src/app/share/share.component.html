@@ -1,7 +1,9 @@
 <app-hourglass [message]="message"></app-hourglass>
 <div style="width: 100%;text-align: center">
   <h2>Destinataire</h2>
-  Attention, le transfert d'un billet est définitif. En cas d'erreur vous ne pourrez le récupérer que si le destinataire accepte de vous le renvoyer
+  <div style="width: 80%;margin-left:10%;">
+    Attention, le transfert d'un billet est définitif. En cas d'erreur vous ne pourrez le récupérer que si le destinataire accepte de vous le renvoyer
+  </div>
 
   <app-scanner [size]="320"
                *ngIf="config.webcamsAvailable>0"
@@ -9,7 +11,7 @@
   </app-scanner>
 
 <br>
-<mat-form-field class="form-field-style" style="width: 90%;margin-right: 5%;">
+<mat-form-field class="form-field-style" style="width: 90%;margin-right: 5%;max-width:400px;">
   <input type="text" matInput
          id="txtAddress"
          title="Saisissez l'adresse de votre compte Ethereum"
