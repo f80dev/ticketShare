@@ -3,15 +3,13 @@
   <br><br>
   <span *ngIf="message">{{message}}</span><br><br>
 
-
-  Vous connecter avec<br>
+  <span *ngIf="message?.length==0">Vous connecter avec</span><br>
   <div style="width: 100%;text-align: center;">
-    <button class="app-button login-button" mat-button mat-raised-button (click)="email_login()">Email</button>
-    <br><br>
     <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('google')">Google</button>
     <br><br>
     <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('facebook')">Facebook</button>
     <br><br><br><br>
+    <button class="app-button login-button" mat-button mat-raised-button (click)="email_login()">Email</button>
   </div>
 
   <!--<mat-form-field class="example-full-width">-->

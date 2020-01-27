@@ -4,17 +4,17 @@
                      (closed)="_event.expanded=false"
                      [ngStyle]="{'width':width,'max-width':maxWidth,'background-color': config.values.colors.bkevent,'padding':'0px !important','margin':'0px !important'}">
 
-  <mat-expansion-panel-header collapsedHeight="60px"
+  <mat-expansion-panel-header collapsedHeight="30px"
                               style="padding:14px !important;text-align: left;"
                               expandedHeight="20px">
 
-    <div style="width:100%;margin:5px;">
+    <div style="width:100%;">
       <strong>{{_event.name}}</strong>
       <br>
-      <small>{{_event.salle}}</small>
-      <div *ngIf="!_event.expanded">
-        <br>
-        <span *ngIf="_event.error!=null && _event.error.message!=null">{{_event.error.message}}</span>
+      <span *ngIf="_event.expanded"><small>{{_event.salle}}</small></span>
+      <div *ngIf="!_event.expanded" style="margin:0;padding:0">
+        <app-hourglass style="font-size: small" [message]="message"></app-hourglass>
+        <span *ngIf="_event.error!=null && _event.error.message!=null && _event.treatment?.length==0" style="color: red;">{{_event.error.message}}</span>
       </div>
 
     </div>

@@ -92,7 +92,8 @@ export class PlacesComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 500) ? 1 : 2;
+    if(event.target!=null)
+      this.breakpoint = (event.target.innerWidth <= 500) ? 1 : 2;
   }
 
 

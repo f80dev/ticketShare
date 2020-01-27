@@ -31,7 +31,16 @@ export class StoreComponent implements OnInit {
       this.events=[];
       for(let e of l_events){
         e["width"]="400px";
-        if(e.state=="draft")e["width"]="100%";
+        e.treatment="";
+        if(e.state=="draft"){
+          e["width"]="100%";
+        }
+
+        if(e.state=="ready")e.treatment="En attente de publication";
+        if(e.state=="in treatment")e.treatment="En cours d'insertion dans la blockchain";
+
+
+
         e["preview"]=true;
         this.events.push(e);
       }
@@ -104,11 +113,9 @@ export class StoreComponent implements OnInit {
    *
    */
   fictif(){
-    this.message="Fabrication d'un événement fictif. Cela peut être long ..."
     var index=tirage(4);
     var event=["demo","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?format=json&owner="+this.config.user.address).subscribe((r:any)=>{
-      this.message="";
+    this.api._get("add_event/"+event+"?execute&format=json&owner="+this.config.user.address).subscribe((r:any)=>{
       this.refresh();
     },(err)=>{
       this.message="";

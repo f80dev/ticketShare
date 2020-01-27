@@ -13,16 +13,17 @@
       <br>
 
       <div style="width: 100%;display: flex;flex-wrap: wrap;text-align: center;" *ngIf="events.length>0">
-        <app-event *ngFor="let event of events" [event]="event" width="100%" style="display: inline-block;">
+        <app-event [message]="event.treatment" *ngFor="let event of events" [event]="event" width="100%" style="display: inline-block;">
 
           <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
                style="width:100%;text-align: left;overflow: hidden;">
-            <h4>Vérifier votre événement avant de le mettre en ligne :</h4>
-            Si certaines informations ne sont pas correctes, vous supprimez cette version, corriger votre fichier de configuration et le renvoyer<br><br>
-            <span *ngIf="event.error!=null">
+            <div *ngIf="event.error==null"><h4>Vérifier votre événement avant de le mettre en ligne :</h4></div>
+
+            <span *ngIf="event.error!=null" style="color:red;">
               Erreur détectée : {{event.error.message}} (Code: {{event.error.code}})<br>
             </span>
-            <ngx-json-viewer [json]="event" [expanded]="false"></ngx-json-viewer>
+            <br>
+            <!--<ngx-json-viewer [json]="event" [expanded]="false"></ngx-json-viewer>-->
           </div>
 
 
@@ -77,13 +78,13 @@
             </button>
           </div>
 
+          <app-hourglass [message]="event.treatment"></app-hourglass><br>
+
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
             <button class="app-button" mat-button mat-flat-button (click)="publish(event)">Publier</button>
             <button class="app-button" mat-button mat-flat-button (click)="delete(event)">Supprimer</button>
           </div>
 
-          <app-hourglass *ngIf="event.state=='ready'" message="En attente de publication"></app-hourglass>
-          <app-hourglass *ngIf="event.state=='in treatment'" message="En cours d'insertion dans la blockchain"></app-hourglass>
 
         </app-event>
       </div>
