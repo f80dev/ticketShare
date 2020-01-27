@@ -98,7 +98,7 @@ export class PlacesComponent implements OnInit {
 
 
   ngOnInit() {
-    this.breakpoint = (window.innerWidth <= 500) ? 1 : 2;
+    this.onResize({event:{target:window}});
     checkLogin(this.router);
     this.load_tickets(()=>{
       this.selectDate=this._dates[0];

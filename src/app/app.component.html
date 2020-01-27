@@ -1,24 +1,24 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar style="height:40px;">
-  <button *ngIf="config.width_screen<=500" mat-button mat-icon-button (click)="drawer.toggle()">
+  <button class="app-button" *ngIf="config.width_screen<=500" mat-button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>TICKETSHARE</span>
   <span class="example-fill-remaining-space"></span>
 
-  <button mat-button mat-icon-button (click)="logout()">
+  <button class="app-button" mat-button mat-icon-button (click)="logout()">
     <mat-icon>exit_to_app</mat-icon>
   </button>
-
 </mat-toolbar>
 
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <app-home (click)="closeMenu()"></app-home>
+  <mat-drawer #drawer class="example-sidenav" mode="side" >
+    <app-home *ngIf="message.length==0" (click)="closeMenu()"></app-home>
   </mat-drawer>
 
   <div class="example-sidenav-content">
-    <router-outlet></router-outlet>
+    <app-hourglass [message]="message"></app-hourglass>
+    <router-outlet *ngIf="message.length==0"></router-outlet>
   </div>
 
 </mat-drawer-container>

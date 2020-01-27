@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent},
-  { path: 'FAQ', redirectTo: "https://faq.ticketshare.f80.fr"},
+  { path: 'faq', redirectTo: "./faq.html"},
   { path: 'wallet', component: WalletComponent},
   { path: 'validate', component: ValidateComponent},
   { path: '', component: StoreComponent},

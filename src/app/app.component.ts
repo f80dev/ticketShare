@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ConfigService} from './config.service';
-import {MatDialog, MatSidenav, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSidenav, MatSidenavContainer, MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
@@ -28,6 +28,7 @@ import Web3 from 'web3';
 })
 export class AppComponent implements OnInit {
   showFiller = false;
+  message="";
   @ViewChild('drawer', {static: false}) drawer: MatSidenav;
 
   constructor(public config: ConfigService,
@@ -72,6 +73,9 @@ export class AppComponent implements OnInit {
   }
 
 
+  onResize() {
+    if(this.config.width_screen>=600 && this.drawer!=null)this.drawer.open();
+  }
 
 
   linkEmail(func){
@@ -129,10 +133,13 @@ export class AppComponent implements OnInit {
     $$("Address récupérée sur le device ",address);
     if (!address){
       //TODO: intégrer la problématique d'obsolescence des cookies
-      $$("Pas de compte connu sur ce device")
+      $$("Pas de compte connu sur ce device");
       $$("Appel de create_user avec text=",text);
+      this.message="Premier lancement sur ce terminal, création d'un nouveau compte";
       this.create_user(text,(u)=>{
+        this.message="";
         showMessage(this,"Nouveau compte créé");
+        this.onResize();
       });
 
     } else {
@@ -217,7 +224,7 @@ export class AppComponent implements OnInit {
 
 
       });
-      if(this.config.width_screen>=500 && this.drawer!=null)this.drawer.open();
+      if(this.config.width_screen>=600 && this.drawer!=null)this.drawer.open();
     },500);
 
 

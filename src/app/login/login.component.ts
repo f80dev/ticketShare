@@ -8,8 +8,12 @@ import {
 import {$$, showError, showMessage} from "../tools";
 import {ApiService} from "../api.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from "@angular/material";
 import {ConfigService} from "../config.service";
+import {PromptComponent} from "../prompt/prompt.component";
+
+
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +21,6 @@ import {ConfigService} from "../config.service";
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-
   email = 'paul.dudule@gmail.com';
   message="";
   redirect=null;
@@ -29,11 +32,11 @@ export class LoginComponent implements OnInit {
 
   constructor(public api: ApiService,
               public router: Router,
+              public dialog:MatDialog,
               public toast:MatSnackBar,
               public config:ConfigService,
               public route:ActivatedRoute,
               private socialAuthService: SocialService) {
-
   }
 
 
@@ -52,33 +55,44 @@ export class LoginComponent implements OnInit {
   }
 
   email_login(){
-    // this.dialog.open(PromptComponent,{
-    //   width:'90vw',data: {title:"Authentification par email",question:"Renseigner votre adresse mail pour recevoir le code de connexion"}}).afterClosed().subscribe((email:any) => {
-    //   if(email){
-    //     this.api.askforemail(email,this.data.user.address).subscribe((res:any)=>{
-    //       if(res==null){
-    //         this.dialogRef.close({"message":"Cette adresse mail n'est pas valide"});
-    //       } else {
-    //         if(res.status!=200){
-    //           this.dialogRef.close({"message":res.message});
-    //           return;
-    //         } else {
-    //           this.dialog.open(PromptComponent,{
-    //             width:'90vw',data: {title:"Renseigner le code reçu"}})
-    //             .afterClosed().subscribe((code:any) => {
-    //             this.api.checkCode(this.data.user.address,code,"code").subscribe((res_auth:any)=>{
-    //               if(res_auth.status==200){
-    //                 this.data.user.email=email;
-    //                 this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
-    //                 this.data.user.pseudo=this.data.user.pseudo.substr(0,1).toUpperCase()+this.data.user.pseudo.substr(1).toLowerCase();
-    //                 this.initUser(email,true);
-    //               } else {
-    //                 this.dialogRef.close({"message":"Le code saisie est incorrect"});
-    //               }
-    //             });
-    //           });
-    //         }
-    //       }
+
+    this.dialog.open(PromptComponent,{
+      width:'90vw',data: {
+        title:"Authentification par email",
+        default:localStorage.getItem("lastEmail"),
+        question:"Renseigner votre adresse mail pour recevoir le code de connexion",
+        lbl_ok:"OK",
+        lbl_cancel:"Annuler"
+      }}).afterClosed().subscribe((email:any) => {
+      if (email) {
+        localStorage.setItem("lastEmail",email);
+        this.api.setuser(this.config.user._id,{"email":email}).subscribe((res: any) => {
+          if (res != null) {
+              this.dialog.open(PromptComponent, {
+                width: '90vw', data: {
+                  title: "Renseigner le code reçu",
+                  question:"Afin de vérifier que vous êtes bien le propriétaire "+email+", veuillez indiquer le code à 6 chiffres que vous avez reçu",
+                  lbl_ok:"OK",
+                  lbl_cancel:"Annuler"
+                }
+              })
+                .afterClosed().subscribe((code: any) => {
+                this.api.checkCode(this.config.user.address, code).subscribe((r: any) => {
+                  if (r!=null) {
+                    showMessage(this, "Profil mise a jour");
+                    this.config.user=r;
+                    this.router.navigate(["store"]);
+                  }else{
+                    this.router.navigate(["store"]);
+                  }
+                },(err)=>{
+                  showMessage(this, "Code incorrect, veuillez recommencer la procédure");
+                });
+              });
+            }
+          });
+      }
+    });
 
           // var message="Un lien de connexion à votre nouveau profil vous a été envoyer sur votre boite. Utilisez le pour vous reconnecter";
           // if(res.status!=200)message="Problème technique. Essayer une autre méthode d'authentification";

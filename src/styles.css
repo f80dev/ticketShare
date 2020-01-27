@@ -52,10 +52,14 @@ body {
   cursor: pointer; }
 
 .app-button {
-  padding-left: 6px !important;
-  padding-right: 6px !important;
-  margin-left: 4px !important;
-  margin-bottom: 1px !important; }
+  background-color: lightgrey;
+  margin: 3px !important;
+  min-width: 80px; }
+
+.login-button {
+  background-color: lightgrey;
+  margin: 3px !important;
+  width: 150px; }
 
 @media print {
   app-root > * {
@@ -88,7 +92,8 @@ body {
   padding-top: 2px !important;
   padding-bottom: 2px !important;
   padding-left: 0px !important;
-  vertical-align: text-top; }
+  vertical-align: text-top;
+  font-size: small; }
 
 .app-toolbar {
   max-width: 900px;

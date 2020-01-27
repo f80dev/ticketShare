@@ -94,8 +94,8 @@
     createFaq(
             document.getElementById("faq_template").innerHTML,
             document.getElementById("faq_zone"),"/config.json",
-            ()=>{
-                let brand=getParam().brand;
+            function(){
+                var brand=getParam().brand;
                 if(brand)document.body.innerHTML = replaceAll(document.body.innerHTML, "REDUCSHARE", brand);
             }
     );

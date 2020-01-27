@@ -3,12 +3,12 @@
   <div *ngIf="message?.length==0" style="width: 100%;height:40px;">
     <table><tr>
       <td>
-        <button mat-button mat-icon-button class="app-button" (click)="router.navigate(['home'])">
+        <button class="app-button" mat-button mat-icon-button class="app-button" (click)="router.navigate(['home'])">
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
       </td>
       <td>
-        <button mat-button mat-flat-button
+        <button class="app-button" mat-button mat-flat-button
                 *ngIf="total>0"
                 style="background-color: darkred;color:white;"
                 class="app-button" (click)="buy()">

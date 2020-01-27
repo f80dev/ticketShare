@@ -5,7 +5,7 @@
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
-    "bkcoupon": "#3A4E5E",
+    "bkevent": "#EEEEEE",
     "bkmain": "#4F4F4F",
     "bkabout": "#5F5F5F",
     "bkdialog": "#5F5F5F",
@@ -46,6 +46,11 @@
       "id":"buildEvent",
       "title": "N'importe qui peut il créé un événement",
       "content": "./faqs/build_promo.html"
+    },
+    {
+      "id":"waitingTransac",
+      "title":"Pourquoi mes tickets achetés ne sont pas tout de suite disponibles ?",
+      "content":"https://btcdirect.eu/fr-fr/transaction-ethereum"
     }
   ],
 

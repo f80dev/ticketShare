@@ -7,11 +7,12 @@ function getParam() {
 function getServer() {
     var server = getParam().server;
     if (server == null)
-        server = "https://reducshare.com";
+        server = "https://ticketshare.f80.fr";
     if (!server.startsWith("http"))
         server = "http://" + server;
     return server;
 }
+
 function getModels(filter) {
     if (filter === void 0) { filter = ""; }
     fetch(getServer() + "/assets/config.json").then(function (r) {
@@ -83,7 +84,9 @@ function createFaq(template, zone, file, func) {
                     for (var j = 0; j < 3; j++) {
                         s = s.replace("faq_title", faq.title);
                         if (faq.content.startsWith("http") || faq.content.endsWith("html")) {
-                            faq.content = "<div class='embed-responsive embed-responsive-16by9'><iframe width='100%' class='embed-responsive-item' src='" + faq.content + "?brand=REDUCSHARE' frameborder='0'></iframe></div>";
+                            faq.content = "<div class='embed-responsive embed-responsive-16by9'>" +
+                              "<iframe width='100%' class='embed-responsive-item' src='"
+                              + faq.content + "?brand=TICKETSHARE' frameborder='0'></iframe></div>";
                         }
                         s = s.replace("faq_content", faq.content);
                         s = s.replace("faq_id", faq.id);
@@ -97,6 +100,9 @@ function createFaq(template, zone, file, func) {
         });
     });
 }
+
+
+
 function start_exemple(func) {
     var competences = {
         step0: {

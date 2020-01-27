@@ -3,11 +3,11 @@
   Jobs
 </h2>
 
-  <button mat-button mat-raised-button (click)="job()">Execute</button>
+  <button class="app-button" mat-button mat-raised-button (click)="job()">Execute</button>
   &nbsp;
-  <button mat-button mat-raised-button (click)="raz()">RAZ</button>
+  <button class="app-button" mat-button mat-raised-button (click)="raz()">RAZ</button>
   &nbsp;
-  <button mat-button mat-raised-button (click)="log()">Log</button>
+  <button class="app-button" mat-button mat-raised-button (click)="log()">Log</button>
 
 <div style="max-width:75vw;margin-left:2vw;overflow: hidden;">
   <ngx-json-viewer [json]="jobs"

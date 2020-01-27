@@ -60,4 +60,8 @@ export class HomeComponent implements OnInit {
   openEvent(_evt) {
     this.router.navigate(["mytickets"],{queryParams:{event:_evt._id}})
   }
+
+  openFAQ() {
+    open("../faq.html","blank");
+  }
 }

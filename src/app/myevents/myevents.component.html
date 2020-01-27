@@ -2,7 +2,7 @@
      style="text-align: center;">
   <br>Vous n'avez pas de billets
   <br><br>
-  <button mat-button mat-raised-button (click)="router.navigate(['store'])">En Trouver</button>
+  <button class="app-button" mat-button mat-raised-button (click)="router.navigate(['store'])">En Trouver</button>
 
   <br><br><br>
   en recevoir directement<br><br>
@@ -18,10 +18,15 @@
 
 <!--Affichage de l'événement-->
 <app-event width="90%" maxwidth="600px" height="0" *ngFor="let event of config.user?._events" [event]="event">
+  <div *ngIf="event.state!='reserved'">
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
-      <button mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
+      <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
     </div>
     <div *ngIf="event?.showTickets" style="width: 100%;text-align: center;">
       <app-mytickets [event]="event"></app-mytickets>
     </div>
+  </div>
+
+  <app-hourglass *ngIf="event.state=='reserved'" message="Réservation de billet en cours"></app-hourglass>
+
 </app-event>

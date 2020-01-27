@@ -1,10 +1,27 @@
-<mat-card class="event-card" [ngStyle]="{'width':width,'max-width':maxWidth}">
+<mat-expansion-panel [expanded]="expanded"
+                     class="event-card"
+                     (opened)="_event.expanded=true"
+                     (closed)="_event.expanded=false"
+                     [ngStyle]="{'width':width,'max-width':maxWidth,'background-color': config.values.colors.bkevent,'padding':'0px !important','margin':'0px !important'}">
 
-  <mat-card-header>
-    <mat-icon mat-card-avatar>house</mat-icon>
-    <mat-card-title>{{_event.name}}</mat-card-title>
-    <mat-card-subtitle>{{_event.salle}}</mat-card-subtitle>
-  </mat-card-header>
+  <mat-expansion-panel-header collapsedHeight="60px"
+                              style="padding:14px !important;text-align: left;"
+                              expandedHeight="20px">
+
+    <div style="width:100%;margin:5px;">
+      <strong>{{_event.name}}</strong>
+      <br>
+      <small>{{_event.salle}}</small>
+      <div *ngIf="!_event.expanded">
+        <br>
+        <span *ngIf="_event.error!=null && _event.error.message!=null">{{_event.error.message}}</span>
+      </div>
+
+    </div>
+
+
+
+  </mat-expansion-panel-header>
 
   <div [ngStyle]="{'width': '100%','min-height': height}">
     <img class="visual-event" [src]="_event.visual" alt="Visuel du ticket">
@@ -15,8 +32,9 @@
   </mat-card-content>
 
   <mat-card-actions *ngIf="showAction">
-    <button mat-button mat-flat-button>LIKE</button>
-    <button mat-button mat-flat-button (click)="openMap()">Y ALLER</button>
-    <button mat-button mat-flat-button>SHARE</button>
+    <button class="app-button" mat-button mat-flat-button>LIKE</button>
+    <button class="app-button" mat-button mat-flat-button (click)="openMap()">Y ALLER</button>
+    <button class="app-button" mat-button mat-flat-button>SHARE</button>
   </mat-card-actions>
-</mat-card>
+</mat-expansion-panel>
+
