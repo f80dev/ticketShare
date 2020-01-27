@@ -29,7 +29,7 @@ export class MyeventsComponent implements OnInit {
     var params:ParamMap=this.route.snapshot.queryParamMap;
     if(params.has("event")){
       setTimeout(()=>{
-        if(this.config.user!=null){
+        if(this.config.user!=null && this.config.user._events!=null){
           for(var i=0;i<this.config.user._events.length;i++){
             if(this.config.user._events[i]["_id"]==params.get("event"))
               this.config.user._events[i]["showTickets"]=true;
