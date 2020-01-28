@@ -4,15 +4,21 @@
     <span *ngIf="config.user?.ether>0">{{config.user?.ether |number:'1.1-5'}} ether</span>
   </p>
 
-  <div *ngIf="config.user?.address?.length>0">
+  <div *ngIf="config.user?.address?.length>0"
+       ngxClipboard
+       [cbContent]="config.user?.address"
+       (click)="informe_copy()">
     <qr-code [size]="150"
              style="display: inline-block;vertical-align: middle;"
              title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
-             ngxClipboard
-             [cbContent]="config.user?.address"
-             (click)="informe_copy()"
              [value]="config.user?.address">
     </qr-code>
+    <br>
+    <div style="font-size: x-small;line-height: 105%;">
+
+      {{config.user?.address.substr(0,20)}}<br>
+      {{config.user?.address.substr(21)}}
+    </div>
   </div>
   <br>
   <br>
