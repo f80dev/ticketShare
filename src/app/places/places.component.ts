@@ -82,7 +82,7 @@ export class PlacesComponent implements OnInit {
             this.categories[_t.price].visual=_t.visual;
             this.categories[_t.price].value=_t.price;
             this.categories[_t.price].to_buy++;
-            this.categories[_t.price].range=range(1,this.categories[_t.price].to_buy)
+            this.categories[_t.price].range=range(0,this.categories[_t.price].to_buy)
             this.categories[_t.price].tickets.push(_t);
           }
         }

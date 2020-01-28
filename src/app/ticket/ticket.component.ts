@@ -11,6 +11,7 @@ export class TicketComponent implements OnInit {
 
   @Input("ticket") ticket:any;
   @Input("width") width="150px";
+  @Input("showAction") showAction=true;
 
   constructor(
     public router:Router

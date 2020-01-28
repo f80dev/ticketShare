@@ -95,10 +95,10 @@
               </td>
               <td>
                 <mat-form-field style="width: 100px;">
-                  <mat-label>Places</mat-label>
+                  <mat-label>Acheter</mat-label>
                   <mat-select [(value)]="categories[cat].buy" (valueChange)="update_total()">
                     <mat-option *ngFor="let i of categories[cat].range" [value]="i">
-                      {{i}} place(s)
+                      {{i}} place<span *ngIf="i>1">s</span>
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

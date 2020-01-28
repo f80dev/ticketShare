@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {checkConfig, subscribe_socket} from "../tools";
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-myevents',
@@ -13,6 +14,7 @@ export class MyeventsComponent implements OnInit {
 
   constructor(public router:Router,
               public route:ActivatedRoute,
+              public socket:Socket,
               public config:ConfigService) {
   }
 
@@ -37,9 +39,7 @@ export class MyeventsComponent implements OnInit {
         }
       },5000);
     }
-    subscribe_socket(this,"refresh_burn",()=>{
-      this.refresh();
-    });
+    subscribe_socket(this,"refresh_buy",()=>{this.refresh();});
   }
 
   myplaces(event) {

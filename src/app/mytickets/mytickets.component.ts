@@ -10,8 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./mytickets.component.sass']
 })
 export class MyticketsComponent implements  OnChanges {
-  @Input("event") _event: any;
-  tickets: any[];
+  @Input("tickets") tickets: any[];
   message="";
 
   constructor(public api:ApiService,
@@ -23,17 +22,16 @@ export class MyticketsComponent implements  OnChanges {
 
   refresh(){
     this.message="Récupération de vos billets";
-    var idevent="";
-    if(this._event!=null)idevent=this._event._id;
+    // var idevent="";
 
-    this.api.use(this.config.user.address,idevent).subscribe((r:any)=>{
-      this.message="";
-      this.tickets=r;
-    });
+    // this.api.use(this.config.user.address,idevent).subscribe((r:any)=>{
+    //   this.message="";
+    //   this.tickets=r;
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this._event!=null)this.refresh();
+    // if(this._event!=null)this.refresh();
   }
 
 }

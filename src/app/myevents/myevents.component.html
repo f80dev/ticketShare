@@ -23,10 +23,7 @@
       <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
     </div>
     <div *ngIf="event?.showTickets" style="width: 100%;text-align: center;">
-      <app-mytickets [event]="event"></app-mytickets>
+      <app-mytickets [tickets]="event.reserved"></app-mytickets>
     </div>
   </div>
-
-  <app-hourglass *ngIf="event.state=='reserved'" message="Réservation de billet en cours"></app-hourglass>
-
 </app-event>

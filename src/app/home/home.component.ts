@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material';
 import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {$$, subscribe_socket,showMessage} from '../tools';
+import {Socket, SocketIoModule} from "ngx-socket-io";
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
               public api: ApiService,
               public toast: MatSnackBar,
               public router: Router,
+              public socket:Socket,
               public config: ConfigService,
               public _location: Location,
               public route: ActivatedRoute) {
