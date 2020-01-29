@@ -17,7 +17,7 @@
 
           <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
                style="width:100%;text-align: left;overflow: hidden;">
-            <div *ngIf="event.error==null"><h4>Vérifier votre événement avant de le mettre en ligne :</h4></div>
+            <div *ngIf="event.error!=null"><h4>Vérifier votre événement avant de le mettre en ligne :</h4></div>
 
             <span *ngIf="event.error!=null" style="color:red;">
               Erreur détectée : {{event.error.message}} (Code: {{event.error.code}})<br>
@@ -78,7 +78,7 @@
             </button>
           </div>
 
-          <app-hourglass [message]="event.treatment"></app-hourglass><br>
+          <app-hourglass [message]="event.treatment" [canCancel]="true" (cancel)="onCancel(event)"></app-hourglass><br>
 
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
             <button class="app-button" mat-button mat-flat-button (click)="publish(event)">Publier</button>

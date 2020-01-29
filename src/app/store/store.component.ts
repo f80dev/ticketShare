@@ -115,7 +115,7 @@ export class StoreComponent implements OnInit {
   fictif(){
     var index=tirage(4);
     var event=["demo","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?execute&format=json&owner="+this.config.user.address).subscribe((r:any)=>{
+    this.api._get("add_event/"+event+"?format=json&owner="+this.config.user.address).subscribe((r:any)=>{
       this.refresh();
     },(err)=>{
       this.message="";
@@ -143,10 +143,16 @@ export class StoreComponent implements OnInit {
 
 
 
-  delete(event:any){
+  delete(event:any,func=null){
     this.api.delevent(event["_id"]).subscribe(()=>{
       this.refresh();
+      if(func!=null)func();
     })
   }
 
+  onCancel(event:any) {
+    this.delete(event,()=>{
+      this.refresh();
+    });
+  }
 }

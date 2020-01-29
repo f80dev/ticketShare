@@ -1,10 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar style="height:40px;">
-  <mat-icon *ngIf="config.width_screen<=500" (click)="drawer.toggle()" style="cursor: pointer;">menu</mat-icon>
+  <mat-icon *ngIf="config.width_screen<=800" (click)="drawer.toggle()" style="cursor: pointer;">menu</mat-icon>
   &nbsp;&nbsp;
   <span>TICKETSHARE</span>
   <span class="example-fill-remaining-space"></span>
-  <mat-icon (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
+  <mat-icon *ngIf="config.user?.email?.length>0" (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container" autosize>

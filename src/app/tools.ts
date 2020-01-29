@@ -99,6 +99,12 @@ export function sendToPrint(section="print-section"){
   WindowPrt.print();
 }
 
+export function isNull(x:Object) {
+  if (x == null)
+    return true;
+  else
+    return false;
+}
 
 /**
  *

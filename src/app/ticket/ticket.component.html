@@ -1,10 +1,10 @@
 <mat-card class="example-card" [ngStyle]="{'width':width}">
   <mat-card-header>
-    <mat-card-title style="line-height: 80% !important;">
-      <small>{{ticket.title}}</small>
+    <mat-card-title style="line-height: 80% !important;" *ngIf="title">
+      <small>{{title}}</small>
     </mat-card-title>
-    <mat-card-subtitle>
-      {{ticket.date | date:'dd/mm/yy'}}
+    <mat-card-subtitle *ngIf="subtitle">
+      {{subtitle}}
     </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="ticket.visual" alt="Visuel du ticket">

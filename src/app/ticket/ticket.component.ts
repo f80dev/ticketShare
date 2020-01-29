@@ -1,6 +1,6 @@
 import { Component, Input,OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {$$,showMessage} from '../tools';
+import {isNull, $$,showMessage} from '../tools';
 
 @Component({
   selector: 'app-ticket',
@@ -10,6 +10,8 @@ import {$$,showMessage} from '../tools';
 export class TicketComponent implements OnInit {
 
   @Input("ticket") ticket:any;
+  @Input("title") title=null;
+  @Input("subtitle") subtitle=null;
   @Input("width") width="150px";
   @Input("showAction") showAction=true;
 
@@ -18,6 +20,8 @@ export class TicketComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(isNull(this.title))this.title=this.ticket.title;
+    if(isNull(this.subtitle))this.subtitle=new Date(this.ticket.date).toLocaleDateString();
   }
 
   openShare(ticket: any) {

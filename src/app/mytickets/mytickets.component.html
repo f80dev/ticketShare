@@ -1,6 +1,8 @@
 
   <app-ticket width="120px"
               *ngFor="let ticket of tickets"
+              [title]="(ticket.date*1000) | date:'dd/MM/yy'"
+              subtitle=""
               [showAction]="ticket.state=='sold'"
               [ticket]="ticket">
     <div *ngIf="ticket.state=='sold'">
@@ -11,7 +13,6 @@
       <div *ngIf="ticket.seat==null">
         #{{ticket.ref}}
       </div>
-      <small>{{ticket.date | date:'HH:MM'}}</small>
     </div>
 
     <app-hourglass *ngIf="ticket.state=='reserved'" message="En cours de réservation"></app-hourglass>

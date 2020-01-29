@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
 
 
   onResize() {
-    if(this.config.width_screen>=600 && this.drawer!=null)this.drawer.open();
+    if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();
   }
 
 
@@ -224,7 +224,7 @@ export class AppComponent implements OnInit {
 
 
       });
-      if(this.config.width_screen>=600 && this.drawer!=null)this.drawer.open();
+      if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();
     },500);
 
 
@@ -236,6 +236,6 @@ export class AppComponent implements OnInit {
   }
 
   closeMenu(){
-    if(this.config.width_screen<400)this.drawer.close();
+    if(this.config.width_screen<800)this.drawer.close();
   }
 }

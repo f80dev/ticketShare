@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-hourglass',
@@ -8,6 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 export class HourglassComponent implements OnInit {
 
   @Input("message") message="";
+  @Input("canCancel") canCancel=false;
+  @Output('cancel') oncancel: EventEmitter<any>=new EventEmitter();
 
   constructor() { }
 
