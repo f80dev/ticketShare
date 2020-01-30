@@ -1,19 +1,50 @@
 
     <div style="padding:1%;">
-      <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
-              (click)="fictif()">
-        Ajouter un événement fictif
-      </button>
-      &nbsp;
-      <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
-              (click)="job()">
-        Envoyer dans la blockchain
-      </button>
-      <br>
-      <br>
+
+      <!--Zone de filtre-->
+      <div style="width: 100%;text-align: left;" *ngIf="message.length==0">
+
+        <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
+                (click)="fictif()">
+          Evénement fictif
+        </button>
+        &nbsp;
+        <!--<button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button-->
+                <!--(click)="job()">-->
+          <!--Execute-->
+        <!--</button>-->
+        &nbsp; &nbsp;
+
+        <div style="display: inline-block;" *ngIf="events?.length>2">
+          <mat-form-field style="width:200px;" >
+            <mat-label>Trier par</mat-label>
+            <mat-select [(value)]="sortField" (valueChange)="refresh()">
+              <mat-option value="dtCreate">Date de fabrication</mat-option>
+              <mat-option value="state">Status</mat-option>
+              <mat-option value="dtStart">Première date</mat-option>
+              <mat-option value="dtEnd">Dernière date</mat-option>
+            </mat-select>
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field style="width: 200px;">
+            <mat-label>Filtrer</mat-label>
+            <mat-select [(value)]="filterField">
+              <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
+                *ngIf="sortField?.length>0 || filterField?.length>0"
+                (click)="clearFilter()">
+          Pas de filtre
+        </button>
+
+      </div>
+
 
       <div style="width: 100%;display: flex;flex-wrap: wrap;text-align: center;" *ngIf="events.length>0">
-        <app-event [message]="event.treatment" *ngFor="let event of events" [event]="event" width="100%" style="display: inline-block;">
+        <app-event [message]="event.treatment" *ngFor="let event of events | filter: ['tags',filterField]" [event]="event" width="100%" style="display: inline-block;">
 
           <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
                style="width:100%;text-align: left;overflow: hidden;">
@@ -69,6 +100,18 @@
                     (click)="sales(event)">
               Ventes
             </button>
+
+             <button class="app-button" mat-button mat-flat-button
+                    *ngIf="event.owner==config.user?.address"
+                    (click)="ongraph(event)">
+              Graph
+             </button>
+
+             <button class="app-button" mat-button mat-flat-button
+                    *ngIf="event.owner==config.user?.address"
+                    (click)="cancel(event)">
+              Annuler
+             </button>
 
 
             <button class="app-button" mat-button mat-flat-button

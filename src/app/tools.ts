@@ -99,6 +99,23 @@ export function sendToPrint(section="print-section"){
   WindowPrt.print();
 }
 
+
+/**
+ * Ouverture d'un graph des transactions
+ * @param tx
+ */
+export function openGraph(tx:string){
+  var domain_server="https://server.f80.fr";
+  domain_server="http://localhost";
+
+  var graph_url=domain_server+":6800/api/getgraph/"+tx+"/50/gpickle";
+  var url=domain_server+":5500/graph/b64="
+    +btoa(graph_url)+"/fr?algo_comm=self&dir=public&axis=False&notext=True&metrics=True&add_property=False&autorotate=False" +
+    "&limit=5000&pca=1&processors=2&title=Distribution_des_coupons_de_votre_point_de_vente";
+  $$("url=",url);
+  return url;
+}
+
 export function isNull(x:Object) {
   if (x == null)
     return true;

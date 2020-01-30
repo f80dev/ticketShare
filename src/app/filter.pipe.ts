@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
   transform(items: any[], args: any[]): any {
-    return items.filter(item => item.id.indexOf(args[0]) !== -1);
+    if(args[1]=="")return items;
+    return items.filter(item => item[args[0]].indexOf(args[1]) !== -1);
   }
 }
