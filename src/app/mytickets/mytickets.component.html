@@ -11,11 +11,12 @@
         {{ticket.seat}}
       </div>
       <div *ngIf="ticket.seat==null">
-        #{{ticket.ref}}
+        Référence #{{ticket.ref}}
       </div>
     </div>
 
     <app-hourglass *ngIf="ticket.state=='reserved'" message="En cours de réservation"></app-hourglass>
+    <app-hourglass *ngIf="ticket.state=='to_transfer'" message="En cours de transfert"></app-hourglass>
 
   </app-ticket>
   <app-hourglass [message]="message"></app-hourglass>
