@@ -35,6 +35,7 @@ export class StoreComponent implements OnInit {
       this.events=[];
       this.tags=[];
       for(let e of l_events){
+
         if(this.filterEvent==null || this.filterEvent==e._id){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
@@ -42,6 +43,7 @@ export class StoreComponent implements OnInit {
 
           e["width"]="400px";
           e.treatment="";
+          e["expanded"]=true;
           if(e.state=="draft"){
             e["width"]="95%";
           }
@@ -99,12 +101,18 @@ export class StoreComponent implements OnInit {
     openGraph(event.tx);
   }
 
+
+
+
   showData(event:any){
     if(event.showData==null)
       event.showData=true;
     else
       event.showData=!event.showData;
   }
+
+
+
 
   share(event:any){
     showMessage(this,"Lien promotionel copié");
@@ -162,6 +170,12 @@ export class StoreComponent implements OnInit {
       this.message="";
       showMessage(this,err.message);
     });
+  }
+
+
+  reducAll(){
+    for(let e of this.events)
+      e["expanded"]=false;
   }
 
 

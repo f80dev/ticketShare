@@ -32,6 +32,10 @@
               <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
             </mat-select>
           </mat-form-field>
+          <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
+                  (click)="reduceAll()">
+            Minimise
+          </button>
         </div>
 
         <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
@@ -44,7 +48,12 @@
 
 
       <div style="width: 100%;display: flex;flex-wrap: wrap;text-align: center;" *ngIf="events.length>0">
-        <app-event [message]="event.treatment" *ngFor="let event of events | filter: ['tags',filterField]" [event]="event" width="100%" style="display: inline-block;">
+        <app-event [message]="event.treatment"
+                   *ngFor="let event of events | filter: ['tags',filterField]"
+                   [event]="event"
+                   [expanded]="event.expanded"
+                   width="100%"
+                   style="display: inline-block;">
 
           <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
                style="width:100%;text-align: left;overflow: hidden;">
