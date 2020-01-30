@@ -35,9 +35,9 @@
         </div>
 
         <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
-                *ngIf="sortField?.length>0 || filterField?.length>0"
+                *ngIf="sortField?.length>0 || filterField?.length>0 || filterEvent!=null"
                 (click)="clearFilter()">
-          Pas de filtre
+          Tout voir
         </button>
 
       </div>
@@ -53,15 +53,26 @@
             <span *ngIf="event.error!=null" style="color:red;">
               Erreur détectée : {{event.error.message}} (Code: {{event.error.code}})<br>
             </span>
-            <br>
-            <!--<ngx-json-viewer [json]="event" [expanded]="false"></ngx-json-viewer>-->
           </div>
 
+          <ngx-json-viewer *ngIf="event.showData==true"
+                           style="text-align: left;"
+                           [json]="event"
+                           [expanded]="false">
+          </ngx-json-viewer>
 
-          <div *ngIf="state=='online' && (event.preview || event.owner!=config.user?.address)">
+          <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
             <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
               {{event.description}}
             </div>
+
+            <span *ngIf="event.dtStart!=event.dtEnd">
+              Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM'}}
+            </span>
+
+            <span *ngIf="event.dtStart==event.dtEnd">
+              le {{event.dtStart*1000 | date:'dd/MM/yy'}}
+            </span>
           </div>
 
           <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">
@@ -101,10 +112,22 @@
               Ventes
             </button>
 
-             <button class="app-button" mat-button mat-flat-button
+            <button class="app-button" mat-button mat-flat-button
                     *ngIf="event.owner==config.user?.address"
+                    (click)="showData(event)">
+              Détail
+            </button>
+
+             <button class="app-button" mat-button mat-flat-button
+                    *ngIf="event.owner==config.user?.address && event.state=='close'"
                     (click)="ongraph(event)">
               Graph
+             </button>
+
+             <button class="app-button" mat-button mat-flat-button
+                     ngxClipboard [cbContent]="event.share_link"
+                    (click)="share(event)">
+              Partager
              </button>
 
              <button class="app-button" mat-button mat-flat-button
@@ -116,6 +139,7 @@
 
             <button class="app-button" mat-button mat-flat-button
                     *ngIf="event.checkers?.indexOf(config.user?.address)>-1"
+                    ngxClipboard [cbContent]="event.validate_link"
                     (click)="validate(event)">
               Valider
             </button>

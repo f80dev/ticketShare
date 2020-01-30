@@ -2,7 +2,12 @@
 <mat-toolbar style="height:40px;">
   <mat-icon *ngIf="config.width_screen<=800" (click)="drawer.toggle()" style="cursor: pointer;">menu</mat-icon>
   &nbsp;&nbsp;
-  <span>TICKETSHARE</span>
+  <span>
+    {{config.values.appname}}
+  </span>
+  &nbsp;
+  <span style="font-size: xx-small;font-style: italic;">{{config.values.version}}</span >
+
   <span class="example-fill-remaining-space"></span>
   <mat-icon *ngIf="config.user?.email?.length>0" (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
 </mat-toolbar>

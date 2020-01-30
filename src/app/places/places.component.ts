@@ -64,6 +64,9 @@ export class PlacesComponent implements OnInit {
   }
 
 
+  clearFilter(){
+    this.selectCategorie="*";
+  }
 
   refresh(){
     var params:ParamMap=this.route.snapshot.queryParamMap;
@@ -82,6 +85,7 @@ export class PlacesComponent implements OnInit {
             this.categories[_t.price].visual=_t.visual;
             this.categories[_t.price].value=_t.price;
             this.categories[_t.price].to_buy++;
+            this.categories[_t.price].title=_t.price+"€";
             this.categories[_t.price].range=range(0,this.categories[_t.price].to_buy)
             this.categories[_t.price].tickets.push(_t);
           }

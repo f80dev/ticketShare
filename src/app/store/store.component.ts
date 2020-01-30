@@ -18,6 +18,7 @@ export class StoreComponent implements OnInit {
   message="";
   sortField: string="";
   filterField: string="";
+  filterEvent=null;
   tags: string[]=[];
 
   constructor(public api:ApiService,
@@ -34,23 +35,24 @@ export class StoreComponent implements OnInit {
       this.events=[];
       this.tags=[];
       for(let e of l_events){
-        for(let tag of e.tags.split(" ")){
-          if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
+        if(this.filterEvent==null || this.filterEvent==e._id){
+          for(let tag of e.tags.split(" ")){
+            if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
+          }
+
+          e["width"]="400px";
+          e.treatment="";
+          if(e.state=="draft"){
+            e["width"]="95%";
+          }
+
+          if(e.state=="ready")e.treatment="En attente de publication";
+          if(e.state=="in treatment")e.treatment="En cours d'insertion dans la blockchain";
+
+          e["preview"]=true;
+          e["showDate"]=false;
+          this.events.push(e);
         }
-
-        e["width"]="400px";
-        e.treatment="";
-        if(e.state=="draft"){
-          e["width"]="100%";
-        }
-
-        if(e.state=="ready")e.treatment="En attente de publication";
-        if(e.state=="in treatment")e.treatment="En cours d'insertion dans la blockchain";
-
-
-
-        e["preview"]=true;
-        this.events.push(e);
       }
     });
   }
@@ -61,10 +63,11 @@ export class StoreComponent implements OnInit {
   ngOnInit() {
     const params = this.route.snapshot.queryParamMap;
     if(params.get("event"))
-      this.router.navigate(
-        ["places"],
-        {queryParams:{event:params.get("event")}}
-        );
+      this.filterEvent=params.get("event");
+
+    if(params.get("filter"))
+      this.filterField=params.get("filter");
+
     this.refresh();
     subscribe_socket(this,"refresh_store");
   }
@@ -72,16 +75,16 @@ export class StoreComponent implements OnInit {
 
 
 
-  buy(event: any) {
+  buy(_evt: any) {
     if(this.config.user!=null && this.config.user.email==""){
       this.router.navigate(["login"],{queryParams:
           {
             message:"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",
-            redirect:"/places?event="+event._id+"&etherprice="+event.etherprice
+            redirect:"/places?event="+_evt._id+"&etherprice="+_evt.etherprice
           }
       });
     } else {
-      this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
+      this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
     }
   }
 
@@ -94,6 +97,17 @@ export class StoreComponent implements OnInit {
 
   ongraph(event:any){
     openGraph(event.tx);
+  }
+
+  showData(event:any){
+    if(event.showData==null)
+      event.showData=true;
+    else
+      event.showData=!event.showData;
+  }
+
+  share(event:any){
+    showMessage(this,"Lien promotionel copié");
   }
 
 
@@ -131,6 +145,7 @@ export class StoreComponent implements OnInit {
   clearFilter(){
     this.sortField="";
     this.filterField="";
+    this.filterEvent=null;
   }
 
 
