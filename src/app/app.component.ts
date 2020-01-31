@@ -143,14 +143,15 @@ export class AppComponent implements OnInit {
       });
 
     } else {
-      $$("Récupération du compte "+address);
+      this.message="Reconnexion au compte "+address;
       this.api.getuser(address,30).subscribe((r: any) => {
+        this.message="";
         this.config.user = r;
       },(err)=>{
         if(err.status==400){
-          $$("Le compte à été supprimé de la base de donnée, on le supprime du device");
+          showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
           localStorage.removeItem("address");
-          this.initUser();
+          setTimeout(()=>{this.initUser();},1000);
         } else
           showMessage(this,err.message);
       });
