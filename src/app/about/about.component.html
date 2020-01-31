@@ -4,7 +4,7 @@
     </div>
 
     <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
-      <div *ngIf="withlogo">
+      <div *ngIf="config.values.logo?.length>0">
         <img
           [src]="config.values.logo"
           [ngStyle]="{'width':logosize,'margin':'15px'}">

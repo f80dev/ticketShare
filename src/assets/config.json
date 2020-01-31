@@ -1,7 +1,7 @@
 {
   "appname": "KERBERUS",
   "title": "KERBERUS",
-  "version": "0.1.3-beta",
+  "version": "0.1.4-beta",
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
@@ -14,7 +14,7 @@
   },
   "bkcolor": "#2a002a",
   "news": "Classement des meilleurs vendeurs",
-  "logo": "./assets/logo.png",
+  "logo": "",
   "claim": "Achetez vos billets en toute sécurité",
   "support": {
     "forum": "http://reducshare.les-forums.com/",
