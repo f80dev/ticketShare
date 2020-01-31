@@ -31,7 +31,9 @@ export class StoreComponent implements OnInit {
 
 
   refresh(){
+    this.message="Recherche des événements disponibles";
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
+      this.message="";
       this.events=[];
       this.tags=[];
       for(let e of l_events){
@@ -42,6 +44,7 @@ export class StoreComponent implements OnInit {
           }
 
           e["width"]="400px";
+          e["htags"]="#"+e.tags.split(" ").join(" #");
           e.treatment="";
           e["expanded"]=true;
           if(e.state=="draft"){
@@ -56,6 +59,9 @@ export class StoreComponent implements OnInit {
           this.events.push(e);
         }
       }
+    },(err)=>{
+      this.message="";
+      showMessage(this,"Problème technique, vérifier votre connexion",0,()=>{this.refresh()},"Réessayer ?");
     });
   }
 
@@ -75,7 +81,9 @@ export class StoreComponent implements OnInit {
   }
 
 
-
+  openWeb(url:string){
+    open(url,"_blank");
+  }
 
   buy(_evt: any) {
     if(this.config.user!=null && this.config.user.email==""){
@@ -162,9 +170,9 @@ export class StoreComponent implements OnInit {
    *
    */
   fictif(){
-    var index=tirage(4);
-    var event=["demo","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?state=ready&format=json&owner="+this.config.user.address).subscribe((r:any)=>{
+    var index=tirage(6);
+    var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
+    this.api._get("add_event/"+event+"?execute&format=json&owner="+this.config.user.address).subscribe((r:any)=>{
       this.refresh();
     },(err)=>{
       this.message="";
@@ -173,7 +181,7 @@ export class StoreComponent implements OnInit {
   }
 
 
-  reducAll(){
+  reduceAll(){
     for(let e of this.events)
       e["expanded"]=false;
   }

@@ -17,7 +17,7 @@
     <app-home *ngIf="message.length==0" (click)="closeMenu()"></app-home>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content" *ngIf="config.user!=null">
     <app-hourglass [message]="message"></app-hourglass>
     <router-outlet *ngIf="message.length==0"></router-outlet>
   </div>
