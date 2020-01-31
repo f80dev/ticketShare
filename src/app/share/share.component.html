@@ -3,6 +3,13 @@
 <div style="width: 100%;text-align: center" *ngIf="config.user?.ether==0">
   <br><br><br>
   <h3>Pour transfèrer des billets vous devez posséder au moins 0.01 ether</h3>
+  <br>
+  <br>
+  <div ngIf="config.user?.refund?.length>0">
+    Utiliser ce lien pour placer des éthers sur votre compte en suivant la procédure indiquer sur la page. L'adresse de votre compte est déjà dans votre presse-papier<br><br>
+    <a [href]="config.user?.refund" target="_blank" ngxClipboard [cbContent]="config.user?.address">Charger votre compte</a>
+  </div>
+
 </div>
 
 <div style="width: 100%;text-align: center" *ngIf="config.user?.ether>0">
