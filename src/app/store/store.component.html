@@ -18,9 +18,10 @@
         <div style="display: inline-block;" *ngIf="events?.length>2">
           <mat-form-field style="width:200px;" >
             <mat-label>Trier par</mat-label>
-            <mat-select [(value)]="sortField" (valueChange)="refresh()">
+            <mat-select [(value)]="sortField">
               <mat-option value="dtCreate">Date de fabrication</mat-option>
               <mat-option value="state">Status</mat-option>
+              <mat-option value="name">Titre</mat-option>
               <mat-option value="dtStart">Première date</mat-option>
               <mat-option value="dtEnd">Dernière date</mat-option>
             </mat-select>
@@ -49,7 +50,7 @@
 
       <div style="width: 100%;display: flex;flex-wrap: wrap;text-align: center;" *ngIf="events.length>0">
         <app-event [message]="event.treatment"
-                   *ngFor="let event of events | filter: ['tags',filterField]"
+                   *ngFor="let event of events | filter: ['tags',filterField] | orderBy: sortField:'asc'"
                    [event]="event"
                    [expanded]="event.expanded"
                    width="100%"
@@ -72,7 +73,10 @@
 
           <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
 
-            <small>{{event.htags}}</small><br><br>
+            <div *ngIf="event.htags?.length>0">
+              <small>{{event.htags}}</small><br>
+            </div>
+
 
             <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
               {{event.description}}
