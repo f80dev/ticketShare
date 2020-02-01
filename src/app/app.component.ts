@@ -167,10 +167,11 @@ export class AppComponent implements OnInit {
 
 
     subscribe_socket(this,"refresh_sell");
+
     subscribe_socket(this,"refresh_buy",(mes,data)=>{
+      debugger
       localStorage.removeItem("dtBuy");
       this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
-      //this.config.reload_user(()=>{  });
     });
 
     //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892

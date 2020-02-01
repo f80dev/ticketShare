@@ -81,9 +81,13 @@ export class StoreComponent implements OnInit {
   }
 
 
+
   openWeb(url:string){
     open(url,"_blank");
   }
+
+
+
 
   buy(_evt: any) {
     if(this.config.user!=null && this.config.user.email==""){
