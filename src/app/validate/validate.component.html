@@ -37,6 +37,7 @@
                      (click)="update_toburn(select?.selectedOptions?.selected)">
       <mat-icon matListIcon>event_seat</mat-icon>
       <h3 matLine>#{{ticket.seat || ticket.ref}}</h3>
+      <h3 matLine>Pour le {{ticket.date*1000 | date:'dd/MM/yy HH:mm'}}</h3>
     </mat-list-option>
   </mat-selection-list>
 

@@ -172,6 +172,10 @@
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
             <button class="app-button" mat-button mat-flat-button (click)="publish(event)">Publier</button>
             <button class="app-button" mat-button mat-flat-button (click)="delete(event)">Supprimer</button>
+            <button class="app-button" mat-button mat-flat-button *ngIf="config.user.email?.length>0"
+                    (click)="receiveByMail(event,config.user.email)">
+              Utiliser
+            </button>
           </div>
 
 

@@ -72,6 +72,10 @@ export class ApiService {
     return this._get("delevent/"+id);
   }
 
+  sendevent(id: string,to:string) {
+    return this._get("sendevent/"+id+"/"+to);
+  }
+
   getuser(address: string,timeoutInSec=30) {
     return this._get("getuser/"+address,timeoutInSec);
   }

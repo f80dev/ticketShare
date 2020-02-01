@@ -172,7 +172,7 @@ export class StoreComponent implements OnInit {
   fictif(){
     var index=tirage(6);
     var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?execute&format=json&owner="+this.config.user.address).subscribe((r:any)=>{
+    this.api._get("add_event/"+event+"?format=json&owner="+this.config.user.address).subscribe((r:any)=>{
       this.refresh();
     },(err)=>{
       this.message="";
@@ -201,6 +201,15 @@ export class StoreComponent implements OnInit {
     this.api.setevent(event["_id"],{"state":"ready"}).subscribe(()=>{
       showMessage(this,"Votre évémenement est prêt à être mise en ligne");
       this.refresh();
+    })
+  }
+
+
+  receiveByMail(event:any,to:string){
+    this.api.sendevent(event["_id"],to).subscribe(()=>{
+      showMessage(this,"Le modèle de l'événement vous a été envoyé");
+    },(err)=>{
+      showMessage(this,err.message);
     })
   }
 
