@@ -18,7 +18,11 @@
 
 <!--Affichage de l'événement-->
 <app-event width="90%" maxwidth="600px" height="0" *ngFor="let event of config.user?._events" [event]="event">
-  <div *ngIf="event.state!='reserved'">
+  <div *ngIf="event.state=='cancel'">
+    Evénement annulé
+  </div>
+
+  <div *ngIf="event.state!='reserved' && event.state!='cancel'">
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
       <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
     </div>
