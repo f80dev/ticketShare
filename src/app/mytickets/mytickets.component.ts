@@ -11,7 +11,6 @@ import { Location } from '@angular/common';
 })
 export class MyticketsComponent implements  OnChanges {
   @Input("tickets") tickets: any[];
-  message="";
 
   constructor(public api:ApiService,
               public config:ConfigService,
@@ -21,7 +20,6 @@ export class MyticketsComponent implements  OnChanges {
   }
 
   refresh(){
-    this.message="Récupération de vos billets";
     // var idevent="";
 
     // this.api.use(this.config.user.address,idevent).subscribe((r:any)=>{
