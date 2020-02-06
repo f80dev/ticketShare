@@ -41,6 +41,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
         this.config.refresh_callback=this.refresh;
         this.refresh();
+        subscribe_socket(this,"refresh_balance",()=>{
+          this.config.reload_user();
+        });
         subscribe_socket(this,"refresh_event");
         subscribe_socket(this,"refresh_error",(event_name,data)=>{
           showMessage(this,data.message);

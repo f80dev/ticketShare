@@ -87,8 +87,10 @@ export class StoreComponent implements OnInit {
   }
 
 
-
-
+  /**
+   *
+   * @param _evt
+   */
   buy(_evt: any) {
     if(this.config.user!=null && this.config.user.email==""){
       this.router.navigate(["login"],{queryParams:
@@ -176,7 +178,8 @@ export class StoreComponent implements OnInit {
   fictif(){
     var index=tirage(6);
     var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
-    this.api._get("add_event/"+event+"?format=json&owner="+this.config.user.address).subscribe((r:any)=>{
+    var addr=this.config.user.address;
+    this.api._get("add_event/"+event+"?format=json&owner="+addr+"&miner="+addr).subscribe((r:any)=>{
       this.refresh();
     },(err)=>{
       this.message="";

@@ -116,8 +116,9 @@ export class PlacesComponent implements OnInit {
   }
 
 
-
-
+  /**
+   *
+   */
   buy(){
     var rc=[];
     if(this.sel_tickets!=null){
@@ -138,7 +139,9 @@ export class PlacesComponent implements OnInit {
     const idEvent=params.get("event");
     const address=localStorage.getItem("address");
 
+    this.message="Réservation en cours";
     this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
+      this.message="";
       if(r!=null){
         localStorage.setItem("dtBuy",stringify(new Date().getTime()));
         showMessage(this,"Enregistrement de la tansaction dans la blockchain");
@@ -146,8 +149,8 @@ export class PlacesComponent implements OnInit {
       }
     }
     ,(err)=>{
-      showMessage(this,"Enregistrement de la tansaction dans la blockchain");
-      this.router.navigate(["store"]);
+      this.message="";
+      showMessage(this,"Annulation de la réservation, "+err.message);
     }
     )
   }
