@@ -4,6 +4,7 @@ import {Location} from "@angular/common";
 import {ConfigService} from "../config.service";
 import {showMessage} from "../tools";
 import {MatSnackBar} from "@angular/material";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-admin',
@@ -33,7 +34,7 @@ export class AdminComponent implements OnInit {
 
   raz(){
     this.api.raz().subscribe(()=>{
-      this._location.go("https://ticketshare.f80.fr");
+      this._location.go(environment.domain_appli);
     });
   }
 

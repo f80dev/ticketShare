@@ -6,27 +6,37 @@
   <div *ngIf="message?.length==0" style="width: 100%;height:40px;">
     <table><tr>
       <td>
-          <mat-icon (click)="router.navigate(['home'])" style="cursor: pointer;">arrow_back_ios</mat-icon>
-      </td>
-      <td>
-        <button class="app-button" mat-button mat-flat-button
-                *ngIf="total>0"
-                style="background-color: darkred;color:white;"
-                class="app-button" (click)="buy()">
-          &nbsp;&nbsp;Acheter &nbsp;&nbsp;
-        </button>
-        &nbsp;&nbsp;
+          <mat-icon (click)="router.navigate(['home'])"
+                    style="cursor: pointer;">
+            arrow_back_ios
+          </mat-icon>
       </td>
       <td>
         <span *ngIf="nb_places>0">{{nb_places}} places</span>
-        <span *ngIf="total>0">&nbsp;pour un total de {{total}}€</span>
-        <span *ngIf="total>0 && etherprice>0">, soit {{total/etherprice | number:'1.1-3'}} ether</span>
+        <span *ngIf="total>0">&nbsp;pour un total de {{total}}€ </span>
+        <span *ngIf="total>0 && etherprice>0">, soit {{total/etherprice | number:'1.1-3'}} ether. </span>
+        <span *ngIf="total>0 && config.user?.ether<total/etherprice">Le solde de votre wallet spectacle est insufisant</span>
       </td>
+      <td>
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="total>0 && total/etherprice<=config.user?.ether"
+                style="background-color: darkred;color:white;"
+                (click)="buy()">
+          &nbsp;&nbsp;Acheter &nbsp;&nbsp;
+        </button>
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="total/etherprice>config.user?.ether"
+                ngxClipboard [cbContent]="config.user?.address"
+                (click)="refund()">
+          &nbsp;&nbsp;Recharger&nbsp;&nbsp;
+        </button>
+      </td>
+
     </tr>
     </table>
     <br>
   </div>
-
+  <br>
   <!--TODO Présentation de l'événement-->
 
 

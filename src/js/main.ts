@@ -1,3 +1,5 @@
+import {environment} from "../environments/environment";
+
 var config;
 
 function getParam():any {
@@ -11,7 +13,7 @@ function getParam():any {
 
 function getServer(){
     var server=getParam().server;
-    if(server==null)server="https://ticketshare.f80.fr";
+    if(server==null)server=environment.domain_appli;
     if(!server.startsWith("http"))server="http://"+server;
     return server;
 }

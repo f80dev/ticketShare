@@ -116,6 +116,12 @@ export class PlacesComponent implements OnInit {
   }
 
 
+  refund(){
+    showMessage(this,"L'adresse du wallet spectacle, nécéssaire au rechargement du compte, est dans le presse papier",0,()=>{
+      open(this.config.user.refunding,"blank");
+    },"Recharger");
+  }
+
   /**
    *
    */
