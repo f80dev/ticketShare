@@ -74,7 +74,7 @@
 
           <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
 
-            <div *ngIf="event.htags?.length>0">
+            <div *ngIf="event.htags?.length>1">
               <small>{{event.htags}}</small><br>
             </div>
 
