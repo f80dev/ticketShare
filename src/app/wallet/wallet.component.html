@@ -54,11 +54,13 @@
     Changer
   </button>
 
+  <button class="app-button" mat-button mat-flat-button
+          (click)="router.navigate(['refund'])">
+    Recharger
+  </button>
 
 
-
-  <br><br><br>
-  <a [href]="config.user?.refunding" target="_blank">Rechargement</a><br>
+  <br><br>
   <a [href]="config.user?.etherscan" target="_blank">Transactions</a><br>
   <a [href]="config.user?.marketplace" target="_blank">Marketplace</a><br>
   <a [href]="config.user?.portal" target="_blank">Statistiques</a><br>

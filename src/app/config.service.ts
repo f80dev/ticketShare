@@ -59,6 +59,11 @@ export class ConfigService {
   }
 
 
+  is_admin(){
+    if(environment.domain_appli.indexOf('localhost')>-1)return true;
+    if(this.values.users.admins.indexOf(this.user.email)>-1)return true;
+    return false;
+  }
 
   /**
    * Initialisation des principaux paramètres

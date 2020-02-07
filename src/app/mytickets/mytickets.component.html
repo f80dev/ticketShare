@@ -18,8 +18,8 @@
       </div>
     </div>
 
-    <app-hourglass *ngIf="ticket.state=='reserved'" message="En cours de réservation"></app-hourglass>
-    <app-hourglass *ngIf="ticket.state=='to_transfer'" message="En cours de transfert"></app-hourglass>
+    <app-hourglass fontsize="small" *ngIf="ticket.state=='reserved'" message="En cours de réservation"></app-hourglass>
+    <app-hourglass fontsize="small" *ngIf="ticket.state=='to_transfer'" message="En cours de transfert"></app-hourglass>
 
   </app-ticket>
 

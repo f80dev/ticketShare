@@ -5,7 +5,7 @@
   </div>
 
     <div *ngIf="config.user?.ether>0">
-      {{config.user?.ether |number:'1.1-5'}} eth
+      {{config.user?.ether |number:'1.1-3'}} eth
       /
       {{config.user?.money |number:'1.0-1'}} €
     </div>
@@ -65,7 +65,8 @@
 
     <br>
 
-   <a mat-list-item routerLink="admin" *ngIf="config.values.users.admins.indexOf(config.user?.email)>-1">
+   <a mat-list-item routerLink="admin"
+      *ngIf="config.is_admin()">
       <mat-icon>build</mat-icon>
       &nbsp;&nbsp;Admin
   </a>

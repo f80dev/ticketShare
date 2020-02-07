@@ -11,6 +11,7 @@ import {ShareComponent} from "./share/share.component";
 import {MyeventsComponent} from "./myevents/myevents.component";
 import {WalletComponent} from "./wallet/wallet.component";
 import {LoginComponent} from "./login/login.component";
+import {RefundComponent} from "./refund/refund.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'mytickets', component: MyticketsComponent},
   { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
+  { path: 'refund', component: RefundComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent},
   { path: 'faq', redirectTo: "./faq.html"},

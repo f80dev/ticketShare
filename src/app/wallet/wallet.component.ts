@@ -45,6 +45,10 @@ export class WalletComponent implements OnInit {
   }
 
 
+  refund(){
+
+  }
+
   change_wallet() {
     /**
      * Rattache un wallet existant

@@ -4,7 +4,7 @@
 
   <!--Panel de commande-->
   <div *ngIf="message?.length==0" style="width: 100%;height:40px;">
-    <table style="width: 100%;"><tr>
+    <table style="width: 100%;max-width:700px;"><tr>
       <td style="text-align: left;">
           <mat-icon (click)="router.navigate(['home'])"
                     style="cursor: pointer;">
@@ -49,7 +49,7 @@
 
 
   <!--Zone de filtre-->
-  <div style="width: 100%;text-align: center;" *ngIf="cats!=null && message.length==0">
+  <div style="width: 100%;text-align: left;margin-left:3%;" *ngIf="cats!=null && message.length==0">
     <mat-form-field style="width:200px;">
       <mat-label>Date</mat-label>
       <mat-select [(value)]="selectDate" (valueChange)="refresh()">
@@ -67,6 +67,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    &nbsp;&nbsp;
     <button class="app-button" mat-button mat-flat-button
             *ngIf="selectCategorie!='*'"
             class="app-button" (click)="clearFilter()">

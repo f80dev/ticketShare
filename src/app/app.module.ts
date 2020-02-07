@@ -54,6 +54,7 @@ import { WalletComponent } from './wallet/wallet.component';
 import { LoginComponent } from './login/login.component';
 import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {getAuthServiceConfigs} from "./tools";
+import { RefundComponent } from './refund/refund.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -83,7 +84,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     FilterPipe,
     MyeventsComponent,
     WalletComponent,
-    LoginComponent
+    LoginComponent,
+    RefundComponent
   ],
   entryComponents: [
     PromptComponent

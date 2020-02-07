@@ -9,6 +9,7 @@ export class HourglassComponent implements OnInit {
 
   @Input("message") message="";
   @Input("canCancel") canCancel=false;
+  @Input("fontsize") fontsize="medium";
   @Output('cancel') oncancel: EventEmitter<any>=new EventEmitter();
 
   constructor() { }

@@ -5,7 +5,7 @@
       <div style="width: 100%;text-align: left;">
 
         <table><tr>
-          <td *ngIf="config.values.users.admins.indexOf(config.user?.email)>-1">
+          <td *ngIf="config.is_admin()">
             <button class="app-button" style="margin-top: 10px;"
                     mat-button mat-raised-button
                     (click)="fictif()">

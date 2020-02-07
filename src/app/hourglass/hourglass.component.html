@@ -4,7 +4,7 @@
       <td>
         <mat-spinner [diameter]="18"></mat-spinner>
       </td>
-      <td style="text-align: left;">
+      <td [ngStyle]="{'text-align': 'left','font-size':fontsize}">
         {{message}}
       </td>
       <td *ngIf="canCancel" style="text-align: right;cursor: pointer;">
