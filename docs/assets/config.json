@@ -17,11 +17,11 @@
   "logo": "",
   "claim": "Achetez vos billets en toute sécurité",
   "support": {
-    "forum": "http://reducshare.les-forums.com/",
+    "forum": "http://kerberus.les-forums.com/",
     "email": "contact@f80.fr",
-    "facebook": "https://www.facebook.com/ticketshare/",
-    "faq": "https://ticketshare.f80.fr/faq.html?from=appli",
-    "website": "https://web.reducshare.com/index.html?from=appli"
+    "facebook": "https://www.facebook.com/kerberus/",
+    "faq": "https://app.kerberus.tech/faq.html?from=appli",
+    "website": ""
   },
 
   "batch": {

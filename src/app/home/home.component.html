@@ -2,7 +2,11 @@
   <p>
     hello {{config.user?.pseudo}}<br>
     <span *ngIf="config.user?.ether>0">
-      {{config.user?.ether |number:'1.1-5'}} ether
+      {{config.user?.ether |number:'1.1-5'}} eth
+    </span>
+    /
+    <span *ngIf="config.user?.ether>0">
+      {{config.user?.money |number:'1.0-1'}} €
     </span>
   </p>
 
