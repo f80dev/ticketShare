@@ -28,6 +28,14 @@
     "interraction":10
   },
 
+  "users":{
+    "admins":[
+      "hhoareau@gmail.com",
+      "paul.dudule@gmail.com",
+      "roger.legumes@gmail.com"
+    ]
+  },
+
   "editor": {
     "name": "F80",
     "website": "https://f80.fr",

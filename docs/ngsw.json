@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1581035133161,
+  "timestamp": 1581066881050,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,7 +10,7 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.ad778dcc74ed67ef53b6.js",
+        "https://app.kerberus.tech/main.b166457551deea97503b.js",
         "https://app.kerberus.tech/polyfills-es5.bdb696aa16209fa3775d.js",
         "https://app.kerberus.tech/polyfills.555006da7c1cb39a1bbc.js",
         "https://app.kerberus.tech/runtime.a8ef3a8272419c2e2c66.js",
@@ -41,7 +41,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://app.kerberus.tech/assets/config.json": "48378e435bf5aecbf0307d01f65d970d699d1112",
+    "https://app.kerberus.tech/assets/config.json": "28ee151a6720b04315f7b8ada4a628b6a3611bb8",
     "https://app.kerberus.tech/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://app.kerberus.tech/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://app.kerberus.tech/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -54,8 +54,8 @@
     "https://app.kerberus.tech/assets/logo.png": "cd469d4948092031cff99d0a7287a8d9f1b9e613",
     "https://app.kerberus.tech/assets/logo.svg": "a6fcd8b152a490db78a9d528169695253f4a77b1",
     "https://app.kerberus.tech/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "https://app.kerberus.tech/index.html": "4bb5a92be8fd81d287819661d04bf7a1a38f6a32",
-    "https://app.kerberus.tech/main.ad778dcc74ed67ef53b6.js": "4d0b74d59f9bbd886a107f3993a9e554d6dfaeb2",
+    "https://app.kerberus.tech/index.html": "8102d9750e93a870b4210febd214f9fd95f25e5d",
+    "https://app.kerberus.tech/main.b166457551deea97503b.js": "9945a5a8e7b68c930e828b17bc787b373f7f73bc",
     "https://app.kerberus.tech/polyfills-es5.bdb696aa16209fa3775d.js": "dcba21e0e10b3b854d5e05ef3d35644b4bc662e2",
     "https://app.kerberus.tech/polyfills.555006da7c1cb39a1bbc.js": "922d5bb9babdb3ce96f8d00b80e07d03d3fde986",
     "https://app.kerberus.tech/runtime.a8ef3a8272419c2e2c66.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",

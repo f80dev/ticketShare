@@ -1,22 +1,23 @@
 <div class="app-card" style="text-align: center;height: 80vh;">
-  <p>
-    hello {{config.user?.pseudo}}<br>
-    <span *ngIf="config.user?.ether>0">
+
+  <div *ngIf="config.user?.pseudo?.length>0">
+    Hello {{config.user?.pseudo}}<br>
+  </div>
+
+    <div *ngIf="config.user?.ether>0">
       {{config.user?.ether |number:'1.1-5'}} eth
-    </span>
-    /
-    <span *ngIf="config.user?.ether>0">
+      /
       {{config.user?.money |number:'1.0-1'}} €
-    </span>
-  </p>
+    </div>
+
 
   <div *ngIf="config.user?.address?.length>0"
        ngxClipboard
+       title="Cliquez sur le QRCode pour enregistrer l'adresse de votre wallet spectacle dans le presse-papier"
        [cbContent]="config.user?.address"
        (click)="informe_copy()">
     <qr-code [size]="150"
              style="display: inline-block;vertical-align: middle;"
-             title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
              [value]="config.user?.address">
     </qr-code>
     <br>
@@ -28,23 +29,23 @@
   <br>
   <br>
   <mat-nav-list>
-    <a mat-list-item routerLink="myevents">
+    <a title="Accédez à tous vos billets" mat-list-item routerLink="myevents">
       <mat-icon>event_seat</mat-icon>
       &nbsp;&nbsp;Vos places
     </a>
 
-    <a mat-list-item routerLink="wallet">
+    <a title="Accédez aux paramètres de votre wallet spectacle" mat-list-item routerLink="wallet">
       <mat-icon>attach_money</mat-icon>
       &nbsp;&nbsp;Wallet
     </a>
 
-    <a mat-list-item routerLink="store">
+    <a title="Accèdez à l'ensemble des événements disponibles" mat-list-item routerLink="store">
       <mat-icon>shopping_cart</mat-icon>
       &nbsp;&nbsp;Billeterie
     </a>
 
 
-    <a mat-list-item routerLink="login" *ngIf="config.user?.email==''">
+    <a title="Associé un email à votre wallet spectacle" mat-list-item routerLink="login" *ngIf="config.user?.email==''">
       <mat-icon>email</mat-icon>
       &nbsp;&nbsp;Se connecter
     </a>
@@ -64,7 +65,7 @@
 
     <br>
 
-   <a mat-list-item routerLink="admin">
+   <a mat-list-item routerLink="admin" *ngIf="config.values.users.admins.indexOf(config.user?.email)>-1">
       <mat-icon>build</mat-icon>
       &nbsp;&nbsp;Admin
   </a>
