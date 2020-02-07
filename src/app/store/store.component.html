@@ -4,17 +4,19 @@
       <!--Zone de filtre-->
       <div style="width: 100%;text-align: left;">
 
-        <button class="app-button" style="margin-top: 10px;"
-                mat-button mat-raised-button
-                (click)="fictif()">
-          Evénement fictif
-        </button>
-        &nbsp;
-        <!--<button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button-->
-                <!--(click)="job()">-->
-          <!--Execute-->
-        <!--</button>-->
-        &nbsp; &nbsp;
+        <table><tr>
+          <td *ngIf="config.values.users.admins.indexOf(config.user?.email)>-1">
+            <button class="app-button" style="margin-top: 10px;"
+                    mat-button mat-raised-button
+                    (click)="fictif()">
+              Evénement fictif
+            </button>
+          </td>
+          <td>
+            <app-hourglass [message]="message"></app-hourglass>
+          </td>
+        </tr></table>
+
 
         <div style="display: inline-block;" *ngIf="events?.length>2">
           <mat-form-field style="width:200px;" >
@@ -183,7 +185,7 @@
         </app-event>
       </div>
 
-      <app-hourglass [message]="message"></app-hourglass>
+
 
       <div *ngIf="events.length==0 && message.length==0">
         <br><br>

@@ -30,8 +30,8 @@
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
       <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
     </div>
-    <div *ngIf="event?.showTickets" style="width: 100%;display: flex;flex-wrap: wrap;">
-      <app-mytickets style="width:100%;"
+    <div *ngIf="event?.showTickets" style="width: 100%;">
+      <app-mytickets style="width:100%;display: flex;flex-wrap: wrap;text-align: center;"
                      [tickets]="event.reserved">
       </app-mytickets>
     </div>

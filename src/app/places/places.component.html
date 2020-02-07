@@ -4,8 +4,8 @@
 
   <!--Panel de commande-->
   <div *ngIf="message?.length==0" style="width: 100%;height:40px;">
-    <table><tr>
-      <td>
+    <table style="width: 100%;"><tr>
+      <td style="text-align: left;">
           <mat-icon (click)="router.navigate(['home'])"
                     style="cursor: pointer;">
             arrow_back_ios
@@ -19,22 +19,25 @@
           Le solde de votre wallet spectacle est insuffisant
         </div>
       </td>
-      <td>
-        <mat-icon>arrow_right</mat-icon>
-      </td>
-      <td>
+      <td style="text-align: left;">
         <button class="app-button" mat-button mat-flat-button
                 *ngIf="total>0 && total/etherprice<=config.user?.ether"
                 style="background-color: darkred;color:white;"
                 (click)="buy()">
-          &nbsp;&nbsp;Acheter &nbsp;&nbsp;
+          &nbsp;&nbsp;Acheter&nbsp;&nbsp;
         </button>
-        <button class="app-button" mat-button mat-flat-button
-                *ngIf="total/etherprice>config.user?.ether"
-                ngxClipboard [cbContent]="config.user?.address"
-                (click)="refund()">
-          &nbsp;Recharger&nbsp;
-        </button>
+        <div *ngIf="total/etherprice>config.user?.ether">
+          <button class="app-button" mat-button mat-flat-button
+                  ngxClipboard [cbContent]="config.user?.address"
+                  (click)="refund()">
+            &nbsp;Recharger&nbsp;
+          </button>
+          <button class="app-button" mat-icon-button mat-button mat-flat-button
+                  title="Rafraichir le wallet pour afficher sa balance"
+                  (click)="refresh_balance()">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
       </td>
 
     </tr>

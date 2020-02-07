@@ -101,6 +101,10 @@ export class PlacesComponent implements OnInit {
   }
 
 
+  refresh_balance(){
+    this.config.reload_user();
+  }
+
 
   ngOnInit() {
     this.onResize({event:{target:window}});
@@ -152,7 +156,7 @@ export class PlacesComponent implements OnInit {
       if(r!=null){
         localStorage.setItem("dtBuy",stringify(new Date().getTime()));
         showMessage(this,"Enregistrement de la tansaction dans la blockchain");
-        this.router.navigate(["store"]);
+        this.router.navigate(["myevents"],{queryParams:{event:idEvent}});
       }
     }
     ,(err)=>{
