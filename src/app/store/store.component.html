@@ -11,12 +11,20 @@
                     (click)="fictif()">
               Evénement fictif
             </button>
+
+            <button class="app-button" style="margin-top: 10px;"
+                    mat-button mat-raised-button
+                    (click)="email_checking()">
+              Email checking
+            </button>
           </td>
           <td>
             <app-hourglass [message]="message"></app-hourglass>
           </td>
         </tr></table>
 
+        <br>
+        <a href="mailto:ticketshare@f80.fr">Créer votre événement</a>
 
         <div style="display: inline-block;" *ngIf="events?.length>2">
           <mat-form-field style="width:200px;" >

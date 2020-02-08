@@ -105,11 +105,11 @@ export class AppComponent implements OnInit {
     var params={};
     if(url!=null && url.indexOf("?")>=0) {
       url= this._location.path().split("?")[1];
+      debugger
       $$('Récupération des paramètres', url);
-      if(url.indexOf("event=")>-1)params["event"]=url.split("event=")[1].split("&")[0];
-      if(url.indexOf("privatekey=")>-1)params["privatekey"]=url.split("privatekey=")[1].split("&")[0];
-      if(url.indexOf("address=")>-1)params["address"]=url.split("address=")[1].split("&")[0];
-      if(url.indexOf("email=")>-1)params["email"]=url.split("email=")[1].split("&")[0];
+      for(let param of ["command","event","privatekey","address","email"]){
+        if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
+      }
     }
     $$('Netoyage de l\'url de lancement:' + this._location.path());
     this._location.replaceState(this._location.path().split('?')[0], '');
@@ -169,7 +169,6 @@ export class AppComponent implements OnInit {
     subscribe_socket(this,"refresh_sell");
 
     subscribe_socket(this,"refresh_buy",(mes,data)=>{
-      debugger
       localStorage.removeItem("dtBuy");
       this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
     });
@@ -221,8 +220,13 @@ export class AppComponent implements OnInit {
               this.initUser();
             }
           }
-
         }
+
+
+        if(p["command"]=="validate" && p.hasOwnProperty("event")){
+          this.router.navigate(["validate"],{queryParams:{event:p["event"]}});
+        }
+
 
 
       });

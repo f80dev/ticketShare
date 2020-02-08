@@ -188,6 +188,16 @@ export class StoreComponent implements OnInit {
   }
 
 
+  /**
+   * Vérification de l'email contenant les événements à créer
+   */
+  email_checking(){
+    this.api._get("email_checking").subscribe(()=>{
+      showMessage(this,"Vérification de l'email");
+    })
+  }
+
+
   reduceAll(){
     for(let e of this.events)
       e["expanded"]=false;
