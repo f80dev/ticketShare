@@ -41,9 +41,15 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
+    $$("Ouverture de la fenêtre de login")
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.redirect=params.get("redirect");
     this.message=params.get("message");
+    if(params.has("address")){
+      $$("Récupération de l'adresse "+params.get("address"))
+      localStorage.setItem("lastEmail",params.get("address"));
+      this.email_login();
+    }
   }
 
 
@@ -55,12 +61,12 @@ export class LoginComponent implements OnInit {
   }
 
   email_login(){
-
+    $$("Ouverture du login par email");
     this.dialog.open(PromptComponent,{
       width:'90vw',data: {
         title:"Authentification par email",
-        default:localStorage.getItem("lastEmail"),
-        question:"Renseigner votre adresse mail pour recevoir le code de connexion",
+        result:localStorage.getItem("lastEmail"),
+        question:"Renseigner votre adresse mail ou votre adresse de wallet pour recevoir le code de connexion",
         lbl_ok:"OK",
         lbl_cancel:"Annuler"
       }}).afterClosed().subscribe((email:any) => {

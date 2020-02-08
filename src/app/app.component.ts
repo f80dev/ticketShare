@@ -105,9 +105,8 @@ export class AppComponent implements OnInit {
     var params={};
     if(url!=null && url.indexOf("?")>=0) {
       url= this._location.path().split("?")[1];
-      debugger
       $$('Récupération des paramètres', url);
-      for(let param of ["command","event","privatekey","address","email"]){
+      for(let param of ["command","event","privatekey","address"]){
         if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
       }
     }
@@ -129,22 +128,25 @@ export class AppComponent implements OnInit {
     //TODO: tous les paramètres transmis ici doivent être encrypté
     $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
     const address = localStorage.getItem('address');
+    $$("Address récupérée sur le device ", address);
 
-    $$("Address récupérée sur le device ",address);
-    if (!address){
+    if (!address) {
       //TODO: intégrer la problématique d'obsolescence des cookies
       $$("Pas de compte connu sur ce device");
-      $$("Appel de create_user avec text=",text);
-      this.message="Premier lancement sur ce terminal, création d'un nouveau compte";
-      this.create_user(text,(u)=>{
-        this.message="";
-        showMessage(this,"Nouveau compte créé");
+      this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
+      $$("Pas de compte connu, Appel de create_user avec text=", text);
+      this.create_user(text, (u) => {
+        this.message = "";
+        showMessage(this, "Nouveau compte créé");
         this.onResize();
       });
-
     } else {
       this.message="Reconnexion au compte "+address;
       this.api.getuser(address,30).subscribe((r: any) => {
+        if(text!=r.address){
+          $$("On ne tient pas compte de l'adresse qui à été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
+        }
+
         this.message="";
         this.config.user = r;
       },(err)=>{
@@ -186,19 +188,19 @@ export class AppComponent implements OnInit {
           this.initUser();
         }
         else{
-          if(p["email"]!=null){
-            $$("A priori on cherche une connexion par email "+p["email"]);
+          if(p["address"]!=null){
+            $$("A priori on cherche une connexion par email "+p["address"]);
             this.dialog.open(PromptComponent, {width: '250px',
               data: {
                 title: 'Récupération du compte',
-                question: "Veuillez renseigner votre code à 6 chiffres pour récupérer votre wallet associé à "+p["email"],
+                question: "Veuillez renseigner votre code à 6 chiffres pour récupérer votre wallet associé à "+p["address"],
                 onlyConfirm: false,
-                canEmoji: false,
+                emojis: false,
                 lib_ok:"Envoyer",
                 lib_cancel:"Annuler"
               }
             }).afterClosed().subscribe((code) => {
-              this.api.checkCode(p["email"],code).subscribe((r)=>{
+              this.api.checkCode(p["address"],code).subscribe((r)=>{
                 if(r!=null){
                   localStorage.setItem("address",r["address"]);
                   this.initUser();
