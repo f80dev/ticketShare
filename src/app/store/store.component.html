@@ -24,7 +24,11 @@
         </tr></table>
 
         <br>
-        <a href="mailto:ticketshare@f80.fr">Créer votre événement</a>
+        <button class="app-button" style="margin-top: 10px;"
+                mat-button mat-raised-button
+                (click)="router.navigate(['eventeditor'])">
+          Créer votre événement
+        </button>
 
         <div style="display: inline-block;" *ngIf="events?.length>2">
           <mat-form-field style="width:200px;" >

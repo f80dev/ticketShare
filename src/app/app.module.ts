@@ -55,6 +55,7 @@ import { LoginComponent } from './login/login.component';
 import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {getAuthServiceConfigs} from "./tools";
 import { RefundComponent } from './refund/refund.component';
+import { EventeditorComponent } from './eventeditor/eventeditor.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -85,7 +86,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MyeventsComponent,
     WalletComponent,
     LoginComponent,
-    RefundComponent
+    RefundComponent,
+    EventeditorComponent
   ],
   entryComponents: [
     PromptComponent

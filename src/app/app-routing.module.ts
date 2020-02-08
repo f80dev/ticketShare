@@ -12,6 +12,7 @@ import {MyeventsComponent} from "./myevents/myevents.component";
 import {WalletComponent} from "./wallet/wallet.component";
 import {LoginComponent} from "./login/login.component";
 import {RefundComponent} from "./refund/refund.component";
+import {EventeditorComponent} from "./eventeditor/eventeditor.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'refund', component: RefundComponent},
+  { path: 'eventeditor', component: EventeditorComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent},
   { path: 'faq', redirectTo: "./faq.html"},
