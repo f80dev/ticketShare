@@ -56,6 +56,8 @@ import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {getAuthServiceConfigs} from "./tools";
 import { RefundComponent } from './refund/refund.component';
 import { EventeditorComponent } from './eventeditor/eventeditor.component';
+import {NgxPayPalModule} from "ngx-paypal";
+import { PaymentComponent } from './payment/payment.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -87,12 +89,14 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     WalletComponent,
     LoginComponent,
     RefundComponent,
-    EventeditorComponent
+    EventeditorComponent,
+    PaymentComponent
   ],
   entryComponents: [
     PromptComponent
   ],
   imports: [
+    NgxPayPalModule,
     BrowserModule,
     NgxJsonViewerModule,
     MatSidenavModule,

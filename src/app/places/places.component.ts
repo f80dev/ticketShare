@@ -131,17 +131,17 @@ export class PlacesComponent implements OnInit {
    *
    */
   buy(){
-    var rc=[];
+    var tickets=[];
     if(this.sel_tickets!=null){
       for(let ticket of this.sel_tickets) {
-        rc.push(ticket.value)
+        tickets.push(ticket.value)
       }
     }
 
     for(let cat of Object.keys(this.categories)) {
       var item=this.categories[cat];
       while(item.buy>0){
-        rc.push(item.tickets[item.buy-1]._id)
+        tickets.push(item.tickets[item.buy-1]._id)
         item.buy--;
       }
     }
@@ -151,21 +151,13 @@ export class PlacesComponent implements OnInit {
     const address=localStorage.getItem("address");
 
     this.message="Réservation en cours";
-    this.api.buy(address,rc,idEvent).subscribe((r:any)=>{
-      this.message="";
-      if(r!=null){
-        localStorage.setItem("dtBuy",stringify(new Date().getTime()));
-        showMessage(this,"Enregistrement de la tansaction dans la blockchain");
-        this.router.navigate(["myevents"],{queryParams:{event:idEvent}});
-      }
-    }
-    ,(err)=>{
-      this.message="";
-      showMessage(this,"Annulation de la réservation, "+err.message);
-    }
-    )
+    const order={nb_places:this.nb_places,tickets:tickets,client:address,event:idEvent,etherprice:this.etherprice,total:this.total};
+    this.router.navigate(["payment"],{queryParams:{order:JSON.stringify(order)}});
   }
 
+  reset_status(){
+
+  }
 
 
   update_total(tickets:any=null) {

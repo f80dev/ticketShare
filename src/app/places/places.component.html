@@ -12,12 +12,7 @@
           </mat-icon>
       </td>
       <td style="text-align: left;">
-        <span *ngIf="nb_places>0">{{nb_places}} places</span>
-        <span *ngIf="total>0">&nbsp;pour un total de {{total}}€ </span>
-        <span *ngIf="total>0 && etherprice>0">({{total/etherprice | number:'1.1-3'}} ether)   </span>
-        <div *ngIf="total>0 && config.user?.ether<total/etherprice" style="color:darkred;">
-          Le solde de votre wallet spectacle est insuffisant
-        </div>
+
       </td>
       <td style="text-align: left;">
         <button class="app-button" mat-button mat-flat-button
