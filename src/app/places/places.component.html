@@ -16,23 +16,11 @@
       </td>
       <td style="text-align: left;">
         <button class="app-button" mat-button mat-flat-button
-                *ngIf="total>0 && total/etherprice<=config.user?.ether"
                 style="background-color: darkred;color:white;"
                 (click)="buy()">
           &nbsp;&nbsp;Acheter&nbsp;&nbsp;
         </button>
-        <div *ngIf="total/etherprice>config.user?.ether">
-          <button class="app-button" mat-button mat-flat-button
-                  ngxClipboard [cbContent]="config.user?.address"
-                  (click)="refund()">
-            &nbsp;Recharger&nbsp;
-          </button>
-          <button class="app-button" mat-icon-button mat-button mat-flat-button
-                  title="Rafraichir le wallet pour afficher sa balance"
-                  (click)="refresh_balance()">
-            <mat-icon>refresh</mat-icon>
-          </button>
-        </div>
+
       </td>
 
     </tr>

@@ -1,0 +1,44 @@
+<!--Résumé de la commande-->
+
+<div style="width: 100%;text-align: center;">
+
+<br><br>
+<span *ngIf="order.nb_places>0">{{order.nb_places}} places</span>
+<span *ngIf="order.total>0">&nbsp;pour un total de {{order.total}}€ </span>
+<span *ngIf="order.total>0 && order.etherprice>0">({{order.total/order.etherprice | number:'1.1-3'}} ether)   </span>
+<div *ngIf="order.total>0 && config.user?.ether<order.total/order.etherprice" style="color:darkred;">
+  Le solde de votre wallet spectacle est insuffisant
+</div>
+<br>
+<br>
+
+
+  <div *ngIf="order.total/order.etherprice<=config.user?.ether">
+    <button class="app-button" mat-button mat-flat-button
+            *ngIf="order.total>0 && order.total/order.etherprice<=config.user?.ether"
+            style="background-color: darkred;color:white;width:200px;"
+            (click)="buy()">
+      <img src="/assets/ether.png" class="image-icon"> &nbsp;En ether
+    </button>
+  </div>
+
+  <div *ngIf="order.total/order.etherprice>config.user?.ether">
+    <button class="app-button" mat-button mat-flat-button
+            ngxClipboard [cbContent]="config.user?.address"
+            (click)="refund()">
+      &nbsp;Recharger&nbsp;
+    </button>
+    <button class="app-button" mat-icon-button mat-button mat-flat-button
+            title="Rafraichir le wallet pour afficher sa balance"
+            (click)="refresh_balance()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+<br>
+
+
+<div style="width:200px;display: inline-block;margin-top: 10px;">
+  <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+</div>
+
+</div>

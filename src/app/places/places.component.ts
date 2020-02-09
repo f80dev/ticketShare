@@ -85,7 +85,10 @@ export class PlacesComponent implements OnInit {
             this.categories[_t.price].visual=_t.visual;
             this.categories[_t.price].value=_t.price;
             this.categories[_t.price].to_buy++;
-            this.categories[_t.price].title=_t.price+"€";
+            if(_t.price==0)
+              this.categories[_t.price].title="Gratuit";
+            else
+              this.categories[_t.price].title=_t.price+"€";
             this.categories[_t.price].range=range(0,this.categories[_t.price].to_buy)
             this.categories[_t.price].tickets.push(_t);
           }
@@ -151,6 +154,7 @@ export class PlacesComponent implements OnInit {
     const address=localStorage.getItem("address");
 
     this.message="Réservation en cours";
+
     const order={nb_places:this.nb_places,tickets:tickets,client:address,event:idEvent,etherprice:this.etherprice,total:this.total};
     this.router.navigate(["payment"],{queryParams:{order:JSON.stringify(order)}});
   }

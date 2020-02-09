@@ -113,8 +113,8 @@ export class ApiService {
     return this._get("transfer/"+_from+"/"+_to+"/"+eventid+"/"+ticketid);
   }
 
-  buy(buyer:string,tickets: string[],event:string) {
+  buy(paymentMode:string,buyer:string,tickets: string[],event:string) {
     var ticket=tickets.join(",");
-    return this._get("buy/"+buyer+"/"+ticket+"/"+event,3600);
+    return this._get("buy/"+paymentMode+"/"+buyer+"/"+ticket+"/"+event,3600);
   }
 }
