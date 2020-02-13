@@ -6,6 +6,7 @@ import {
 import {WebcamUtil} from "ngx-webcam";
 import {MatSnackBar} from "@angular/material";
 import {stringify} from "querystring";
+import {ICreateOrderRequest, ITransactionItem} from 'ngx-paypal';
 
 export const ADMIN_PASSWORD="hh4271";
 
@@ -13,6 +14,7 @@ export function showError(vm:any,err:any){
   $$("!Error ",err);
   showMessage(vm,"L'application est en cours de maintenance, Merci de réessayer l'opération dans quelques instants");
 }
+
 
 export function brand_text(text:string,config:any){
   if(text==null || text.length==0)return "";
@@ -22,6 +24,7 @@ export function brand_text(text:string,config:any){
     text=text.replace("REDUCSHARE",config.values.brands[config.activeBrand].appname);
   return text;
 }
+
 
 export function range(start=0, end) {
   var ans = [];
@@ -575,7 +578,7 @@ export function compute(coupon:any){
   coupon.conditions=coupon.conditions.replace("offre valable pour","").replace("valable pour","");
 
   coupon.dtStart=new Date().getTime();
-  
+
   if(coupon.duration_jours==null)coupon.duration_jours=0;
   if(coupon.duration_hours==null)coupon.duration_hours=0;
 
@@ -866,3 +869,74 @@ function drawRotated(canvas, image, degrees) {
 }
 
 
+export function createOrder(vm:any,_user:any,items:ITransactionItem[],onPayment:Function,sandbox=false){
+  var clientId = 'AeEOnV5osIW2qTWbAxTGwOMOuyZvAJ8CUtCDn0Lr5-eeHGJhUHCkuAl0foZ0hkYGKNo9mtJP0nklI0tD';
+  if(sandbox)clientId="sb";
+  let tmp_total=0;
+  for(let item of items){
+    tmp_total=tmp_total+Number(item["unit_amount"]["value"])
+  }
+  let total:string=""+tmp_total;
+
+    let rc= {
+      currency: 'EUR',
+      clientId,
+      createOrderOnClient: (data) => < ICreateOrderRequest > {
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'EUR',
+            value: total,
+            breakdown: {
+              item_total: {
+                currency_code: 'EUR',
+                value: total
+              }
+            }
+          },
+          items: items
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      payee:{
+        email:"hhoareau@gmail.com"
+      },
+      payer:{
+        name:{
+          given_name:_user["pseudo"]
+        },
+        email_address:_user["email"]
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+
+      onApprove: (data, actions) => {
+        $$('onApprove - transaction was approved, but not authorized', data);
+        actions.order.get().then(details => {
+          $$('onApprove - you can get full order details inside onApprove: ', details);
+        });
+      },
+
+      onClientAuthorization: (data) => {
+        onPayment(data)
+      },
+
+      onCancel: (data, actions) => {
+        showMessage(vm,"Transaction annulée");
+      },
+
+      onError: err => {
+        showMessage(vm,"Problème technique, recommencez");
+      },
+
+      onClick: (data, actions) => {
+        $$('Déclenchement du payant', data);
+      }
+    };
+
+    return rc;
+}

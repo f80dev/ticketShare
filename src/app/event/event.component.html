@@ -2,7 +2,13 @@
                      class="event-card"
                      (opened)="_event.expanded=true"
                      (closed)="_event.expanded=false"
-                     [ngStyle]="{'width':width,'max-width':maxWidth,'background-color': config.values.colors.bkevent,'padding':'0px !important','margin':'0px !important'}">
+                     [ngStyle]="{
+                       'width':width,
+                       'max-width':maxWidth,
+                       'background-color': config.values.colors.bkcard,
+                       'padding':'0px !important',
+                       'margin':'0px !important'
+                     }">
 
   <mat-expansion-panel-header collapsedHeight="30px"
                               style="padding:14px !important;text-align: left;"

@@ -172,30 +172,7 @@ export class StoreComponent implements OnInit {
 
 
 
-  /**
-   *
-   */
-  fictif(){
-    var index=tirage(6);
-    var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
-    var addr=this.config.user.address;
-    this.api._get("add_event/"+event+"?format=json&owner="+addr+"&miner="+addr).subscribe((r:any)=>{
-      this.refresh();
-    },(err)=>{
-      this.message="";
-      showMessage(this,err.message);
-    });
-  }
 
-
-  /**
-   * Vérification de l'email contenant les événements à créer
-   */
-  email_checking(){
-    this.api._get("email_checking").subscribe(()=>{
-      showMessage(this,"Vérification de l'email");
-    })
-  }
 
 
   reduceAll(){

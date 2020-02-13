@@ -117,4 +117,8 @@ export class ApiService {
     var ticket=tickets.join(",");
     return this._get("buy/"+paymentMode+"/"+buyer+"/"+ticket+"/"+event,3600);
   }
+
+  sendpayment(wallet:string,userid:string,data: any) {
+    return this.http.post(api("sendpayment/"+wallet+"/"+userid),data);
+  }
 }

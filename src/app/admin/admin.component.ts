@@ -43,6 +43,16 @@ export class AdminComponent implements OnInit {
     open("https://server.f80.fr:6800/api/infos/log","_blank");
   }
 
+   /**
+   * Vérification de l'email contenant les événements à créer
+   */
+  email_checking(){
+    this.api._get("email_checking").subscribe(()=>{
+      showMessage(this,"Vérification de l'email");
+    })
+  }
+
+
 
 
   job() {

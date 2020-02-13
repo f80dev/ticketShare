@@ -9,6 +9,12 @@
   &nbsp;
   <button class="app-button" mat-button mat-raised-button (click)="log()">Log</button>
 
+   <button class="app-button" style="margin-top: 10px;"
+                    mat-button mat-raised-button
+                    (click)="email_checking()">
+              Email checking
+   </button>
+
 <div style="max-width:75vw;margin-left:2vw;overflow: hidden;">
   <ngx-json-viewer [json]="jobs"
                    [expanded]="false"

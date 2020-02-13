@@ -1,2 +1,34 @@
+<div style="width:100%;text-align:center;">
 
-<a [href]="config.user?.refunding" target="_blank">Rechargement</a><br>
+  <h3>{{wallet}}</h3>
+  <a *ngIf="config.user?.refunding"
+     [href]="config.user?.refunding"
+     target="_blank">
+    Rechargement
+  </a>
+  <br>
+  &nbsp;
+
+  <table style="width:100%;text-align: center;"><tr>
+    <td>
+      <span *ngIf="amounts.length==1">{{amount}} €</span>
+      <mat-form-field *ngIf="amounts.length>1" style="width:80px;">
+        <mat-label>Montant</mat-label>
+        <mat-select [(value)]="amount" (valueChange)="refresh()">
+          <mat-option *ngFor="let amount of amounts" [value]="amount">
+            {{amount}} €
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+
+    <td>
+      <div style="width:180px;display: inline-block;margin-top: 10px;">
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      </div>
+    </td>
+  </tr></table>
+
+  <app-hourglass [message]="message"></app-hourglass>
+
+</div>

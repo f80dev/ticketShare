@@ -3,27 +3,6 @@
 
       <!--Zone de filtre-->
       <div style="width: 100%;text-align: left;">
-
-        <table><tr>
-          <td *ngIf="config.is_admin()">
-            <button class="app-button" style="margin-top: 10px;"
-                    mat-button mat-raised-button
-                    (click)="fictif()">
-              Evénement fictif
-            </button>
-
-            <button class="app-button" style="margin-top: 10px;"
-                    mat-button mat-raised-button
-                    (click)="email_checking()">
-              Email checking
-            </button>
-          </td>
-          <td>
-            <app-hourglass [message]="message"></app-hourglass>
-          </td>
-        </tr></table>
-
-        <br>
         <button class="app-button" style="margin-top: 10px;"
                 mat-button mat-raised-button
                 (click)="router.navigate(['eventeditor'])">
