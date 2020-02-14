@@ -938,5 +938,7 @@ export function createOrder(vm:any,_user:any,items:ITransactionItem[],onPayment:
       }
     };
 
+    $$("Création de la commande Paypal : ",rc);
+
     return rc;
 }

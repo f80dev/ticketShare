@@ -5,13 +5,12 @@
 <br><br>
 <span *ngIf="order?.nb_places>0">{{order?.nb_places}} places</span>
 <span *ngIf="order?.total>0">&nbsp;pour un total de {{order?.total}}€ </span>
-<span *ngIf="order?.total>0 && order?.etherprice>0">({{order?.total/order?.etherprice | number:'1.1-3'}} ether)   </span>
+<span *ngIf="order?.total>0 && order?.etherprice>0">({{order?.total/order?.etherprice | number:'1.1-3'}} ether)</span>
 <div *ngIf="order?.total>0 && config.user?.ether<order?.total/order?.etherprice" style="color:darkred;">
   Le solde de votre wallet spectacle est insuffisant
 </div>
 <br>
 <br>
-
 
   <div *ngIf="order.total/order.etherprice<=config.user?.ether">
     <button class="app-button" mat-button mat-flat-button
@@ -36,14 +35,13 @@
   </div>
 <br>
 
+  {{config.user?.account}}€ disponible sur votre compte
 
-<div style="width:200px;display: inline-block;margin-top: 10px;">
   <app-refund [amounts]="[order?.total-config.user?.account]"
-              [items]="getTicketsForOrder()"
-              *ngIf="order?.total>config.user?.account"
+              [items]="tickets"
+              *ngIf="true || order?.total>config.user?.account"
               [sandbox]="config.user?.offer=='pilote'"
               (payment)="onpayment($event)">
   </app-refund>
-</div>
 
 </div>

@@ -40,26 +40,33 @@ export class PaymentComponent implements OnInit {
     } else {
       this.api.getevent(this.order.event).subscribe((r) => {
         this.event = r;
-        this.tickets=this.getTicketsForOrder();
+        this.tickets=this.getTicketsForOrder(r);
+        $$("Initialisation des tickets effectués");
       });
     }
   }
 
-  getTicketsForOrder() {
+
+  /**
+   * retourne les billets pour la facture paypal
+   */
+  getTicketsForOrder(_event) {
     const rc = [];
-    if(this.event==null)return rc;
+    if(_event==null)return rc;
 
     for (const t of this.order.tickets) {
-      const _t = this.event.tickets[t];
+      const _t = _event.tickets[t];
       rc.push({
-        name: this.event.name,
+        name: _event.name,
         quantity: '1',
-        description:_t.description,
-        unit_amount: {currency_code: "EUR",value: ""+_t.price}
+        unit_amount: {currency_code: "EUR",value: _t.price.toString()}
       });
     }
+    $$("liste des tickets à acheter ",rc);
     return rc;
   }
+
+
 
   resetStatus() {
 

@@ -38,19 +38,19 @@ export class RefundComponent implements OnInit {
   }
 
   refresh(){
-    if(this.config.user!=null){
-    this.payPalConfig=createOrder(this,this.config.user.email,this.items,(data)=>{
-      this.message="Mise a jour de votre compte";
-      this.api.sendpayment("account",this.config.user._id,data).subscribe(()=>{
-        this.message="";
-          this.config.reload_user(()=>{
-            this.onpayment.emit();
-          });
-        },(err)=>{
-        this.message="";
-        showError(this,err);
-      });
-    },this.config.user.offer=='pilote')
+    if(this.config.user!=null && this.items!=null){
+      this.payPalConfig=createOrder(this,this.config.user.email,this.items,(data)=>{
+        this.message="Mise a jour de votre compte";
+        this.api.sendpayment("account",this.config.user._id,data).subscribe(()=>{
+          this.message="";
+            this.config.reload_user(()=>{
+              this.onpayment.emit();
+            });
+          },(err)=>{
+          this.message="";
+          showError(this,err);
+        });
+      },this.config.user.offer=='pilote')
     }
   }
 
