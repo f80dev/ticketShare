@@ -171,6 +171,13 @@ export class StoreComponent implements OnInit {
   }
 
 
+  onpayment(){
+    this.config.reload_user(()=>{
+      this.refresh();
+      }
+    );
+  }
+
 
 
 

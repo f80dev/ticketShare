@@ -39,6 +39,7 @@
 
   <app-refund [amounts]="[order?.total-config.user?.account]"
               [items]="tickets"
+              title="Rechargement pour achat de billets"
               *ngIf="true || order?.total>config.user?.account"
               [sandbox]="config.user?.offer=='pilote'"
               (payment)="onpayment($event)">

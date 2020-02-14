@@ -17,6 +17,7 @@ export class RefundComponent implements OnInit {
   @Input("amounts") amounts=[5,10,20,50,100];
   @Input("sandbox") sandbox=false;
   @Input("items") items=[];
+  @Input("title") title="";
   @Output('payment') onpayment: EventEmitter<any>=new EventEmitter();
   message="";
 
@@ -34,11 +35,15 @@ export class RefundComponent implements OnInit {
   ngOnInit() {
     if(this.amounts.length==1)
       this.amount=this.amounts[0];
-    this.refresh();
+    setTimeout(()=>{
+      this.refresh();
+    },500);
+
   }
 
   refresh(){
     if(this.config.user!=null && this.items!=null){
+      this.items[0].unit_amount.value=this.amount.toString();
       this.payPalConfig=createOrder(this,this.config.user.email,this.items,(data)=>{
         this.message="Mise a jour de votre compte";
         this.api.sendpayment("account",this.config.user._id,data).subscribe(()=>{

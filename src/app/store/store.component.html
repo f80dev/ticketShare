@@ -163,8 +163,26 @@
 
           <app-hourglass [message]="event.treatment" [canCancel]="true" (cancel)="onCancel(event)"></app-hourglass><br>
 
+          <!--Rechargement-->
+
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
-            <button class="app-button" mat-button mat-flat-button (click)="publish(event)">Publier</button>
+
+            <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
+              Frais de publication : {{event.cost}} €<br>
+
+              <div *ngIf="config.user.account<event.cost">
+                Solde insuffisant pour publier l'événement<br>
+                <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: ''},quantity: '1',description:'Rechargement pour création d\'événement'}]"
+                            [amounts]="[event.cost-config.user.account]"
+                            [sandbox]="config.user.offer=='pilote'"
+                            (payment)="onpayment($event)">
+                </app-refund>
+                <br>
+              </div>
+            </div>
+
+
+            <button class="app-button" mat-button mat-flat-button *ngIf="config.user.account>=event.cost" (click)="publish(event)">Publier</button>
             <button class="app-button" mat-button mat-flat-button (click)="delete(event)">Supprimer</button>
             <button class="app-button" mat-button mat-flat-button *ngIf="config.user.email?.length>0"
                     (click)="receiveByMail(event,config.user.email)">

@@ -1,11 +1,10 @@
 <div style="width:100%;text-align:center;">
-  <h3>{{wallet}}</h3>
-  <a *ngIf="config.user?.refunding"
-     [href]="config.user?.refunding"
-     target="_blank">
-    Rechargement
-  </a>
-  <br>
+  <h3 *ngIf="title.length>0">{{title}}</h3>
+  <!--<a *ngIf="config.user?.refunding"-->
+     <!--[href]="config.user?.refunding"-->
+     <!--target="_blank">-->
+    <!--Rechargement-->
+  <!--</a>-->
   &nbsp;
   <table style="width:100%;text-align: center;"><tr>
     <td>

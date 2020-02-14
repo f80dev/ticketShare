@@ -868,7 +868,7 @@ function drawRotated(canvas, image, degrees) {
   ctx.restore();
 }
 
-
+//TEsteur sb-iy3fn1051170@personal.example.com / pd4271!!
 export function createOrder(vm:any,_user:any,items:ITransactionItem[],onPayment:Function,sandbox=false){
   var clientId = 'AeEOnV5osIW2qTWbAxTGwOMOuyZvAJ8CUtCDn0Lr5-eeHGJhUHCkuAl0foZ0hkYGKNo9mtJP0nklI0tD';
   if(sandbox)clientId="sb";
