@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from '@angular/router';
 import {checkLogin, createOrder, showError, showMessage, tirage} from '../tools';
@@ -11,7 +11,7 @@ import {Location} from "@angular/common";
   templateUrl: './refund.component.html',
   styleUrls: ['./refund.component.sass']
 })
-export class RefundComponent implements OnInit {
+export class RefundComponent implements AfterViewInit {
 
   @Input("amounts") amounts=[5,10,20,50,100];
   @Input("sandbox") sandbox=false;
@@ -31,9 +31,9 @@ export class RefundComponent implements OnInit {
   amount=5;
 
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if(this.amounts.length==1)this.amount=this.amounts[0];
-    setTimeout(()=>{this.refresh();},100);
+    setTimeout(()=>{this.refresh();},500);
   }
 
   refresh(){
