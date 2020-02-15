@@ -20,5 +20,15 @@
 En attendant vous pouvez envoyer un mail à ticketshare@f80.fr
 en respectant la syntaxe
 YAML
+<br>
+
+  <button class="app-button"
+          style="margin-top: 10px;"
+          *ngIf="config.user?.email"
+          mat-button mat-raised-button
+          (click)="sendDemo()">
+    Recevoir un exemple
+  </button>
+
 
 </div>

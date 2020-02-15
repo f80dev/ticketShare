@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get(api('raz/hh4271'));
   }
 
+  send_yaml_demo(user_email,yaml_file){
+    return this.http.get(api("send_yaml_demo/"+user_email+"/"+yaml_file));
+  }
+
   getusers() {
     return this.http.get(api("getusers/"+ADMIN_PASSWORD));
   }

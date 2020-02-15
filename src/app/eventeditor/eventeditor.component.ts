@@ -43,4 +43,9 @@ export class EventeditorComponent implements OnInit {
   }
 
 
+  sendDemo() {
+    this.api.send_yaml_demo(this.config.user.email,"demo").subscribe(()=>{
+      showMessage(this,"Consultez votre boite mail");
+    })
+  }
 }
