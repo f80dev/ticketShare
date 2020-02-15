@@ -58,6 +58,7 @@ import { RefundComponent } from './refund/refund.component';
 import { EventeditorComponent } from './eventeditor/eventeditor.component';
 import {NgxPayPalModule} from "ngx-paypal";
 import { PaymentComponent } from './payment/payment.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -90,7 +91,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     LoginComponent,
     RefundComponent,
     EventeditorComponent,
-    PaymentComponent
+    PaymentComponent,
+    SettingsComponent
   ],
   entryComponents: [
     PromptComponent

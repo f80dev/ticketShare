@@ -146,4 +146,13 @@ h2 {
 .image-icon {
   width: 22px; }
 
+.input-full-width {
+  width: 100%; }
+
+.mainform {
+  width: 96%;
+  margin-left: 2%;
+  text-align: center;
+  margin-top: 5px; }
+
 /*# sourceMappingURL=styles.css.map */

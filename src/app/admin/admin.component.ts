@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {Location} from "@angular/common";
 import {ConfigService} from "../config.service";
-import {showMessage} from "../tools";
+import {checkLogin, showMessage} from "../tools";
 import {MatSnackBar} from "@angular/material";
 import {environment} from "../../environments/environment";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -14,17 +15,18 @@ import {environment} from "../../environments/environment";
 export class AdminComponent implements OnInit {
   infos: any={};
   jobs: any={};
+  users: any={};
 
   constructor(public api:ApiService,
               public _location:Location,
+              public router:Router,
               public toast:MatSnackBar,
               public config:ConfigService) {
   }
 
   refresh(){
-    this.api.infos().subscribe((r:any)=>{
-      if(r!=null)this.infos=r;
-    })
+    this.api.infos().subscribe((r:any)=>{if(r!=null)this.infos=r;});
+    this.api.getusers().subscribe((r:any)=>{this.users=r;});
     this.api.job(0).subscribe((r:any)=>{this.jobs=r;});
   }
 
@@ -34,7 +36,7 @@ export class AdminComponent implements OnInit {
 
   raz(){
     this.api.raz().subscribe(()=>{
-      this._location.go(environment.domain_appli);
+      checkLogin(this.router);
     });
   }
 
@@ -51,6 +53,7 @@ export class AdminComponent implements OnInit {
       showMessage(this,"Vérification de l'email");
     })
   }
+
 
 
 

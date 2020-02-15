@@ -1,3 +1,5 @@
+<div class="mainform">
+
 
 <h2>
   Jobs
@@ -8,6 +10,7 @@
   <!--<button class="app-button" mat-button mat-raised-button (click)="raz()">RAZ</button>-->
   &nbsp;
   <button class="app-button" mat-button mat-raised-button (click)="log()">Log</button>
+  <button class="app-button" mat-button mat-raised-button (click)="raz()">Raz</button>
 
    <button class="app-button" style="margin-top: 10px;"
                     mat-button mat-raised-button
@@ -18,16 +21,21 @@
 <div style="max-width:75vw;margin-left:2vw;overflow: hidden;">
   <ngx-json-viewer [json]="jobs"
                    [expanded]="false"
-                   style="width:80%;max-width:500px;max-height:500px;margin:5px;">
+                   style="width:80%;max-width:500px;max-height:500px;margin:5px;text-align: left;">
   </ngx-json-viewer>
 </div>
-
 <br>
 
 
 
 <h2>Infos du serveur</h2>
-<div style="max-width:75vw;margin-left:2vw;overflow: hidden;">
+<div style="max-width:75vw;margin-left:2vw;overflow: hidden;text-align: left;">
   <ngx-json-viewer [json]="infos"></ngx-json-viewer>
 </div>
 
+<h2>Users</h2>
+<div style="max-width:75vw;margin-left:2vw;overflow: hidden;text-align: left;">
+  <ngx-json-viewer [json]="users"></ngx-json-viewer>
+</div>
+
+</div>

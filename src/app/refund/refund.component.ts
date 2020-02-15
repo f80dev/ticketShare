@@ -13,7 +13,6 @@ import {Location} from "@angular/common";
 })
 export class RefundComponent implements OnInit {
 
-  @Input("wallet") wallet:string="wallet spectacle";
   @Input("amounts") amounts=[5,10,20,50,100];
   @Input("sandbox") sandbox=false;
   @Input("items") items=[];
@@ -33,12 +32,8 @@ export class RefundComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.amounts.length==1)
-      this.amount=this.amounts[0];
-    setTimeout(()=>{
-      this.refresh();
-    },500);
-
+    if(this.amounts.length==1)this.amount=this.amounts[0];
+    setTimeout(()=>{this.refresh();},100);
   }
 
   refresh(){
@@ -46,11 +41,10 @@ export class RefundComponent implements OnInit {
       this.items[0].unit_amount.value=this.amount.toString();
       this.payPalConfig=createOrder(this,this.config.user.email,this.items,(data)=>{
         this.message="Mise a jour de votre compte";
-        this.api.sendpayment("account",this.config.user._id,data).subscribe(()=>{
+        this.api.sendpayment("account",this.config.user._id,data).subscribe((r:any)=>{
+          if(r.hasOwnProperty("user"))this.config.user=r.user;
+          this.onpayment.emit(r);
           this.message="";
-            this.config.reload_user(()=>{
-              this.onpayment.emit();
-            });
           },(err)=>{
           this.message="";
           showError(this,err);

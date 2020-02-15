@@ -14,6 +14,7 @@ import {LoginComponent} from "./login/login.component";
 import {RefundComponent} from "./refund/refund.component";
 import {EventeditorComponent} from "./eventeditor/eventeditor.component";
 import {PaymentComponent} from "./payment/payment.component";
+import {SettingsComponent} from "./settings/settings.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'share', component: ShareComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'refund', component: RefundComponent},
+  { path: 'settings', component: SettingsComponent},
   { path: 'eventeditor', component: EventeditorComponent},
   { path: 'payment', component: PaymentComponent},
   { path: 'login', component: LoginComponent},

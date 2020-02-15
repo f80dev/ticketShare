@@ -1,4 +1,7 @@
- <table><tr>
+<div class="mainform">
+
+
+<table style="text-align: center;"><tr>
           <td *ngIf="config.is_admin()">
             <button class="app-button" style="margin-top: 10px;"
                     mat-button mat-raised-button
@@ -10,24 +13,11 @@
             <app-hourglass [message]="message"></app-hourglass>
           </td>
         </tr></table>
-<br><br>
-Solde : {{config.user?.account}}
-<br>
-<button class="app-button"
-        mat-button mat-raised-button
-        (click)="showRefund=true">
-  Rechargement
-</button>
 
- <app-refund [items]="items"
-             *ngIf="showRefund"
-             [amounts]="[5,10,20,50,100]"
-             [sandbox]="config.user.offer=='pilote'"
-             (payment)="onpayment($event)">
- </app-refund>
 
 <br><br>
 En attendant vous pouvez envoyer un mail à ticketshare@f80.fr
 en respectant la syntaxe
 YAML
 
+</div>

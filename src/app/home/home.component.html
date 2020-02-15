@@ -44,6 +44,11 @@
       &nbsp;&nbsp;Billeterie
     </a>
 
+    <a title="Vos préférence" mat-list-item routerLink="settings">
+      <mat-icon>build</mat-icon>
+      &nbsp;&nbsp;Préférences
+    </a>
+
 
     <a title="Associé un email à votre wallet spectacle" mat-list-item routerLink="login" *ngIf="config.user?.email==''">
       <mat-icon>email</mat-icon>

@@ -1,8 +1,8 @@
 
-    <div style="padding:1%;">
+    <div class="mainform">
 
       <!--Zone de filtre-->
-      <div style="width: 100%;text-align: left;">
+
         <button class="app-button" style="margin-top: 10px;"
                 mat-button mat-raised-button
                 (click)="router.navigate(['eventeditor'])">
@@ -38,8 +38,6 @@
                 (click)="clearFilter()">
           Tout voir
         </button>
-
-      </div>
 
 
       <div style="width: 100%;display: flex;flex-wrap: wrap;text-align: center;" *ngIf="events.length>0">

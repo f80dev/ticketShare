@@ -6,14 +6,20 @@
     <!--Rechargement-->
   <!--</a>-->
   &nbsp;
-  <table style="width:100%;text-align: center;"><tr>
+  <table style="width:100%;text-align: center;"><tr style="vertical-align: top;">
     <td>
-      <span *ngIf="amounts.length==1">{{amount}} €</span>
+      <br>
+      <div *ngIf="amounts.length==1" style="line-height: 110%;">
+        Créditer:<br>
+        <span style="font-size: x-large;">{{amount}}€</span>
+        <br><br>
+        sur votre compte
+      </div>
       <mat-form-field *ngIf="amounts.length>1" style="width:80px;">
-        <mat-label>Montant</mat-label>
+        <mat-label>Créditer:</mat-label>
         <mat-select [(value)]="amount" (valueChange)="refresh()">
           <mat-option *ngFor="let amount of amounts" [value]="amount">
-            {{amount}} €
+            {{amount}}€
           </mat-option>
         </mat-select>
       </mat-form-field>

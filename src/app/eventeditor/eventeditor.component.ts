@@ -13,7 +13,6 @@ import {ApiService} from '../api.service';
 export class EventeditorComponent implements OnInit {
 
   message="";
-  items=[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: '0'},quantity: '1',description:'Rechargement pour création d\'événement'}];
   showRefund=false;
 
   constructor(
@@ -44,7 +43,4 @@ export class EventeditorComponent implements OnInit {
   }
 
 
-  onpayment($event: any) {
-    this.config.reload_user();
-  }
 }
