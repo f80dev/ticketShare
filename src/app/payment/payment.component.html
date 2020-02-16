@@ -21,12 +21,12 @@
   </div>
 
   <div *ngIf="order.total>config.user?.money">
-    <table style="width: 100%;">
+    <table style="width: 100%;" cellspacing="0" cellpadding="0">
       <tr>
         <th>Payer en Euro</th>
         <th>Payer en Ether</th>
       </tr>
-      <tr>
+      <tr style="padding:0px;">
         <td>
           <app-refund [amounts]="[order?.total-config.user?.account]"
                       [items]="tickets"
