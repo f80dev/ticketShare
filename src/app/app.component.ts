@@ -144,7 +144,7 @@ export class AppComponent implements OnInit {
       this.message="Reconnexion au compte "+address;
       this.api.getuser(address,30).subscribe((r: any) => {
         if(text!=r.address){
-          $$("On ne tient pas compte de l'adresse qui à été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
+          $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
         }
 
         this.message="";

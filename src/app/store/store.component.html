@@ -169,7 +169,7 @@
               Frais de publication : {{event.cost}} €<br>
 
               <div *ngIf="config.user.money<event.cost">
-                Solde insuffisant pour publier l'événement<br>
+                Solde insuffisant pour publier l'événement<br><br>
                 <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: ''},quantity: '1',description:'Rechargement pour création d\'événement'}]"
                             [amounts]="[event.cost-config.user.money]"
                             [sandbox]="config.user.offer=='pilote'"

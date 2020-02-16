@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
   email_login(){
+
     $$("Ouverture du login par email");
     this.dialog.open(PromptComponent,{
       width:'90vw',data: {
@@ -72,31 +73,56 @@ export class LoginComponent implements OnInit {
       }}).afterClosed().subscribe((email:any) => {
       if (email) {
         localStorage.setItem("lastEmail",email);
-        this.api.setuser(this.config.user._id,{"email":email}).subscribe((res: any) => {
-          if (res != null) {
-              this.dialog.open(PromptComponent, {
-                width: '90vw', data: {
-                  title: "Renseigner le code reçu",
-                  question:"Afin de vérifier que vous êtes bien le propriétaire "+email+", veuillez indiquer le code à 6 chiffres que vous avez reçu",
-                  lbl_ok:"OK",
-                  lbl_cancel:"Annuler"
-                }
-              })
-                .afterClosed().subscribe((code: any) => {
-                this.api.checkCode(this.config.user.address, code).subscribe((r: any) => {
-                  if (r!=null) {
-                    showMessage(this, "Profil mise a jour");
-                    this.config.user=r;
-                    this.router.navigate(["store"]);
-                  }else{
-                    this.router.navigate(["store"]);
+
+        //Recherche d'un compte déjà existant
+
+        this.api.getuser(email).subscribe((_old_user:any)=>{
+          if(_old_user!=null){
+            this.dialog.open(PromptComponent, {
+              width: '90vw', data: {
+                title: "Compte existant",
+                question:"Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
+                lbl_ok:"OK",
+                lbl_cancel:"Annuler"
+              }
+            }).afterClosed().subscribe((code: any) => {
+              if(code==_old_user.code){
+                localStorage.setItem("address",_old_user.address);
+                this.router.navigate(["home"]);
+              } else {
+                $$("Code incorrect")
+              }
+            });
+          } else {
+            this.api.setuser(this.config.user._id,{"email":email}).subscribe((res: any) => {
+              if (res != null) {
+                this.dialog.open(PromptComponent, {
+                  width: '90vw', data: {
+                    title: "Renseigner le code reçu",
+                    question:"Afin de vérifier que vous êtes bien le propriétaire "+email+", veuillez indiquer le code à 6 chiffres que vous avez reçu",
+                    lbl_ok:"OK",
+                    lbl_cancel:"Annuler"
                   }
-                },(err)=>{
-                  showMessage(this, "Code incorrect, veuillez recommencer la procédure");
+                })
+                  .afterClosed().subscribe((code: any) => {
+                  this.api.checkCode(this.config.user.address, code).subscribe((r: any) => {
+
+                    if (r!=null) {
+                      showMessage(this, "Profil mise a jour");
+                      this.config.user=r;
+                      this.router.navigate(["store"]);
+                    }else{
+                      this.router.navigate(["store"]);
+                    }
+                  },(err)=>{
+                    showMessage(this, "Code incorrect, veuillez recommencer la procédure");
+                  });
                 });
-              });
-            }
-          });
+              }
+            });
+          }
+        });
+
       }
     });
 
@@ -129,56 +155,44 @@ export class LoginComponent implements OnInit {
   }
 
   initUser(data:any,askForCode=false){
-    this.api.setuser(this.config.user.address,{"email":data.email,"pseudo":data.firstname}).subscribe((r:any)=>{
-      if(r!=null && r._id!=null){
-        showMessage(this,"Profil mis à jour");
-        if(this.redirect==null)
-          this.router.navigate(["store"]);
-        else
-          this.router.navigateByUrl(this.redirect);
-        this.config.user=r;
+    $$("Recherche d'un compte ayant ce mail");
+    this.api.getuser(data.email).subscribe((_old_user:any)=> {
+
+      this.dialog.open(PromptComponent, {
+        width: '90vw', data: {
+          title: "Compte existant",
+          question: "Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
+          lbl_ok: "OK",
+          lbl_cancel: "Annuler"
+        }
+      }).afterClosed().subscribe((code: any) => {
+        if (code == _old_user.code) {
+          this.api.deluser(this.config.user._id).subscribe(()=>{});
+          localStorage.setItem("address", _old_user.address);
+          this.router.navigate(["home"]);
+        } else {
+          $$("Code incorrect")
+        }
+      });
+    },(err)=>{
+        $$("Il n'y a pas de compte à cet email");
+        this.api.setuser(this.config.user.address, {
+          "email": data.email,
+          "pseudo": data.firstname
+        }).subscribe((r: any) => {
+          if (r != null && r._id != null) {
+            showMessage(this, "Profil mis à jour");
+            if (this.redirect == null)
+              this.router.navigate(["store"]);
+            else
+              this.router.navigateByUrl(this.redirect);
+            this.config.user = r;
+          }
+        }, () => {
+          showMessage(this, "Problème de mise a jour, réessayez");
+        })
       }
-    },()=>{
-      showMessage(this,"Problème de mise a jour, réessayez");
-    })
-    // this.api.getuser(email).subscribe((u:any)=>{
-    //   if(u.code==500){
-    //     $$("L'email "+email+" n'était pas encore enregistré. On l'affecte au compte existant");
-    //     this.updateUser();
-    //   } else {
-    //     $$("L'email "+email+" est déjà utilisé par le compte "+u._id);
-    //     if(u._id!=localStorage.getItem("user")){
-    //       if(this.data.user.coupons.length>0 || this.data.user.shops.length>0){
-    //         this.dialog.open(PromptComponent, {width: '250px',data: {title: "Compte déjà présent", question:"Cet email correspond à un autre compte, si vous souhaitez vous y connecté vous perder le compte actuel", onlyConfirm: true}
-    //         }).afterClosed().subscribe((result) => {
-    //           if(result=="yes"){
-    //
-    //             if(!askForCode){
-    //               $$("On change l'attribution du compte")
-    //               localStorage.setItem("user",u._id);
-    //             } else {
-    //               this.dialog.open(PromptComponent, {width: '250px',data: {title: "Donner le code de sécurité"}}).afterClosed().subscribe((code) => {
-    //                 if(code!=null && code==u["code"]){
-    //                   $$("On change l'attribution du compte, le code est exacte")
-    //                   localStorage.setItem("user",u._id);
-    //                 }
-    //               });
-    //             }
-    //
-    //
-    //           }
-    //           this.dialogRef.close({user:u,message:"Vous êtes reconnecter sur votre compte "+u.email});
-    //         });
-    //       } else {
-    //         $$("Le compte n'avait aucun coupon ni magazin donc on s'en déconnecte sans poser de question")
-    //         localStorage.setItem("user",u._id);
-    //         this.dialogRef.close({user:u,message:"Vous êtes reconnecter sur votre compte "+u.email});
-    //       }
-    //     } else {
-    //       $$("!Il s'agit d'une reconnexion au compte déjà enregistré, normalement c'est une erreur")
-    //     }
-    //   }
-    // });
+    );
   }
 
   public socialSignIn(socialPlatform : string) {
