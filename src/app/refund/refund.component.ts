@@ -18,6 +18,7 @@ export class RefundComponent implements OnInit {
   @Input("items") items=[];
   @Input("title") title="";
   @Output('payment') onpayment: EventEmitter<any>=new EventEmitter();
+  @Output('error') onerror: EventEmitter<any>=new EventEmitter();
   message="";
 
 
@@ -43,11 +44,17 @@ export class RefundComponent implements OnInit {
         this.message="Mise a jour de votre compte";
         this.api.sendpayment("account",this.config.user._id,data).subscribe((r:any)=>{
           if(r.hasOwnProperty("user"))this.config.user=r.user;
-          this.onpayment.emit(r);
+          this.onpayment.emit({data:r});
           this.message="";
           },(err)=>{
+          debugger;
+          this.onerror.emit(err.status);
           this.message="";
-          showError(this,err);
+          if(err.status==404)
+            showMessage(this,"Pour des raisons de sécurité vous devez utilisez "+this.config.user.email+" comme compte paypal. Votre compte n'a pas été crédité");
+          else{
+            showError(this,err);
+          }
         });
       },this.config.user.offer=='pilote')
     }

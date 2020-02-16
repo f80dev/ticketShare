@@ -5,13 +5,13 @@
 <br><br>
 <span *ngIf="order?.nb_places>0">Vous souhaitez {{order?.nb_places}} places</span>
 <span *ngIf="order?.total>0">&nbsp;pour un total de {{order?.total}}€ </span>
-<div *ngIf="order?.total>0 && config.user?.ether<order?.total/order?.etherprice" style="color:darkred;">
-  Le solde de votre wallet spectacle ({{config.user.money}}€) est insuffisant
+<div *ngIf="order?.total>0 && config.user?.money<order?.total" style="color:darkred;">
+  Il manque {{order.total-config.user?.money}}€ sur votre compte pour acheter les places
 </div>
 <br>
 <br>
 
-  <div *ngIf="order.total/order.etherprice<=config.user?.ether">
+  <div *ngIf="order.total<=config.user?.money">
     <button class="app-button" mat-button mat-flat-button
             *ngIf="order?.total>0 && order?.total<=config.user?.money"
             style="background-color: darkred;color:white;width:200px;"

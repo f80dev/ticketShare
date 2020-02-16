@@ -7,14 +7,14 @@
   <!--</a>-->
   &nbsp;
   <div style="display: flex;flex-wrap: wrap;width:100%;text-align: center;">
-      <div *ngIf="amounts.length==1" style="line-height: 110%;display: inline-block;">
+      <div *ngIf="amounts.length==1" style="line-height: 110%;display: inline-block;min-width:200px;width:50%;text-align: center;">
         Créditer:<br>
         <span style="font-size: x-large;">{{amount}}€</span>
         <br>
         <small>sur votre compte</small>
       </div>
 
-      <div *ngIf="amounts.length>1" style="display: inline-block;margin-right:10px;">
+      <div *ngIf="amounts.length>1" style="display: inline-block;min-width:200px;width:50%;">
         <mat-form-field *ngIf="amounts.length>1" style="width:120px;">
           <mat-label>Créditer:</mat-label>
           <mat-select [(value)]="amount" (valueChange)="refresh()">
@@ -26,7 +26,7 @@
         <small>sur votre compte</small>
       </div>
 
-      <div style="min-width:120px;display: inline-block;margin-left:10px;">
+      <div style="min-width:200px;display: inline-block;text-align: center;">
         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
       </div>
 
