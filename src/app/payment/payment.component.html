@@ -3,11 +3,10 @@
 <div style="width: 100%;text-align: center;">
 
 <br><br>
-<span *ngIf="order?.nb_places>0">{{order?.nb_places}} places</span>
+<span *ngIf="order?.nb_places>0">Vous souhaitez {{order?.nb_places}} places</span>
 <span *ngIf="order?.total>0">&nbsp;pour un total de {{order?.total}}€ </span>
-<span *ngIf="order?.total>0 && order?.etherprice>0">({{order?.total/order?.etherprice | number:'1.1-3'}} ether)</span>
 <div *ngIf="order?.total>0 && config.user?.ether<order?.total/order?.etherprice" style="color:darkred;">
-  Le solde de votre wallet spectacle est insuffisant
+  Le solde de votre wallet spectacle ({{config.user.money}}€) est insuffisant
 </div>
 <br>
 <br>
@@ -22,7 +21,7 @@
   </div>
 
   <div *ngIf="order.total>config.user?.money">
-    <table>
+    <table style="width: 100%;">
       <tr>
         <th>Payer en Euro</th>
         <th>Payer en Ether</th>
@@ -31,7 +30,6 @@
         <td>
           <app-refund [amounts]="[order?.total-config.user?.account]"
                       [items]="tickets"
-                      title="Rechargement pour achat de billets"
                       *ngIf="order?.total>config.user?.money"
                       [sandbox]="config.user?.offer=='pilote'"
                       (payment)="onpayment($event)">
@@ -59,9 +57,4 @@
     </table>
 
   </div>
-<br>
-
-  {{config.user?.account}}€ disponible sur votre compte
-
-
 </div>

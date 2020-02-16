@@ -6,32 +6,31 @@
     <!--Rechargement-->
   <!--</a>-->
   &nbsp;
-  <table style="width:100%;text-align: center;"><tr style="vertical-align: top;">
-    <td>
-      <br>
-      <div *ngIf="amounts.length==1" style="line-height: 110%;">
+  <div style="display: flex;flex-wrap: wrap;width:100%;text-align: center;">
+      <div *ngIf="amounts.length==1" style="line-height: 110%;display: inline-block;">
         Créditer:<br>
         <span style="font-size: x-large;">{{amount}}€</span>
-        <br><br>
-        sur votre compte
+        <br>
+        <small>sur votre compte</small>
       </div>
-      <mat-form-field *ngIf="amounts.length>1" style="width:80px;">
-        <mat-label>Créditer:</mat-label>
-        <mat-select [(value)]="amount" (valueChange)="refresh()">
-          <mat-option *ngFor="let amount of amounts" [value]="amount">
-            {{amount}}€
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </td>
 
-    <td>
-      <div style="width:180px;display: inline-block;margin-top: 10px;">
+      <div *ngIf="amounts.length>1" style="display: inline-block;margin-right:10px;">
+        <mat-form-field *ngIf="amounts.length>1" style="width:120px;">
+          <mat-label>Créditer:</mat-label>
+          <mat-select [(value)]="amount" (valueChange)="refresh()">
+            <mat-option *ngFor="let amount of amounts" [value]="amount">
+              {{amount}}€
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+        <small>sur votre compte</small>
+      </div>
+
+      <div style="min-width:120px;display: inline-block;margin-left:10px;">
         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
       </div>
-    </td>
-  </tr></table>
+
+  </div>
 
   <app-hourglass [message]="message"></app-hourglass>
-
 </div>

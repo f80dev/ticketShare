@@ -89,14 +89,14 @@ export class PaymentComponent implements OnInit {
   }
 
   onpayment(data){
-    this.api.sendpayment("account",this.config.user.email,data).subscribe(()=>{
-      this.config.reload_user();
-      this.buy("paypal");
+    this.config.reload_user(()=>{
+      if(this.config.user.money>this.order.total)
+        this.buy("paypal");
     });
   }
 
 
   refresh_balance() {
-    this.config.reload_user();
+    this.onpayment({});
   }
 }

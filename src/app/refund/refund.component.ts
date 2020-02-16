@@ -11,7 +11,7 @@ import {Location} from "@angular/common";
   templateUrl: './refund.component.html',
   styleUrls: ['./refund.component.sass']
 })
-export class RefundComponent implements AfterViewInit {
+export class RefundComponent implements OnInit {
 
   @Input("amounts") amounts=[5,10,20,50,100];
   @Input("sandbox") sandbox=false;
@@ -31,7 +31,7 @@ export class RefundComponent implements AfterViewInit {
   amount=5;
 
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if(this.amounts.length==1)this.amount=this.amounts[0];
     setTimeout(()=>{this.refresh();},500);
   }
