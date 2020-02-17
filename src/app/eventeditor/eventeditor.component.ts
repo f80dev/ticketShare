@@ -35,10 +35,10 @@ export class EventeditorComponent implements OnInit {
     var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
     var addr=this.config.user.address;
     this.api._get("add_event/"+event+"?format=json&owner="+addr+"&miner="+addr).subscribe((r:any)=>{
-      this._location.back();
+      this.router.navigate(["store"]);
     },(err)=>{
       showMessage(this,err.message);
-      this._location.back();
+      this.router.navigate(["store"]);
     });
   }
 

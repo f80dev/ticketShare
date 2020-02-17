@@ -266,7 +266,7 @@ export function showMessage(vm:any,s:string="",duration=2000,func=null,label_but
     if(s.length>0)setTimeout(()=>{vm.showMessage=true;},500);
   } else {
     //Affichage en mode toaster
-    var toaster:MatSnackBar=vm.toast || vm.snackBar;
+    var toaster:MatSnackBar=vm.toast || vm.snackBar || vm.toaster;
     if(toaster!=null){
       if(duration==0)
         toaster.open(s,label_button).onAction().subscribe(()=>{
@@ -910,7 +910,9 @@ export function createOrder(vm:any,_user:any,items:ITransactionItem[],onPayment:
         email_address:_user["email"]
       },
       style: {
-        label: 'paypal',
+        size: 'small',
+        label: 'buynow',
+        color:'black',
         layout: 'vertical'
       },
 

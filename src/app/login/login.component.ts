@@ -11,6 +11,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from "@angular/material";
 import {ConfigService} from "../config.service";
 import {PromptComponent} from "../prompt/prompt.component";
+import {Location} from "@angular/common";
 
 
 
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
               public router: Router,
               public dialog:MatDialog,
               public toast:MatSnackBar,
+              public _location:Location,
               public config:ConfigService,
               public route:ActivatedRoute,
               private socialAuthService: SocialService) {
@@ -184,8 +186,13 @@ export class LoginComponent implements OnInit {
             showMessage(this, "Profil mis à jour");
             if (this.redirect == null)
               this.router.navigate(["store"]);
-            else
-              this.router.navigateByUrl(this.redirect);
+            else {
+              if(this.redirect=="back")
+                this._location.back();
+              else
+                this.router.navigateByUrl(this.redirect);
+            }
+
             this.config.user = r;
           }
         }, () => {

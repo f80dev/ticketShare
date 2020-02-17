@@ -15,7 +15,7 @@ import {Socket, SocketIoModule} from "ngx-socket-io";
 })
 export class HomeComponent implements OnInit {
 
-  ethPrice=0
+  ethPrice=0;
 
   constructor(
               public meta: Meta,

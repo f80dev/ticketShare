@@ -4,9 +4,7 @@
     Hello {{config.user?.pseudo}}<br>
   </div>
 
-    <div *ngIf="config.user?.ether>0">
-      {{config.user?.ether |number:'1.1-3'}} eth
-      /
+    <div *ngIf="config.user?.money>0">
       {{config.user?.money |number:'1.0-1'}} €
     </div>
 

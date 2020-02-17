@@ -20,6 +20,7 @@ export class StoreComponent implements OnInit {
   filterField: string="";
   filterEvent=null;
   tags: string[]=[];
+  showRefund: boolean=false;
 
   constructor(public api:ApiService,
               public config:ConfigService,
@@ -87,21 +88,28 @@ export class StoreComponent implements OnInit {
   }
 
 
-  /**
-   *
-   * @param _evt
-   */
-  buy(_evt: any) {
+  askForAuthent(redirect:string,func:Function){
     if(this.config.user!=null && this.config.user.email==""){
       this.router.navigate(["login"],{queryParams:
           {
             message:"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",
-            redirect:"/places?event="+_evt._id+"&etherprice="+_evt.etherprice
+            redirect:redirect
           }
       });
     } else {
-      this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
+      func();
     }
+  }
+
+
+/**
+   *
+   * @param _evt
+   */
+  buy(_evt: any) {
+    this.askForAuthent("/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
+      this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
+    })
   }
 
 
@@ -226,6 +234,19 @@ export class StoreComponent implements OnInit {
   onCancel(event:any) {
     this.delete(event,()=>{
       this.refresh();
+    });
+  }
+
+  refund(_evt:any){
+    this.showRefund=!this.showRefund;
+    this.askForAuthent("back",()=>{
+      this.refresh();
+    });
+  }
+
+  openEventEditor() {
+    this.askForAuthent('/eventeditor',()=>{
+      this.router.navigate(['eventeditor']);
     });
   }
 }

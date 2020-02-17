@@ -5,6 +5,7 @@ import {checkLogin, createOrder, showError, showMessage, tirage} from '../tools'
 import {ICreateOrderRequest, ITax, ItemCategory, IUnitAmount} from 'ngx-paypal';
 import {ApiService} from '../api.service';
 import {Location} from "@angular/common";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-refund',
@@ -15,15 +16,16 @@ export class RefundComponent implements OnInit {
 
   @Input("amounts") amounts=[5,10,20,50,100];
   @Input("sandbox") sandbox=false;
-  @Input("items") items=[];
+  @Input("items") items:any=[];
+  @Input("user") user:any={};
   @Input("title") title="";
   @Output('payment') onpayment: EventEmitter<any>=new EventEmitter();
   @Output('error') onerror: EventEmitter<any>=new EventEmitter();
   message="";
 
-
   constructor(public config:ConfigService,
               public router:Router,
+              public toaster:MatSnackBar,
               public _location:Location,
               public api:ApiService,
               public routes:ActivatedRoute) { }
@@ -60,5 +62,8 @@ export class RefundComponent implements OnInit {
     }
   }
 
+  informe_copy() {
+    showMessage(this,"Adresse disponible dans le presse-papier");
+  }
 
 }
