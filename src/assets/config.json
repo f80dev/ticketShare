@@ -48,12 +48,7 @@
     {
       "id":"buildEvent",
       "title": "N'importe qui peut il créé un événement",
-      "content": "Oui ! TicketShare est un système de billeterie sécurisé ouvert à tous."
-    },
-    {
-      "id":"buildEvent",
-      "title": "N'importe qui peut il créé un événement",
-      "content": "./faqs/build_promo.html"
+      "content": "./faqs/build_event.html"
     },
     {
       "id":"waitingTransac",

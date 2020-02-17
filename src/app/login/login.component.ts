@@ -171,7 +171,7 @@ export class LoginComponent implements OnInit {
         if (code == _old_user.code) {
           this.api.deluser(this.config.user._id).subscribe(()=>{});
           localStorage.setItem("address", _old_user.address);
-          this.router.navigate(["home"]);
+          window.location.reload();
         } else {
           $$("Code incorrect")
         }
