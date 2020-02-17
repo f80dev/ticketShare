@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
-import {$$, createOrder, showMessage} from '../tools';
+import {$$, showMessage} from '../tools';
 import {stringify} from 'querystring';
 
 @Component({

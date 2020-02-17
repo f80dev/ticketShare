@@ -63,6 +63,11 @@ export class ApiService {
   }
 
 
+  gettokenforimagesearchengine() {
+    return this.http.get("https://server.f80.fr:5800/auth?username=reducshare&password=hh");
+  }
+
+
   setuser(id:string,body:any) {
     return this.http.post(api("setuser/"+id),body);
   }
@@ -126,7 +131,7 @@ export class ApiService {
     return this._get("buy/"+paymentMode+"/"+buyer+"/"+ticket+"/"+event,3600);
   }
 
-  sendpayment(wallet:string,userid:string,data: any) {
-    return this.http.post(api("sendpayment/"+wallet+"/"+userid),data);
+  sendpayment(data: any) {
+    return this.http.post(api("sendpayment"),data);
   }
 }

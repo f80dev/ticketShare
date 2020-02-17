@@ -1,4 +1,10 @@
-<div style="width:100%;text-align:center;">
+<button mat-raised-button mat-button
+        *ngIf="!show" class="app-button"
+        (click)="show=true">
+  Recharcher
+</button>
+
+<div style="width:100%;text-align:center;" *ngIf="show">
   <h3 *ngIf="title.length>0">{{title}}</h3>
   <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
       <div *ngIf="amounts.length==1" style="line-height: 120%;display: inline-block;min-width:200px;width:50%;">
@@ -24,7 +30,7 @@
       </div>
 
       <div style="min-width:200px;display: inline-block;text-align: center;cursor: pointer;"
-           ngxClipboard [cbContent]="user?.share_link"
+           ngxClipboard [cbContent]="user?.address"
           (click)="informe_copy()">
         Via Ethereum<br>
         <qr-code [size]="150"
@@ -42,9 +48,14 @@
                 (click)="config.reload_user()">
           <mat-icon>refresh</mat-icon>
         </button>
+
+        <button mat-raised-button mat-button
+                mat-icon-button class="app-button"
+                (click)="show=false">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-
   </div>
-
   <app-hourglass [message]="message"></app-hourglass>
+
 </div>

@@ -91,9 +91,9 @@ export class LoginComponent implements OnInit {
               if(code==_old_user.code){
                 localStorage.setItem("address",_old_user.address);
                 this.router.navigate(["home"]);
-              } else {
-                $$("Code incorrect")
               }
+
+              showMessage(this,"Utiliser un autre compte pour vous connecter");
             });
           } else {
             this.api.setuser(this.config.user._id,{"email":email}).subscribe((res: any) => {
@@ -180,7 +180,8 @@ export class LoginComponent implements OnInit {
         $$("Il n'y a pas de compte à cet email");
         this.api.setuser(this.config.user.address, {
           "email": data.email,
-          "pseudo": data.firstname
+          "pseudo": data.firstname,
+          "photo":data.picture
         }).subscribe((r: any) => {
           if (r != null && r._id != null) {
             showMessage(this, "Profil mis à jour");

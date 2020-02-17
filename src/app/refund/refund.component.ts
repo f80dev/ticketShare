@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from '@angular/router';
-import {checkLogin, createOrder, showError, showMessage, tirage} from '../tools';
-import {ICreateOrderRequest, ITax, ItemCategory, IUnitAmount} from 'ngx-paypal';
+import {$$, checkLogin, showError, showMessage, tirage} from '../tools';
+import {ICreateOrderRequest, ITax, ItemCategory, ITransactionItem, IUnitAmount} from 'ngx-paypal';
 import {ApiService} from '../api.service';
 import {Location} from "@angular/common";
 import {MatSnackBar} from "@angular/material";
@@ -18,6 +18,7 @@ export class RefundComponent implements OnInit {
   @Input("sandbox") sandbox=false;
   @Input("items") items:any=[];
   @Input("user") user:any={};
+  @Input("show") show:boolean=true;
   @Input("title") title="";
   @Output('payment') onpayment: EventEmitter<any>=new EventEmitter();
   @Output('error') onerror: EventEmitter<any>=new EventEmitter();
@@ -33,23 +34,101 @@ export class RefundComponent implements OnInit {
   public payPalConfig ?:any;
   amount=5;
 
-
   ngOnInit() {
     if(this.amounts.length==1)this.amount=this.amounts[0];
     setTimeout(()=>{this.refresh();},500);
   }
 
+  //TEsteur sb-iy3fn1051170@personal.example.com / pd4271!!
+  createOrder(_user:any,items:ITransactionItem[],onPayment:Function,sandbox=false){
+    var clientId = 'AeEOnV5osIW2qTWbAxTGwOMOuyZvAJ8CUtCDn0Lr5-eeHGJhUHCkuAl0foZ0hkYGKNo9mtJP0nklI0tD';
+    if(sandbox)clientId="sb";
+    let tmp_total=0;
+    for(let item of items){
+      tmp_total=tmp_total+Number(item["unit_amount"]["value"])
+    }
+    let total:string=""+tmp_total;
+
+    let rc= {
+      currency: 'EUR',
+      clientId,
+      createOrderOnClient: (data) => < ICreateOrderRequest > {
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'EUR',
+            value: total,
+            breakdown: {
+              item_total: {
+                currency_code: 'EUR',
+                value: total
+              }
+            }
+          },
+          items: items
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      payee:{
+        email:"hhoareau@gmail.com"
+      },
+      payer:{
+        name:{
+          given_name:_user["pseudo"]
+        },
+        email_address:_user["email"]
+      },
+      style: {
+        size: 'small',
+        label: 'buynow',
+        color:'black',
+        layout: 'vertical'
+      },
+
+      onApprove: (data, actions) => {
+        $$('onApprove - transaction was approved, but not authorized', data);
+        actions.order.get().then(details => {
+          $$('onApprove - you can get full order details inside onApprove: ', details);
+        });
+      },
+
+      onClientAuthorization: (data) => {
+        this.message="Authorisation";
+        onPayment(data);
+      },
+
+      onCancel: (data, actions) => {
+        showMessage(this,"Transaction annulée");
+        this.message="";
+      },
+
+      onError: err => {
+        showMessage(this,"Problème technique, recommencez");
+        this.message="";
+      },
+
+      onClick: (data, actions) => {
+        this.message="Execution de la transaction";
+      }
+    };
+
+    $$("Création de la commande Paypal : ",rc);
+
+    return rc;
+  }
+
   refresh(){
     if(this.config.user!=null && this.items!=null){
       this.items[0].unit_amount.value=this.amount.toString();
-      this.payPalConfig=createOrder(this,this.config.user.email,this.items,(data)=>{
+      this.payPalConfig=this.createOrder(this.config.user.email,this.items,(data)=>{
         this.message="Mise a jour de votre compte";
-        this.api.sendpayment("account",this.config.user._id,data).subscribe((r:any)=>{
+        this.api.sendpayment(data).subscribe((r:any)=>{
           if(r.hasOwnProperty("user"))this.config.user=r.user;
           this.onpayment.emit({data:r});
           this.message="";
           },(err)=>{
-          debugger;
           this.onerror.emit(err.status);
           this.message="";
           if(err.status==404)

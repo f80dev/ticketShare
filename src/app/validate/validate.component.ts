@@ -19,6 +19,7 @@ export class ValidateComponent implements OnInit {
   tickets=[];
   address="";
   _event:any;
+  _user:any;
 
   //http://localhost:4200/validate?event=1578905752
 
@@ -58,7 +59,8 @@ export class ValidateComponent implements OnInit {
       this.api.use(addr,this._event["_id"]).subscribe((r:any)=>{
         this.address="";
         this.message="";
-        this.tickets=r;
+        this.tickets=r.tickets;
+        this._user=r.user;
         if(this.tickets.length==0){
           this.api.removeEvt(addr,this._event["_id"]).subscribe(()=>{});
           showMessage(this,"Pas de ticket pour cet événement");

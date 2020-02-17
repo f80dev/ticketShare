@@ -1,0 +1,66 @@
+<div class="mainform" *ngIf="config.user">
+
+  <br>
+
+  <div *ngIf="config.user?.photo?.length==0">
+    Renforcer la sécurité de votre compte<br>
+    <button class="app-button"
+            mat-button mat-raised-button
+            (click)="addImage($event)">
+      Ajouter une photo
+    </button>
+
+  </div>
+
+  <img [src]="config.user.photo"
+       *ngIf="config.user?.photo?.length>0"
+       width="150px" height="150px"
+       class="image-photo"
+       (click)="addImage($event)">
+
+  <mat-form-field class="input-full-width">
+    <mat-label>Pseudo</mat-label>
+    <input matInput placeholder="Roger" [value]="config.user?.pseudo">
+  </mat-form-field>
+
+  <mat-form-field class="input-full-width">
+    <mat-label>Offre</mat-label>
+    <mat-select [(value)]="config.user.offer">
+      <mat-option value="standard">Standard</mat-option>
+      <mat-option value="pro">Pro</mat-option>
+      <mat-option value="pilote">Pilote</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br><br>
+  Solde actuel : {{config.user?.account}}€
+  <br><br>
+
+  <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: '0'},quantity: '1',description:'Rechargement pour création d\'événement'}]"
+              [show]="false"
+              [amounts]="[5,10,20,50,100]"
+              [user]="config.user"
+              [sandbox]="config.user.offer=='pilote'"
+              (payment)="refreshSolde()">
+  </app-refund>
+  <br>
+  <br>
+  <hr>
+
+
+  <button class="app-button"
+          id="cmdCancel"
+          mat-button mat-raised-button
+          (click)="cancelUser()">
+    Annuler
+  </button>
+
+
+  <button class="app-button"
+          id="cmdSave"
+          mat-button mat-raised-button
+          (click)="saveUser($event)">
+    Enregistre
+  </button>
+
+</div>

@@ -26,7 +26,6 @@ export class EventeditorComponent implements OnInit {
   }
 
 
-
   /**
    *
    */
@@ -35,7 +34,9 @@ export class EventeditorComponent implements OnInit {
     var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
     var addr=this.config.user.address;
     this.api._get("add_event/"+event+"?format=json&owner="+addr+"&miner="+addr).subscribe((r:any)=>{
-      this.router.navigate(["store"]);
+      this.config.reload_user(()=>{
+        this.router.navigate(["store"]);
+      });
     },(err)=>{
       showMessage(this,err.message);
       this.router.navigate(["store"]);

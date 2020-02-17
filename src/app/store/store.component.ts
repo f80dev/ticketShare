@@ -20,7 +20,6 @@ export class StoreComponent implements OnInit {
   filterField: string="";
   filterEvent=null;
   tags: string[]=[];
-  showRefund: boolean=false;
 
   constructor(public api:ApiService,
               public config:ConfigService,
@@ -78,6 +77,7 @@ export class StoreComponent implements OnInit {
       this.filterField=params.get("filter");
 
     this.refresh();
+
     subscribe_socket(this,"refresh_store");
   }
 
@@ -88,11 +88,11 @@ export class StoreComponent implements OnInit {
   }
 
 
-  askForAuthent(redirect:string,func:Function){
+  askForAuthent(message:string,redirect:string,func:Function){
     if(this.config.user!=null && this.config.user.email==""){
       this.router.navigate(["login"],{queryParams:
           {
-            message:"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",
+            message:message,
             redirect:redirect
           }
       });
@@ -107,7 +107,7 @@ export class StoreComponent implements OnInit {
    * @param _evt
    */
   buy(_evt: any) {
-    this.askForAuthent("/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
+    this.askForAuthent("Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
       this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
     })
   }
@@ -187,9 +187,6 @@ export class StoreComponent implements OnInit {
   }
 
 
-
-
-
   reduceAll(){
     for(let e of this.events)
       e["expanded"]=false;
@@ -225,7 +222,9 @@ export class StoreComponent implements OnInit {
 
 
   delete(event:any,func=null){
+    this.message="Suppression en cours ...";
     this.api.delevent(event["_id"]).subscribe(()=>{
+      this.message="";
       this.refresh();
       if(func!=null)func();
     })
@@ -237,15 +236,9 @@ export class StoreComponent implements OnInit {
     });
   }
 
-  refund(_evt:any){
-    this.showRefund=!this.showRefund;
-    this.askForAuthent("back",()=>{
-      this.refresh();
-    });
-  }
 
   openEventEditor() {
-    this.askForAuthent('/eventeditor',()=>{
+    this.askForAuthent("La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
       this.router.navigate(['eventeditor']);
     });
   }
