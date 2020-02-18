@@ -231,9 +231,14 @@ export class StoreComponent implements OnInit {
   }
 
   onCancel(event:any) {
-    this.delete(event,()=>{
-      this.refresh();
-    });
+    if(event.state=="in treatment"){
+      $$("L'événement repasse au statut draft");
+      this.api.setevent(event._id,{state:"draft"}).subscribe(()=>{
+        showMessage(this,"Annulation de la demande de mise en ligne");
+        this.refresh();
+      });
+    }
+
   }
 
 

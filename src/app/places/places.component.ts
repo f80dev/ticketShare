@@ -166,18 +166,10 @@ export class PlacesComponent implements OnInit {
 
   update_total(tickets:any=null) {
     this.total=0;this.nb_places=0;
-    if(tickets!=null){
-      this.sel_tickets=tickets;
-      this.nb_places=tickets.length;
-      for(let t of tickets){
-        for(let r of this.tickets){
-          if(t.value==r._id)this.total=this.total+r.price;
-        }
-      }
-    }
     for(let cat of Object.keys(this.categories)){
+      const price=Number(cat);
       this.nb_places=this.nb_places+this.categories[cat].buy;
-      this.total=this.total+Number(cat)*this.categories[cat].buy;
+      this.total=this.total+price*this.categories[cat].buy;
     }
   }
 }

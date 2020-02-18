@@ -1,10 +1,12 @@
 <button mat-raised-button mat-button
         *ngIf="!show" class="app-button"
         (click)="show=true">
-  Recharcher
+  <div class="bloc-bouton">Créditer<br>votre compte</div>
 </button>
 
-<div style="width:100%;text-align:center;" *ngIf="show">
+<app-hourglass [message]="message"></app-hourglass>
+
+<div style="width:100%;text-align:center;margin-top: 5px;" *ngIf="show">
   <h3 *ngIf="title.length>0">{{title}}</h3>
   <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
       <div *ngIf="amounts.length==1" style="line-height: 120%;display: inline-block;min-width:200px;width:50%;">
@@ -56,6 +58,6 @@
         </button>
       </div>
   </div>
-  <app-hourglass [message]="message"></app-hourglass>
+
 
 </div>

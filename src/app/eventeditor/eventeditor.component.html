@@ -1,27 +1,29 @@
 <div class="mainform">
 
+  <app-hourglass [message]="message"></app-hourglass>
+  <br>
 
-<table style="text-align: center;"><tr>
-          <td>
+Vous pouvez créer un événement fictif parmi les modèles disponibles<br><br>
             <button class="app-button"
                     style="margin-top: 10px;"
                     mat-button mat-raised-button
                     (click)="fictif()">
               Evénement fictif
-            </button>
-          </td>
-          <td>
-            <app-hourglass [message]="message"></app-hourglass>
-          </td>
-        </tr></table>
+            </button><br><br>
 
 
-<br><br>
-En attendant vous pouvez envoyer un mail à ticketshare@f80.fr
-en respectant la syntaxe
-YAML
+  <br>
+
+<hr>
 <br>
 
+  <br>
+ou décrire votre événement dans un mail (voir la syntaxe de l'email dans les FAQ) <br>
+  puis l'envoyer à <strong>ticketshare@f80.fr</strong>
+
+  <br><br>
+  A titre d'exemple, vous pouvez recevoir un exemple à personnaliser sur votre mail {{config.user.email}}
+<br><br>
   <button class="app-button"
           style="margin-top: 10px;"
           *ngIf="config.user?.email"

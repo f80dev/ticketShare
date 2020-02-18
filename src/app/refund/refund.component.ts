@@ -110,7 +110,9 @@ export class RefundComponent implements OnInit {
       },
 
       onClick: (data, actions) => {
-        this.message="Execution de la transaction";
+        setTimeout(()=>{
+          this.message="Transaction de rechargement en cours";
+        },1000);
       }
     };
 

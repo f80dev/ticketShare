@@ -3,11 +3,17 @@
   <br>
 
   <div *ngIf="config.user?.photo?.length==0">
-    Renforcer la sécurité de votre compte<br>
-    <button class="app-button"
+    Renforcer la sécurité de votre compte:<br><br>
+    <button class="app-button large-button"
             mat-button mat-raised-button
             (click)="addImage($event)">
       Ajouter une photo
+    </button><br>
+
+    <button class="app-button large-button"
+            mat-button mat-raised-button
+            (click)="router.navigate(['login'],{queryParam:{message:'Utilisez google ou facebook pour enregistrez simplement votre mail',redirect:'/settings'}})">
+      Ajouter une adresse mail
     </button>
 
   </div>
@@ -15,13 +21,22 @@
   <img [src]="config.user.photo"
        *ngIf="config.user?.photo?.length>0"
        width="150px" height="150px"
+       title="Cette photo est vérifier au moment de la validation de vos billets pour garantir votre identité"
        class="image-photo"
        (click)="addImage($event)">
+  <br>
+  <span *ngIf="config.user.email.length>0">{{config.user.email}}</span>
+  <br>
 
   <mat-form-field class="input-full-width">
     <mat-label>Pseudo</mat-label>
     <input matInput placeholder="Roger" [value]="config.user?.pseudo">
   </mat-form-field>
+
+
+
+
+
 
   <mat-form-field class="input-full-width">
     <mat-label>Offre</mat-label>

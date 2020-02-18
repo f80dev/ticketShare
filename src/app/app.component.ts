@@ -229,6 +229,10 @@ export class AppComponent implements OnInit {
           this.router.navigate(["validate"],{queryParams:{event:p["event"]}});
         }
 
+        if(p["command"]=="myevents"){
+          this.router.navigate(["myevents"]);
+        }
+
 
 
       });

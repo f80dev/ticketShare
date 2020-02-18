@@ -158,6 +158,7 @@ export class LoginComponent implements OnInit {
 
   initUser(data:any,askForCode=false){
     $$("Recherche d'un compte ayant ce mail");
+    debugger
     this.api.getuser(data.email).subscribe((_old_user:any)=> {
 
       this.dialog.open(PromptComponent, {
@@ -181,7 +182,7 @@ export class LoginComponent implements OnInit {
         this.api.setuser(this.config.user.address, {
           "email": data.email,
           "pseudo": data.firstname,
-          "photo":data.picture
+          "photo":data.photo || data.picture
         }).subscribe((r: any) => {
           if (r != null && r._id != null) {
             showMessage(this, "Profil mis à jour");
