@@ -84,7 +84,7 @@ export class PlacesComponent implements OnInit {
             this.categories[_t.price].description=_t.description;
             this.categories[_t.price].visual=_t.visual;
             this.categories[_t.price].value=_t.price;
-            this.categories[_t.price].to_buy++;
+            if(!this.categories[_t.price].hasOwnProperty("limit") || this.categories[_t.price].to_buy<this.categories[_t.price].limit)this.categories[_t.price].to_buy++;
             if(_t.price==0)
               this.categories[_t.price].title="Gratuit";
             else

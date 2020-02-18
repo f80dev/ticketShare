@@ -60,6 +60,7 @@ import {NgxPayPalModule} from "ngx-paypal";
 import { PaymentComponent } from './payment/payment.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ImageSelectorComponent } from './image-selector/image-selector.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -94,7 +95,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     EventeditorComponent,
     PaymentComponent,
     SettingsComponent,
-    ImageSelectorComponent
+    ImageSelectorComponent,
+    WelcomeComponent
   ],
   entryComponents: [
     PromptComponent,

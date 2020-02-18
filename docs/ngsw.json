@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1581986563005,
+  "timestamp": 1582045848141,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,11 +10,11 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.b30c0adf4d7a1df26c6d.js",
+        "https://app.kerberus.tech/main.68a56434d7d668536550.js",
         "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js",
         "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js",
         "https://app.kerberus.tech/runtime.458556a34b891ea32398.js",
-        "https://app.kerberus.tech/styles.57876a3086db3e9ec256.css"
+        "https://app.kerberus.tech/styles.a45e19fc982d645a3d92.css"
       ],
       "patterns": []
     },
@@ -56,12 +56,12 @@
     "https://app.kerberus.tech/assets/logo.png": "cd469d4948092031cff99d0a7287a8d9f1b9e613",
     "https://app.kerberus.tech/assets/logo.svg": "a6fcd8b152a490db78a9d528169695253f4a77b1",
     "https://app.kerberus.tech/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "https://app.kerberus.tech/index.html": "a33ba54615212fc0cfd777fd1fba099135f8549b",
-    "https://app.kerberus.tech/main.b30c0adf4d7a1df26c6d.js": "08f6f8a3724d7442aaa8e73f6cc9233465546eb2",
+    "https://app.kerberus.tech/index.html": "0bfb5a6a333c8a8f181c85965f0076de2520332c",
+    "https://app.kerberus.tech/main.68a56434d7d668536550.js": "02c2a3aa5ca4e793b5fbbaedaa265db5be580544",
     "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js": "f6468420664dc84d3233ce5bbb8425610e84ab8d",
     "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js": "c8b1721e71d9b5c8fc6e7fd886b4152944c41743",
     "https://app.kerberus.tech/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://app.kerberus.tech/styles.57876a3086db3e9ec256.css": "0ca6c05769dfb37dc5e062197ff67848eacc45bd"
+    "https://app.kerberus.tech/styles.a45e19fc982d645a3d92.css": "fd5712719b27fa849c2a777c6c90682c20e394f2"
   },
   "navigationUrls": [
     {

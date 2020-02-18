@@ -26,7 +26,7 @@
        (click)="addImage($event)">
   <br>
   <span *ngIf="config.user.email.length>0">{{config.user.email}}</span>
-  <br>
+  <br><br>
 
   <mat-form-field class="input-full-width">
     <mat-label>Pseudo</mat-label>
@@ -48,7 +48,8 @@
   </mat-form-field>
 
   <br><br>
-  Solde actuel : {{config.user?.account}}€
+  Solde de votre compte<br>
+  <span style="font-size: 4em">{{config.user?.money | number:'1.0-1'}}€</span>
   <br><br>
 
   <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: '0'},quantity: '1',description:'Rechargement pour création d\'événement'}]"

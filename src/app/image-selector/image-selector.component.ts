@@ -17,6 +17,7 @@ export interface ImageSelectorData {
   filter:string;
   result:string;
   emoji:boolean;
+  internet:boolean;
   width:number;
   height:number;
 }

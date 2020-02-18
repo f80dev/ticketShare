@@ -3,12 +3,6 @@
 
       <!--Zone de filtre-->
 
-        <button class="app-button" style="margin-top: 10px;"
-                mat-button mat-raised-button
-                (click)="openEventEditor()">
-          Créer votre événement
-        </button>
-
         <div style="display: inline-block;" *ngIf="events?.length>2">
           <mat-form-field style="width:200px;" >
             <mat-label>Trier par</mat-label>
@@ -40,7 +34,7 @@
         </button>
 
 
-      <div style="width: 100%;display: flex;flex-wrap: wrap;text-align: center;" *ngIf="events.length>0">
+      <div style="width: 100%;display: flex;flex-wrap: wrap;justify-content: center;" *ngIf="events.length>0">
         <app-event [message]="event.treatment"
                    *ngFor="let event of events | filter: ['tags',filterField] | orderBy: sortField:'asc'"
                    [event]="event"
@@ -209,4 +203,11 @@
         <br><br>
         Aucun événement disponible pour l'instant<br><br>
       </div>
+
+      <button class="app-button" style="margin-top: 10px;"
+              mat-button mat-raised-button
+              (click)="openEventEditor()">
+        Créer votre événement
+      </button>
+
     </div>

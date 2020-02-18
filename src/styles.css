@@ -147,7 +147,9 @@ h2 {
   width: 22px; }
 
 .input-full-width {
-  width: 100%; }
+  width: 100%;
+  max-width: 500px;
+  margin-right: 2%; }
 
 .mainform {
   width: 96%;

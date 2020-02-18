@@ -130,6 +130,7 @@ export class RefundComponent implements OnInit {
           if(r.hasOwnProperty("user"))this.config.user=r.user;
           this.onpayment.emit({data:r});
           this.message="";
+          this.show=false;
           },(err)=>{
           this.onerror.emit(err.status);
           this.message="";

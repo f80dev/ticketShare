@@ -4,6 +4,7 @@
 
   <div style="width: 100%;text-align: center;margin-bottom: 5px;">
     <button mat-flat-button mat-button
+            *ngIf="data.internet"
             (click)="addUrl()">
       Internet
     </button>

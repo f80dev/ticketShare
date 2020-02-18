@@ -54,6 +54,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  quit(){
+    setTimeout(()=>{
+      if (this.redirect == null)
+        this.router.navigate(["store"]);
+      else {
+        if(this.redirect=="back")
+          this._location.back();
+        else
+          this.router.navigateByUrl(this.redirect);
+      }
+    },6000);
+  }
 
   updateUser(){
     // this.api.setuser(this.data.user).subscribe((res:any)=>{
@@ -90,7 +102,7 @@ export class LoginComponent implements OnInit {
             }).afterClosed().subscribe((code: any) => {
               if(code==_old_user.code){
                 localStorage.setItem("address",_old_user.address);
-                this.router.navigate(["home"]);
+                this.quit();
               }
 
               showMessage(this,"Utiliser un autre compte pour vous connecter");
@@ -112,9 +124,9 @@ export class LoginComponent implements OnInit {
                     if (r!=null) {
                       showMessage(this, "Profil mise a jour");
                       this.config.user=r;
-                      this.router.navigate(["store"]);
+                      this.quit();
                     }else{
-                      this.router.navigate(["store"]);
+                      this.quit();
                     }
                   },(err)=>{
                     showMessage(this, "Code incorrect, veuillez recommencer la procédure");
@@ -158,7 +170,6 @@ export class LoginComponent implements OnInit {
 
   initUser(data:any,askForCode=false){
     $$("Recherche d'un compte ayant ce mail");
-    debugger
     this.api.getuser(data.email).subscribe((_old_user:any)=> {
 
       this.dialog.open(PromptComponent, {
@@ -186,16 +197,8 @@ export class LoginComponent implements OnInit {
         }).subscribe((r: any) => {
           if (r != null && r._id != null) {
             showMessage(this, "Profil mis à jour");
-            if (this.redirect == null)
-              this.router.navigate(["store"]);
-            else {
-              if(this.redirect=="back")
-                this._location.back();
-              else
-                this.router.navigateByUrl(this.redirect);
-            }
-
             this.config.user = r;
+            this.quit();
           }
         }, () => {
           showMessage(this, "Problème de mise a jour, réessayez");

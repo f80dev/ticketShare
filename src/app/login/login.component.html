@@ -3,13 +3,24 @@
   <br><br>
   <span *ngIf="message">{{message}}</span><br><br>
 
-  <span *ngIf="message?.length==0">Vous connecter avec</span><br>
-  <div style="width: 100%;text-align: center;">
-    <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('google')">Google</button>
+  <div *ngIf="config.user.email.length==0">
+    <span *ngIf="message?.length==0">Vous connecter avec</span><br>
+    <div style="width: 100%;text-align: center;">
+      <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('google')">Google</button>
+      <br><br>
+      <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('facebook')">Facebook</button>
+      <br><br><br><br>
+      <button class="app-button login-button" mat-button mat-raised-button (click)="email_login()">Email</button>
+    </div>
+  </div>
+
+  <div *ngIf="config.user.email.length>0">
+    <h1>Bonjour {{config.user.pseudo}}</h1>
+    <br>
+    <img [src]="config.user.photo" width="150px" height="150px" class="image-photo">
     <br><br>
-    <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('facebook')">Facebook</button>
-    <br><br><br><br>
-    <button class="app-button login-button" mat-button mat-raised-button (click)="email_login()">Email</button>
+    Maintenant que votre mail est enregistrez vous allez pouvoir acheter des places directement dans {{config.values.appname}}<br>
+    et même gérer les billets de vos propres événement si vous en avez besoin
   </div>
 
 </div>
