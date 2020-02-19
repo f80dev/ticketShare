@@ -160,7 +160,7 @@
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
 
             <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
-              Frais de mise en ligne : {{event.cost}} €<br>
+              Frais de mise en ligne : {{event.cost | number:"1.0-1"}} €<br>
 
               <div *ngIf="config.user.money<event.cost" style="color:red;">
                 Il manque {{event.cost-config.user?.money}}€ sur votre compte pour créer l'événement<br><br>
