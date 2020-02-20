@@ -14,6 +14,8 @@ export class EventeditorComponent implements OnInit {
 
   message="";
   showRefund=false;
+  templates:any[]=[];
+  selTemplate: any=null;
 
   constructor(
     public config:ConfigService,
@@ -23,6 +25,15 @@ export class EventeditorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.api.gettemplates().subscribe((r:any[])=>{
+      this.templates=r;
+    });
+  }
+
+
+
+  openModele(template:any){
+    this.selTemplate=template;
   }
 
 
@@ -30,8 +41,7 @@ export class EventeditorComponent implements OnInit {
    *
    */
   fictif(){
-    var index=tirage(6);
-    var event=["demo","eiffel","bicep","foot","musee","pixies"][index];
+    var event=this.selTemplate.filename;
     var addr=this.config.user.address;
     this.api._get("add_event/"+event+"?format=json&owner="+addr+"&miner="+addr).subscribe((r:any)=>{
       this.config.reload_user(()=>{

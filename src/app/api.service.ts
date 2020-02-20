@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get(api('raz/hh4271'));
   }
 
+  gettemplates() {
+    return this.http.get(api('templates'));
+  }
+
   deluser(userid:string) {
     return this.http.get(api('deluser/'+userid));
   }

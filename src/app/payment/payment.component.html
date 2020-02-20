@@ -8,7 +8,7 @@
       <td>
         Sur votre compte, vous disposez de
       </td>
-      <td>
+      <td style="text-align: right;">
         {{config.user?.money | number:'1.0-1'}}€
       </td>
     </tr>
@@ -17,8 +17,19 @@
       <td>
         Vous souhaitez {{order?.nb_places}} places pour un total de
       </td>
+      <td style="text-align: right;">
+        -{{order?.total | number:'1.0-1'}}€
+      </td>
+    </tr>
+    <tr>
+      <hr>
+    </tr>
+    <tr>
       <td>
-        {{order?.total | number:'1.0-1'}}€
+        Solde après achat
+      </td>
+      <td style="text-align: right;">
+        {{config.user.money-order?.total | number:'1.0-1'}}€
       </td>
     </tr>
 
@@ -35,7 +46,7 @@
             *ngIf="order?.total>0 && order?.total<=config.user?.money"
             style="background-color: darkred;color:white;width:200px;"
             (click)="buy()">
-      Acheter
+      Confirmer
     </button>
   </div>
 

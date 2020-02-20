@@ -1,5 +1,5 @@
 <app-hourglass [message]="message"></app-hourglass>
-<div style="width:100%;text-align: center;margin-top:10%;" *ngIf="showScanner && message.length==0">
+<div style="width:100%;text-align: center;" *ngIf="showScanner && message.length==0">
   <h2>Validation des entrées de {{_event?.name}}</h2>
 
   <app-scanner [size]="300"
@@ -7,11 +7,11 @@
                (flash)="onflash_event($event)">
   </app-scanner>
 
-  <mat-form-field class="form-field-style" style="width: 90%;margin-right: 5%;">
+  <mat-form-field class="form-field-style" style="width: 70%;max-width: 300px;">
     <input type="text" matInput
            id="txtAddress"
            title="Saisissez l'adresse de votre compte Ethereum"
-           placeholder="Adresse du wallet"
+           placeholder="Adresse du wallet du visiteur"
            [(ngModel)]="address"
            (change)="update_addr($event)">
   </mat-form-field>
@@ -22,6 +22,12 @@
           (click)="update_addr(address)">
     Recherche des places
   </button>
+
+  <div  *ngIf="config.webcamsAvailable==0" style="font-size: x-small">
+    <br><br>
+    Aucune caméra détectée sur ce device<br>pour valider les entrées sur la base du QRCode<br>
+  </div>
+
 </div>
 
 
@@ -37,7 +43,11 @@
 
   <h2>{{tickets.length}} entrée(s) valable(s)</h2>
 
-  <button class="app-button" mat-button mat-raised-button (click)="burn(true)">Tout utiliser</button>
+  <button class="app-button"
+          mat-button mat-raised-button
+          (click)="burn(true)">
+    Tout utiliser
+  </button>
 
   <mat-selection-list #select>
     <mat-list-option *ngFor="let ticket of tickets"

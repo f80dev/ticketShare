@@ -4,8 +4,11 @@ import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {$$, openGraph, showMessage, subscribe_socket, tirage} from "../tools";
 import {Socket} from "ngx-socket-io";
-import {MatSnackBar} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
+import {NgNavigatorShareService} from "ng-navigator-share";
+import {ClipboardService} from "ngx-clipboard";
+import {PromptComponent} from "../prompt/prompt.component";
 
 @Component({
   selector: 'app-store',
@@ -21,9 +24,13 @@ export class StoreComponent implements OnInit {
   filterEvent=null;
   tags: string[]=[];
 
+
   constructor(public api:ApiService,
               public config:ConfigService,
+              public dialog: MatDialog,
+              private _clipboardService: ClipboardService,
               public socket:Socket,
+              public ngNavigatorShareService: NgNavigatorShareService,
               public toast:MatSnackBar,
               public route:ActivatedRoute,
               public router:Router) {
@@ -137,14 +144,25 @@ export class StoreComponent implements OnInit {
 
 
   share(event:any){
-    showMessage(this,"Lien promotionel copié");
+    this.ngNavigatorShareService.share({title: event.name,text: "Outil de validation des billets",url: event.share_link})
+      .then( (response) => {console.log(response);})
+      .catch( (error) => {
+        this._clipboardService.copyFromContent(event.share_link)
+        showMessage(this,"Lien promotionel disponible dans le presse-papier");
+      });
   }
 
 
   cancel(event:any){
-    this.api.delevent(event._id).subscribe(()=>{
-      this.refresh();
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Annulation de l'événement", question: "Etês vous sûr de vouloir annuler cet évenement et ainsi déclencher le remboursement de tous les billets",confirmOnly:true}
+    }).afterClosed().subscribe((result) => {
+      if(result=="yes"){
+        this.api.delevent(event._id).subscribe(()=>{
+          this.refresh();
+        });
+      }
     });
+
   }
 
 

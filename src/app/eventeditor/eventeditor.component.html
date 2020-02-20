@@ -3,34 +3,70 @@
   <app-hourglass [message]="message"></app-hourglass>
   <br>
 
-Vous pouvez créer un événement fictif parmi les modèles disponibles<br><br>
-            <button class="app-button"
-                    style="margin-top: 10px;"
-                    mat-button mat-raised-button
-                    (click)="fictif()">
+  <div *ngIf="selTemplate==null">
+    Sélectionner un modèles d'événements:<br><br>
+    <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
+      <div *ngFor="let template of templates"
+           style="cursor:pointer;font-size:x-small;width:150px;text-align: center;margin: 5px;"
+           (click)="openModele(template)">
+        {{template.title}}<br>
+        <img class="image-photo"
+             [src]="template.visual"
+             style="width:150px;height:150px;">
+        <br>
+        {{template.description}}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selTemplate">
+    <h2>{{selTemplate.title}}</h2>
+    <small>{{selTemplate.description}}</small>
+    <br><br>
+    <img class="image-photo"
+         [src]="selTemplate.visual"
+         style="width:100px;height:100px;">
+
+    <br>
+    <br>
+    <br>
+
+    <table style="width: 100%;">
+      <tr style="font-size: small;">
+        <td style="width: 50%;">Créer un évenement fictif depuis ce modèle</td>
+        <td>Recevoir ce modèle sur votre mail puis le personnaliser</td>
+      </tr>
+      <tr>
+        <td>
+          <button class="app-button"
+                  style="margin-top: 10px;"
+                  mat-button mat-raised-button
+                  (click)="fictif()">
               Evénement fictif
-            </button><br><br>
+          </button>
+        </td>
+        <td>
+          <button class="app-button "
+                  style="margin-top: 10px;"
+                  *ngIf="config.user?.email"
+                  mat-button mat-raised-button
+                  (click)="sendDemo()">
+              Recevoir ce modèle
+          </button>
+        </td>
+      </tr>
+    </table>
 
+    <br>
 
-  <br>
+    <br>
+    <button class="app-button "
+            style="margin-top: 10px;"
+            mat-button mat-raised-button
+            (click)="selTemplate=null">
+      Liste des modèles
+    </button>
 
-<hr>
-<br>
-
-  <br>
-ou décrire votre événement dans un mail (voir la syntaxe de l'email dans les FAQ) <br>
-  puis l'envoyer à <strong>ticketshare@f80.fr</strong>
-
-  <br><br>
-  A titre d'exemple, vous pouvez recevoir un exemple à personnaliser sur votre mail {{config.user.email}}
-<br><br>
-  <button class="app-button"
-          style="margin-top: 10px;"
-          *ngIf="config.user?.email"
-          mat-button mat-raised-button
-          (click)="sendDemo()">
-    Recevoir un exemple
-  </button>
-
+  </div>
 
 </div>
