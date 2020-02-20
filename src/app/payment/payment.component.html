@@ -3,11 +3,30 @@
 <div style="width: 100%;text-align: center;">
 
 <br><br>
-<span *ngIf="order?.nb_places>0">Vous souhaitez {{order?.nb_places}} places</span>
-<span *ngIf="order?.total>0">&nbsp;pour un total de {{order?.total}}€ </span>
-<div *ngIf="order?.total>0 && config.user?.money<order?.total" style="color:darkred;">
-  Il manque {{order.total-config.user?.money}}€ sur votre compte pour acheter les places
-</div>
+  <table style="width:80%;max-width: 400px;text-align: left;margin-left:10%;">
+    <tr>
+      <td>
+        Sur votre compte, vous disposez de
+      </td>
+      <td>
+        {{config.user?.money | number:'1.0-1'}}€
+      </td>
+    </tr>
+
+    <tr *ngIf="order?.nb_places>0 && order?.total>0">
+      <td>
+        Vous souhaitez {{order?.nb_places}} places pour un total de
+      </td>
+      <td>
+        {{order?.total | number:'1.0-1'}}€
+      </td>
+    </tr>
+
+  </table>
+
+  <div *ngIf="order?.total>0 && config.user?.money<order?.total" style="color:darkred;">
+    Il manque {{order.total-config.user?.money}}€ sur votre compte pour acheter les places
+  </div>
 <br>
 <br>
 

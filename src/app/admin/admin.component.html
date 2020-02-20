@@ -5,11 +5,21 @@
   Jobs
 </h2>
 
-  <button class="app-button" mat-button mat-raised-button (click)="job()">Execute</button>
+  <button class="app-button"
+          mat-button mat-raised-button
+          (click)="job()">
+    Execute
+  </button>
+
   &nbsp;
   <!--<button class="app-button" mat-button mat-raised-button (click)="raz()">RAZ</button>-->
   &nbsp;
-  <button class="app-button" mat-button mat-raised-button (click)="log()">Log</button>
+  <button class="app-button"
+          mat-button mat-raised-button
+          (click)="log()">
+    Log
+  </button>
+
   <button class="app-button" mat-button mat-raised-button (click)="raz()">Raz</button>
 
    <button class="app-button" style="margin-top: 10px;"
@@ -26,6 +36,15 @@
 </div>
 <br>
 
+
+  <h2>Compte admin</h2>
+  <ngx-json-viewer [json]="admin"
+                   [expanded]="false"
+                   style="width:80%;max-width:500px;max-height:500px;margin:5px;text-align: left;">
+  </ngx-json-viewer>
+
+
+ <br>
 
 
 <h2>Infos du serveur</h2>

@@ -54,6 +54,7 @@
 
   <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: '0'},quantity: '1',description:'Rechargement pour création d\'événement'}]"
               [show]="false"
+              *ngIf="config.user?.email?.length>0"
               [amounts]="[5,10,20,50,100]"
               [user]="config.user"
               [sandbox]="config.user.offer=='pilote'"

@@ -17,7 +17,7 @@
   <div *ngIf="config.user.email.length>0">
     <h1>Bonjour {{config.user.pseudo}}</h1>
     <br>
-    <img [src]="config.user.photo" width="150px" height="150px" class="image-photo">
+    <img *ngIf="config.user.photo?.length>0" [src]="config.user.photo" width="150px" height="150px" class="image-photo">
     <br><br>
     Maintenant que votre mail est enregistrez vous allez pouvoir acheter des places directement dans {{config.values.appname}}<br>
     et même gérer les billets de vos propres événement si vous en avez besoin

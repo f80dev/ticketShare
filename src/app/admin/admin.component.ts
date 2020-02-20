@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   infos: any={};
   jobs: any={};
   users: any={};
+  admin:any={}
 
   constructor(public api:ApiService,
               public _location:Location,
@@ -25,7 +26,12 @@ export class AdminComponent implements OnInit {
   }
 
   refresh(){
-    this.api.infos().subscribe((r:any)=>{if(r!=null)this.infos=r;});
+    this.api.infos().subscribe((r:any)=>{
+      if(r!=null){
+        this.infos=r;
+        this.admin={address:r.admin,ether:r.admin_ether};
+      }
+    });
     this.api.getusers().subscribe((r:any)=>{this.users=r;});
     this.api.job(0).subscribe((r:any)=>{this.jobs=r;});
   }

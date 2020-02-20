@@ -23,7 +23,7 @@ import {Location} from "@angular/common";
 })
 export class LoginComponent implements OnInit {
   email = 'paul.dudule@gmail.com';
-  message="";
+  message="Pour enregistrer votre mail, vous pouvez utilisez Google ou Facebook, ou directement le saisir";
   redirect=null;
 
   shareObj = {
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     $$("Ouverture de la fenêtre de login")
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.redirect=params.get("redirect");
-    this.message=params.get("message");
+    if(params.has("message"))this.message=params.get("message");
     if(params.has("address")){
       $$("Récupération de l'adresse "+params.get("address"))
       localStorage.setItem("lastEmail",params.get("address"));
@@ -189,6 +189,7 @@ export class LoginComponent implements OnInit {
         }
       });
     },(err)=>{
+        debugger
         $$("Il n'y a pas de compte à cet email");
         this.api.setuser(this.config.user.address, {
           "email": data.email,
