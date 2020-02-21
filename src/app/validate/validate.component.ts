@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {$$, showMessage} from "../tools";
+import {PromptComponent} from "../prompt/prompt.component";
 
 @Component({
   selector: 'app-validate',
@@ -25,6 +26,7 @@ export class ValidateComponent implements OnInit {
 
   constructor(public api: ApiService,
               public router:Router,
+              public dialog: MatDialog,
               public config:ConfigService,
               public toast:MatSnackBar,
               public route: ActivatedRoute) {
@@ -32,18 +34,33 @@ export class ValidateComponent implements OnInit {
   }
 
 
-
+  //http://localhost:4200/?event=1582301601&command=validate
   ngOnInit() {
     var idEvent=localStorage.getItem("validation");
     if(idEvent==null && this.config.params!=null && this.config.params["event"]!=null && this.config.params["event"].length>0)idEvent=this.config.params["event"];
     if(idEvent==null){
-      $$("impossible de rester dans validate sans indiquer l'evenement a valider");
+      $$("impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
     } else {
-      this.api.getevent(idEvent).subscribe((r)=>{
+      this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
-        localStorage.setItem("validation",r["_id"]);
-      })
+        if(this.config.user.email.length==0 && r.checkers.indexOf("*")==-1) {
+          this.router.navigate(["login"], {
+            queryParams:
+              {
+                message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
+                redirect: "/validate?event=" + r._id
+              }
+          });
+        }else{
+          if (r.checkers.indexOf(this.config.user.email) == -1 && r.checkers.indexOf(this.config.user.address)==-1) {
+            showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
+            this.router.navigate(["store"]);
+          } else {
+            localStorage.setItem("validation", r["_id"]);
+          }
+        }
+      });
     }
   }
 
@@ -127,5 +144,29 @@ export class ValidateComponent implements OnInit {
       showMessage(this,err.message);
       this.reload();
     });
+  }
+
+  add_checker() {
+    this.dialog.open(PromptComponent, {width: '250px',
+      data: {
+        title: 'Ajouter un validateur de billet',
+        question: "Saisissez l'email du nouveau validateur pour "+this._event.name,
+        result:"@",
+        onlyConfirm: false,
+        canEmoji: false,
+        lbl_ok:"Ajouter",
+        lbl_cancel:"Annuler"
+      }
+    }).afterClosed().subscribe((result) => {
+      if(result!=null){
+        var checkers=this._event.checkers;
+        checkers.push(result);
+        this.api.setevent(this._event._id,{checkers:checkers}).subscribe(()=>{
+          showMessage(this,result+" va recevoir un mail pour la validation des billets");
+        });
+      }
+
+    });
+
   }
 }

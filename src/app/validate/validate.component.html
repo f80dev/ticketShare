@@ -2,6 +2,15 @@
 <div style="width:100%;text-align: center;" *ngIf="showScanner && message.length==0">
   <h2>Validation des entrées de {{_event?.name}}</h2>
 
+
+  <button class="app-button" mat-button mat-raised-button
+          *ngIf="_event.owner==config.user.address"
+          (click)="add_checker()">
+    Ajouter un valideur
+  </button>
+
+
+
   <app-scanner [size]="300"
                *ngIf="config.webcamsAvailable>0"
                (flash)="onflash_event($event)">
