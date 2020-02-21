@@ -3,14 +3,6 @@
   <h2>Validation des entrées de {{_event?.name}}</h2>
 
 
-  <button class="app-button" mat-button mat-raised-button
-          *ngIf="_event.owner==config.user.address"
-          (click)="add_checker()">
-    Ajouter un valideur
-  </button>
-
-
-
   <app-scanner [size]="300"
                *ngIf="config.webcamsAvailable>0"
                (flash)="onflash_event($event)">
@@ -36,6 +28,13 @@
     <br><br>
     Aucune caméra détectée sur ce device<br>pour valider les entrées sur la base du QRCode<br>
   </div>
+
+  <br><br>
+  <button class="app-button" mat-button mat-raised-button
+          *ngIf="_event.owner==config.user.address"
+          (click)="add_checker()">
+    Ajouter un valideur
+  </button>
 
 </div>
 
