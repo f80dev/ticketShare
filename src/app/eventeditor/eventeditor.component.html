@@ -1,15 +1,25 @@
 <div class="mainform">
 
   <app-hourglass [message]="message"></app-hourglass>
+
   <br>
+  <button class="app-button"
+          style="margin-top: 10px;"
+          mat-button mat-raised-button
+          *ngIf="selTemplate!=null"
+          (click)="selTemplate=null">
+    <div class="bloc-bouton">Retour à la<br>liste des modèles</div>
+  </button>
+  <br>
+
 
   <div *ngIf="selTemplate==null">
     Sélectionner un modèles d'événements:<br><br>
     <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
       <div *ngFor="let template of templates"
-           style="cursor:pointer;font-size:x-small;width:150px;text-align: center;margin: 5px;"
+           style="cursor:pointer;font-size:x-small;width:150px;height:250px;text-align: center;margin: 15px;"
            (click)="openModele(template)">
-        {{template.title}}<br>
+        <div style="height:25px;">{{template.title}}</div>
         <img class="image-photo"
              [src]="template.visual"
              style="width:150px;height:150px;">
@@ -20,22 +30,24 @@
   </div>
 
   <div *ngIf="selTemplate">
-    <h2>{{selTemplate.title}}</h2>
-    <small>{{selTemplate.description}}</small>
-    <br><br>
+    <div style="width: 80%;margin:10%;">
+      <h2>{{selTemplate.title}}</h2>
+      <small>{{selTemplate.description}}</small>
+    </div>
+
     <img class="image-photo"
          [src]="selTemplate.visual"
-         style="width:100px;height:100px;">
+         style="width:200px;height:200px;">
 
-    <br>
     <br>
     <br>
 
     <table style="width: 100%;">
-      <tr style="font-size: small;">
-        <td style="width: 50%;">Créer un évenement fictif depuis ce modèle</td>
-        <td>Recevoir ce modèle sur votre mail puis le personnaliser</td>
+      <tr style="font-size: x-small;">
+        <td style="width: 50%;">Créer un évenement fictif depuis ce modèle. Cet évenement ne sera visible que des clients pilotes</td>
+        <td>Recevoir ce modèle sur votre mail, le personnaliser et le renvoyer pour créer votre événement</td>
       </tr>
+      <tr></tr>
       <tr>
         <td>
           <button class="app-button"
@@ -45,6 +57,7 @@
               Evénement fictif
           </button>
         </td>
+
         <td>
           <button class="app-button "
                   style="margin-top: 10px;"
@@ -56,16 +69,6 @@
         </td>
       </tr>
     </table>
-
-    <br>
-
-    <br>
-    <button class="app-button "
-            style="margin-top: 10px;"
-            mat-button mat-raised-button
-            (click)="selTemplate=null">
-      Liste des modèles
-    </button>
 
   </div>
 

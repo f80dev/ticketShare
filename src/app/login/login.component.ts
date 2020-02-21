@@ -54,17 +54,19 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  next(){
+    if (this.redirect == null)
+      this.router.navigate(["store"]);
+    else {
+      if(this.redirect=="back")
+        this._location.back();
+      else
+        this.router.navigateByUrl(this.redirect);
+    }
+  }
+
   quit(){
-    setTimeout(()=>{
-      if (this.redirect == null)
-        this.router.navigate(["store"]);
-      else {
-        if(this.redirect=="back")
-          this._location.back();
-        else
-          this.router.navigateByUrl(this.redirect);
-      }
-    },6000);
+    setTimeout(()=>{this.next();},20000);
   }
 
   updateUser(){

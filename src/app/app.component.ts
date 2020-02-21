@@ -243,8 +243,20 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('address');
-    window.location.reload();
+    this.dialog.open(PromptComponent, {width: '250px',
+      data: {
+        title: 'Deconnexion',
+        question: "Etes vous sûr de vouloir vous déconnecter de "+this.config.user.email+" ?",
+        onlyConfirm: true,
+        canEmoji: false,
+        lbl_ok:"Oui",
+        lbl_cancel:"Annuler"
+      }
+    }).afterClosed().subscribe((result_email) => {
+      localStorage.removeItem('address');
+      window.location.reload();
+    });
+
   }
 
   closeMenu(){

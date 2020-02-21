@@ -29,7 +29,7 @@ export class ApiService {
     return this.http.get(api('deluser/'+userid));
   }
 
-  send_yaml_demo(user_email,yaml_file){
+  send_yaml_demo(user_email:string,yaml_file:string="demo"){
     return this.http.get(api("send_yaml_demo/"+user_email+"/"+yaml_file));
   }
 

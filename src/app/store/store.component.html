@@ -7,11 +7,11 @@
           <mat-form-field style="width:200px;" >
             <mat-label>Trier par</mat-label>
             <mat-select [(value)]="sortField">
-              <mat-option value="dtCreate">Date de fabrication</mat-option>
-              <mat-option value="state">Status</mat-option>
-              <mat-option value="name">Titre</mat-option>
-              <mat-option value="dtStart">Première date</mat-option>
-              <mat-option value="dtEnd">Dernière date</mat-option>
+              <mat-option value="dtCreate=desc">Date de fabrication</mat-option>
+              <mat-option value="state=asc">Status</mat-option>
+              <mat-option value="name=asc">Titre</mat-option>
+              <mat-option value="dtStart=desc">Première date</mat-option>
+              <mat-option value="dtEnd=desc">Dernière date</mat-option>
             </mat-select>
           </mat-form-field>
           &nbsp;
@@ -28,7 +28,7 @@
         </div>
 
         <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
-                *ngIf="sortField?.length>0 || filterField?.length>0 || filterEvent!=null"
+                *ngIf="filterField?.length>0 || filterEvent!=null"
                 (click)="clearFilter()">
           Tout voir
         </button>
@@ -36,7 +36,7 @@
 
       <div style="width: 100%;display: flex;flex-wrap: wrap;justify-content: center;" *ngIf="events.length>0">
         <app-event [message]="event.treatment"
-                   *ngFor="let event of events | filter: ['tags',filterField] | orderBy: sortField:'asc'"
+                   *ngFor="let event of events | filter: ['tags',filterField] | orderBy: sortField.split('=')[0]:sortField.split('=')[1]"
                    [event]="event"
                    [expanded]="event.expanded"
                    width="100%"

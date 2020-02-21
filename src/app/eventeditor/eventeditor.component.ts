@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {showMessage, tirage} from '../tools';
 import {ApiService} from '../api.service';
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-eventeditor',
@@ -20,6 +21,7 @@ export class EventeditorComponent implements OnInit {
   constructor(
     public config:ConfigService,
     public router:Router,
+    public toaster:MatSnackBar,
     public _location:Location,
     public api:ApiService
   ) { }
@@ -29,8 +31,6 @@ export class EventeditorComponent implements OnInit {
       this.templates=r;
     });
   }
-
-
 
   openModele(template:any){
     this.selTemplate=template;
@@ -48,14 +48,14 @@ export class EventeditorComponent implements OnInit {
         this.router.navigate(["store"]);
       });
     },(err)=>{
-      showMessage(this,err.message);
+      showMessage(this,err.error.message);
       this.router.navigate(["store"]);
     });
   }
 
 
   sendDemo() {
-    this.api.send_yaml_demo(this.config.user.email,"demo").subscribe(()=>{
+    this.api.send_yaml_demo(this.config.user.email,this.selTemplate.filename).subscribe(()=>{
       showMessage(this,"Consultez votre boite mail");
     })
   }

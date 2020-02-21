@@ -19,7 +19,7 @@ export class StoreComponent implements OnInit {
 
   events=[];
   message="";
-  sortField: string="";
+  sortField: string="dtCreate=desc";
   filterField: string="";
   filterEvent=null;
   tags: string[]=[];
@@ -191,7 +191,7 @@ export class StoreComponent implements OnInit {
 
 
   clearFilter(){
-    this.sortField="";
+    this.sortField="dtCreate=desc";
     this.filterField="";
     this.filterEvent=null;
   }
