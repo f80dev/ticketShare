@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get(api('raz/hh4271'));
   }
 
+ addchecker(userid:string,eventid:string) {
+    return this.http.get(api('addchecker/'+userid+"/"+eventid));
+  }
+
   gettemplates() {
     return this.http.get(api('templates'));
   }
