@@ -5,7 +5,7 @@ import {
   SocialService
 } from "ngx-social-button";
 
-import {$$, showError, showMessage} from "../tools";
+import {$$, clear, showError, showMessage} from "../tools";
 import {ApiService} from "../api.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from "@angular/material";
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     href: "FACEBOOK-SHARE-LINK",
     hashtag:"#FACEBOOK-SHARE-HASGTAG"
   };
+  handle: any=null;
 
   constructor(public api: ApiService,
               public router: Router,
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   next(){
+    clearTimeout(this.handle);
     if (this.redirect == null)
       this.router.navigate(["store"]);
     else {
@@ -66,7 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   quit(){
-    setTimeout(()=>{this.next();},20000);
+    this.handle=setTimeout(()=>{this.next();},20000);
   }
 
   updateUser(){
