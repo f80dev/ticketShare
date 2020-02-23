@@ -1,0 +1,4 @@
+content:
+  - buildEvent:
+      title: N'importe qui peut il créé un événement,
+      content: "./faqs/build_event.html"

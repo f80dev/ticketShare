@@ -44,7 +44,7 @@ export class ValidateComponent implements OnInit {
     } else {
       this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
-        if(this.config.user.email.length==0 && r.checkers.indexOf("*")==-1) {
+        if(this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
           this.router.navigate(["login"], {
             queryParams:
               {
@@ -54,7 +54,7 @@ export class ValidateComponent implements OnInit {
           });
         }else{
 
-          if (r.checkers.indexOf(this.config.user.email) == -1 && r.checkers.indexOf(this.config.user.address)==-1) {
+          if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
             showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
             this.router.navigate(["store"]);
           } else {
@@ -79,10 +79,21 @@ export class ValidateComponent implements OnInit {
         this.message="";
         this.tickets=r.tickets;
         this._user=r.user;
+
         if(this.tickets.length==0){
           this.api.removeEvt(addr,this._event["_id"]).subscribe(()=>{});
           showMessage(this,"Pas de ticket pour cet événement");
           this.showScanner=true;
+        } else {
+          $$("Mise en oeuvre du processus de validation automatique");
+          if(this._event.validate.auto_validate==1 && this.tickets.length==1){
+            this.burn(true);
+          }
+
+          if(this._event.validate.auto_validate==2){
+            this.burn(true);
+          }
+
         }
       },()=>{
         this.message="";

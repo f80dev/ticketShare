@@ -71,7 +71,9 @@ function createFaq(template, zone, file, func) {
     if (file === void 0) { file = "/config.json"; }
     if (func === void 0) { func = null; }
     fetch(getServer() + "/assets/" + file).then(function (r) {
-        r.json().then(function (config) {
+        r.text().then(function (config_text) {
+          debugger;
+          config=yaml.safeLoad(config_text);
             var i = 0;
             var s = "";
             if (config.faqs != null) {

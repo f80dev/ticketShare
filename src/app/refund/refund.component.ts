@@ -6,6 +6,7 @@ import {ICreateOrderRequest, ITax, ItemCategory, ITransactionItem, IUnitAmount} 
 import {ApiService} from '../api.service';
 import {Location} from "@angular/common";
 import {MatSnackBar} from "@angular/material";
+import {ClipboardService} from "ngx-clipboard";
 
 @Component({
   selector: 'app-refund',
@@ -14,7 +15,7 @@ import {MatSnackBar} from "@angular/material";
 })
 export class RefundComponent implements OnInit {
 
-  @Input("amounts") amounts=[5,10,20,50,100];
+  @Input("amounts") amounts=[];
   @Input("sandbox") sandbox=false;
   @Input("items") items:any=[];
   @Input("user") user:any={};
@@ -28,10 +29,11 @@ export class RefundComponent implements OnInit {
               public router:Router,
               public toaster:MatSnackBar,
               public _location:Location,
+              public clipboard:ClipboardService,
               public api:ApiService,
               public routes:ActivatedRoute) { }
 
-  public payPalConfig ?:any;
+  payPalConfig:any=null;
   amount=5;
 
   ngOnInit() {
@@ -123,29 +125,44 @@ export class RefundComponent implements OnInit {
 
   refresh(){
     if(this.config.user!=null && this.items!=null){
-      this.items[0].unit_amount.value=this.amount.toString();
-      this.payPalConfig=this.createOrder(this.config.user.email,this.items,(data)=>{
-        this.message="Mise a jour de votre compte";
-        this.api.sendpayment(data).subscribe((r:any)=>{
-          if(r.hasOwnProperty("user"))this.config.user=r.user;
-          this.onpayment.emit({data:r});
-          this.message="";
-          this.show=false;
+      if(this.items.length>0){
+        this.items[0].unit_amount.value=this.amount.toString();
+        this.payPalConfig=this.createOrder(this.config.user.email,this.items,(data)=>{
+          this.message="Mise a jour de votre compte";
+          this.api.sendpayment(data).subscribe((r:any)=>{
+            if(r.hasOwnProperty("user"))this.config.user=r.user;
+            this.onpayment.emit({data:r});
+            this.message="";
+            this.show=false;
           },(err)=>{
-          this.onerror.emit(err.status);
-          this.message="";
-          if(err.status==404)
-            showMessage(this,"Pour des raisons de sécurité vous devez utilisez "+this.config.user.email+" comme compte paypal. Votre compte n'a pas été crédité");
-          else{
-            showError(this,err);
-          }
-        });
-      },this.config.user.offer=='pilote')
+            this.onerror.emit(err.status);
+            this.message="";
+            if(err.status==404)
+              showMessage(this,"Pour des raisons de sécurité vous devez utilisez "+this.config.user.email+" comme compte paypal. Votre compte n'a pas été crédité");
+            else{
+              showError(this,err);
+            }
+          });
+        },this.config.user.offer=='pilote')
+      }
     }
   }
+
+
 
   informe_copy() {
     showMessage(this,"Adresse disponible dans le presse-papier");
   }
 
+
+  faucet() {
+    if(this.config.user.refunding){
+      if(this.config.user.refunding.startsWith("http")){
+        open(this.config.user.refunding,"_blank");
+      }else{
+        this.clipboard.copy(this.config.user.refunding);
+        showMessage(this,"Commande de rechargement disponible dans le presse-papier");
+      }
+    }
+  }
 }

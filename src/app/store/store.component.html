@@ -97,13 +97,13 @@
 
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
             <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.checkers?.indexOf(config.user?.address)==-1"
+                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1"
                     (click)="buy(event)">
               Acheter
             </button>
 
             <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.checkers?.indexOf(config.user?.address)==-1 && event.website?.length>0"
+                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1 && event.website?.length>0"
                     (click)="openWeb(event.website)">
               En savoir plus
             </button>
@@ -146,7 +146,7 @@
 
 
             <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.checkers?.indexOf(config.user?.address)>-1"
+                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1"
                     ngxClipboard [cbContent]="event.validate_link"
                     (click)="validate(event)">
               Valider

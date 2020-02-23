@@ -27,28 +27,35 @@
         </mat-form-field>
       </div>
 
-      <div style="height:80px;min-width:200px;display: inline-block;text-align: center;overflow: hidden;margin-bottom: 20px;">
+      <div style="height:80px;min-width:200px;display: inline-block;text-align: center;overflow: hidden;margin-bottom: 20px;"
+           *ngIf="payPalConfig">
         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
       </div>
 
-      <div style="min-width:200px;display: inline-block;text-align: center;cursor: pointer;"
-           ngxClipboard [cbContent]="user?.address"
-          (click)="informe_copy()">
+      <div style="min-width:200px;display: inline-block;text-align: center;">
         Via Ethereum<br>
         <qr-code [size]="150"
+                 ngxClipboard [cbContent]="user?.address"
+                 (click)="informe_copy()"
                  style="display: inline-block;vertical-align: middle;"
                  [value]="user?.address">
         </qr-code>
         <br>
         <div style="font-size: x-small;line-height: 105%;">
-          {{user?.address.substr(0,20)}}<br>
-          {{user?.address.substr(21)}}
+          {{user?.address?.substr(0,20)}}<br>
+          {{user?.address?.substr(21)}}
         </div>
         <br>
         <button class="app-button" mat-icon-button mat-button mat-flat-button
                 title="Rafraichir le wallet pour afficher sa balance"
                 (click)="config.reload_user()">
           <mat-icon>refresh</mat-icon>
+        </button>
+
+        <button class="app-button" mat-icon-button mat-button mat-flat-button
+                title="Copier la commande permettant le rechargement"
+                (click)="faucet()">
+          <mat-icon>copy</mat-icon>
         </button>
 
         <button mat-raised-button mat-button

@@ -15,18 +15,13 @@
 
   <h4>Adresse de votre wallet</h4>
 
-        <div ngxClipboard [cbContent]="config.user?.address"
-             (click)="informe_copy()"
-             style="cursor: pointer;width:80%;display: inline-block;margin:10px;">
-          {{public_key}}
-        </div>
-<br>
-        <qr-code [size]="150"
-                 style="margin:10px;display: inline-block;vertical-align: middle;"
-                 title="Le QRCode de votre clé de sécurité"
-                 [value]="config.user?.address">
-        </qr-code>
+  <app-refund [show]="true"
+              [user]="config.user"
+              [sandbox]="config.user.offer=='pilote'"
+              (payment)="onpayment($event)">
+  </app-refund>
 
+<br>
 
 
   <br>
@@ -53,12 +48,6 @@
           (click)="change_wallet()">
     Changer
   </button>
-
-  <button class="app-button" mat-button mat-flat-button
-          (click)="router.navigate(['refund'])">
-    Recharger
-  </button>
-
 
   <br><br>
   <a [href]="config.user?.etherscan" target="_blank">Transactions</a><br>

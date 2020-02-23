@@ -72,7 +72,11 @@ export class WalletComponent implements OnInit {
           })
         }
       });
+  }
 
-
+  onpayment($event){
+    this.config.reload_user(()=>{
+      showMessage(this,"En attente du payment");
+    });
   }
 }

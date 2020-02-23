@@ -44,18 +44,7 @@
     "contact": "herve.hoareau@f80.fr"
   },
 
-  "faqs": [
-    {
-      "id":"buildEvent",
-      "title": "N'importe qui peut il créé un événement",
-      "content": "./faqs/build_event.html"
-    },
-    {
-      "id":"waitingTransac",
-      "title":"Pourquoi mes tickets achetés ne sont pas tout de suite disponibles ?",
-      "content":"https://btcdirect.eu/fr-fr/transaction-ethereum"
-    }
-  ],
+  "faqs":"faq.yaml",
 
   "cgu":{
     "dtModif":1570395953,
