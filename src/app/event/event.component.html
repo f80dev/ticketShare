@@ -16,6 +16,7 @@
 
     <div style="width:100%;">
       <strong>{{_event.name}}</strong>
+      <span *ngIf="_event.fictif"><small>(fictif)</small></span>
       <br>
       <span *ngIf="_event.expanded"><small>{{_event.salle}}</small></span>
       <div *ngIf="!_event.expanded" style="margin:0;padding:0">

@@ -30,11 +30,21 @@
   </div>
 
   <br><br>
-  <button class="app-button" mat-button mat-raised-button
-          *ngIf="_event.owner==config.user.address"
-          (click)="add_checker()">
-    Ajouter un valideur
-  </button>
+
+  <div *ngIf="_event.owner==config.user.address">
+    <div *ngIf="_event.validate.checkers?.length>1">
+      Liste des valideurs:
+      <div *ngFor="let val of _event.validate.checkers">
+        <span *ngIf="val!=config.user.address">{{val}}</span>
+      </div>
+      <br>
+    </div>
+    <button class="app-button" mat-button mat-raised-button
+            (click)="add_checker()">
+      Ajouter un valideur
+    </button>
+  </div>
+
 
 </div>
 

@@ -120,11 +120,6 @@
               Ventes
             </button>
 
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.owner==config.user?.address"
-                    (click)="showData(event)">
-              Détail
-            </button>
 
              <button class="app-button" mat-button mat-flat-button
                     *ngIf="event.owner==config.user?.address && event.state=='close'"
@@ -144,9 +139,8 @@
               Annuler
              </button>
 
-
             <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1"
+                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
                     ngxClipboard [cbContent]="event.validate_link"
                     (click)="validate(event)">
               Valider
@@ -156,11 +150,27 @@
           <app-hourglass [message]="event.treatment" [canCancel]="true" (cancel)="onCancel(event)"></app-hourglass><br>
 
           <!--Rechargement-->
-
           <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
 
+            <table style="width:100%;text-align: left;">
+              <tr>
+                <td>Dates</td>
+                <td>Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td>Nombre de billets</td>
+                <td>{{event.tickets.length}}</td>
+              </tr>
+              <tr *ngIf="event.cost>0" >
+                <td>Frais de mise en ligne </td>
+                <td>
+                  {{event.cost | number:"1.0-1"}} €
+                </td>
+              </tr>
+            </table>
+
             <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
-              Frais de mise en ligne : {{event.cost | number:"1.0-1"}} €<br>
+
 
               <div *ngIf="config.user.money<event.cost" style="color:red;">
                 Il manque {{event.cost-config.user?.money}}€ sur votre compte pour créer l'événement<br><br>
@@ -177,27 +187,28 @@
               <br><br>
             </div>
 
-
-
-
             <button class="app-button" mat-button mat-flat-button *ngIf="config.user.money>=event.cost"
                     (click)="publish(event)">
               Publier
             </button>
 
+            <button class="app-button" mat-button mat-flat-button
+                    *ngIf="event.owner==config.user?.address"
+                    (click)="showData(event)">
+              Détail
+            </button>
+
+
             <button class="app-button" mat-button mat-flat-button (click)="delete(event)">Supprimer</button>
 
-            <button class="app-button" mat-button mat-flat-button *ngIf="config.user.email?.length>0"
+            <button class="app-button" mat-button mat-flat-button
+                    *ngIf="config.user.email?.length>0 && event.fictif"
                     (click)="receiveByMail(event,config.user.email)">
               <div class="bloc-bouton">Recevoir<br>le modèle</div>
             </button>
           </div>
-
-
         </app-event>
       </div>
-
-
 
       <div *ngIf="events.length==0 && message.length==0">
         <br><br>
