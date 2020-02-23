@@ -46,6 +46,7 @@ export class PaymentComponent implements OnInit {
           this.amount_to_credit=Math.round(this.order.total-this.config.user.account+0.5);
         });
         $$("Initialisation des tickets effectués");
+
       });
     }
   }
