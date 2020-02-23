@@ -29,14 +29,15 @@
         Solde après achat
       </td>
       <td style="text-align: right;">
-        {{config.user.money-order?.total | number:'1.0-1'}}€
+        {{amount_to_credit | number:'1.0-1'}}€
       </td>
     </tr>
 
   </table>
 
   <div *ngIf="order?.total>0 && config.user?.money<order?.total" style="color:darkred;">
-    Il manque {{order.total-config.user?.money}}€ sur votre compte pour acheter les places
+    <br>
+    Il manque {{amount_to_credit | number:'1.0-1'}}€ sur votre compte pour acheter les places
   </div>
 <br>
 <br>
@@ -52,7 +53,7 @@
 
   <div *ngIf="order.total>config.user?.money">
 
-          <app-refund [amounts]="[order?.total-config.user?.account]"
+          <app-refund [amounts]="[amount_to_credit,50,100]"
                       [user]="config.user"
                       [items]="tickets"
                       *ngIf="order?.total>config.user?.money"

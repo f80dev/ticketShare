@@ -29,6 +29,7 @@ export class PaymentComponent implements OnInit {
               public api: ApiService) { }
 
   public payPalConfig ?: any;
+  amount_to_credit: number=0;
 
   ngOnInit(): void {
     const params = this.route.snapshot.queryParamMap;
@@ -41,6 +42,9 @@ export class PaymentComponent implements OnInit {
       this.api.getevent(this.order.event).subscribe((r) => {
         this.event = r;
         this.tickets=this.getTicketsForOrder(r);
+        this.config.reload_user(()=>{
+          this.amount_to_credit=Math.round(this.order.total-this.config.user.account+0.5);
+        });
         $$("Initialisation des tickets effectués");
       });
     }

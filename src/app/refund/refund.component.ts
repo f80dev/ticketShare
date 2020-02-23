@@ -7,6 +7,7 @@ import {ApiService} from '../api.service';
 import {Location} from "@angular/common";
 import {MatSnackBar} from "@angular/material";
 import {ClipboardService} from "ngx-clipboard";
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-refund',
@@ -34,11 +35,11 @@ export class RefundComponent implements OnInit {
               public routes:ActivatedRoute) { }
 
   payPalConfig:any=null;
-  amount=5;
+  amount=0;
 
   ngOnInit() {
-    if(this.amounts.length==1)this.amount=this.amounts[0];
     setTimeout(()=>{this.refresh();},500);
+    if(this.amounts.length>=1 && this.amount==0)this.amount=this.amounts[0];
   }
 
   //TEsteur sb-iy3fn1051170@personal.example.com / pd4271!!
