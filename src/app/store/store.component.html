@@ -129,21 +129,21 @@
 
              <button class="app-button" mat-button mat-flat-button
                      ngxClipboard [cbContent]="event.share_link"
-                    (click)="share(event)">
+                    (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
               Partager
              </button>
 
              <button class="app-button" mat-button mat-flat-button
                     *ngIf="event.owner==config.user?.address"
                     (click)="cancel(event)">
-              Annuler
+               <div class="bloc-bouton">Annuler cet<br>événement</div>
              </button>
 
             <button class="app-button" mat-button mat-flat-button
                     *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
                     ngxClipboard [cbContent]="event.validate_link"
                     (click)="validate(event)">
-              Valider
+              <div class="bloc-bouton">Gérer les<br>entrées</div>
             </button>
           </div>
 

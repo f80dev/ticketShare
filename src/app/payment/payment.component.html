@@ -29,7 +29,7 @@
         Solde après achat
       </td>
       <td style="text-align: right;">
-        {{amount_to_credit | number:'1.0-1'}}€
+        {{this.config.user.money-this.order.total | number:'1.0-1'}}€
       </td>
     </tr>
 
@@ -52,15 +52,12 @@
   </div>
 
   <div *ngIf="order.total>config.user?.money">
-
-          <app-refund [amounts]="[-amount_to_credit,50,100]"
-                      [user]="config.user"
-                      [items]="tickets"
-                      *ngIf="order?.total>config.user?.money"
-                      [sandbox]="config.user?.offer=='pilote'"
-                      (payment)="onpayment($event)">
-          </app-refund>
-
-
+    <app-refund [amounts]="[-amount_to_credit,50,100]"
+                [user]="config.user"
+                [items]="tickets"
+                *ngIf="order?.total>config.user?.money"
+                [sandbox]="config.user?.offer=='pilote'"
+                (payment)="onpayment($event)">
+    </app-refund>
   </div>
 </div>

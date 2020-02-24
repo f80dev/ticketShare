@@ -34,10 +34,6 @@
   </mat-form-field>
 
 
-
-
-
-
   <mat-form-field class="input-full-width">
     <mat-label>Offre</mat-label>
     <mat-select [(value)]="config.user.offer">
@@ -58,12 +54,13 @@
               [amounts]="[5,10,20,50,100]"
               [user]="config.user"
               [sandbox]="config.user.offer=='pilote'"
-              (payment)="refreshSolde()">
+              (payment)="refreshSolde($event)">
   </app-refund>
+
+
   <br>
   <br>
   <hr>
-
 
   <button class="app-button"
           id="cmdCancel"

@@ -36,8 +36,9 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  refreshSolde(data) {
-    this.account=this.config.user.account;
+  refreshSolde(data:any) {
+    if(data && data.hasOwnProperty("user"))
+      this.account=data.user.account;
   }
 
   addImage(event) {

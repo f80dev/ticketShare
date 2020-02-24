@@ -61,6 +61,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ImageSelectorComponent } from './image-selector/image-selector.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { PromoComponent } from './promo/promo.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -96,7 +97,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PaymentComponent,
     SettingsComponent,
     ImageSelectorComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    PromoComponent
   ],
   entryComponents: [
     PromptComponent,

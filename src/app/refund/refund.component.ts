@@ -131,7 +131,6 @@ export class RefundComponent implements OnInit {
         this.payPalConfig=this.createOrder(this.config.user.email,this.items,(data)=>{
           this.message="Mise a jour de votre compte";
           this.api.sendpayment(data).subscribe((r:any)=>{
-            if(r.hasOwnProperty("user"))this.config.user=r.user;
             this.onpayment.emit({data:r});
             this.message="";
             this.show=false;

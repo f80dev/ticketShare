@@ -30,7 +30,6 @@ export class StoreComponent implements OnInit {
               public dialog: MatDialog,
               private _clipboardService: ClipboardService,
               public socket:Socket,
-              public ngNavigatorShareService: NgNavigatorShareService,
               public toast:MatSnackBar,
               public route:ActivatedRoute,
               public router:Router) {
@@ -143,14 +142,6 @@ export class StoreComponent implements OnInit {
 
 
 
-  share(event:any){
-    this.ngNavigatorShareService.share({title: event.name,text: "Outil de validation des billets",url: event.share_link})
-      .then( (response) => {console.log(response);})
-      .catch( (error) => {
-        this._clipboardService.copyFromContent(event.share_link)
-        showMessage(this,"Lien promotionel disponible dans le presse-papier");
-      });
-  }
 
 
   cancel(event:any){
