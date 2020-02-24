@@ -43,7 +43,7 @@ export class PaymentComponent implements OnInit {
         this.event = r;
         this.tickets=this.getTicketsForOrder(r);
         this.config.reload_user(()=>{
-          this.amount_to_credit=Math.round(this.order.total-this.config.user.account+0.5);
+          this.amount_to_credit=Math.round(this.config.user.money-this.order.total+0.5);
         });
         $$("Initialisation des tickets effectués");
 

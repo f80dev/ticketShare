@@ -37,7 +37,7 @@
 
   <div *ngIf="order?.total>0 && config.user?.money<order?.total" style="color:darkred;">
     <br>
-    Il manque {{amount_to_credit | number:'1.0-1'}}€ sur votre compte pour acheter les places
+    Il manque {{-amount_to_credit | number:'1.0-1'}}€ sur votre compte pour acheter les places
   </div>
 <br>
 <br>
@@ -53,7 +53,7 @@
 
   <div *ngIf="order.total>config.user?.money">
 
-          <app-refund [amounts]="[amount_to_credit,50,100]"
+          <app-refund [amounts]="[-amount_to_credit,50,100]"
                       [user]="config.user"
                       [items]="tickets"
                       *ngIf="order?.total>config.user?.money"
