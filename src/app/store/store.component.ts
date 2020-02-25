@@ -58,7 +58,7 @@ export class StoreComponent implements OnInit {
           }
 
           if(e.state=="ready")e.treatment="En attente de publication";
-          if(e.state=="in treatment")e.treatment="En cours d'insertion dans la blockchain";
+          if(e.state=="in treatment")e.treatment="En cours d'insertion dans la blockchain. Cela peut prendre plusieurs minutes ...";
 
           e["preview"]=true;
           e["showDate"]=false;

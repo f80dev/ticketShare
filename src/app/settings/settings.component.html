@@ -49,6 +49,12 @@
   </app-refund>
 
   <h2>Offre {{config.user.offer.name}}</h2>
+  <button class="app-button"
+          id="cmdChangeOffer"
+          mat-button mat-raised-button
+          (click)="changeOffer()">
+    Changer
+  </button><br>
   <div style="width: 100%;text-align: center;">
     <ngx-json-viewer [json]="config.user.offer"
                      [expanded]="false"

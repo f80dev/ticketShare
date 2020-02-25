@@ -37,8 +37,9 @@ export class SettingsComponent implements OnInit {
   }
 
   refreshSolde(data:any) {
+    debugger
     if(data && data.hasOwnProperty("user"))
-      this.account=data.user.account;
+      this.account=data.user.money;
   }
 
   addImage(event) {
@@ -60,5 +61,9 @@ export class SettingsComponent implements OnInit {
         });
       }
     });
+  }
+
+  changeOffer() {
+    this.router.navigate(["offer"]);
   }
 }
