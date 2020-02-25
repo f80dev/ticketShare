@@ -30,21 +30,22 @@
   </div>
 
   <div *ngIf="selTemplate">
-    <div style="width: 80%;margin:10%;">
+
       <h2>{{selTemplate.title}}</h2>
       <small>{{selTemplate.description}}</small>
-    </div>
+    <br>
 
     <img class="image-photo"
          [src]="selTemplate.visual"
-         style="width:200px;height:200px;">
+         style="width:250px;height:250px;">
 
     <br>
     <br>
 
     <table style="width: 100%;">
-      <tr style="font-size: x-small;">
+      <tr style="font-size: small;">
         <td style="width: 50%;">Créer un évenement fictif depuis ce modèle. Cet évenement ne sera visible que des clients pilotes</td>
+        <td></td>
         <td>Recevoir ce modèle sur votre mail, le personnaliser et le renvoyer pour créer votre événement</td>
       </tr>
       <tr></tr>
@@ -57,7 +58,7 @@
               Evénement fictif
           </button>
         </td>
-
+        <td style="width: 10%;"></td>
         <td>
           <button class="app-button "
                   style="margin-top: 10px;"

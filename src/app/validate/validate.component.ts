@@ -173,6 +173,7 @@ export class ValidateComponent implements OnInit {
       if(result!=null){
         this.api.addchecker(result,this._event._id).subscribe(()=>{
           showMessage(this,result+" va recevoir un mail pour la validation des billets");
+          this._event.validate.checkers.push(result);
         });
       }
 
