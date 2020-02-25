@@ -1,7 +1,33 @@
-Faites la promotions de votre événement<br>
+<div class="mainform" style="margin-left:10%;width:80%;">
+  <br>
+  <h2>Faites la promotions de votre événement</h2>
 
-<button class="app-button" mat-button mat-flat-button
-        ngxClipboard [cbContent]="_event?.share_link"
-        (click)="share(_event)">
-  Partager le lien
-</button>
+  <button class="app-button" mat-button mat-flat-button
+          ngxClipboard [cbContent]="_event?.share_link"
+          (click)="share(_event)">
+    Partager le lien
+  </button>
+
+  <button class="app-button" mat-button mat-flat-button
+          ngxClipboard [cbContent]="_event?.share_link"
+          (click)="openPrinter(_event)">
+    Fabriquer l'affiche
+  </button>
+  <br>
+
+  <div id="print-section" style="display: none;text-align: center;font-size: x-large;">
+    <h1>{{_event.name}}</h1>
+    <span *ngIf="_event.dtStart==_event.dtEnd">Le {{_event.dtStart*1000 | date:'short'}}</span>
+    <span *ngIf="_event.dtStart!=_event.dtEnd">Du, {{_event.dtStart*1000 | date:'dd/mm/yy HH:MM'}} au {{_event.dtEnd*1000 | date:'dd/mm/yy'}}</span>
+
+    <br><br>
+    <img [src]="_event.visual" class="image-photo" style="width: 500px;">
+
+    <br><br><br>
+    Acheter vos places directement depuis votre smartphone:<br>
+    <img [src]="_event.qrcode" style="width: 300px;height: 300px;">
+    <br><br><br>
+    {{_event.address}}
+  </div>
+
+</div>

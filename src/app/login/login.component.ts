@@ -23,128 +23,142 @@ import {Location} from "@angular/common";
 })
 export class LoginComponent implements OnInit {
   email = 'paul.dudule@gmail.com';
-  message="Pour enregistrer votre mail, vous pouvez utilisez Google ou Facebook, ou directement le saisir";
-  redirect=null;
+  message = "Pour enregistrer votre mail, vous pouvez utilisez Google ou Facebook, ou directement le saisir";
+  redirect = null;
 
   shareObj = {
     href: "FACEBOOK-SHARE-LINK",
-    hashtag:"#FACEBOOK-SHARE-HASGTAG"
+    hashtag: "#FACEBOOK-SHARE-HASGTAG"
   };
-  handle: any=null;
+  handle: any = null;
 
   constructor(public api: ApiService,
               public router: Router,
-              public dialog:MatDialog,
-              public toast:MatSnackBar,
-              public _location:Location,
-              public config:ConfigService,
-              public route:ActivatedRoute,
+              public dialog: MatDialog,
+              public toast: MatSnackBar,
+              public _location: Location,
+              public config: ConfigService,
+              public route: ActivatedRoute,
               private socialAuthService: SocialService) {
   }
 
 
   ngOnInit() {
     $$("Ouverture de la fenêtre de login")
-    var params:ParamMap=this.route.snapshot.queryParamMap;
-    this.redirect=params.get("redirect");
-    if(params.has("message"))this.message=params.get("message");
-    if(params.has("address")){
-      $$("Récupération de l'adresse "+params.get("address"))
-      localStorage.setItem("lastEmail",params.get("address"));
+    var params: ParamMap = this.route.snapshot.queryParamMap;
+    this.redirect = params.get("redirect");
+    if (params.has("message")) this.message = params.get("message");
+    if (params.has("address")) {
+      $$("Récupération de l'adresse " + params.get("address"))
+      localStorage.setItem("lastEmail", params.get("address"));
       this.email_login();
     }
   }
 
-  next(){
+  next() {
     clearTimeout(this.handle);
     if (this.redirect == null)
       this.router.navigate(["store"]);
     else {
-      if(this.redirect=="back")
+      if (this.redirect == "back")
         this._location.back();
       else
         this.router.navigateByUrl(this.redirect);
     }
   }
 
-  quit(){
-    this.handle=setTimeout(()=>{this.next();},20000);
+  quit() {
+    this.handle = setTimeout(() => {
+      this.next();
+    }, 20000);
   }
 
-  updateUser(){
+  updateUser() {
     // this.api.setuser(this.data.user).subscribe((res:any)=>{
     //   localStorage.setItem("user",res.user.address);
     //   this.dialogRef.close({user:res.user,message:"Vous êtes maintenant authentifier",code:200,force_refresh:true});
     // },(err)=>{showError(this,err)});
   }
 
-  email_login(){
-
+  email_login() {
     $$("Ouverture du login par email");
-    this.dialog.open(PromptComponent,{
-      width:'90vw',data: {
-        title:"Authentification par email",
-        result:localStorage.getItem("lastEmail"),
-        question:"Renseigner votre adresse mail ou votre adresse de wallet pour recevoir le code de connexion",
-        lbl_ok:"OK",
-        lbl_cancel:"Annuler"
-      }}).afterClosed().subscribe((email:any) => {
+    this.dialog.open(PromptComponent, {
+      width: '90vw', data: {
+        title: "Authentification par email",
+        result: localStorage.getItem("lastEmail"),
+        question: "Renseigner votre adresse mail ou votre adresse de wallet pour recevoir le code de connexion",
+        lbl_ok: "OK",
+        lbl_cancel: "Annuler"
+      }
+    }).afterClosed().subscribe((email: any) => {
       if (email) {
-        localStorage.setItem("lastEmail",email);
+        localStorage.setItem("lastEmail", email);
 
         //Recherche d'un compte déjà existant
 
-        this.api.getuser(email).subscribe((_old_user:any)=>{
-          if(_old_user!=null){
+        this.api.getuser(email).subscribe((_old_user: any) => {
+          if (_old_user != null) {
             this.dialog.open(PromptComponent, {
               width: '90vw', data: {
                 title: "Compte existant",
-                question:"Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
-                type:"number",
-                lbl_ok:"OK",
-                lbl_cancel:"Annuler"
+                question: "Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
+                type: "number",
+                lbl_ok: "OK",
+                lbl_cancel: "Annuler",
+                lbl_sup:"Renvoyer"
               }
             }).afterClosed().subscribe((code: any) => {
-              if(code==_old_user.code){
-                localStorage.setItem("address",_old_user.address);
-                this.quit();
+              if (code == "lbl_sup"){
+                this.api.resend(_old_user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
+              } else {
+                if (code == _old_user.code) {
+                  localStorage.setItem("address", _old_user.address);
+                  this.quit();
+                }
+                showMessage(this, "Utiliser un autre compte pour vous connecter");
               }
-
-              showMessage(this,"Utiliser un autre compte pour vous connecter");
             });
           } else {
-            this.api.setuser(this.config.user._id,{"email":email}).subscribe((res: any) => {
+
+          }
+        }, (err:any) => {
+          if(err.status==400)
+            this.api.setuser(this.config.user._id, {"email": email}).subscribe((res: any) => {
               if (res != null) {
                 this.dialog.open(PromptComponent, {
                   width: '90vw', data: {
                     title: "Renseigner le code reçu",
-                    type:"number",
-                    question:"Afin de vérifier que vous êtes bien le propriétaire "+email+", veuillez indiquer le code à 6 chiffres que vous avez reçu",
-                    lbl_ok:"OK",
-                    lbl_cancel:"Annuler"
+                    type: "number",
+                    question: "Afin de vérifier que vous êtes bien le propriétaire " + email + ", veuillez indiquer le code à 6 chiffres que vous avez reçu",
+                    lbl_ok: "OK",
+                    lbl_cancel: "Annuler",
+                    lbl_sup:"Renvoyer"
                   }
                 })
                   .afterClosed().subscribe((code: any) => {
                   this.api.checkCode(this.config.user.address, code).subscribe((r: any) => {
 
-                    if (r!=null) {
-                      showMessage(this, "Profil mise a jour");
-                      this.config.user=r;
-                      this.quit();
-                    }else{
+                    if (r != null) {
+                      if(r=='lbl_sup'){
+                        this.api.resend(this.config.user.address).subscribe(()=>{showMessage(this,"Code secret renvoyé, consultez votre boite mail")})
+                        this.quit();
+                      } else {
+                        showMessage(this, "Connexion vérifié, Profil mise a jour");
+                        this.config.user = r;
+                        this.quit();
+                      }
+                    } else {
                       this.quit();
                     }
-                  },(err)=>{
+                  }, (err) => {
                     showMessage(this, "Code incorrect, veuillez recommencer la procédure");
                   });
                 });
               }
             });
-          }
         });
-
       }
-    });
+    })
 
           // var message="Un lien de connexion à votre nouveau profil vous a été envoyer sur votre boite. Utilisez le pour vous reconnecter";
           // if(res.status!=200)message="Problème technique. Essayer une autre méthode d'authentification";

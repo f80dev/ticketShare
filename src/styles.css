@@ -54,7 +54,7 @@ body {
 .app-button {
   background-color: lightgrey;
   margin: 3px !important;
-  min-width: 80px; }
+  min-width: 100px; }
 
 .login-button {
   background-color: lightgrey;

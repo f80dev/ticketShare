@@ -10,7 +10,8 @@ export interface DialogData {
   emojis:boolean;
   lbl_ok:string,
   type:string,
-  lbl_cancel:string
+  lbl_cancel:string,
+  lbl_sup:string
 }
 
 

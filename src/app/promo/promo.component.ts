@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {showMessage} from "../tools";
+import {showMessage,sendToPrint} from "../tools";
 import {NgNavigatorShareService} from "ng-navigator-share";
 import {ClipboardService} from "ngx-clipboard";
 import {ApiService} from "../api.service";
 import {MatSnackBar} from "@angular/material";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-promo',
@@ -20,13 +21,16 @@ export class PromoComponent implements OnInit {
     public _clipboardService:ClipboardService,
     public api:ApiService,
     public toast:MatSnackBar,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public router:Router
   ) {
 
   }
 
   ngOnInit() {
+    if(!this.route.snapshot.queryParamMap.has("event"))this.router.navigate(["store"]);
     this.api.getevent(this.route.snapshot.queryParamMap.get("event")).subscribe((e:any)=>{
+      e.qrcode=environment.root_api+"/qrcode?url="+encodeURIComponent(e.share_link);
       this._event=e;
     })
   }
@@ -38,6 +42,10 @@ export class PromoComponent implements OnInit {
         this._clipboardService.copyFromContent(event.share_link)
         showMessage(this,"Lien promotionel disponible dans le presse-papier");
       });
+  }
+
+  openPrinter(_event:any){
+    sendToPrint("print-section");
   }
 
 
