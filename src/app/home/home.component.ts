@@ -7,6 +7,7 @@ import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {$$, subscribe_socket,showMessage} from '../tools';
 import {Socket, SocketIoModule} from "ngx-socket-io";
+import {FaqsComponent} from "../faqs/faqs.component";
 
 @Component({
   selector: 'app-home',
@@ -68,6 +69,6 @@ export class HomeComponent implements OnInit {
   }
 
   openFAQ() {
-    open("../faq.html","blank");
+    this.router.navigate(["faqs"]);
   }
 }

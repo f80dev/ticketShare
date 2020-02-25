@@ -163,7 +163,7 @@ export class ValidateComponent implements OnInit {
       data: {
         title: 'Ajouter un validateur de billet',
         question: "Saisissez l'email du nouveau validateur pour "+this._event.name,
-        result:"@",
+        result:"",
         onlyConfirm: false,
         canEmoji: false,
         lbl_ok:"Ajouter",

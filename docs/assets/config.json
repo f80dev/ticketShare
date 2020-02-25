@@ -1,7 +1,7 @@
 {
   "appname": "KERBERUS",
   "title": "KERBERUS",
-  "version": "0.2.91-beta",
+  "version": "0.2.92-beta",
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
@@ -13,7 +13,7 @@
     "inkmodel": "#921882"
   },
   "bkcolor": "#2a002a",
-  "news": "Classement des meilleurs vendeurs",
+  "news": "Ajout des faqs",
   "logo": "",
   "claim": "Achetez vos billets en toute sécurité",
   "support": {

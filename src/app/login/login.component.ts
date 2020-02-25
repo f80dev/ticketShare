@@ -100,6 +100,7 @@ export class LoginComponent implements OnInit {
               width: '90vw', data: {
                 title: "Compte existant",
                 question:"Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
+                type:"number",
                 lbl_ok:"OK",
                 lbl_cancel:"Annuler"
               }
@@ -117,6 +118,7 @@ export class LoginComponent implements OnInit {
                 this.dialog.open(PromptComponent, {
                   width: '90vw', data: {
                     title: "Renseigner le code reçu",
+                    type:"number",
                     question:"Afin de vérifier que vous êtes bien le propriétaire "+email+", veuillez indiquer le code à 6 chiffres que vous avez reçu",
                     lbl_ok:"OK",
                     lbl_cancel:"Annuler"
@@ -179,6 +181,7 @@ export class LoginComponent implements OnInit {
       this.dialog.open(PromptComponent, {
         width: '90vw', data: {
           title: "Compte existant",
+          type:"number",
           question: "Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
           lbl_ok: "OK",
           lbl_cancel: "Annuler"

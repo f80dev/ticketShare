@@ -1,0 +1,7 @@
+Faites la promotions de votre événement<br>
+
+<button class="app-button" mat-button mat-flat-button
+        ngxClipboard [cbContent]="_event?.share_link"
+        (click)="share(_event)">
+  Partager le lien
+</button>

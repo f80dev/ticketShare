@@ -62,6 +62,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { ImageSelectorComponent } from './image-selector/image-selector.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PromoComponent } from './promo/promo.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { OfferComponent } from './offer/offer.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -98,7 +100,9 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     SettingsComponent,
     ImageSelectorComponent,
     WelcomeComponent,
-    PromoComponent
+    PromoComponent,
+    FaqsComponent,
+    OfferComponent
   ],
   entryComponents: [
     PromptComponent,

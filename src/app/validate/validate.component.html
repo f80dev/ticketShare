@@ -32,6 +32,11 @@
   <br><br>
 
   <div *ngIf="_event.owner==config.user.address">
+
+    <div *ngIf="_event.validate.checkers?.length==1">
+      Vous êtes le seul habilité à valider les billets
+    </div>
+
     <div *ngIf="_event.validate.checkers?.length>1">
       Liste des valideurs:
       <div *ngFor="let val of _event.validate.checkers">
@@ -39,6 +44,8 @@
       </div>
       <br>
     </div>
+
+
     <button class="app-button" mat-button mat-raised-button
             (click)="add_checker()">
       Ajouter un valideur

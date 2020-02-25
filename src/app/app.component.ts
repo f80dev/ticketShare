@@ -192,12 +192,13 @@ export class AppComponent implements OnInit {
             $$("A priori on cherche une connexion par email "+p["address"]);
             this.dialog.open(PromptComponent, {width: '250px',
               data: {
-                title: 'Récupération du compte',
-                question: "Veuillez renseigner votre code à 6 chiffres pour récupérer votre wallet associé à "+p["address"],
+                title: 'Accès à votre compte',
+                question: "Veuillez renseigner votre code d'accès à 6 chiffres pour votre wallet associé à "+p["address"],
                 onlyConfirm: false,
                 emojis: false,
-                lib_ok:"Envoyer",
-                lib_cancel:"Annuler"
+                type: "number",
+                lbl_ok:"Valider",
+                lbl_cancel:"Annuler"
               }
             }).afterClosed().subscribe((code) => {
               this.api.checkCode(p["address"],code).subscribe((r)=>{

@@ -29,6 +29,10 @@ export class ApiService {
     return this.http.get(api('templates'));
   }
 
+  getfaqs() {
+    return this.http.get(api('faqs'));
+  }
+
   deluser(userid:string) {
     return this.http.get(api('deluser/'+userid));
   }

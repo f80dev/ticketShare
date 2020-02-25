@@ -16,6 +16,8 @@ import {EventeditorComponent} from "./eventeditor/eventeditor.component";
 import {PaymentComponent} from "./payment/payment.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {PromoComponent} from "./promo/promo.component";
+import {FaqsComponent} from "./faqs/faqs.component";
+import {OfferComponent} from "./offer/offer.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -31,6 +33,8 @@ const routes: Routes = [
   { path: 'eventeditor', component: EventeditorComponent},
   { path: 'payment', component: PaymentComponent},
   { path: 'promo', component: PromoComponent},
+  { path: 'faqs', component: FaqsComponent},
+  { path: 'offer', component: OfferComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent},
   { path: 'faq', redirectTo: "./faq.html"},

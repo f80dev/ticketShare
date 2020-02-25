@@ -216,6 +216,7 @@
       </div>
 
       <button class="app-button" style="margin-top: 10px;"
+              *ngIf="config.user.offer.create_event"
               mat-button mat-raised-button
               (click)="openEventEditor()">
         Créer votre événement

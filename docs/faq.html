@@ -100,7 +100,7 @@
             "/faq.yaml",
             function(){
                 var brand=getParam().brand;
-                if(brand)document.body.innerHTML = replaceAll(document.body.innerHTML, "REDUCSHARE", brand);
+                if(brand)document.body.innerHTML = replaceAll(document.body.innerHTML, "#brand#", brand);
             }
     );
   }

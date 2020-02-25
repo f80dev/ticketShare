@@ -1,0 +1,28 @@
+
+
+  <mat-expansion-panel [expanded]="false"
+                       *ngFor="let faq of faqs"
+                       style="width:96%;margin:2%;">
+
+    <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+      <h3>{{faq.title}}</h3>
+    </mat-expansion-panel-header>
+
+    <div style="height:auto;">
+      <div style="font-size: small" *ngIf="!faq.content.endsWith('html')">
+        {{faq.content}}
+      </div>
+
+      <iframe style="border:none;width:100%;"
+              *ngIf="faq.content.endsWith('html')"
+              [src]="faq.content | safe">
+
+      </iframe>
+    </div>
+
+
+  </mat-expansion-panel>
+
+
+
+
