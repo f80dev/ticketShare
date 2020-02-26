@@ -32,7 +32,7 @@
 
   <br><br>
 
-  <div *ngIf="_event.owner==config.user.address">
+  <div *ngIf="_event?.owner==config.user?.address">
     <div *ngIf="_event.validate.checkers?.length==1">
       Vous êtes le seul habilité à valider les billets
     </div>
@@ -40,7 +40,7 @@
     <div *ngIf="_event.validate.checkers?.length>1">
       <h2>Liste des valideurs</h2>
       <div *ngFor="let val of _event.validate.checkers">
-        <span *ngIf="val!=config.user.address">{{val}}</span>
+        <span *ngIf="val!=config.user?.address">{{val}}</span>
       </div>
       <br>
     </div>
@@ -61,32 +61,58 @@
         class="image-photo"
         width="150px" height="150px">
   <br>
+  <br>
 
-  <h2>{{tickets.length}} entrée(s) valable(s)</h2>
+  <div style="font-size: x-large;">{{tickets.length}} entrée(s) valable(s)</div>
+  <div *ngIf="_dates.length==1">
+    <span *ngIf="!_dates[0].startsWith('aujourd')" style="color:red;">Attention ! Pour le, {{_dates[0]}}</span>
+    <span *ngIf="_dates[0].startsWith('aujourd')">{{_dates[0]}}</span>
+  </div>
 
-  <button class="app-button"
-          mat-button mat-raised-button
-          (click)="burn(true)">
-    Tout utiliser
-  </button>
 
-  <mat-selection-list #select>
-    <mat-list-option *ngFor="let ticket of tickets"
-                     [value]="ticket._id"
-                     (click)="update_toburn(select?.selectedOptions?.selected)">
-      <mat-icon matListIcon>event_seat</mat-icon>
-      <h3 matLine>#{{ticket.seat || ticket.ref}}</h3>
-      <h3 matLine>Pour le {{ticket.date*1000 | date:'dd/MM/yy HH:mm'}}</h3>
-    </mat-list-option>
-  </mat-selection-list>
+  <!-- Présentation quand les valideurs ont la charge de brulé les billets-->
+  <div *ngIf="_event.validate.instant_burn">
+    <button class="app-button"
+            mat-button mat-raised-button
+            (click)="burn(true)">
+      Tout utiliser
+    </button>
 
-  <div *ngIf="to_burn.length>0">
+    <mat-selection-list #select>
+      <mat-list-option *ngFor="let ticket of tickets"
+                       [value]="ticket._id"
+                       (click)="update_toburn(select?.selectedOptions?.selected)">
+        <mat-icon matListIcon>event_seat</mat-icon>
+        <h3 matLine>#{{ticket.seat || ticket.ref}}</h3>
+        <h3 matLine>Pour le {{ticket.date*1000 | date:'dd/MM/yy HH:mm'}}</h3>
+      </mat-list-option>
+    </mat-selection-list>
+
+    <div *ngIf="to_burn.length>0">
+      <br>
+      <button class="app-button" mat-button
+              mat-raised-button (click)="burn(false)">
+        Utiliser {{to_burn.length}} places
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <div *ngIf="!_event.validate.instant_burn" >
+    <div *ngFor="let ticket of tickets">
+      Billet <span>#{{ticket.seat || ticket.ref}}</span>&nbsp;
+      <div *ngIf="dates?.length>1">Pour le {{ticket.date*1000 | date:'dd/MM/yy HH:mm'}}</div>
+    </div>
+
     <br>
     <button class="app-button" mat-button
-            mat-raised-button (click)="burn(false)">
-      Utiliser {{to_burn.length}} places
+            mat-raised-button (click)="reload()">
+      Suivant
     </button>
+
   </div>
+
+
 
 </div>
 

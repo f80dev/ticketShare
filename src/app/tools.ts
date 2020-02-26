@@ -78,6 +78,27 @@ export function selectFile(event:any,maxsize:number,quality:number,square:boolea
   }
 }
 
+export function getTime(d){
+  var _d=new Date(d*1000);
+  return _d.getHours()+":"+_d.getMinutes();
+}
+
+export function isToday(d){
+  var _d=new Date(d*1000);
+  _d.setHours(0);
+  _d.setMinutes(0);
+  _d.setSeconds(0);
+
+  //TODO: a vérifier l'histoire du GMT fuseau pour l'égalité
+  var _now=new Date();
+  _now.setMinutes(0);
+  _now.setHours(0);
+  _now.setSeconds(0);
+
+  var diff=(_now.getTime()-_d.getTime());
+  return diff==0;
+}
+
 //On cherche a produire une reference au terminal de l'utilisateur
 export function unique_id(){
   var rc="";

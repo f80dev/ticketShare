@@ -191,26 +191,32 @@ export class LoginComponent implements OnInit {
   initUser(data:any,askForCode=false){
     $$("Recherche d'un compte ayant ce mail");
     this.api.getuser(data.email).subscribe((_old_user:any)=> {
-
       this.dialog.open(PromptComponent, {
         width: '90vw', data: {
           title: "Compte existant",
           type:"number",
           question: "Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
           lbl_ok: "OK",
-          lbl_cancel: "Annuler"
+          lbl_cancel: "Annuler",
+          lbl_sup:"Renvoyer le code"
         }
       }).afterClosed().subscribe((code: any) => {
-        if (code == _old_user.code) {
-          this.api.deluser(this.config.user._id).subscribe(()=>{});
-          localStorage.setItem("address", _old_user.address);
-          window.location.reload();
+        if (code == "lbl_sup"){
+          this.api.resend(_old_user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
         } else {
-          $$("Code incorrect")
+          if (code == _old_user.code) {
+            $$("On supprime le compte courant qui avait été créé");
+            this.api.deluser(this.config.user._id).subscribe(() => {
+              $$("On positionne le device sur l'ancien compte");
+              localStorage.setItem("address", _old_user.address);
+              window.location.reload();
+            });
+          } else {
+            $$("Code incorrect")
+          }
         }
       });
     },(err)=>{
-        debugger
         $$("Il n'y a pas de compte à cet email");
         this.api.setuser(this.config.user.address, {
           "email": data.email,

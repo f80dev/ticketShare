@@ -3,7 +3,7 @@ import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {$$, showMessage} from "../tools";
+import {$$, showMessage,isToday,getTime} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 
 @Component({
@@ -21,6 +21,7 @@ export class ValidateComponent implements OnInit {
   address="";
   _event:any;
   _user:any;
+  _dates: any[]=[];
 
   //http://localhost:4200/validate?event=1578905752
 
@@ -44,7 +45,7 @@ export class ValidateComponent implements OnInit {
     } else {
       this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
-        if(this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
+        if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
           this.router.navigate(["login"], {
             queryParams:
               {
@@ -53,7 +54,6 @@ export class ValidateComponent implements OnInit {
               }
           });
         }else{
-
           if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
             showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
             this.router.navigate(["store"]);
@@ -79,6 +79,19 @@ export class ValidateComponent implements OnInit {
         this.message="";
         this.tickets=r.tickets;
         this._user=r.user;
+
+        this._dates=[];
+        for(let _t of this.tickets){
+          if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
+        }
+        if(this._dates.length==1){
+          if(isToday(this._dates[0])){
+            this._dates[0]="aujourd'hui "+getTime(this._dates[0]);
+          } else {
+            this._dates[0]=new Date(this._dates[0]*1000).toLocaleString();
+          }
+
+        }
 
         if(this.tickets.length==0){
           this.api.removeEvt(addr,this._event["_id"]).subscribe(()=>{});
@@ -130,11 +143,14 @@ export class ValidateComponent implements OnInit {
     this.message="";
     this.showScanner=true;
     this.to_burn=[];
+    this._dates=[];
     this.tickets=[];
     this.refresh("");
   }
 
   burn(all=false) {
+    if(!this._event.validate.instant_burn)return(false);
+
     if(all)this.to_burn=this.tickets;
     this.message="Validation du ticket";
     var tickets="";
