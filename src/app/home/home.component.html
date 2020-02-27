@@ -8,8 +8,6 @@
   </div>
 
 
-
-
   <div *ngIf="config.user?.address?.length>0"
        ngxClipboard
        title="Cliquez sur le QRCode pour enregistrer l'adresse de votre wallet spectacle dans le presse-papier"
@@ -28,28 +26,28 @@
   <br>
   <br>
   <mat-nav-list>
-    <a title="Accédez à tous vos billets" mat-list-item routerLink="myevents">
+    <a title="Accédez à tous vos billets" mat-list-item routerLink="myevents" id="cmdMyPlaces">
       <mat-icon>event_seat</mat-icon>
       &nbsp;&nbsp;Vos places
     </a>
 
-    <a title="Accédez aux paramètres de votre wallet spectacle" mat-list-item routerLink="wallet">
+    <a title="Accédez aux paramètres de votre wallet spectacle" mat-list-item routerLink="wallet" id="cmdWallet">
       <mat-icon>attach_money</mat-icon>
       &nbsp;&nbsp;Wallet
     </a>
 
-    <a title="Accèdez à l'ensemble des événements disponibles" mat-list-item routerLink="store">
+    <a title="Accèdez à l'ensemble des événements disponibles" mat-list-item routerLink="store" id="cmdStore">
       <mat-icon>shopping_cart</mat-icon>
       &nbsp;&nbsp;Billeterie
     </a>
 
-    <a title="Vos préférence" mat-list-item routerLink="settings">
+    <a title="Vos préférence" mat-list-item routerLink="settings" id="cmdSettings">
       <mat-icon>build</mat-icon>
       &nbsp;&nbsp;Préférences
     </a>
 
 
-    <a title="Associé un email à votre wallet spectacle" mat-list-item routerLink="login" *ngIf="config.user?.email==''">
+    <a title="Associé un email à votre wallet spectacle" mat-list-item routerLink="login" *ngIf="config.user?.email==''" id="cmdLogin">
       <mat-icon>email</mat-icon>
       &nbsp;&nbsp;Se connecter
     </a>

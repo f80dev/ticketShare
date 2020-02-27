@@ -1,225 +1,255 @@
+<div *ngIf="showLanding"
+     (click)="showLanding=false"
+     style="width:100%;height:100%;object-fit: cover;">
+  <img [src]="events[0].landing_page"
+       style="width:100%;">
+</div>
 
-    <div class="mainform">
+<div class="mainform" *ngIf="!showLanding">
 
-      <!--Zone de filtre-->
+  <!--Zone de filtre-->
 
-        <div style="display: inline-block;" *ngIf="events?.length>2">
-          <mat-form-field style="width:200px;" >
-            <mat-label>Trier par</mat-label>
-            <mat-select [(value)]="sortField">
-              <mat-option value="dtCreate=desc">Date de fabrication</mat-option>
-              <mat-option value="state=asc">Status</mat-option>
-              <mat-option value="name=asc">Titre</mat-option>
-              <mat-option value="dtStart=desc">Première date</mat-option>
-              <mat-option value="dtEnd=desc">Dernière date</mat-option>
-            </mat-select>
-          </mat-form-field>
-          &nbsp;
-          <mat-form-field style="width: 200px;">
-            <mat-label>Filtrer</mat-label>
-            <mat-select [(value)]="filterField">
-              <mat-option *ngFor="let tag of tags" [value]="tag">#{{tag}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <button class="app-button" style="margin-top: 10px;" mat-icon-button mat-button mat-raised-button
-                  (click)="reduceAll()">
-            <mat-icon>arrow_drop_up</mat-icon>
-          </button>
+    <div style="display: inline-block;" *ngIf="events?.length>2">
+      <mat-form-field style="width:200px;" >
+        <mat-label>Trier par</mat-label>
+        <mat-select [(value)]="sortField">
+          <mat-option value="dtCreate=desc">Date de fabrication</mat-option>
+          <mat-option value="state=asc">Status</mat-option>
+          <mat-option value="name=asc">Titre</mat-option>
+          <mat-option value="dtStart=desc">Première date</mat-option>
+          <mat-option value="dtEnd=desc">Dernière date</mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field style="width: 200px;">
+        <mat-label>Filtrer</mat-label>
+        <mat-select [(value)]="filterField">
+          <mat-option *ngFor="let tag of tags" [value]="tag">#{{tag}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="app-button" style="margin-top: 10px;"
+              id="cmdReduceAll"
+              mat-icon-button mat-button mat-raised-button
+              (click)="reduceAll()">
+        <mat-icon>arrow_drop_up</mat-icon>
+      </button>
+    </div>
+
+    <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
+            id="cmdClearFilter"
+            *ngIf="filterField?.length>0 || filterEvent!=null"
+            (click)="clearFilter()">
+      Tout voir
+    </button>
+
+
+  <div style="width: 100%;display: flex;flex-wrap: wrap;justify-content: center;" *ngIf="events.length>0">
+    <app-event [message]="event.treatment"
+               *ngFor="let event of events | filter: ['tags',filterField] | orderBy: sortField.split('=')[0]:sortField.split('=')[1]"
+               [event]="event"
+               [expanded]="event.expanded"
+               width="100%"
+               style="display: inline-block;">
+
+      <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
+           style="width:100%;text-align: left;overflow: hidden;">
+        <div *ngIf="event.error!=null"><h4>Vérifier votre événement avant de le mettre en ligne :</h4></div>
+
+        <span *ngIf="event.error!=null" style="color:red;">
+          Erreur détectée : {{event.error.message}} (Code: {{event.error.code}})<br>
+        </span>
+      </div>
+
+      <ngx-json-viewer *ngIf="event.showData==true"
+                       style="text-align: left;"
+                       [json]="event"
+                       [expanded]="false">
+      </ngx-json-viewer>
+
+      <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
+
+        <div *ngIf="event.htags?.length>1">
+          <small>{{event.htags}}</small><br>
         </div>
 
-        <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
-                *ngIf="filterField?.length>0 || filterEvent!=null"
-                (click)="clearFilter()">
-          Tout voir
+
+        <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
+          {{event.description}}
+        </div>
+
+        <span *ngIf="event.dtStart!=event.dtEnd">
+          Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM'}}
+        </span>
+
+        <span *ngIf="event.dtStart==event.dtEnd">
+          le {{event.dtStart*1000 | date:'dd/MM/yy'}}
+        </span>
+      </div>
+
+      <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">
+        Il reste <br><br>
+        <table style="width:100%;text-align: center;">
+          <tr *ngFor="let r of event.rows">
+            <td>
+              {{r.free}}
+            </td>
+            <td>
+              places à
+            </td>
+            <td>
+              {{r.price}}€
+            </td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdBuy"
+                *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1"
+                (click)="buy(event)">
+          Acheter
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdEnSavoirPlus"
+                *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1 && event.website?.length>0"
+                (click)="openWeb(event.website)">
+          En savoir plus
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdPreview"
+                *ngIf="event.owner==config.user?.address && !event.preview"
+                (click)="preview(event)">
+          Preview
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdSales"
+                *ngIf="event.owner==config.user?.address && event.preview"
+                (click)="sales(event)">
+          Ventes
         </button>
 
 
-      <div style="width: 100%;display: flex;flex-wrap: wrap;justify-content: center;" *ngIf="events.length>0">
-        <app-event [message]="event.treatment"
-                   *ngFor="let event of events | filter: ['tags',filterField] | orderBy: sortField.split('=')[0]:sortField.split('=')[1]"
-                   [event]="event"
-                   [expanded]="event.expanded"
-                   width="100%"
-                   style="display: inline-block;">
+         <button class="app-button" mat-button mat-flat-button
+                 name="cmdGraph"
+                *ngIf="event.owner==config.user?.address && event.state=='close'"
+                (click)="ongraph(event)">
+          Graph
+         </button>
 
-          <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
-               style="width:100%;text-align: left;overflow: hidden;">
-            <div *ngIf="event.error!=null"><h4>Vérifier votre événement avant de le mettre en ligne :</h4></div>
+         <button class="app-button" mat-button mat-flat-button
+                 ngxClipboard [cbContent]="event.share_link"
+                 name="cmdShare"
+                (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
+          Partager
+         </button>
 
-            <span *ngIf="event.error!=null" style="color:red;">
-              Erreur détectée : {{event.error.message}} (Code: {{event.error.code}})<br>
-            </span>
-          </div>
+         <button class="app-button" mat-button mat-flat-button
+                *ngIf="event.owner==config.user?.address"
+                 name="cmdCancelEvent"
+                (click)="cancel(event)">
+           <div class="bloc-bouton">Annuler cet<br>événement</div>
+         </button>
 
-          <ngx-json-viewer *ngIf="event.showData==true"
-                           style="text-align: left;"
-                           [json]="event"
-                           [expanded]="false">
-          </ngx-json-viewer>
-
-          <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
-
-            <div *ngIf="event.htags?.length>1">
-              <small>{{event.htags}}</small><br>
-            </div>
-
-
-            <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
-              {{event.description}}
-            </div>
-
-            <span *ngIf="event.dtStart!=event.dtEnd">
-              Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM'}}
-            </span>
-
-            <span *ngIf="event.dtStart==event.dtEnd">
-              le {{event.dtStart*1000 | date:'dd/MM/yy'}}
-            </span>
-          </div>
-
-          <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">
-            Il reste <br><br>
-            <table style="width:100%;text-align: center;">
-              <tr *ngFor="let r of event.rows">
-                <td>
-                  {{r.free}}
-                </td>
-                <td>
-                  places à
-                </td>
-                <td>
-                  {{r.price}}€
-                </td>
-              </tr>
-            </table>
-
-          </div>
-
-          <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1"
-                    (click)="buy(event)">
-              Acheter
-            </button>
-
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1 && event.website?.length>0"
-                    (click)="openWeb(event.website)">
-              En savoir plus
-            </button>
-
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.owner==config.user?.address && !event.preview"
-                    (click)="preview(event)">
-              Preview
-            </button>
-
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.owner==config.user?.address && event.preview"
-                    (click)="sales(event)">
-              Ventes
-            </button>
-
-
-             <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.owner==config.user?.address && event.state=='close'"
-                    (click)="ongraph(event)">
-              Graph
-             </button>
-
-             <button class="app-button" mat-button mat-flat-button
-                     ngxClipboard [cbContent]="event.share_link"
-                    (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
-              Partager
-             </button>
-
-             <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.owner==config.user?.address"
-                    (click)="cancel(event)">
-               <div class="bloc-bouton">Annuler cet<br>événement</div>
-             </button>
-
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
-                    ngxClipboard [cbContent]="event.validate_link"
-                    (click)="validate(event)">
-              <div class="bloc-bouton">Gérer les<br>entrées</div>
-            </button>
-          </div>
-
-          <app-hourglass [message]="event.treatment" [canCancel]="true" (cancel)="onCancel(event)"></app-hourglass><br>
-
-          <!--Rechargement-->
-          <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
-
-            <table style="width:100%;text-align: left;">
-              <tr>
-                <td>Dates</td>
-                <td>Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yyyy'}}</td>
-              </tr>
-              <tr>
-                <td>Nombre de billets</td>
-                <td>{{event.tickets.length}}</td>
-              </tr>
-              <tr *ngIf="event.cost>0" >
-                <td>Frais de mise en ligne </td>
-                <td>
-                  {{event.cost | number:"1.0-1"}} €
-                </td>
-              </tr>
-            </table>
-
-            <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
-
-
-              <div *ngIf="config.user.money<event.cost" style="color:red;">
-                Il manque {{event.cost-config.user?.money}}€ sur votre compte pour créer l'événement<br><br>
-              </div>
-
-              <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: ''},quantity: '1',description:'Rechargement pour création d\'événement'}]"
-                          [show]="false"
-                          *ngIf="event.cost>config.user.money"
-                          [user]="config.user"
-                          [amounts]="[event.cost-config.user.money]"
-                          [sandbox]="config.user.offer=='pilote'"
-                          (payment)="onpayment($event)">
-              </app-refund>
-              <br><br>
-            </div>
-
-            <button class="app-button" mat-button mat-flat-button *ngIf="config.user.money>=event.cost"
-                    (click)="publish(event)">
-              Publier
-            </button>
-
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="event.owner==config.user?.address"
-                    (click)="showData(event)">
-              Détail
-            </button>
-
-
-            <button class="app-button" mat-button mat-flat-button (click)="delete(event)">Supprimer</button>
-
-            <button class="app-button" mat-button mat-flat-button
-                    *ngIf="config.user.email?.length>0 && event.fictif"
-                    (click)="receiveByMail(event,config.user.email)">
-              <div class="bloc-bouton">Recevoir<br>le modèle</div>
-            </button>
-          </div>
-        </app-event>
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
+                name="cmdValidate"
+                ngxClipboard [cbContent]="event.validate_link"
+                (click)="validate(event)">
+          <div class="bloc-bouton">Gérer les<br>entrées</div>
+        </button>
       </div>
 
-      <div *ngIf="events.length==0 && message.length==0">
-        <br><br>
-        Aucun événement disponible pour l'instant<br><br>
+      <app-hourglass [message]="event.treatment" [canCancel]="true" (cancel)="onCancel(event)"></app-hourglass><br>
+
+      <!--Rechargement-->
+      <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
+
+        <table style="width:100%;text-align: left;">
+          <tr>
+            <td>Dates</td>
+            <td>Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td>Nombre de billets</td>
+            <td>{{event.tickets.length}}</td>
+          </tr>
+          <tr *ngIf="event.cost>0" >
+            <td>Frais de mise en ligne </td>
+            <td>
+              {{event.cost | number:"1.0-1"}} €
+            </td>
+          </tr>
+        </table>
+
+        <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
+
+
+          <div *ngIf="config.user.money<event.cost" style="color:red;">
+            Il manque {{event.cost-config.user?.money}}€ sur votre compte pour créer l'événement<br><br>
+          </div>
+
+          <app-refund [items]="[{name: 'Rechargement',unit_amount: {currency_code: 'EUR',value: ''},quantity: '1',description:'Rechargement pour création d\'événement'}]"
+                      [show]="false"
+                      *ngIf="event.cost>config.user.money"
+                      [user]="config.user"
+                      [amounts]="[event.cost-config.user.money]"
+                      [sandbox]="config.user.offer=='pilote'"
+                      (payment)="onpayment($event)">
+          </app-refund>
+          <br><br>
+        </div>
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdPublish"
+                *ngIf="config.user.money>=event.cost"
+                (click)="publish(event)">
+
+          Publier
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdDetail"
+                *ngIf="event.owner==config.user?.address"
+                (click)="showData(event)">
+          Détail
+        </button>
+
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdDelete"
+                (click)="delete(event)">
+          Supprimer
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdReceiveModel"
+                *ngIf="config.user.email?.length>0 && event.fictif"
+                (click)="receiveByMail(event,config.user.email)">
+          <div class="bloc-bouton">
+            Recevoir<br>le modèle
+          </div>
+        </button>
+
       </div>
+    </app-event>
+  </div>
 
-      <button class="app-button" style="margin-top: 10px;"
-              *ngIf="config.user.offer.create_event"
-              mat-button mat-raised-button
-              (click)="openEventEditor()">
-        Créer votre événement
-      </button>
+  <div *ngIf="events.length==0 && message.length==0">
+    <br><br>
+    Aucun événement disponible pour l'instant<br><br>
+  </div>
 
-    </div>
+  <button class="app-button" style="margin-top: 10px;"
+          *ngIf="config.user?.offer?.create_event"
+          id="cmdCreateEvent"
+          mat-button mat-raised-button
+          (click)="openEventEditor()">
+    Créer votre événement
+  </button>
+
+</div>

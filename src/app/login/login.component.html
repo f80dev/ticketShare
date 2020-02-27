@@ -6,11 +6,27 @@
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
-      <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('google')">Google</button>
+      <button class="app-button login-button"
+              id="cmdGoogle"
+              mat-button mat-raised-button
+              (click)="socialSignIn('google')">
+        Google
+      </button>
       <br><br>
-      <button class="app-button login-button" mat-button mat-raised-button (click)="socialSignIn('facebook')">Facebook</button>
+      <button class="app-button login-button"
+              mat-button mat-raised-button
+              id="cmdFacebook"
+              (click)="socialSignIn('facebook')">
+        Facebook
+      </button>
+
       <br><br><br><br>
-      <button class="app-button login-button" mat-button mat-raised-button (click)="email_login()">Email</button>
+      <button class="app-button login-button"
+              mat-button mat-raised-button
+              id="cmdEmail"
+              (click)="email_login()">
+        Email
+      </button>
     </div>
   </div>
 
@@ -30,7 +46,12 @@
     <br>
     <br>
 
-    <button class="app-button" mat-button mat-raised-button (click)="next()">Continuer</button>
+    <button class="app-button"
+            id="cmdGoStore"
+            mat-button mat-raised-button
+            (click)="next()">
+      Continuer
+    </button>
 
   </div>
 

@@ -17,6 +17,7 @@
     Sélectionner un modèle d'événement:<br><br>
     <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
       <div *ngFor="let template of templates"
+           name="template"
            style="cursor:pointer;font-size:x-small;width:150px;height:250px;text-align: center;margin: 15px;"
            (click)="openModele(template)">
         <div style="height:25px;">{{template.title}}</div>
@@ -53,6 +54,7 @@
         <td>
           <button class="app-button"
                   style="margin-top: 10px;"
+                  id="cmdCreateFictif"
                   mat-button mat-raised-button
                   (click)="fictif()">
               Evénement fictif
@@ -62,6 +64,7 @@
         <td>
           <button class="app-button "
                   style="margin-top: 10px;"
+                  id="cmdSendTemplate"
                   *ngIf="config.user?.email"
                   mat-button mat-raised-button
                   (click)="sendDemo()">

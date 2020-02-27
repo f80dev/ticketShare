@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit {
   filterField: string="";
   filterEvent=null;
   tags: string[]=[];
-
+  showLanding:boolean=false;
 
   constructor(public api:ApiService,
               public config:ConfigService,
@@ -76,8 +76,13 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     const params = this.route.snapshot.queryParamMap;
-    if(params.get("event"))
+
+    if(params.has("event")){
       this.filterEvent=params.get("event");
+      this.api.getevent(this.filterEvent).subscribe((r:any)=>{
+        this.showLanding=(r.landing_page.length>0);
+      });
+    }
 
     if(params.get("filter"))
       this.filterField=params.get("filter");
@@ -224,6 +229,9 @@ export class StoreComponent implements OnInit {
       this.refresh();
     })
   }
+
+
+
 
 
   receiveByMail(event:any,to:string){

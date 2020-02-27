@@ -137,7 +137,6 @@ export class LoginComponent implements OnInit {
                 })
                   .afterClosed().subscribe((code: any) => {
                   this.api.checkCode(this.config.user.address, code).subscribe((r: any) => {
-
                     if (r != null) {
                       if(r=='lbl_sup'){
                         this.api.resend(this.config.user.address).subscribe(()=>{showMessage(this,"Code secret renvoyé, consultez votre boite mail")})
@@ -204,6 +203,7 @@ export class LoginComponent implements OnInit {
         if (code == "lbl_sup"){
           this.api.resend(_old_user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
         } else {
+
           if (code == _old_user.code) {
             $$("On supprime le compte courant qui avait été créé");
             this.api.deluser(this.config.user._id).subscribe(() => {
