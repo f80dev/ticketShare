@@ -36,19 +36,16 @@ export class PaymentComponent implements OnInit {
     this.order = JSON.parse(params.get('order'));
     if(!params.has("order"))this.router.navigate(["home"]);
     // tslint:disable-next-line:triple-equals
-    if (this.order.total == 0) {
-      this.buy('gratuit');
-    } else {
-      this.api.getevent(this.order.event).subscribe((r) => {
-        this.event = r;
-        this.tickets=this.getTicketsForOrder(r);
-        this.config.reload_user(()=>{
-          this.amount_to_credit=Math.round(this.config.user.money-this.order.total+0.5);
-        });
-        $$("Initialisation des tickets effectués");
 
+    this.api.getevent(this.order.event).subscribe((r) => {
+      this.event = r;
+      this.tickets=this.getTicketsForOrder(r);
+      this.config.reload_user(()=>{
+        this.amount_to_credit=Math.round(this.config.user.money-this.order.total+0.5);
       });
-    }
+      $$("Initialisation des tickets effectués");
+    });
+
   }
 
 

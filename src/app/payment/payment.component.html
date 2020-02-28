@@ -52,10 +52,11 @@
     </button>
     &nbsp;
     <button class="app-button" mat-button mat-flat-button
-            *ngIf="order?.total>0 && order?.total<=config.user?.money"
+            *ngIf="order?.total<=config.user?.money"
             style="background-color: darkred;color:white;"
             (click)="buy()">
-      Confirmer
+      <span *ngIf="order?.total>0">Confirmer</span>
+      <span *ngIf="order?.total==0">Réserver</span>
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
