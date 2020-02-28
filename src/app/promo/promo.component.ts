@@ -35,6 +35,11 @@ export class PromoComponent implements OnInit {
     })
   }
 
+  informe_copy() {
+    showMessage(this,"Adresse copiée");
+  }
+
+
   share(event:any){
     this.ngNavigatorShareService.share({title: event.name,text: "Outil de validation des billets",url: event.share_link})
       .then( (response) => {console.log(response);})

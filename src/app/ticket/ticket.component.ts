@@ -1,6 +1,7 @@
 import { Component, Input,OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {isNull, $$,showMessage} from '../tools';
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-ticket',
@@ -16,7 +17,8 @@ export class TicketComponent implements OnInit {
   @Input("showAction") showAction=true;
 
   constructor(
-    public router:Router
+    public router:Router,
+    public config:ConfigService
   ) { }
 
   ngOnInit() {

@@ -2,6 +2,7 @@
 
 <div style="width: 100%;text-align: center;">
 
+
 <br><br>
   <table style="width:80%;max-width: 400px;text-align: left;margin-left:10%;">
     <tr>
@@ -45,9 +46,17 @@
   <div *ngIf="order.total<=config.user?.money">
     <button class="app-button" mat-button mat-flat-button
             *ngIf="order?.total>0 && order?.total<=config.user?.money"
-            style="background-color: darkred;color:white;width:200px;"
+            (click)="_location.back()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      Modifier
+    </button>
+    &nbsp;
+    <button class="app-button" mat-button mat-flat-button
+            *ngIf="order?.total>0 && order?.total<=config.user?.money"
+            style="background-color: darkred;color:white;"
             (click)="buy()">
       Confirmer
+      <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
 

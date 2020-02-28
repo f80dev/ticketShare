@@ -17,7 +17,8 @@
 
   <br><br>Flasher ce code pour<br>acheter des places<br>
   <img [src]="_event.qrcode"
-       style="width: 250px;height: 250px;"
+       style="width: 250px;height: 250px;cursor: pointer;"
+       (click)="informe_copy()"
        ngxClipboard [cbContent]="_event?.share_link">
   <br>
 

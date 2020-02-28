@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '../../node_modules/@angular/common/http';
 import { Location } from '@angular/common';
 import {environment} from '../environments/environment';
-import {initAvailableCameras} from "./tools";
+import {initAvailableCameras, isLocal} from "./tools";
 import {Platform} from "@angular/cdk/platform";
 import {ApiService} from "./api.service";
 import {ActivatedRoute} from "@angular/router";
@@ -64,6 +64,7 @@ export class ConfigService {
     if(this.values.users.admins.indexOf(this.user.email)>-1)return true;
     return false;
   }
+
 
   /**
    * Initialisation des principaux paramètres

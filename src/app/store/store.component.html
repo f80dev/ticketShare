@@ -1,8 +1,8 @@
-<div *ngIf="showLanding"
+<div *ngIf="showLanding && events?.length>0"
      (click)="showLanding=false"
-     style="width:100%;height:100%;object-fit: cover;">
-  <img [src]="events[0].landing_page"
-       style="width:100%;">
+     style="width:100%;height:100%;">
+  <img [src]="events[0]?.landing_page"
+       style="width:100%;height:100%;object-fit: cover;">
 </div>
 
 <div class="mainform" *ngIf="!showLanding">
@@ -37,7 +37,7 @@
 
     <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
             id="cmdClearFilter"
-            *ngIf="filterField?.length>0 || filterEvent!=null"
+            *ngIf="(filterField?.length>0 || filterEvent!=null) && events.length>1"
             (click)="clearFilter()">
       Tout voir
     </button>
@@ -226,14 +226,14 @@
           Supprimer
         </button>
 
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdReceiveModel"
-                *ngIf="config.user.email?.length>0 && event.fictif"
-                (click)="receiveByMail(event,config.user.email)">
-          <div class="bloc-bouton">
-            Recevoir<br>le modèle
-          </div>
-        </button>
+        <!--<button class="app-button" mat-button mat-flat-button-->
+                <!--name="cmdReceiveModel"-->
+                <!--*ngIf="config.user.email?.length>0 && event.fictif"-->
+                <!--(click)="receiveByMail(event,config.user.email)">-->
+          <!--<div class="bloc-bouton">-->
+            <!--Recevoir<br>le modèle-->
+          <!--</div>-->
+        <!--</button>-->
 
       </div>
     </app-event>
