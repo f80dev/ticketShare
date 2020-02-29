@@ -2,7 +2,7 @@
 <div class="mainform" style="margin-left:10%;width:80%;">
   <br><br>
   <span *ngIf="message">{{message}}</span><br><br>
-
+  <app-hourglass [message]="wait_message"></app-hourglass>
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
@@ -34,10 +34,12 @@
       <div *ngIf="messageCode.length>0">
         <br><br><br>
         {{messageCode}}<br>
+        <br>
 
-        <mat-form-field class="form-field-style" style="width: 70%;max-width: 300px;" >
+        <mat-form-field class="form-field-style" style="width: 100px !important;" >
           <input type="text" matInput
                  id="txtCode"
+                 maxlength=6
                  title="Saisissez votre code d'accès à 6 chiffres"
                  placeholder="Code d'accès"
                  [(ngModel)]="code"
@@ -58,6 +60,13 @@
                 id="cmdResend"
                 (click)="resend_code()">
           Renvoyer le code
+        </button>
+        &nbsp;
+        <button class="app-button login-button"
+                mat-button mat-raised-button
+                id="cmdReset"
+                (click)="quit()">
+          Rester anonymae
         </button>
         <br>
 

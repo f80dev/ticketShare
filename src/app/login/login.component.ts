@@ -24,6 +24,7 @@ import {Location} from "@angular/common";
 export class LoginComponent implements OnInit {
   email = 'paul.dudule@gmail.com';
   message = "Pour enregistrer votre mail, vous pouvez utilisez Google ou Facebook, ou directement le saisir";
+  wait_message="";
   redirect = null;
   code="";
 
@@ -142,33 +143,36 @@ export class LoginComponent implements OnInit {
   }
 
   resend_code(){
-    this.api.resend(this.config.user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
+    this.api.resend(this.email).subscribe(()=>{
+      showMessage(this,"Votre code d'accès a été renvoyé, consultez votre mail");
+    });
   }
 
   updateCode(event){
-
-    // $$("On supprime le compte courant qui avait été créé");
-    // this.api.deluser(this.config.user._id).subscribe(() => {
-    //   $$("On positionne le device sur l'ancien compte");
-    //   localStorage.setItem("address", _old_user.address);
-    //   window.location.reload();
-    // });
-
     var code=event.target.value.trim();
     if(code.length<6)return;
-
+    this.wait_message="Vérification du code";
     this.api.checkCode(this.email, code).subscribe((r: any) => {
+      this.wait_message="";
       if (r != null) {
-          localStorage.setItem("address",r.address);
-          showMessage(this, "Connexion vérifié, Profil mise a jour");
-          this.config.user = r;
-          this.messageCode="";
-          this.quit();
+          localStorage.setItem("address", r.address);
+          if(r.address!=this.config.user.address){
+            $$("On supprime le compte courant qui avait été créé");
+            this.api.deluser(this.config.user.address).subscribe(() => {
+              window.location.reload();
+            });
+          } else {
+            showMessage(this, "Connexion vérifié, Profil mise a jour");
+            this.config.user = r;
+            this.messageCode="";
+            this.quit();
+          }
       } else {
         this.messageCode="";
         this.quit();
       }
     }, (err) => {
+      this.wait_message="";
       this.code="";
       showMessage(this, "Code incorrect, veuillez recommencer la procédure");
     });;
@@ -206,8 +210,11 @@ export class LoginComponent implements OnInit {
     }else if(socialPlatform == "google"){
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_TYPE;
     }
+
     $$("Appel de la plateforme d'authentification "+socialPlatform);
+    this.wait_message="Récupération de votre adresse mail via "+socialPlatform;
     this.socialAuthService.signIn(socialPlatformProvider).then((socialUser) => {
+      this.wait_message="";
       $$("Resultat de l'authentification ",socialUser);
         this.initUser({"email":socialUser.email,"firstname":socialUser.name.split(" ")[0],"photo":socialUser.image});
       },
