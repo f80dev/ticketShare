@@ -159,6 +159,7 @@ export class LoginComponent implements OnInit {
 
     this.api.checkCode(this.email, code).subscribe((r: any) => {
       if (r != null) {
+          localStorage.setItem("address",r.address);
           showMessage(this, "Connexion vérifié, Profil mise a jour");
           this.config.user = r;
           this.messageCode="";

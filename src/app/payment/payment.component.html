@@ -45,7 +45,7 @@
 
   <div *ngIf="order.total<=config.user?.money">
     <button class="app-button" mat-button mat-flat-button
-            *ngIf="order?.total>0 && order?.total<=config.user?.money"
+            *ngIf="order?.total<=config.user?.money"
             (click)="_location.back()">
       <mat-icon>keyboard_arrow_left</mat-icon>
       Modifier
