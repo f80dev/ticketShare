@@ -25,12 +25,14 @@ export class LoginComponent implements OnInit {
   email = 'paul.dudule@gmail.com';
   message = "Pour enregistrer votre mail, vous pouvez utilisez Google ou Facebook, ou directement le saisir";
   redirect = null;
+  code="";
 
   shareObj = {
     href: "FACEBOOK-SHARE-LINK",
     hashtag: "#FACEBOOK-SHARE-HASGTAG"
   };
   handle: any = null;
+  messageCode:string="";
 
   constructor(public api: ApiService,
               public router: Router,
@@ -93,66 +95,18 @@ export class LoginComponent implements OnInit {
     }).afterClosed().subscribe((email: any) => {
       if (email) {
         localStorage.setItem("lastEmail", email);
-
+        this.email=email;
         //Recherche d'un compte déjà existant
 
         this.api.getuser(email).subscribe((_old_user: any) => {
           if (_old_user != null) {
-            this.dialog.open(PromptComponent, {
-              width: '90vw', data: {
-                title: "Compte existant",
-                question: "Le compte "+email+" existe déjà, veuillez indiquer son code à 6 chiffres",
-                type: "number",
-                lbl_ok: "OK",
-                lbl_cancel: "Annuler",
-                lbl_sup:"Renvoyer"
-              }
-            }).afterClosed().subscribe((code: any) => {
-              if (code == "lbl_sup"){
-                this.api.resend(_old_user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
-              } else {
-                if (code == _old_user.code) {
-                  localStorage.setItem("address", _old_user.address);
-                  this.quit();
-                }
-                showMessage(this, "Utiliser un autre compte pour vous connecter");
-              }
-            });
-          } else {
-
+            this.messageCode="Le compte "+email+" existe déjà, veuillez indiquer son code à 6 chiffres";
           }
         }, (err:any) => {
           if(err.status==400)
             this.api.setuser(this.config.user._id, {"email": email}).subscribe((res: any) => {
               if (res != null) {
-                this.dialog.open(PromptComponent, {
-                  width: '90vw', data: {
-                    title: "Renseigner le code reçu",
-                    type: "number",
-                    question: "Afin de vérifier que vous êtes bien le propriétaire de " + email + ", veuillez indiquer le code à 6 chiffres que vous avez reçu",
-                    lbl_ok: "OK",
-                    lbl_cancel: "Annuler",
-                    lbl_sup:"Renvoyer"
-                  }
-                })
-                  .afterClosed().subscribe((code: any) => {
-                  this.api.checkCode(this.config.user.address, code).subscribe((r: any) => {
-                    if (r != null) {
-                      if(r=='lbl_sup'){
-                        this.api.resend(this.config.user.address).subscribe(()=>{showMessage(this,"Code secret renvoyé, consultez votre boite mail")})
-                        this.quit();
-                      } else {
-                        showMessage(this, "Connexion vérifié, Profil mise a jour");
-                        this.config.user = r;
-                        this.quit();
-                      }
-                    } else {
-                      this.quit();
-                    }
-                  }, (err) => {
-                    showMessage(this, "Code incorrect, veuillez recommencer la procédure");
-                  });
-                });
+                this.messageCode="Afin de vérifier que vous êtes bien le propriétaire de " + email + ", veuillez indiquer le code à 6 chiffres que vous avez reçu";
               }
             });
         });
@@ -187,37 +141,46 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  resend_code(){
+    this.api.resend(this.config.user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
+  }
+
+  updateCode(event){
+
+    // $$("On supprime le compte courant qui avait été créé");
+    // this.api.deluser(this.config.user._id).subscribe(() => {
+    //   $$("On positionne le device sur l'ancien compte");
+    //   localStorage.setItem("address", _old_user.address);
+    //   window.location.reload();
+    // });
+
+    var code=event.target.value.trim();
+    if(code.length<6)return;
+
+    this.api.checkCode(this.email, code).subscribe((r: any) => {
+      if (r != null) {
+          showMessage(this, "Connexion vérifié, Profil mise a jour");
+          this.config.user = r;
+          this.messageCode="";
+          this.quit();
+      } else {
+        this.messageCode="";
+        this.quit();
+      }
+    }, (err) => {
+      this.code="";
+      showMessage(this, "Code incorrect, veuillez recommencer la procédure");
+    });;
+  }
+
   initUser(data:any,askForCode=false){
     $$("Recherche d'un compte ayant ce mail");
     this.api.getuser(data.email).subscribe((_old_user:any)=> {
-      this.dialog.open(PromptComponent, {
-        width: '90vw', data: {
-          title: "Compte existant",
-          type:"number",
-          question: "Ce compte existe déjà, veuillez indiquer son code à 6 chiffres",
-          lbl_ok: "OK",
-          lbl_cancel: "Annuler",
-          lbl_sup:"Renvoyer le code"
-        }
-      }).afterClosed().subscribe((code: any) => {
-        if (code == "lbl_sup"){
-          this.api.resend(_old_user.address).subscribe(()=>{showMessage(this,"Code renvoyé")});
-        } else {
-
-          if (code == _old_user.code) {
-            $$("On supprime le compte courant qui avait été créé");
-            this.api.deluser(this.config.user._id).subscribe(() => {
-              $$("On positionne le device sur l'ancien compte");
-              localStorage.setItem("address", _old_user.address);
-              window.location.reload();
-            });
-          } else {
-            $$("Code incorrect")
-          }
-        }
-      });
+      this.messageCode="Le compte "+_old_user.email+" existe déjà, veuillez indiquer son code à 6 chiffres";
+        this.email=data.email;
     },(err)=>{
         $$("Il n'y a pas de compte à cet email");
+        this.email=data.email;
         this.api.setuser(this.config.user.address, {
           "email": data.email,
           "pseudo": data.firstname,

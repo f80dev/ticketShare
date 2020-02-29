@@ -6,30 +6,77 @@
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
-      <button class="app-button login-button"
-              id="cmdGoogle"
-              mat-button mat-raised-button
-              (click)="socialSignIn('google')">
-        Google
-      </button>
-      <br><br>
-      <button class="app-button login-button"
-              mat-button mat-raised-button
-              id="cmdFacebook"
-              (click)="socialSignIn('facebook')">
-        Facebook
-      </button>
+      <div *ngIf="messageCode.length==0">
+        <button class="app-button login-button"
+                id="cmdGoogle"
 
-      <br><br><br><br>
+                mat-button mat-raised-button
+                (click)="socialSignIn('google')">
+          Google
+        </button>
+        <br><br>
+        <button class="app-button login-button"
+                mat-button mat-raised-button
+                id="cmdFacebook"
+                (click)="socialSignIn('facebook')">
+          Facebook
+        </button>
+        <br>
+      </div>
+      <br><br>
       <button class="app-button login-button"
               mat-button mat-raised-button
               id="cmdEmail"
               (click)="email_login()">
         Email
       </button>
+
+      <div *ngIf="messageCode.length>0">
+        <br><br><br>
+        {{messageCode}}<br>
+
+        <mat-form-field class="form-field-style" style="width: 70%;max-width: 300px;" >
+          <input type="text" matInput
+                 id="txtCode"
+                 title="Saisissez votre code d'accès à 6 chiffres"
+                 placeholder="Code d'accès"
+                 [(ngModel)]="code"
+                 (change)="updateCode($event)">
+        </mat-form-field>
+
+        <br>
+        <button class="app-button login-button"
+                mat-button mat-raised-button
+                *ngIf="code.length>3 && code.length<7"
+                id="cmdValider"
+                (click)="updateCode({target:{value:code}})">
+          Valider
+        </button>
+        &nbsp;
+        <button class="app-button login-button"
+                mat-button mat-raised-button
+                id="cmdResend"
+                (click)="resend_code()">
+          Renvoyer le code
+        </button>
+        <br>
+
+      </div>
+
+
     </div>
+
+
+
   </div>
 
+
+
+
+
+
+
+  <!--Zone d'acceuil-->
   <div *ngIf="config.user.email.length>0">
     <h1>Bonjour {{config.user.pseudo}}</h1>
     <br>

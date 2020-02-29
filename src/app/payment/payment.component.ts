@@ -49,6 +49,8 @@ export class PaymentComponent implements OnInit {
   }
 
 
+
+
   /**
    * retourne les billets pour la facture paypal
    */
