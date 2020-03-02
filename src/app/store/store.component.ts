@@ -157,12 +157,12 @@ export class StoreComponent implements OnInit {
         lbl_ok:"oui",
         lbl_cancel:"non"
     }
-    }).afterClosed().subscribe((result) => {
-      if(result=="yes"){
+    }).afterClosed().subscribe(() => {
+        this.message="Annulation de l'événement en cours";
         this.api.delevent(event._id).subscribe(()=>{
+          this.message="";
           this.refresh();
         });
-      }
     });
 
   }
@@ -265,9 +265,5 @@ export class StoreComponent implements OnInit {
   }
 
 
-  openEventEditor() {
-    this.askForAuthent("La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
-      this.router.navigate(['eventeditor']);
-    });
-  }
+
 }

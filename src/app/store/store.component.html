@@ -164,7 +164,11 @@
         </button>
       </div>
 
-      <app-hourglass [message]="event.treatment" [canCancel]="true" (cancel)="onCancel(event)"></app-hourglass><br>
+      <app-hourglass [message]="event.treatment"
+                     [canCancel]="true"
+                     (cancel)="onCancel(event)">
+      </app-hourglass>
+      <br>
 
       <!--Rechargement-->
       <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
@@ -172,7 +176,8 @@
         <table style="width:100%;text-align: left;">
           <tr>
             <td>Dates</td>
-            <td>Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yyyy'}}</td>
+            <td *ngIf="event.dtStart!=event.dtEnd">Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yy'}}</td>
+            <td *ngIf="event.dtStart==event.dtEnd">le {{event.dtStart*1000 | date:'dd/MM/yy'}}</td>
           </tr>
           <tr>
             <td title="Nombre de billets liés à l'événement">Nombre de billets</td>
@@ -250,13 +255,5 @@
     Aucun événement disponible pour l'instant<br><br>
   </div>
 
-  <button class="app-button" style="margin-top: 10px;"
-          *ngIf="config.user?.offer?.create_event"
-          id="cmdCreateEvent"
-          title="Créer un événement depuis les modèles disponibles"
-          mat-button mat-raised-button
-          (click)="openEventEditor()">
-    Créer votre événement
-  </button>
 
 </div>

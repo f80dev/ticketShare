@@ -18,6 +18,7 @@ import {SettingsComponent} from "./settings/settings.component";
 import {PromoComponent} from "./promo/promo.component";
 import {FaqsComponent} from "./faqs/faqs.component";
 import {OfferComponent} from "./offer/offer.component";
+import {SearchComponent} from "./search/search.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -35,12 +36,13 @@ const routes: Routes = [
   { path: 'promo', component: PromoComponent},
   { path: 'faqs', component: FaqsComponent},
   { path: 'offer', component: OfferComponent},
+  { path: 'search', component: SearchComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about', component: AboutComponent},
   { path: 'faq', redirectTo: "./faq.html"},
   { path: 'wallet', component: WalletComponent},
   { path: 'validate', component: ValidateComponent},
-  { path: '', component: StoreComponent},
+  { path: '', component: SearchComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

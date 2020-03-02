@@ -44,7 +44,7 @@
       </mat-select>
     </mat-form-field>
     &nbsp;
-    <mat-form-field style="width: 200px;">
+    <mat-form-field style="width: 200px;" *ngIf="cats?.length>1">
       <mat-label>Catégorie</mat-label>
       <mat-select [(value)]="selectCategorie">
         <mat-option *ngFor="let cat of cats" [value]="cat.value">

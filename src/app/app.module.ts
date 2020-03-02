@@ -64,6 +64,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { PromoComponent } from './promo/promo.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { OfferComponent } from './offer/offer.component';
+import { SearchComponent } from './search/search.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -102,7 +103,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     WelcomeComponent,
     PromoComponent,
     FaqsComponent,
-    OfferComponent
+    OfferComponent,
+    SearchComponent
   ],
   entryComponents: [
     PromptComponent,

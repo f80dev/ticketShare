@@ -29,6 +29,10 @@ export class ApiService {
     return this.http.get(api('delchecker/'+userid+"/"+eventid));
   }
 
+  search(query:string) {
+    return this.http.get(api('search/'+query));
+  }
+
   gettemplates() {
     return this.http.get(api('templates'));
   }

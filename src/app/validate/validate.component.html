@@ -2,10 +2,12 @@
 <div style="width:96%;margin-left:2%;text-align: center;" *ngIf="showScanner && message.length==0">
   <h2>Validation des entrées de {{_event?.name}}</h2>
 
-  <app-scanner [size]="300"
-               *ngIf="config.webcamsAvailable>0"
-               (flash)="onflash_event($event)">
-  </app-scanner>
+  <div *ngIf="config.webcamsAvailable>0">
+    <app-scanner [size]="300"
+                 (flash)="onflash_event($event)">
+    </app-scanner>
+    <br>
+  </div>
 
   <mat-form-field class="form-field-style" style="width: 70%;max-width: 300px;">
     <input type="text" matInput

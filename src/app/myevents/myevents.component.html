@@ -17,7 +17,7 @@
 
 
 <!--Affichage de l'événement-->
-<app-event width="95%" maxwidth="800px" height="0" *ngFor="let event of config.user?._events" [event]="event">
+<app-event width="95%" maxwidth="600px" height="0" *ngFor="let event of config.user?._events" [event]="event">
   <div *ngIf="event.state=='cancel'">
     Evénement annulé
   </div>

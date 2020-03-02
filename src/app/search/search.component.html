@@ -1,0 +1,66 @@
+<div class="mainform">
+  <br>
+  <mat-form-field class="form-field-style" style="width:60%;text-align: center !important;">
+    <input id="txtSearch"
+           type="text"
+           cdkFocusInitial
+           style="text-align: center;width:80%;font-size: x-large;"
+           matInput
+           placeholder="Trouver un événement"
+           [(ngModel)]="query"
+           (keypress)="onEnter($event)"
+    >
+  </mat-form-field>
+
+  <div *ngIf="query.length==0">
+    <div id="toolbar">
+      <button class="app-button"
+              id="cmdShowAll"
+              title="Vous tous les événements"
+              mat-button mat-raised-button
+              (click)="router.navigate(['store'])">
+        Voir tous
+      </button>
+    </div>
+    <br>
+    <br>
+    <button class="app-button" style="margin-top: 10px;"
+            *ngIf="config.user?.offer?.create_event"
+            id="cmdCreateEvent"
+            title="Créer un événement depuis les modèles disponibles"
+            mat-button mat-raised-button
+            (click)="openEventEditor()">
+      Créer votre événement
+    </button>
+  </div>
+
+
+
+
+  <div id="results" style="text-align: left;width: 100%;" *ngIf="query.length>0">
+    <table style="width: 100%">
+      <tr *ngFor="let _evt of _events" >
+        <td >
+          {{_evt.name}},
+          <span *ngFor="let dt of _evt.dates">
+        - {{dt*1000 | date:'dd/MM/yy'}}
+      </span>
+          <div style="font-size: small">
+            {{_evt.address}}
+          </div>
+        </td>
+        <td style="width: 30px;">
+          <button mat-button mat-icon-button mat-raised-button
+                  name="cmdSelEvent"
+                  (click)="router.navigate(['store'],{queryParams:{event:_evt._id}})"
+                  >
+            <mat-icon>arrow_right</mat-icon>
+          </button>
+
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+</div>
