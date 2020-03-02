@@ -25,6 +25,10 @@ export class ApiService {
     return this.http.get(api('addchecker/'+userid+"/"+eventid));
   }
 
+ delchecker(userid:string,eventid:string) {
+    return this.http.get(api('delchecker/'+userid+"/"+eventid));
+  }
+
   gettemplates() {
     return this.http.get(api('templates'));
   }

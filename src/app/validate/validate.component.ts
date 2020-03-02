@@ -186,7 +186,7 @@ export class ValidateComponent implements OnInit {
         lbl_cancel:"Annuler"
       }
     }).afterClosed().subscribe((result) => {
-      if(result!=null){
+      if(result!="no"){
         this.api.addchecker(result,this._event._id).subscribe(()=>{
           showMessage(this,result+" va recevoir un mail pour la validation des billets");
           this._event.validate.checkers.push(result);
@@ -195,5 +195,15 @@ export class ValidateComponent implements OnInit {
 
     });
 
+  }
+
+  removeChecker(val) {
+    this.api.delchecker(val,this._event._id).subscribe(()=>{
+      showMessage(this,val+" n'est plus en charge des entrées");
+      const index=this._event.validate.checkers.indexOf(val);
+      if(index>-1)this._event.validate.checkers.splice(index,1);
+    },(err)=>{
+      showMessage(this,err.message);
+    });
   }
 }

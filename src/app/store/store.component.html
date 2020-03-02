@@ -145,14 +145,14 @@
                  ngxClipboard [cbContent]="event.share_link"
                  name="cmdShare"
                 (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
-          Partager
+          Promotion
          </button>
 
          <button class="app-button" mat-button mat-flat-button
                 *ngIf="event.owner==config.user?.address"
                  name="cmdCancelEvent"
                 (click)="cancel(event)">
-           <div class="bloc-bouton">Annuler cet<br>événement</div>
+           Annuler
          </button>
 
         <button class="app-button" mat-button mat-flat-button
@@ -175,11 +175,14 @@
             <td>Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yyyy'}}</td>
           </tr>
           <tr>
-            <td>Nombre de billets</td>
+            <td title="Nombre de billets liés à l'événement">Nombre de billets</td>
             <td>{{event.tickets.length}}</td>
           </tr>
           <tr *ngIf="event.cost>0" >
-            <td>Frais de mise en ligne </td>
+            <td title="Les frais de mise en ligne sont principalement calculés en fonction du nombre de billets à émèttre et de votre offre">
+              Frais de mise en ligne
+              &nbsp;<mat-icon style="font-size: small;color:gray;cursor: pointer;" (click)="router.navigate(['settings'])">help</mat-icon>
+            </td>
             <td>
               {{event.cost | number:"1.0-1"}} €
             </td>
@@ -206,22 +209,24 @@
 
         <button class="app-button" mat-button mat-flat-button
                 name="cmdPublish"
+                title="Votre événement sera disponible dans la billeterie"
                 *ngIf="config.user.money>=event.cost"
                 (click)="publish(event)">
 
           Publier
         </button>
 
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdDetail"
-                *ngIf="event.owner==config.user?.address"
-                (click)="showData(event)">
-          Détail
-        </button>
+        <!--<button class="app-button" mat-button mat-flat-button-->
+                <!--name="cmdDetail"-->
+                <!--*ngIf="event.owner==config.user?.address"-->
+                <!--(click)="showData(event)">-->
+          <!--Détail-->
+        <!--</button>-->
 
 
         <button class="app-button" mat-button mat-flat-button
                 name="cmdDelete"
+                title="Votre événement est supprimé. Par sécurité, il est envoyé sur votre mail avant."
                 (click)="delete(event)">
           Supprimer
         </button>
@@ -247,6 +252,7 @@
   <button class="app-button" style="margin-top: 10px;"
           *ngIf="config.user?.offer?.create_event"
           id="cmdCreateEvent"
+          title="Créer un événement depuis les modèles disponibles"
           mat-button mat-raised-button
           (click)="openEventEditor()">
     Créer votre événement

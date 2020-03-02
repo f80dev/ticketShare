@@ -35,6 +35,23 @@
 
 
   <br><br>
+
+
+  <h2>Vous avez l'offre <strong>{{config.user.offer.name}}</strong></h2>
+  <button class="app-button"
+          id="cmdChangeOffer"
+          mat-button mat-raised-button
+          (click)="changeOffer()">
+    Changer
+  </button><br>
+  <!--<div style="width: 100%;text-align: center;">-->
+    <!--<ngx-json-viewer [json]="config.user.offer"-->
+                     <!--[expanded]="false"-->
+                     <!--style="width:200px;text-align: left;">-->
+    <!--</ngx-json-viewer>-->
+  <!--</div>-->
+  <br><br>
+
   Solde de votre compte<br>
   <span style="font-size: 4em">{{config.user?.money | number:'1.0-1'}}€</span>
   <br><br>
@@ -48,19 +65,7 @@
               (payment)="refreshSolde($event)">
   </app-refund>
 
-  <h2>Offre {{config.user.offer.name}}</h2>
-  <button class="app-button"
-          id="cmdChangeOffer"
-          mat-button mat-raised-button
-          (click)="changeOffer()">
-    Changer
-  </button><br>
-  <div style="width: 100%;text-align: center;">
-    <ngx-json-viewer [json]="config.user.offer"
-                     [expanded]="false"
-                     style="width:200px;text-align: left;">
-    </ngx-json-viewer>
-  </div>
+
 
 
   <br>

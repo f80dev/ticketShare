@@ -32,18 +32,37 @@
 
   <br><br>
 
+
+
+
+
+
   <div *ngIf="_event?.owner==config.user?.address">
     <div *ngIf="_event.validate.checkers?.length==1">
       Vous êtes le seul habilité à valider les billets
     </div>
 
-    <div *ngIf="_event.validate.checkers?.length>1">
+
+
+
+    <div *ngIf="_event.validate.checkers?.length>1" style="width: 100%;text-align: center;">
       <h2>Liste des valideurs</h2>
-      <div *ngFor="let val of _event.validate.checkers">
-        <span *ngIf="val!=config.user?.address">{{val}}</span>
-      </div>
+      <table style="display: inline-block;">
+        <tr *ngFor="let val of _event.validate.checkers" style="width: 350px;">
+          <td style="text-align: left;">
+            <span *ngIf="val!=config.user?.address">{{val}}</span>
+          </td>
+          <td style="text-align: right;width:30px;">
+            <mat-icon *ngIf="val!=config.user?.address"  (click)="removeChecker(val)">cancel</mat-icon>
+          </td>
+
+        </tr>
+      </table>
+
       <br>
     </div>
+
+
 
     <button class="app-button" mat-button mat-raised-button
             (click)="add_checker()">
