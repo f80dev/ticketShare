@@ -37,7 +37,7 @@ export class StoreComponent implements OnInit {
 
 
   refresh(){
-    this.message="Recherche des événements disponibles";
+    this.message="Chargement des événements disponibles";
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
       this.message="";
       this.events=[];

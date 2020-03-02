@@ -19,6 +19,7 @@ export class PlacesComponent implements OnInit {
   tickets:any[]=[];
   message="";
   total=0;
+  eventname="";
   categories={};
   l_categories:string[]=[];
   cats:any[]=[];

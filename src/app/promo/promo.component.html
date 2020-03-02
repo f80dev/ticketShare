@@ -1,6 +1,6 @@
 <div class="mainform" style="margin-left:10%;width:80%;">
   <br>
-  <h2>Faites la promotions de votre événement</h2>
+  <h2>Faites la promotions de {{_event.name}}</h2>
 
   <button class="app-button" mat-button mat-flat-button
           ngxClipboard [cbContent]="_event?.share_link"
@@ -9,6 +9,7 @@
   </button>
 
   <button class="app-button" mat-button mat-flat-button
+          *ngIf="config.user.address==_event.owner"
           ngxClipboard [cbContent]="_event?.share_link"
           (click)="openPrinter(_event)">
     Fabriquer l'affiche
@@ -21,6 +22,12 @@
        (click)="informe_copy()"
        ngxClipboard [cbContent]="_event?.share_link">
   <br>
+  <br>
+  <button class="app-button"
+          mat-button mat-flat-button
+          (click)="_location.back()">
+    Retour
+  </button>
 
   <div id="print-section" style="display: none;text-align: center;font-size: x-large;">
     <h1>{{_event.name}}</h1>

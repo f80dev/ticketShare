@@ -9,7 +9,7 @@ import jsQR from "jsqr";
 })
 export class ScannerComponent implements OnInit,OnDestroy {
 
-  @Input("size") size=0;
+  @Input("size") size=300;
   @Input("filter") filter="";
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
 

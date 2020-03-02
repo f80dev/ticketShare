@@ -6,6 +6,8 @@ import {ApiService} from "../api.service";
 import {MatSnackBar} from "@angular/material";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {Location} from "@angular/common";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-promo',
@@ -20,6 +22,8 @@ export class PromoComponent implements OnInit {
     public ngNavigatorShareService: NgNavigatorShareService,
     public _clipboardService:ClipboardService,
     public api:ApiService,
+    public _location:Location,
+    public config:ConfigService,
     public toast:MatSnackBar,
     public route: ActivatedRoute,
     public router:Router

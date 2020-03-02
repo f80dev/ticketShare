@@ -15,7 +15,8 @@ export class ValidateComponent implements OnInit {
   to_burn=[];
   showScanner=true;
   message="";
-
+  audio_ok=null;
+  audio_ko=null;
   lastAddress="";
   tickets=[];
   address="";
@@ -37,6 +38,18 @@ export class ValidateComponent implements OnInit {
 
   //http://localhost:4200/?event=1582301601&command=validate
   ngOnInit() {
+
+    //Chargement des fichiers audios
+    this.audio_ok = new Audio();
+    this.audio_ok.src = "/assets/ok.mp3";
+    this.audio_ok.load();
+
+    //Chargement des fichiers audios
+    this.audio_ko = new Audio();
+    this.audio_ko.src = "/assets/ko.mp3";
+    this.audio_ko.load();
+
+
     var idEvent=localStorage.getItem("validation");
     if(idEvent==null && this.config.params!=null && this.config.params["event"]!=null && this.config.params["event"].length>0)idEvent=this.config.params["event"];
     if(idEvent==null){
@@ -92,12 +105,13 @@ export class ValidateComponent implements OnInit {
           }
 
         }
-
         if(this.tickets.length==0){
+          this.audio_ko.play();
           this.api.removeEvt(addr,this._event["_id"]).subscribe(()=>{});
           showMessage(this,"Pas de ticket pour cet événement");
           this.showScanner=true;
         } else {
+          this.audio_ok.play();
           $$("Mise en oeuvre du processus de validation automatique");
           if(this._event.validate.auto_validate==1 && this.tickets.length==1){
             this.burn(true);

@@ -1,7 +1,6 @@
 <app-hourglass [message]="message"></app-hourglass>
-<div style="width:100%;text-align: center;" *ngIf="showScanner && message.length==0">
+<div style="width:96%;margin-left:2%;text-align: center;" *ngIf="showScanner && message.length==0">
   <h2>Validation des entrées de {{_event?.name}}</h2>
-
 
   <app-scanner [size]="300"
                *ngIf="config.webcamsAvailable>0"
@@ -31,10 +30,6 @@
   </div>
 
   <br><br>
-
-
-
-
 
 
   <div *ngIf="_event?.owner==config.user?.address">
@@ -117,7 +112,7 @@
   </div>
 
   <br>
-  <div *ngIf="!_event.validate.instant_burn" >
+  <div *ngIf="!_event.validate.instant_burn">
     <div *ngFor="let ticket of tickets">
       Billet <span>#{{ticket.seat || ticket.ref}}</span>&nbsp;
       <div *ngIf="dates?.length>1">Pour le {{ticket.date*1000 | date:'dd/MM/yy HH:mm'}}</div>
