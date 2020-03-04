@@ -164,7 +164,6 @@ export class StoreComponent implements OnInit {
           this.refresh();
         });
     });
-
   }
 
 

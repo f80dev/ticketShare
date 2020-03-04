@@ -19,6 +19,7 @@ export class ValidateComponent implements OnInit {
   audio_ko=null;
   lastAddress="";
   tickets=[];
+  all_tickets=[];
   address="";
   _event:any;
   _user:any;
@@ -56,24 +57,41 @@ export class ValidateComponent implements OnInit {
       $$("impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
     } else {
+
       this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
-        if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
-          this.router.navigate(["login"], {
-            queryParams:
-              {
-                message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
-                redirect: "/validate?event=" + r._id
-              }
-          });
-        }else{
-          if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
-            showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
-            this.router.navigate(["store"]);
-          } else {
-            localStorage.setItem("validation", r["_id"]);
+        this.api.getbalances(idEvent).subscribe((all:any)=>{
+          this.all_tickets=all;
+          if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
+            this.router.navigate(["login"], {
+              queryParams:
+                {
+                  message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
+                  redirect: "/validate?event=" + r._id
+                }
+            });
+          }else{
+            if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
+              showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
+              this.router.navigate(["store"]);
+            } else {
+              localStorage.setItem("validation", r["_id"]);
+            }
           }
-        }
+        })
+      });
+    }
+  }
+
+
+  getplaces(addr,idevent,func,func_error=null){
+    if(this.all_tickets.hasOwnProperty(addr))
+      func({tickets:this.all_tickets[addr]});
+    else{
+      this.api.use(addr,this._event["_id"]).subscribe((r:any)=> {
+        func(r);
+      },()=>{
+        func_error();
       });
     }
   }
@@ -87,11 +105,10 @@ export class ValidateComponent implements OnInit {
     this.lastAddress=addr;
     if(addr.length>0){
       this.message="Récupération des places du client";
-      this.api.use(addr,this._event["_id"]).subscribe((r:any)=>{
+      this.getplaces(addr,this._event["_id"],(r)=>{
         this.address="";
         this.message="";
         this.tickets=r.tickets;
-        this._user=r.user;
 
         this._dates=[];
         for(let _t of this.tickets){
@@ -161,6 +178,9 @@ export class ValidateComponent implements OnInit {
     this.tickets=[];
     this.refresh("");
   }
+
+
+
 
   burn(all=false) {
     if(!this._event.validate.instant_burn)return(false);

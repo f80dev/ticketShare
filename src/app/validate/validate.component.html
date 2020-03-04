@@ -72,7 +72,7 @@
 
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="tickets.length>0 && message.length==0">
   <h2>Propriétaire des billets</h2>
-  {{_user.pseudo}}<br>
+  {{_user?.pseudo}}<br>
   <img [src]="_user?.photo"
         class="image-photo"
         width="150px" height="150px">
