@@ -23,6 +23,7 @@ export class ValidateComponent implements OnInit {
   address="";
   _event:any;
   _user:any;
+  _identities:any[];
   _dates: any[]=[];
 
   //http://localhost:4200/validate?event=1578905752
@@ -60,7 +61,7 @@ export class ValidateComponent implements OnInit {
 
       this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
-        this.api.getbalances(idEvent).subscribe((all:any)=>{
+        this.api.getbalances(idEvent,true).subscribe((all:any)=>{
           this.all_tickets=all;
           if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
             this.router.navigate(["login"], {
@@ -85,9 +86,10 @@ export class ValidateComponent implements OnInit {
 
 
   getplaces(addr,idevent,func,func_error=null){
-    if(this.all_tickets.hasOwnProperty(addr))
-      func({tickets:this.all_tickets[addr]});
-    else{
+    if(this.all_tickets.hasOwnProperty(addr)) {
+      $$("L'utilisateur est bien dans la liste des billets, on affiche le résultats")
+      func({tickets: this.all_tickets[addr],photo:this.all_tickets["identities"][addr].photo,pseudo:this.all_tickets["identities"][addr].pseudo});
+    }else{
       this.api.use(addr,this._event["_id"]).subscribe((r:any)=> {
         func(r);
       },()=>{
@@ -109,6 +111,7 @@ export class ValidateComponent implements OnInit {
         this.address="";
         this.message="";
         this.tickets=r.tickets;
+        this._user={pseudo:r.pseudo,photo:r.photo};
 
         this._dates=[];
         for(let _t of this.tickets){

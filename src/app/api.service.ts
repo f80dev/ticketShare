@@ -33,8 +33,8 @@ export class ApiService {
     return this.http.get(api('search/'+query));
   }
 
- getbalances(idevent:string) {
-    return this.http.get(api('balances/'+idevent));
+  getbalances(idevent:string,withIdentities=false) {
+    return this.http.get(api('balances/'+idevent+"/"+withIdentities));
   }
 
   gettemplates() {
@@ -125,6 +125,7 @@ export class ApiService {
   getevent(_id:string){
     return this._get("getevent"+"/"+_id);
   }
+
 
   use(address: any, event: string) {
     return this._get("use/"+address+"/"+event);
