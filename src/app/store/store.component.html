@@ -1,3 +1,5 @@
+<app-hourglass [message]="message"></app-hourglass>
+
 <div *ngIf="showLanding && events?.length>0"
      (click)="showLanding=false"
      style="width:100%;height:100%;">
@@ -9,7 +11,7 @@
 
   <!--Zone de filtre-->
 
-    <div style="display: inline-block;" *ngIf="events?.length>2">
+    <div style="display: inline-block;" *ngIf="events?.length>1">
       <mat-form-field style="width:200px;" >
         <mat-label>Trier par</mat-label>
         <mat-select [(value)]="sortField">
@@ -27,6 +29,12 @@
           <mat-option *ngFor="let tag of tags" [value]="tag">#{{tag}}</mat-option>
         </mat-select>
       </mat-form-field>
+      &nbsp;
+      <mat-checkbox [checked]="onlyMyEvents"
+                    (change)="updateFilterMyEvents($event)">
+        Mes événements
+      </mat-checkbox>
+      &nbsp;
       <button class="app-button" style="margin-top: 10px;"
               id="cmdReduceAll"
               mat-icon-button mat-button mat-raised-button
@@ -168,6 +176,7 @@
                      [canCancel]="true"
                      (cancel)="onCancel(event)">
       </app-hourglass>
+
       <br>
 
       <!--Rechargement-->

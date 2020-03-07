@@ -34,7 +34,7 @@
 
       <h2>{{selTemplate.title}}</h2>
       <small>{{selTemplate.description}}</small>
-    <br>
+    <br><br>
 
     <img class="image-photo"
          [src]="selTemplate.visual"
@@ -68,7 +68,7 @@
                   *ngIf="config.user?.email"
                   mat-button mat-raised-button
                   (click)="sendDemo()">
-              Recevoir ce modèle
+              Modifier ce modèle
           </button>
         </td>
       </tr>

@@ -41,8 +41,13 @@
       &nbsp;&nbsp;Billeterie
     </a>
 
-    <a title="Vos préférence" mat-list-item routerLink="settings" id="cmdSettings">
+    <a title="Accèdez à l'ensemble de mes évélements" mat-list-item routerLink="store" [queryParams]="{onlyMyEvents:true}" id="cmdMyEvents">
       <mat-icon>build</mat-icon>
+      &nbsp;&nbsp;Mes événements
+    </a>
+
+    <a title="Vos préférence" mat-list-item routerLink="settings" id="cmdSettings">
+      <mat-icon>person</mat-icon>
       &nbsp;&nbsp;Préférences
     </a>
 

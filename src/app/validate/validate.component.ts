@@ -13,7 +13,7 @@ import {PromptComponent} from "../prompt/prompt.component";
 })
 export class ValidateComponent implements OnInit {
   to_burn=[];
-  showScanner=true;
+  showScanner=false;
   message="";
   audio_ok=null;
   audio_ko=null;
@@ -41,6 +41,7 @@ export class ValidateComponent implements OnInit {
   //http://localhost:4200/?event=1582301601&command=validate
   ngOnInit() {
 
+
     //Chargement des fichiers audios
     this.audio_ok = new Audio();
     this.audio_ok.src = "/assets/ok.mp3";
@@ -53,12 +54,11 @@ export class ValidateComponent implements OnInit {
 
 
     var idEvent=localStorage.getItem("validation");
-    if(idEvent==null && this.config.params!=null && this.config.params["event"]!=null && this.config.params["event"].length>0)idEvent=this.config.params["event"];
+    if(idEvent==null)idEvent=this.config.params["event"];
     if(idEvent==null){
-      $$("impossible de rester dans validate sans indiquer l'événement a valider");
+      showMessage(this,"impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
     } else {
-
       this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
         this.api.getbalances(idEvent,true).subscribe((all:any)=>{
@@ -80,6 +80,9 @@ export class ValidateComponent implements OnInit {
             }
           }
         })
+      },(err)=>{
+        showMessage(this,"L'evenement à valider n'existe pas");
+        this.router.navigate(['store']);
       });
     }
   }
@@ -153,7 +156,6 @@ export class ValidateComponent implements OnInit {
 
 
   onflash_event($event: any) {
-    this.showScanner=false;
     this.refresh($event.data);
   }
 

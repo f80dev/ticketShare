@@ -1,9 +1,19 @@
 <app-hourglass [message]="message"></app-hourglass>
-<div style="width:96%;margin-left:2%;text-align: center;" *ngIf="showScanner && message.length==0">
-  <h2>Validation des entrées de {{_event?.name}}</h2>
+<div style="width:96%;margin-left:2%;text-align: center;" *ngIf="message.length==0">
+  <h3>Validation pour {{_event?.name}}</h3>
 
   <div *ngIf="config.webcamsAvailable>0">
-    <app-scanner [size]="300"
+
+    <button class="app-button" mat-button mat-raised-button
+            *ngIf="!showScanner"
+            (click)="showScanner=true">
+      <mat-icon>power_on</mat-icon>Scanner
+    </button>
+    <br>
+
+    <app-scanner [size]="200"
+                 (click)="showScanner=false"
+                 *ngIf="showScanner"
                  (flash)="onflash_event($event)">
     </app-scanner>
     <br>
@@ -35,17 +45,17 @@
 
 
   <div *ngIf="_event?.owner==config.user?.address">
-    <div *ngIf="_event.validate.checkers?.length==1">
+    <div *ngIf="_event?.validate.checkers?.length==1">
       Vous êtes le seul habilité à valider les billets
     </div>
 
 
 
 
-    <div *ngIf="_event.validate.checkers?.length>1" style="width: 100%;text-align: center;">
+    <div *ngIf="_event?.validate.checkers?.length>1" style="width: 100%;text-align: center;">
       <h2>Liste des valideurs</h2>
       <table style="display: inline-block;">
-        <tr *ngFor="let val of _event.validate.checkers" style="width: 350px;">
+        <tr *ngFor="let val of _event?.validate.checkers" style="width: 350px;">
           <td style="text-align: left;">
             <span *ngIf="val!=config.user?.address">{{val}}</span>
           </td>

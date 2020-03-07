@@ -21,6 +21,7 @@ export class StoreComponent implements OnInit {
   message="";
   sortField: string="dtCreate=desc";
   filterField: string="";
+  onlyMyEvents=false;
   filterEvent=null;
   tags: string[]=[];
   showLanding:boolean=false;
@@ -36,6 +37,11 @@ export class StoreComponent implements OnInit {
   }
 
 
+  updateFilterMyEvents(value:any){
+    this.onlyMyEvents=value.checked;
+    this.refresh();
+  }
+
   refresh(){
     this.message="Chargement des événements disponibles";
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
@@ -44,7 +50,7 @@ export class StoreComponent implements OnInit {
       this.tags=[];
       for(let e of l_events){
 
-        if(this.filterEvent==null || this.filterEvent==e._id){
+        if((this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
           }
@@ -82,6 +88,10 @@ export class StoreComponent implements OnInit {
       this.api.getevent(this.filterEvent).subscribe((r:any)=>{
         this.showLanding=(r.landing_page.length>0);
       });
+    }
+
+    if(params.has("onlyMyEvents")){
+      this.onlyMyEvents=params.get("onlyMyEvents")=='true';
     }
 
     if(params.get("filter"))
