@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
   next() {
     clearTimeout(this.handle);
     if (this.redirect == null)
-      this.router.navigate(["store"]);
+      this.router.navigate(["search"]);
     else {
       if (this.redirect == "back")
         this._location.back();

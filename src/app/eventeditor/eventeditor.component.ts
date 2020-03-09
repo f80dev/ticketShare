@@ -45,11 +45,11 @@ export class EventeditorComponent implements OnInit {
     var addr=this.config.user.address;
     this.api._get("add_event/"+event+"?format=json&owner="+addr+"&miner="+addr+"&fictif=True").subscribe((r:any)=>{
       this.config.reload_user(()=>{
-        this.router.navigate(["store"]);
+        this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
       });
     },(err)=>{
       showMessage(this,err.error.message);
-      this.router.navigate(["store"]);
+      this.router.navigate(["search"]);
     });
   }
 

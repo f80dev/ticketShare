@@ -1,7 +1,7 @@
 
 <div class="mainform" style="margin-left:10%;width:80%;">
   <br><br>
-  <span *ngIf="message">{{message}}</span><br><br>
+  <span *ngIf="message && messageCode.length==0">{{message}}</span><br><br>
   <app-hourglass [message]="wait_message"></app-hourglass>
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
@@ -25,6 +25,7 @@
       </div>
       <br><br>
       <button class="app-button login-button"
+              *ngIf="messageCode.length==0"
               mat-button mat-raised-button
               id="cmdEmail"
               (click)="email_login()">
@@ -55,19 +56,22 @@
           Valider
         </button>
         <br><br><br>
+        <div *ngIf="code.length<4">
           <button class="app-button login-button"
-                mat-button mat-raised-button
-                id="cmdResend"
-                (click)="resend_code()">
-          Renvoyer le code
-        </button>
-        &nbsp;
-        <button class="app-button login-button"
-                mat-button mat-raised-button
-                id="cmdReset"
-                (click)="quit()">
-          Rester anonymae
-        </button>
+                  mat-button mat-raised-button
+                  id="cmdResend"
+                  (click)="resend_code()">
+            Renvoyer le code
+          </button>
+          &nbsp;
+          <button class="app-button login-button"
+                  mat-button mat-raised-button
+                  id="cmdReset"
+                  (click)="next()">
+            Rester anonymae
+          </button>
+        </div>
+
         <br>
 
       </div>

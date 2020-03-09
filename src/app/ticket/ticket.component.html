@@ -8,7 +8,11 @@
     </mat-card-subtitle>
   </mat-card-header>
 
-  <img mat-card-image style="height:100px;" [src]="ticket.visual" alt="Visuel du ticket">
+  <img mat-card-image
+       style="height:100px;"
+       *ngIf="ticket.visual?.length>0"
+       [src]="ticket.visual"
+       alt="Visuel du ticket">
 
   <mat-card-content>
     <ng-content></ng-content>

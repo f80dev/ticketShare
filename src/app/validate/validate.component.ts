@@ -74,7 +74,7 @@ export class ValidateComponent implements OnInit {
           }else{
             if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
               showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
-              this.router.navigate(["store"]);
+              this.router.navigate(["search"]);
             } else {
               localStorage.setItem("validation", r["_id"]);
             }

@@ -39,7 +39,9 @@ export class MyeventsComponent implements OnInit {
         }
       },5000);
     }
-    subscribe_socket(this,"refresh_buy",()=>{this.refresh();});
+    subscribe_socket(this,"refresh_buy",()=>{
+      this.refresh();
+    });
   }
 
   myplaces(event) {
