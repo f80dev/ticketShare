@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ConfigService} from "../config.service";
 import {ApiService} from "../api.service";
 import {Router} from "@angular/router";
+import {askForAuthent} from "../tools";
+
 
 @Component({
   selector: 'app-search',
@@ -30,22 +32,11 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  askForAuthent(message:string,redirect:string,func:Function){
-    if(this.config.user!=null && this.config.user.email==""){
-      this.router.navigate(["login"],{queryParams:
-          {
-            message:message,
-            redirect:redirect
-          }
-      });
-    } else {
-      func();
-    }
-  }
+
 
 
   openEventEditor() {
-    this.askForAuthent("La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
+    askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
       this.router.navigate(['eventeditor']);
     });
   }

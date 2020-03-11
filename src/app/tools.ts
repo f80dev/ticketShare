@@ -300,6 +300,21 @@ export function showMessage(vm:any,s:string="",duration=2000,func=null,label_but
   }
 }
 
+export function askForAuthent(vm:any,message:string,redirect:string,func:Function){
+  if(vm.config.user!=null && vm.config.user.email==""){
+    vm.router.navigate(["login"],{queryParams:
+        {
+          message:message,
+          redirect:redirect
+        }
+    });
+  } else {
+    func();
+  }
+}
+
+
+
 export function isLocal(){
   return location.href.indexOf("localhost") > -1;
 

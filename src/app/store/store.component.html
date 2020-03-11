@@ -264,5 +264,16 @@
     Aucun événement disponible pour l'instant<br><br>
   </div>
 
+  <br>
+  <button class="app-button" style="margin-top: 10px;"
+          *ngIf="config.user?.offer?.create_event"
+          id="cmdCreateEvent"
+          title="Créer un événement depuis les modèles disponibles"
+          mat-button mat-raised-button
+          (click)="openEventEditor()">
+    Créer votre événement
+  </button>
+
+
 
 </div>

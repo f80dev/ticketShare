@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {$$, openGraph, showMessage, subscribe_socket, tirage} from "../tools";
+import {$$, openGraph, showMessage, subscribe_socket, askForAuthent} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
-import {NgNavigatorShareService} from "ng-navigator-share";
 import {ClipboardService} from "ngx-clipboard";
 import {PromptComponent} from "../prompt/prompt.component";
 
@@ -40,6 +39,12 @@ export class StoreComponent implements OnInit {
   updateFilterMyEvents(value:any){
     this.onlyMyEvents=value.checked;
     this.refresh();
+  }
+
+  openEventEditor() {
+    askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
+      this.router.navigate(['eventeditor']);
+    });
   }
 
   refresh(){
