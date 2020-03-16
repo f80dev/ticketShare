@@ -121,6 +121,7 @@ export class ValidateComponent implements OnInit {
           if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
         }
         if(this._dates.length==1){
+          debugger
           if(isToday(this._dates[0])){
             this._dates[0]="aujourd'hui "+getTime(this._dates[0]);
           } else {

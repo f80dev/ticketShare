@@ -175,7 +175,7 @@ export class LoginComponent implements OnInit {
       this.wait_message="";
       this.code="";
       showMessage(this, "Code incorrect, veuillez recommencer la procédure");
-    });;
+    });
   }
 
   initUser(data:any,askForCode=false){

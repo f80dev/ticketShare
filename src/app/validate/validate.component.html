@@ -81,12 +81,14 @@
 
 
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="tickets.length>0 && message.length==0">
-  <h2>Propriétaire des billets</h2>
-  {{_user?.pseudo}}<br>
-  <img [src]="_user?.photo"
-        class="image-photo"
-        width="150px" height="150px">
-  <br>
+  <div *ngIf="_user?.photo?.length>0">
+    <h2>Propriétaire des billets</h2>
+    {{_user?.pseudo}}<br>
+    <img [src]="_user?.photo"
+         class="image-photo"
+         width="150px" height="150px">
+    <br>
+  </div>
   <br>
 
   <div style="font-size: x-large;">{{tickets.length}} entrée(s) valable(s)</div>
