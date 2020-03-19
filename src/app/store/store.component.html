@@ -11,8 +11,8 @@
 
   <!--Zone de filtre-->
 
-    <div style="display: inline-block;" *ngIf="events?.length>1">
-      <mat-form-field style="width:200px;" >
+    <div style="display: inline-block;font-size: small;width:100%;" *ngIf="events?.length>1">
+      <mat-form-field style="width:120px;" >
         <mat-label>Trier par</mat-label>
         <mat-select [(value)]="sortField">
           <mat-option value="dtCreate=desc">Date de fabrication</mat-option>
@@ -23,7 +23,7 @@
         </mat-select>
       </mat-form-field>
       &nbsp;
-      <mat-form-field style="width: 200px;">
+      <mat-form-field style="width: 80px;">
         <mat-label>Filtrer</mat-label>
         <mat-select [(value)]="filterField">
           <mat-option *ngFor="let tag of tags" [value]="tag">#{{tag}}</mat-option>
@@ -31,16 +31,12 @@
       </mat-form-field>
       &nbsp;
       <mat-checkbox [checked]="onlyMyEvents"
+                    title="Uniquement mes événements"
                     (change)="updateFilterMyEvents($event)">
-        Mes événements
+        De moi
       </mat-checkbox>
       &nbsp;
-      <button class="app-button" style="margin-top: 10px;"
-              id="cmdReduceAll"
-              mat-icon-button mat-button mat-raised-button
-              (click)="reduceAll()">
-        <mat-icon>arrow_drop_up</mat-icon>
-      </button>
+      <mat-icon (click)="reduceAll()" id="cmdReduceAll" style="font-size: x-large;cursor: pointer;">arrow_drop_up</mat-icon>
     </div>
 
     <button class="app-button" style="margin-top: 10px;" mat-button mat-raised-button
