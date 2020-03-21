@@ -1,8 +1,19 @@
-<mat-form-field class="input-full-width">
-  <mat-label>Offre</mat-label>
-  <mat-select [(value)]="config.user.offer.name">
-    <mat-option value="standard">Standard</mat-option>
-    <mat-option value="pro">Pro</mat-option>
-    <mat-option value="pilote">Pilote</mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="mainform">
+ <br>
+  <mat-form-field style="width:200px;">
+    <mat-label>Offre</mat-label>
+    <mat-select [(value)]="config.user.offer.name">
+      <mat-option value="standard">Standard</mat-option>
+      <mat-option value="pro">Pro</mat-option>
+      <mat-option value="pilote">Pilote</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br><br>
+  <button class="app-button"
+          mat-button mat-raised-button
+          (click)="_location.back()">
+    Retour
+  </button>
+
+
+</div>

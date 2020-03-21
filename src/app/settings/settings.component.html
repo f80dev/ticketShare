@@ -9,14 +9,15 @@
             (click)="addImage($event)">
       Ajouter une photo
     </button><br>
-
-    <button class="app-button large-button"
-            mat-button mat-raised-button
-            (click)="router.navigate(['login'],{queryParam:{message:'Utilisez google ou facebook pour enregistrez simplement votre mail',redirect:'/settings'}})">
-      Ajouter une adresse mail
-    </button>
-
   </div>
+
+  <button class="app-button large-button"
+          *ngIf="config.user?.email?.length==0"
+          mat-button mat-raised-button
+          (click)="router.navigate(['login'],{queryParam:{message:'Utilisez google ou facebook pour enregistrez simplement votre mail',redirect:'settings'}})">
+    Ajouter une adresse mail
+  </button>
+
 
   <img [src]="config.user.photo"
        *ngIf="config.user?.photo?.length>0"
@@ -28,7 +29,7 @@
   <span *ngIf="config.user.email.length>0">{{config.user.email}}</span>
   <br><br>
 
-  <mat-form-field class="input-full-width">
+  <mat-form-field style="width:50%;max-width: 200px;text-align: center;">
     <mat-label>Pseudo</mat-label>
     <input matInput placeholder="Roger" [value]="config.user?.pseudo">
   </mat-form-field>
@@ -43,7 +44,9 @@
           mat-button mat-raised-button
           (click)="changeOffer()">
     Changer
-  </button><br>
+  </button>
+  <br><br>
+  <hr>
   <!--<div style="width: 100%;text-align: center;">-->
     <!--<ngx-json-viewer [json]="config.user.offer"-->
                      <!--[expanded]="false"-->

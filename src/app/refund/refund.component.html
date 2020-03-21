@@ -16,8 +16,8 @@
         <br>
       </div>
 
-      <div *ngIf="amounts.length>1" style="display: inline-block;min-width:200px;width:50%;">
-        <mat-form-field *ngIf="amounts.length>1" style="width:120px;">
+      <div *ngIf="amounts.length>1" style="display: inline-block;">
+        <mat-form-field *ngIf="amounts.length>1" style="width:60px;margin:25px;">
           <mat-label>Créditer:</mat-label>
           <mat-select [(value)]="amount" (valueChange)="refresh()">
             <mat-option *ngFor="let amount of amounts" [value]="amount">
@@ -27,7 +27,7 @@
         </mat-form-field>
       </div>
 
-      <div style="height:80px;min-width:200px;display: inline-block;text-align: center;overflow: hidden;margin-bottom: 20px;"
+      <div style="height:150px;min-width:200px;position:relative;display: inline-block;text-align: center;overflow: hidden;margin-bottom: 20px;"
            *ngIf="payPalConfig">
         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
       </div>

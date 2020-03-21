@@ -86,7 +86,9 @@ export class RefundComponent implements OnInit {
       style: {
         size: 'small',
         label: 'buynow',
-        color:'black',
+        shap:'pill',
+        color:'silver',
+        tagline:false,
         layout: 'vertical'
       },
 

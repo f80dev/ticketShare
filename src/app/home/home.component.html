@@ -1,9 +1,9 @@
 <div class="app-card" style="text-align: center;height: 80vh;">
 
   <div *ngIf="config.user?.pseudo?.length>0">
-    {{config.user?.pseudo}} /
-    <span *ngIf="config.user?.money>0">
-      {{config.user?.money |number:'1.0-1'}} €
+    {{config.user?.pseudo}}
+    <span *ngIf="config.user?.money>=0">
+      / {{config.user?.money |number:'1.0-1'}} €
     </span>
   </div>
 
