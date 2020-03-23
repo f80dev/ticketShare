@@ -46,7 +46,6 @@
     </mat-grid-tile>
   </mat-grid-list>
 
-
   <div *ngIf="showIcons" style="width:100%;">
     <img *ngFor="let icon of icons"
          [src]="icon.photo"
@@ -93,7 +92,8 @@
           (click)="rotatePhoto()">
     <mat-icon>refresh</mat-icon>
   </button>
-
+  <br>
+  <hr>
   <button id="cmdCancel" mat-button mat-raised-button (click)="onNoClick()">Annuler</button>
   <button id="cmdValide" mat-button mat-raised-button [mat-dialog-close]="data.result" >Ok</button>
 </mat-dialog-actions>

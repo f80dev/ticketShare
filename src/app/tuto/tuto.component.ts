@@ -21,7 +21,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input("background") background="";
   @Input('if') _if=true;
   @Input('image') image: string="";
-  @Input('button') labelButton: string="Continuez";
+  @Input('main_button') labelButton: string="Continuez";
   @Input('icon') icon:string="";
   @Input('color') color:string="darkgrey";
   @Input('force') force:boolean=false;
@@ -39,7 +39,6 @@ export class TutoComponent implements OnChanges,OnInit {
 
     //if(this.config.params==null)return;
     //if(!this.config.params.tuto)this.hideTuto(false);
-
     if(!this.config.visibleTuto || this._type=="title" || this.force ){
       if(this._if){
           this.config.visibleTuto=true;
