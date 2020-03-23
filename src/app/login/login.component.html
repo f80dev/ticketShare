@@ -3,6 +3,7 @@
   <br><br>
   <span *ngIf="message && messageCode.length==0">{{message}}</span><br><br>
   <app-hourglass [message]="wait_message"></app-hourglass>
+  <app-tuto label="Pour acheter ou vendre des billets, KERBERUS doit connaitre votre adresse mail afin de pouvoir vous envoyer les confirmations de vos transactions"></app-tuto>
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
@@ -76,16 +77,8 @@
 
       </div>
 
-
     </div>
-
-
-
   </div>
-
-
-
-
 
 
 

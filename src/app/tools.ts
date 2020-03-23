@@ -99,6 +99,9 @@ export function isToday(d){
   return diff==0;
 }
 
+
+
+
 //On cherche a produire une reference au terminal de l'utilisateur
 export function unique_id(){
   var rc="";

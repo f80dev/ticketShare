@@ -19,11 +19,11 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input("delay") delay=0.2;
   @Input("duration") duration=0;
   @Input("background") background="";
-  @Input('if') _if: boolean=true;
+  @Input('if') _if=true;
   @Input('image') image: string="";
   @Input('button') labelButton: string="Continuez";
   @Input('icon') icon:string="";
-  @Input('color') color:string="white";
+  @Input('color') color:string="darkgrey";
   @Input('force') force:boolean=false;
   @Input('button') _button:string="";
   @Input('height') height:string="auto";
@@ -34,12 +34,11 @@ export class TutoComponent implements OnChanges,OnInit {
   code:string="";
 
   refresh(){
-
     this.text=brand_text(this.text,this.config);
     this.title=brand_text(this.title,this.config);
 
-    if(this.config.params==null)return;
-    if(!this.config.params.tuto)this.hideTuto(false);
+    //if(this.config.params==null)return;
+    //if(!this.config.params.tuto)this.hideTuto(false);
 
     if(!this.config.visibleTuto || this._type=="title" || this.force ){
       if(this._if){
@@ -52,6 +51,8 @@ export class TutoComponent implements OnChanges,OnInit {
       }
     } else this.hideTuto();
   }
+
+
 
   ngOnChanges() {
 
@@ -70,6 +71,7 @@ export class TutoComponent implements OnChanges,OnInit {
 
 
   ngOnInit(): void {
+    debugger
     if(this._type=="tips" && this.image.length==0)this.image="./assets/img/tips.png";
     if(this.icon!=null && this.icon.length>0)this.image="";
     if(this.text==null || this.text.length==0)this.text=this.label;

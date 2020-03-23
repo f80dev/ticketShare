@@ -9,6 +9,7 @@
 
 <div class="mainform" *ngIf="!showLanding">
 
+  <app-tuto label="Retrouvez ici l'ensemble des événements disponibles sur {{config.values.appname}}"></app-tuto>
   <!--Zone de filtre-->
 
     <div style="display: inline-block;font-size: small;width:100%;" *ngIf="events?.length>1">
