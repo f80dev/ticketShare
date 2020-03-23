@@ -71,7 +71,6 @@ export class TutoComponent implements OnChanges,OnInit {
 
 
   ngOnInit(): void {
-    debugger
     if(this._type=="tips" && this.image.length==0)this.image="./assets/img/tips.png";
     if(this.icon!=null && this.icon.length>0)this.image="";
     if(this.text==null || this.text.length==0)this.text=this.label;

@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
 
 
   informe_copy() {
-    debugger
+
     showMessage(this,"Adresse copiée");
   }
 

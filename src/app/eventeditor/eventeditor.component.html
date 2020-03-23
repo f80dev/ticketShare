@@ -1,6 +1,10 @@
 <div class="mainform">
 
   <app-hourglass [message]="message"></app-hourglass>
+  <app-tuto title="Vendez les billets de votre événement !"
+            image="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/241/toolbox_1f9f0.png"
+            subtitle="Afin de simplifier la fabrication d'événement, KERBERUS vous propose plusieurs modèles totalement personnalisables">
+  </app-tuto>
 
   <br>
   <button class="app-button"
@@ -31,10 +35,13 @@
   </div>
 
   <div *ngIf="selTemplate">
-
       <h2>{{selTemplate.title}}</h2>
       <small>{{selTemplate.description}}</small>
     <br><br>
+    <app-tuto label="Vous pouvez recevoir le modèle sur votre mail, le personnaliser et nous le renvoyer pour publication immédiate,
+                     OU pouvez directement publier le modèle comme un événement fictif. Dans ce cas, seul les profils pilotes
+                     pour 'fictivement' acheter des places. C'est un bon moyen de tester gratuitement KERBERUS">
+    </app-tuto>
 
     <img class="image-photo"
          [src]="selTemplate.visual"
@@ -47,7 +54,9 @@
       <tr style="font-size: small;">
         <td style="width: 50%;">Créer un évenement fictif depuis ce modèle.<br>Cet évenement ne sera visible que des clients pilotes</td>
         <td></td>
-        <td>Recevoir ce modèle sur votre mail, le personnaliser<br>et le renvoyer pour créer votre événement</td>
+        <td *ngIf="config.user?.email">
+          Recevoir ce modèle sur votre mail, le personnaliser<br>et le renvoyer pour créer votre événement
+        </td>
       </tr>
       <tr></tr>
       <tr>

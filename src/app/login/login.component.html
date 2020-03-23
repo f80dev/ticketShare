@@ -3,7 +3,6 @@
   <br><br>
   <span *ngIf="message && messageCode.length==0">{{message}}</span><br><br>
   <app-hourglass [message]="wait_message"></app-hourglass>
-  <app-tuto label="Pour acheter ou vendre des billets, KERBERUS doit connaitre votre adresse mail afin de pouvoir vous envoyer les confirmations de vos transactions"></app-tuto>
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
@@ -32,6 +31,8 @@
               (click)="email_login()">
         Email
       </button>
+      <br>
+      <app-tuto label="Pour acheter ou vendre des billets, KERBERUS doit connaitre votre adresse mail afin de pouvoir vous envoyer les confirmations de vos transactions"></app-tuto>
 
       <div *ngIf="messageCode.length>0">
         <br><br><br>
@@ -47,6 +48,8 @@
                  [(ngModel)]="code"
                  (change)="updateCode($event)">
         </mat-form-field>
+        <br>
+        <app-tuto label="Le code à 6 chiffres vous a été envoyé sur votre adresse mail à votre première authentification. Si vous ne retrouvez pas le mail vous pouvez vous le faire renvoyer par KERBERUS"></app-tuto>
 
         <br>
         <button class="app-button login-button"
