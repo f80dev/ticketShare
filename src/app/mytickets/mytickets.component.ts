@@ -20,16 +20,11 @@ export class MyticketsComponent implements  OnChanges {
   }
 
   refresh(){
-    // var idevent="";
 
-    // this.api.use(this.config.user.address,idevent).subscribe((r:any)=>{
-    //   this.message="";
-    //   this.tickets=r;
-    // });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // if(this._event!=null)this.refresh();
+
   }
 
 }

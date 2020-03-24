@@ -18,6 +18,8 @@ export class MyeventsComponent implements OnInit {
               public config:ConfigService) {
   }
 
+
+
   refresh(){
     this.config.reload_user(()=>{
       if(this.config.user._events.length==1)
@@ -25,6 +27,10 @@ export class MyeventsComponent implements OnInit {
     });
   }
 
+
+  /**
+   *
+   */
   ngOnInit() {
     checkConfig(this);
     this.refresh();

@@ -19,6 +19,7 @@
   </mat-card-content>
   <mat-card-actions *ngIf="showAction">
     <button class="app-button"
+            *ngIf="transferable"
             mat-button mat-flat-button mat-icon-button
             (click)="openShare(ticket)">
       <mat-icon>card_giftcard</mat-icon>
