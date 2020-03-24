@@ -186,6 +186,7 @@ export class LoginComponent implements OnInit {
     },(err)=>{
         $$("Il n'y a pas de compte à cet email");
         this.email=data.email;
+        this.message="";
         this.api.setuser(this.config.user.address, {
           "email": data.email,
           "pseudo": data.firstname,
@@ -215,6 +216,7 @@ export class LoginComponent implements OnInit {
     this.wait_message="Récupération de votre adresse mail via "+socialPlatform;
     this.socialAuthService.signIn(socialPlatformProvider).then((socialUser) => {
       this.wait_message="";
+      this.message="";
       $$("Resultat de l'authentification ",socialUser);
         this.initUser({"email":socialUser.email,"firstname":socialUser.name.split(" ")[0],"photo":socialUser.image});
       },

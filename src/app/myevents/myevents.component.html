@@ -32,6 +32,7 @@
       <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
     </div>
     <div *ngIf="event?.showTickets" style="width: 100%;">
+      <app-tuto label="Si vous le souhaitez vous pouvez envoyer/offrir vos billets à des amis" icon="card_gift"></app-tuto>
       <app-mytickets style="width:100%;display: flex;flex-wrap: wrap;text-align: center;"
                      [tickets]="event.reserved">
       </app-mytickets>

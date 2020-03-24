@@ -7,7 +7,6 @@
               [subtitle]="ticket.price+'€'"
               [showAction]="ticket.state=='sold'"
               [ticket]="ticket">
-    <app-tuto label="Si vous le souhaitez vous pouvez envoyer vos billets à des amis" icon="shopping_cart"></app-tuto>
     <div *ngIf="ticket.state=='sold'">
       <div *ngIf="ticket.seat!=null">
         <mat-icon>event_seat</mat-icon>&nbsp;
