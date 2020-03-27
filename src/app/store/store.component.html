@@ -56,8 +56,16 @@
                width="100%"
                style="display: inline-block;">
 
+      <app-tuto [if]="event.fictif"
+                label="Cet événement est fictif. Il permet de tester simplement et gratuitement KERBERUS. Il n'est visible que par les utilisateurs ayant le profil de pilote">
+      </app-tuto>
+
+      <app-tuto [if]="!event.preview" label="A tout instant vous pouvez savoir combien de billets sont encore en vente"></app-tuto>
+
+
       <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
            style="width:100%;text-align: left;overflow: hidden;">
+
         <div *ngIf="event.error!=null"><h4>Vérifier votre événement avant de le mettre en ligne :</h4></div>
 
         <span *ngIf="event.error!=null" style="color:red;">
@@ -76,7 +84,6 @@
         <div *ngIf="event.htags?.length>1">
           <small>{{event.htags}}</small><br>
         </div>
-
 
         <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
           {{event.description}}
@@ -260,6 +267,8 @@
     <br><br>
     Aucun événement disponible pour l'instant<br><br>
   </div>
+
+  <app-tuto label="Avec KERBERUS tout le monde peut vendre les billets de ses événements, qu'ils soient payants ou gratuits"></app-tuto>
 
   <br>
   <button class="app-button" style="margin-top: 10px;"

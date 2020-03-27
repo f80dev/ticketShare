@@ -34,6 +34,9 @@ export class ConfigService {
       this.activeBrand=Number(localStorage.getItem("activeBrand"));
   }
 
+
+
+
   async logo(): Promise<string> {
     let conf = await this.getConfig();
     return Promise.resolve(conf.logo);
