@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service';
 import {Router} from '@angular/router';
 import { Location } from '@angular/common';
-import {showMessage, tirage} from '../tools';
+import {showMessage, $$} from '../tools';
 import {ApiService} from '../api.service';
 import {MatSnackBar} from "@angular/material";
 
@@ -14,9 +14,12 @@ import {MatSnackBar} from "@angular/material";
 export class EventeditorComponent implements OnInit {
 
   message="";
+  showCode=false;
   showRefund=false;
   templates:any[]=[];
   selTemplate: any=null;
+  editorOptions = {theme: 'vs-dark', language: 'yaml'};
+  code:string="";
 
   constructor(
     public config:ConfigService,
@@ -24,7 +27,9 @@ export class EventeditorComponent implements OnInit {
     public toaster:MatSnackBar,
     public _location:Location,
     public api:ApiService
-  ) { }
+  ) {}
+
+
 
   ngOnInit() {
     this.api.gettemplates().subscribe((r:any[])=>{
@@ -32,9 +37,18 @@ export class EventeditorComponent implements OnInit {
     });
   }
 
+
+
   openModele(template:any){
     this.selTemplate=template;
+    this.api.get_yaml_code(this.config.user.address,template.filename).subscribe((code:any)=>{
+      if(code.status==200){
+        $$("Code="+code.data);
+        this.code=code.data;
+      }
+    });
   }
+
 
 
   /**
@@ -54,9 +68,19 @@ export class EventeditorComponent implements OnInit {
   }
 
 
+
+
   sendDemo() {
     this.api.send_yaml_demo(this.config.user.email,this.selTemplate.filename).subscribe(()=>{
       showMessage(this,"Consultez votre boite mail");
     })
+  }
+
+  publish() {
+    this.api._post("add_event",this.code).subscribe((r:any)=>{
+      $$("result du add_event=",r);
+      this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
+    })
+
   }
 }

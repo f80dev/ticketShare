@@ -819,6 +819,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+ngx-monaco-editor
+MIT
+
 ngx-paypal
 
 ngx-social-button

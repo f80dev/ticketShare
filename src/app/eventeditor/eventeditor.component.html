@@ -43,14 +43,50 @@
                      pour 'fictivement' acheter des places. C'est un bon moyen de tester gratuitement KERBERUS">
     </app-tuto>
 
-    <img class="image-photo"
-         [src]="selTemplate.visual"
-         style="width:250px;height:250px;">
+    <div *ngIf="!showCode" style="width:100%;text-align: center;font-size: small;">
+      <img class="image-photo"
+           (click)="showCode=true"
+           [src]="selTemplate.visual"
+           style="width:250px;height:250px;">
+      <br>
+
+        <br>
+
+        Adapter ce modèle à votre événement<br>
+        <button class="app-button "
+                style="margin-top: 10px;"
+                mat-button mat-raised-button
+                (click)="showCode=true">
+          Editer
+        </button>
+
+
+    </div>
+
+    <div *ngIf="showCode" style="width:94%;margin-left:3%;">
+      <ngx-monaco-editor [options]="editorOptions"
+                         style="text-align: left;height:400px;"
+                         [(ngModel)]="code">
+      </ngx-monaco-editor>
+      <button class="app-button "
+              style="margin-top: 10px;"
+              mat-button mat-raised-button
+              (click)="showCode=false">
+        Fermer
+      </button>
+      &nbsp;
+      <button class="app-button "
+              style="margin-top: 10px;"
+              mat-button mat-raised-button
+              (click)="publish()">
+        Publier
+      </button>
+    </div>
 
     <br>
     <br>
 
-    <table style="width: 100%;">
+    <table style="width: 100%;" *ngIf="!showCode">
       <tr style="font-size: small;">
         <td style="width: 50%;">Créer un évenement fictif depuis ce modèle.<br>Cet évenement ne sera visible que des clients pilotes</td>
         <td></td>
@@ -77,7 +113,7 @@
                   *ngIf="config.user?.email"
                   mat-button mat-raised-button
                   (click)="sendDemo()">
-              Modifier ce modèle
+              Recevoir ce modèle
           </button>
         </td>
       </tr>

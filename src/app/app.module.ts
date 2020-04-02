@@ -65,6 +65,7 @@ import { PromoComponent } from './promo/promo.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { OfferComponent } from './offer/offer.component';
 import { SearchComponent } from './search/search.component';
+import {MonacoEditorModule} from "ngx-monaco-editor";
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -119,6 +120,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PickerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MonacoEditorModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     ImageCropperModule,
     SocketIoModule.forRoot(config),

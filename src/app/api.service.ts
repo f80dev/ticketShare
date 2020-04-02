@@ -16,6 +16,10 @@ export class ApiService {
     return this.http.get(api(url)).pipe(timeout(_timeoutInSec*1000));
   }
 
+  _post(url,body,_timeoutInSec=60){
+    return this.http.post(api(url),body).pipe(timeout(_timeoutInSec*1000));
+  }
+
   raz() {
     localStorage.removeItem('address');
     return this.http.get(api('raz/hh4271'));
@@ -40,6 +44,12 @@ export class ApiService {
   gettemplates() {
     return this.http.get(api('templates'));
   }
+
+
+  get_yaml_code(user:string,yaml_file:string) {
+    return this.http.get(api('get_yaml_code/'+user+"/"+yaml_file));
+  }
+
 
   getfaqs() {
     return this.http.get(api('faqs'));

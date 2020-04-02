@@ -8,6 +8,7 @@ import {Socket} from "ngx-socket-io";
 import {subscribe_socket,$$,showMessage} from "./tools";
 import {ActivatedRoute, Router} from "@angular/router";
 import Web3 from 'web3';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 // export const WEB3 = new InjectionToken<Web3>('web3', {
 //   providedIn: 'root',
