@@ -63,7 +63,9 @@
 
     </div>
 
-    <div *ngIf="showCode" style="width:94%;margin-left:3%;">
+    <div *ngIf="showCode" style="width:94%;margin-left:3%;touch-action: none;">
+      Vous pouvez directement modifier les paramètres du modèle pour créer votre événement.<br>
+      A la publication, le fichier de votre événement vous sera envoyé sur votre boite mail.
       <ngx-monaco-editor [options]="editorOptions"
                          style="text-align: left;height:400px;"
                          [(ngModel)]="code">

@@ -77,7 +77,7 @@ export class EventeditorComponent implements OnInit {
   }
 
   publish() {
-    this.api._post("add_event",this.code).subscribe((r:any)=>{
+    this.api._post("add_event/"+this.config.user.email,this.code).subscribe((r:any)=>{
       $$("result du add_event=",r);
       this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
     })
