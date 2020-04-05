@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="logo2.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="359.55134"
+     inkscape:cy="542.99275"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4579"
+       transform="matrix(1.13343,0,0,1.13343,-4.7215628,-14.521272)"
+       style="stroke-width:0.88227773"
+       inkscape:export-xdpi="107.79"
+       inkscape:export-ydpi="107.79"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png">
+      <path
+         style="fill:#4d4d4d;stroke:none;stroke-width:0.23343597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 133.14428,103.78947 6.68357,-3.55835 C 122.50767,83.916435 113.53073,78.69842 109.17784,48.738577 l -22.572414,62.426493 -0.0067,21.70244 C 106.98011,94.994691 105.28714,97.337748 133.14428,103.78947 Z"
+         id="path4558"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path4518"
+         d="m 40.066571,103.78947 -6.683564,-3.55835 C 50.703183,83.916435 59.680115,78.69842 64.033017,48.738577 l 22.572409,62.426493 0.0067,21.70244 C 66.230742,94.994691 67.923709,97.337748 40.066571,103.78947 Z"
+         style="fill:#4d4d4d;stroke:none;stroke-width:0.23343597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccccccc"
+         inkscape:connector-curvature="0"
+         id="path4522"
+         d="M 102.00105,78.967027 95.108513,59.123277 87.494324,79.271265 86.340459,79.250505 79.281193,58.745298 71.112261,79.941607 84.386784,122.0563 h 4.339751 z"
+         style="fill:#000000;stroke:#000000;stroke-width:0.23343597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.16016388px;line-height:1.25;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none"
+       x="34.740993"
+       y="147.19635"
+       id="text4562"
+       transform="scale(0.91467558,1.0932838)"
+       inkscape:export-xdpi="107.79"
+       inkscape:export-ydpi="107.79"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png"><tspan
+         sodipodi:role="line"
+         id="tspan4560"
+         x="34.740993"
+         y="147.19635"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.16016388px;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none">KERBERUS</tspan></text>
+  </g>
+</svg>

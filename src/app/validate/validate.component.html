@@ -11,7 +11,7 @@
     </button>
     <br>
 
-    <app-scanner [size]="200"
+    <app-scanner [size]="300"
                  (click)="showScanner=false"
                  *ngIf="showScanner"
                  (flash)="onflash_event($event)">
@@ -51,7 +51,6 @@
 
 
 
-
     <div *ngIf="_event?.validate.checkers?.length>1" style="width: 100%;text-align: center;">
       <h2>Liste des valideurs</h2>
       <table style="display: inline-block;">
@@ -68,7 +67,6 @@
 
       <br>
     </div>
-
 
 
     <button class="app-button" mat-button mat-raised-button
