@@ -20,6 +20,7 @@ export class EventeditorComponent implements OnInit {
   selTemplate: any=null;
   editorOptions = {theme: 'vs-dark', language: 'yaml'};
   code:string="";
+  private showPublish: boolean=false;
 
   constructor(
     public config:ConfigService,
@@ -82,5 +83,20 @@ export class EventeditorComponent implements OnInit {
       this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
     })
 
+  }
+
+  check_event() {
+    this.api._post("check_event",this.code).subscribe((result)=>{
+      showMessage(this,"Evénement correct");
+      this.showPublish=true;
+    },(err:any)=>{
+      showMessage(this,err.error.message);
+      this.showPublish=false;
+    });
+  }
+
+
+  updateCode(event){
+    this.showPublish=false;
   }
 }

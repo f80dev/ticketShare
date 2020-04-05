@@ -63,25 +63,34 @@
 
     </div>
 
-    <div *ngIf="showCode" style="width:94%;margin-left:3%;touch-action: none;">
+    <div *ngIf="showCode" style="width:94%;margin-left:3%;touch-action: none;" (keypress)="updateCode($event)">
       Vous pouvez directement modifier les paramètres du modèle pour créer votre événement.<br>
       A la publication, le fichier de votre événement vous sera envoyé sur votre boite mail.
       <ngx-monaco-editor [options]="editorOptions"
                          style="text-align: left;height:400px;"
                          [(ngModel)]="code">
       </ngx-monaco-editor>
-      <button class="app-button "
+      <button class="app-button"
               style="margin-top: 10px;"
               mat-button mat-raised-button
               (click)="showCode=false">
         Fermer
       </button>
       &nbsp;
-      <button class="app-button "
+      <button class="app-button"
               style="margin-top: 10px;"
+              *ngIf="showPublish"
               mat-button mat-raised-button
               (click)="publish()">
         Publier
+      </button>
+      &nbsp;
+      <button class="app-button"
+              style="margin-top: 10px;"
+              *ngIf="!showPublish"
+              mat-button mat-raised-button
+              (click)="check_event()">
+        Vérifier
       </button>
     </div>
 

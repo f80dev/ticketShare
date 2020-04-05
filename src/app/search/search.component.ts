@@ -24,8 +24,8 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  onEnter(event){
-    if(event.keyCode==13){
+  onEnter(event=null){
+    if(event==null || event.keyCode==13){
       this.api.search(this.query).subscribe((r:any)=>{
         this._events=r;
       });

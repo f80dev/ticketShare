@@ -16,8 +16,16 @@
     >
   </mat-form-field>
 
-  <div *ngIf="query.length==0">
+
     <div id="toolbar">
+      <button class="app-button"
+              id="cmdSearch"
+              *ngIf="query.length>2"
+              mat-button mat-raised-button
+              (click)="onEnter({keyCode:13})">
+        Rechercher
+      </button>
+      &nbsp;
       <button class="app-button"
               id="cmdShowAll"
               title="Vous tous les événements"
@@ -28,18 +36,23 @@
     </div>
     <br>
     <br>
-    <app-tuto position="center"
-              label="KERBERUS peut gérer les billets de vos propres événements">
-    </app-tuto>
-    <button class="app-button" style="margin-top: 10px;"
-            *ngIf="config.user?.offer?.create_event"
-            id="cmdCreateEvent"
-            title="Créer un événement depuis les modèles disponibles"
-            mat-button mat-raised-button
-            (click)="openEventEditor()">
-      Créer votre événement
-    </button>
-  </div>
+
+    <div *ngIf="query.length==0">
+      <app-tuto position="center"
+                label="KERBERUS peut gérer les billets de vos propres événements">
+      </app-tuto>
+
+      <button class="app-button" style="margin-top: 10px;"
+              *ngIf="config.user?.offer?.create_event"
+              id="cmdCreateEvent"
+              title="Créer un événement depuis les modèles disponibles"
+              mat-button mat-raised-button
+              (click)="openEventEditor()">
+        Créer votre événement
+      </button>
+
+    </div>
+
 
 
 
