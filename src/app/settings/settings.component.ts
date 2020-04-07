@@ -4,7 +4,8 @@ import {ApiService} from "../api.service";
 import {Router} from "@angular/router";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 import {MatDialog} from "@angular/material";
-import {showMessage} from "../tools";
+import {api,showMessage} from "../tools";
+
 
 @Component({
   selector: 'app-settings',
@@ -68,6 +69,7 @@ export class SettingsComponent implements OnInit {
   }
 
   makeCard() {
-    //TODO: ici le code permettant d'imprimer le QRCODE et la photo
+    showMessage(this,"Vos billets sont disponibles sur cette carte qu'il vous suffit de montrer à l'entrée des événements pour lesquels vous avez acheté des billets");
+    open(api("build_card/"+this.config.user.address),"_blank");
   }
 }

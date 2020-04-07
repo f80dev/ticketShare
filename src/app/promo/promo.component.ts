@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {showMessage,sendToPrint} from "../tools";
+import {showMessage,api} from "../tools";
 import {NgNavigatorShareService} from "ng-navigator-share";
 import {ClipboardService} from "ngx-clipboard";
 import {ApiService} from "../api.service";
@@ -56,8 +56,11 @@ export class PromoComponent implements OnInit {
       });
   }
 
+
   openPrinter(_event:any){
-    sendToPrint("print-section");
+    //sendToPrint("print-section");
+    debugger;
+    open(api("build_affiche/"+_event._id),"_blank")
   }
 
 

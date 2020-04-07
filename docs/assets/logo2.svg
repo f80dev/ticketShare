@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="359.55134"
-     inkscape:cy="542.99275"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="498.74754"
+     inkscape:cy="572.47987"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -54,32 +54,24 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <g
-       id="g4579"
-       transform="matrix(1.13343,0,0,1.13343,-4.7215628,-14.521272)"
-       style="stroke-width:0.88227773"
-       inkscape:export-xdpi="107.79"
-       inkscape:export-ydpi="107.79"
-       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png">
-      <path
-         style="fill:#4d4d4d;stroke:none;stroke-width:0.23343597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 133.14428,103.78947 6.68357,-3.55835 C 122.50767,83.916435 113.53073,78.69842 109.17784,48.738577 l -22.572414,62.426493 -0.0067,21.70244 C 106.98011,94.994691 105.28714,97.337748 133.14428,103.78947 Z"
-         id="path4558"
-         inkscape:connector-curvature="0"
-         sodipodi:nodetypes="cccccc" />
-      <path
-         sodipodi:nodetypes="cccccc"
-         inkscape:connector-curvature="0"
-         id="path4518"
-         d="m 40.066571,103.78947 -6.683564,-3.55835 C 50.703183,83.916435 59.680115,78.69842 64.033017,48.738577 l 22.572409,62.426493 0.0067,21.70244 C 66.230742,94.994691 67.923709,97.337748 40.066571,103.78947 Z"
-         style="fill:#4d4d4d;stroke:none;stroke-width:0.23343597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="ccccccccc"
-         inkscape:connector-curvature="0"
-         id="path4522"
-         d="M 102.00105,78.967027 95.108513,59.123277 87.494324,79.271265 86.340459,79.250505 79.281193,58.745298 71.112261,79.941607 84.386784,122.0563 h 4.339751 z"
-         style="fill:#000000;stroke:#000000;stroke-width:0.23343597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    </g>
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path1389"
+       d="m 146.06057,103.11683 7.57535,-4.033144 C 134.00471,80.592133 133.09041,85.639188 128.1567,51.681803 l -34.844642,59.794747 -0.0076,24.5982 C 116.40531,93.148561 114.48645,95.804252 146.06057,103.11683 Z"
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 40.572973,103.11683 32.997621,99.083686 C 52.628828,80.592133 53.543135,85.639188 58.476845,51.681803 l 34.844662,59.794747 0.0076,24.5982 C 70.228229,93.148561 72.147089,95.804252 40.572973,103.11683 Z"
+       id="path4518"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 114.44732,74.982325 105.07249,52.490824 94.716113,75.327158 93.146694,75.303628 83.545099,52.062411 72.4342,76.086944 90.489421,123.821 h 5.902672 z"
+       id="path4522"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.16016388px;line-height:1.25;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none"
