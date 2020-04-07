@@ -117,12 +117,22 @@
       </div>
 
       <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdBuy"
-                *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1"
-                (click)="buy(event)">
-          Acheter
-        </button>
+        <div *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1">
+          <button class="app-button" mat-button mat-flat-button
+                  name="cmdBuy"
+
+                  (click)="buy(event)">
+            Acheter
+          </button>
+
+          <button class="app-button" mat-button mat-flat-button
+                  ngxClipboard [cbContent]="event.share_link"
+                  name="cmdShare"
+                  (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
+            Partager
+          </button>
+        </div>
+
 
         <button class="app-button" mat-button mat-flat-button
                 name="cmdEnSavoirPlus"
@@ -131,41 +141,45 @@
           En savoir plus
         </button>
 
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdPreview"
-                *ngIf="event.owner==config.user?.address && !event.preview"
-                (click)="preview(event)">
-          Preview
-        </button>
+        <!--Panel destiner à l'organisateur-->
+        <div *ngIf="event.owner==config.user?.address">
+          <button class="app-button" mat-button mat-flat-button
+                  name="cmdPreview"
+                  *ngIf="!event.preview"
+                  (click)="preview(event)">
+            Preview
+          </button>
 
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdSales"
-                *ngIf="event.owner==config.user?.address && event.preview"
-                (click)="sales(event)">
-          Ventes
-        </button>
+          <button class="app-button" mat-button mat-flat-button
+                  name="cmdSales"
+                  (click)="sales(event)">
+            Ventes
+          </button>
+
+          <button class="app-button" mat-button mat-flat-button
+                  ngxClipboard [cbContent]="event.share_link"
+                  name="cmdShare"
+                  (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
+            Promotion
+          </button>
 
 
-         <button class="app-button" mat-button mat-flat-button
-                 name="cmdGraph"
-                *ngIf="event.owner==config.user?.address && event.state=='close'"
-                (click)="ongraph(event)">
-          Graph
-         </button>
+          <button class="app-button" mat-button mat-flat-button
+                  name="cmdGraph"
+                  *ngIf="event.state=='close'"
+                  (click)="ongraph(event)">
+            Graph
+          </button>
 
-         <button class="app-button" mat-button mat-flat-button
-                 ngxClipboard [cbContent]="event.share_link"
-                 name="cmdShare"
-                (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
-          Promotion
-         </button>
 
-         <button class="app-button" mat-button mat-flat-button
-                *ngIf="event.owner==config.user?.address"
-                 name="cmdCancelEvent"
-                (click)="cancel(event)">
-           Annuler
-         </button>
+          <button class="app-button" mat-button mat-flat-button
+                  name="cmdCancelEvent"
+                  (click)="cancel(event)">
+            Annuler
+          </button>
+
+        </div>
+
 
         <button class="app-button" mat-button mat-flat-button
                 *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"

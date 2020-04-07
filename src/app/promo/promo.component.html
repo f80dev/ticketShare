@@ -1,10 +1,14 @@
 <div class="mainform" style="margin-left:10%;width:80%;">
   <br>
-  <h2>Faites la promotions de {{_event.name}}</h2>
+  <h2>Faites connaître {{_event.name}}</h2>
+  <app-tuto [if]="config.user?.address!=_event?.owner" label="KERBERUS vous permet de partager le lien de l'événement"></app-tuto>
+  <app-tuto [if]="config.user?.address==_event?.owner"
+            label="KERBERUS vous simplifie la fabrication du visuel de votre événement en produisant un fichier contenant l'ensemble des éléments nécéssaire à la réalisation d'une affiche">
+  </app-tuto>
 
   <button class="app-button" mat-button mat-flat-button
           ngxClipboard [cbContent]="_event?.share_link"
-          (click)="share(_event)">
+          (click)="share_event(_event)">
     Partager le lien
   </button>
 

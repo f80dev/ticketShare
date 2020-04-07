@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service';
 import {Router} from '@angular/router';
 import { Location } from '@angular/common';
-import {showMessage, $$} from '../tools';
+import {showMessage, $$, checkLogin} from '../tools';
 import {ApiService} from '../api.service';
 import {MatSnackBar} from "@angular/material";
 
@@ -33,6 +33,7 @@ export class EventeditorComponent implements OnInit {
 
 
   ngOnInit() {
+    checkLogin(this.router);
     this.api.gettemplates().subscribe((r:any[])=>{
       this.templates=r;
     });

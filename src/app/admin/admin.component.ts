@@ -42,7 +42,9 @@ export class AdminComponent implements OnInit {
 
   raz(){
     this.api.raz().subscribe(()=>{
-      checkLogin(this.router);
+      localStorage.removeItem("address");
+      setTimeout(()=>{window.location.reload();},500);
+      this.router.navigate(["home"]);
     });
   }
 

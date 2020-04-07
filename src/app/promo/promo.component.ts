@@ -44,11 +44,14 @@ export class PromoComponent implements OnInit {
   }
 
 
-  share(event:any){
+  share_event(event:any){
     this.ngNavigatorShareService.share({title: event.name,text: "Outil de validation des billets",url: event.share_link})
-      .then( (response) => {console.log(response);})
+      .then( (response) => {console.log(response);},()=>{
+        this._clipboardService.copyFromContent(event.share_link);
+        showMessage(this,"Lien promotionel disponible dans le presse-papier");
+      })
       .catch( (error) => {
-        this._clipboardService.copyFromContent(event.share_link)
+        this._clipboardService.copyFromContent(event.share_link);
         showMessage(this,"Lien promotionel disponible dans le presse-papier");
       });
   }

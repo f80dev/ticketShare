@@ -26,7 +26,8 @@
     Evénement terminé
   </div>
 
-  <app-tuto label="Ici, sont listés l'ensemble des billets que vous possédez."></app-tuto>
+  <app-tuto label="Après achat, KERBERUS sécurise votre achat. Ce traitement peut prendre quelques minutes"></app-tuto>
+
   <div *ngIf="event.state!='reserved' && event.state!='cancel' && event.state!='closed'">
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
       <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>

@@ -66,4 +66,8 @@ export class SettingsComponent implements OnInit {
   changeOffer() {
     this.router.navigate(["offer"]);
   }
+
+  makeCard() {
+    //TODO: ici le code permettant d'imprimer le QRCODE et la photo
+  }
 }

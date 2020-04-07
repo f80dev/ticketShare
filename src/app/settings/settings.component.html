@@ -35,8 +35,19 @@
     <input matInput placeholder="Roger" [value]="config.user?.pseudo">
   </mat-form-field>
 
-
+  <br>
+  <button class="app-button"
+          id="cmdMakeCard"
+          title="Vous permet de vous fabriquer une version physique de votre wallet"
+          *ngIf="config.user.photo?.length>0"
+          mat-button mat-raised-button
+          (click)="makeCard()">
+    <div class="bloc-bouton">Fabriquer<br>une carte</div>
+  </button>
   <br><br>
+  <hr>
+  <br>
+
 
 
   <h2>Vous avez l'offre <strong>{{config.user.offer.name}}</strong></h2>

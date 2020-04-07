@@ -58,12 +58,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+
   next() {
     clearTimeout(this.handle);
     if (this.redirect == null)
       this.router.navigate(["search"]);
     else {
-      if (this.redirect == "back")
+      if (this.redirect == "back" || this.config.user.email.length==0)
         this._location.back();
       else
         this.router.navigateByUrl(this.redirect);
