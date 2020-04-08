@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
     if(url!=null && url.indexOf("?")>=0) {
       url= this._location.path().split("?")[1];
       $$('Récupération des paramètres', url);
-      for(let param of ["command","event","privatekey","address"]){
+      for(let param of ["command","event","privatekey","address","faq"]){
         if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
       }
     }
@@ -237,13 +237,13 @@ export class AppComponent implements OnInit {
           }
         }
 
-
+        if(p.hasOwnProperty("faq")){
+          this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
+        }
 
         if(p["command"]=="myevents"){
           this.router.navigate(["myevents"]);
         }
-
-
 
       });
       if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();

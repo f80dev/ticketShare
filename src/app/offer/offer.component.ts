@@ -10,6 +10,9 @@ import {ApiService} from "../api.service";
 })
 export class OfferComponent implements OnInit {
 
+  offers:any[]=[];
+  select_offer:any=null;
+
   constructor(
     public config:ConfigService,
     public api:ApiService,
@@ -17,6 +20,9 @@ export class OfferComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.api._get("offers").subscribe((r:any)=>{
+      this.offers=r.result;
+    })
   }
 
 }

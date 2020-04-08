@@ -92,6 +92,8 @@ export class StoreComponent implements OnInit {
       this.filterEvent=params.get("event");
       this.api.getevent(this.filterEvent).subscribe((r:any)=>{
         this.showLanding=(r.landing_page.length>0);
+        if(this.showLanding)
+          setTimeout(()=>{this.showLanding=false;},4000);
       });
     }
 
