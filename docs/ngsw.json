@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1586269401806,
+  "timestamp": 1586350391975,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -35,6 +35,11 @@
         "https://app.kerberus.tech/assets/icons/icon-512x512.png",
         "https://app.kerberus.tech/assets/icons/icon-72x72.png",
         "https://app.kerberus.tech/assets/icons/icon-96x96.png",
+        "https://app.kerberus.tech/assets/img/cinema.jpg",
+        "https://app.kerberus.tech/assets/img/concert.jpg",
+        "https://app.kerberus.tech/assets/img/football.jpg",
+        "https://app.kerberus.tech/assets/img/musee.jpg",
+        "https://app.kerberus.tech/assets/img/tickets.jpg",
         "https://app.kerberus.tech/assets/img/tips.png",
         "https://app.kerberus.tech/assets/ko.mp3",
         "https://app.kerberus.tech/assets/logo.png",
@@ -129,7 +134,7 @@
   "dataGroups": [],
   "hashTable": {
     "https://app.kerberus.tech/assets/2020030101moteur-recherche-image.odt": "fadcc91de6596380bb8f8ed516316a31022100b4",
-    "https://app.kerberus.tech/assets/config.json": "5d5e5b34eb89cdb9f88d89dad1529710bfe113a8",
+    "https://app.kerberus.tech/assets/config.json": "2e7f570682e0941462405770eea34fe01b8f0430",
     "https://app.kerberus.tech/assets/ether.png": "44bd7798d73172b5420215c8c5c1a281a8985cbe",
     "https://app.kerberus.tech/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://app.kerberus.tech/assets/icons/icon-128x128.png": "5ee8380c6e53d771872333cb93449126544c9b6b",
@@ -140,6 +145,11 @@
     "https://app.kerberus.tech/assets/icons/icon-512x512.png": "ae29adbbceff49320652acf44c4b056a60ae60f6",
     "https://app.kerberus.tech/assets/icons/icon-72x72.png": "6e6b171087693c8e778ba787ab944a035c71ab4e",
     "https://app.kerberus.tech/assets/icons/icon-96x96.png": "6435c040da572c340c6e789479ef67e3331418b5",
+    "https://app.kerberus.tech/assets/img/cinema.jpg": "6630ded2f7465d24ae4b67c7d907aeee7bd96eec",
+    "https://app.kerberus.tech/assets/img/concert.jpg": "009e34992c3e5d2bf4c78715049655ea735ae666",
+    "https://app.kerberus.tech/assets/img/football.jpg": "8bfa4face9b207fa0612060bd0ffcec786f5407f",
+    "https://app.kerberus.tech/assets/img/musee.jpg": "c07358e175af25de62c972e5dda23bd9a9a563b0",
+    "https://app.kerberus.tech/assets/img/tickets.jpg": "70bd0b71b15217de7702ede51d86609084f70942",
     "https://app.kerberus.tech/assets/img/tips.png": "f7b9e7372227902dd4cc5e68d5a2239cb1c4ad18",
     "https://app.kerberus.tech/assets/ko.mp3": "8cddaacaec46cdca7b80e8a51310af4703f96610",
     "https://app.kerberus.tech/assets/logo.png": "30c946bda4297a37d0ab55101fb7d7d5491423e6",
