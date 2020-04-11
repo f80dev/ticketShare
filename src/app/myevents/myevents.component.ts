@@ -19,7 +19,6 @@ export class MyeventsComponent implements OnInit {
   }
 
 
-
   refresh(){
     this.config.reload_user(()=>{
       if(this.config.user._events.length==1)
@@ -49,6 +48,11 @@ export class MyeventsComponent implements OnInit {
       this.refresh();
     });
   }
+
+
+
+
+
 
   myplaces(event) {
     event["showTickets"]=true;

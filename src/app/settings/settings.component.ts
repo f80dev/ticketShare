@@ -72,4 +72,8 @@ export class SettingsComponent implements OnInit {
     showMessage(this,"Vos billets sont disponibles sur cette carte qu'il vous suffit de montrer à l'entrée des événements pour lesquels vous avez acheté des billets");
     open(api("build_card/"+this.config.user.address),"_blank");
   }
+
+  openWallet() {
+    this.router.navigate(["wallet"]);
+  }
 }

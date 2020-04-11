@@ -18,12 +18,17 @@
       <strong>{{_event.name}}</strong>
       <span *ngIf="_event.fictif">&nbsp;<small>(fictif)</small></span>
       <br>
-      <span *ngIf="_event.expanded"><small>{{_event.salle}}</small></span>
+      <span *ngIf="_event.expanded">
+        <small>{{_event.salle}}</small>
+        <span *ngIf="_event.delayInSec<3600*5">{{_event.delayInSec/3600 | number:'1.0-1'}} heures</span>
+      </span>
       <div *ngIf="!_event.expanded" style="margin:0;padding:0">
         <app-hourglass style="font-size: small" [message]="message"></app-hourglass>
-        <span *ngIf="_event.error!=null && _event.error.message!=null && _event.treatment?.length==0" style="color: red;">{{_event.error.message}}</span>
+        <span *ngIf="_event.error!=null && _event.error.message!=null && _event.treatment?.length==0"
+              style="color: red;">
+          {{_event.error.message}}
+        </span>
       </div>
-
     </div>
 
   </mat-expansion-panel-header>

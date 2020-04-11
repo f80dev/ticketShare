@@ -85,7 +85,7 @@
           <small>{{event.htags}}</small><br>
         </div>
 
-        <div *ngIf="event.description?.length>0" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
+        <div *ngIf="event.description?.length>0 && event.owner!=config.user?.address" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
           {{event.description}}
         </div>
 

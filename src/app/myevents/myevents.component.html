@@ -1,6 +1,8 @@
-<div *ngIf="config.user?._events==null || config.user?._events?.length==0"
-     class="mainform">
-  <br>Vous n'avez pas de billets
+<div class="mainform">
+
+
+<div *ngIf="config.user?._events==null || config.user?._events?.length==0" >
+  <br>Actuellement, vous n'avez pas de billets.
   <br><br>
   <button class="app-button" mat-button mat-raised-button (click)="router.navigate(['store'])">Billeterie</button>
 
@@ -15,9 +17,26 @@
   </qr-code>
 </div>
 
+<div *ngIf="config.user.nextEvent<7000">
+  Présenter ce QRCode au contrôle des billets<br>
+  <qr-code [size]="150"
+
+           style="display: inline-block;vertical-align: middle;"
+           title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
+           ngxClipboard
+           [cbContent]="config.user?.address"
+           [value]="config.user?.address">
+  </qr-code>
+</div>
+
 
 <!--Affichage de l'événement-->
-<app-event width="95%" maxwidth="600px" height="0" *ngFor="let event of config.user?._events" [event]="event">
+
+<app-event width="95%"
+           maxwidth="600px"
+           height="0"
+           *ngFor="let event of config.user?._events"
+           [event]="event">
   <div *ngIf="event.state=='cancel'">
     Evénement annulé
   </div>
@@ -34,9 +53,10 @@
     </div>
     <div *ngIf="event?.showTickets" style="width: 100%;">
       <app-tuto label="Si vous le souhaitez vous pouvez envoyer/offrir vos billets à des amis" icon="card_gift"></app-tuto>
-      <app-mytickets style="width:100%;display: flex;flex-wrap: wrap;text-align: center;"
+      <app-mytickets style="width:100%;display: flex;flex-wrap: wrap;justify-content: center;"
                      [tickets]="event.reserved">
       </app-mytickets>
     </div>
   </div>
 </app-event>
+</div>
