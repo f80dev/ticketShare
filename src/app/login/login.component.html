@@ -2,7 +2,7 @@
 <div class="mainform" style="margin-left:10%;width:80%;">
   <br><br>
   <span *ngIf="message && messageCode.length==0">{{message}}</span><br><br>
-  <app-hourglass [message]="wait_message"></app-hourglass>
+  <app-hourglass maxwidth="300px" [message]="wait_message"></app-hourglass>
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
