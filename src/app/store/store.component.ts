@@ -74,8 +74,7 @@ export class StoreComponent implements OnInit {
           e["preview"]=true;
           e["showDate"]=false;
 
-          debugger;
-          if(e["owner"]==this.config.user.address || e["onstore"]*1000>now())
+          if(e["owner"]==this.config.user.address || e["onstore"]*1000<new Date().getTime())
             this.events.push(e);
         }
       }

@@ -99,6 +99,9 @@ export function isToday(d){
   return diff==0;
 }
 
+
+
+
 export function now(){
   return new Date().getTime();
 }
