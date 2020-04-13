@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConfigService} from "../config.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-about',
@@ -8,7 +9,7 @@ import {ConfigService} from "../config.service";
 })
 export class AboutComponent implements OnInit {
 
-  constructor(public config:ConfigService) { }
+  constructor(public config:ConfigService,public router: Router) { }
 
   visible=false;
   @Input("withlogo") withlogo=true;

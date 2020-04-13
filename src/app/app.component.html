@@ -7,7 +7,7 @@
           image="https://app.kerberus.tech/assets/logo_sanstitre.png">
 </app-tuto>
 
-<mat-toolbar style="height:40px;">
+<mat-toolbar style="height:40px;" (mousedown)="closeMenu()">
   <mat-icon *ngIf="config.width_screen<=800"
             id="cmdMenu"
             (click)="drawer.toggle()"
@@ -32,7 +32,7 @@
     <app-home *ngIf="message.length==0" (click)="closeMenu()"></app-home>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content" (mousedown)="closeMenu()">
     <app-hourglass [message]="message"></app-hourglass>
     <router-outlet *ngIf="message.length==0"></router-outlet>
   </div>

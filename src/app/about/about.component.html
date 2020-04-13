@@ -10,9 +10,9 @@
           [ngStyle]="{'width':logosize,'margin':'15px'}">
         <br>
       </div>
-      <table style="display: inline-block;text-align: left;">
+      <table style="display: inline-block;width:90%;text-align: left;">
         <tr><td>Réalisation</td>
-          <td>:
+          <td style="width: 50%;">
             <a style="color:lightgray;font-variant: normal;font-weight: normal;" [href]="config.values.editor?.link_author" target="_blank">
               {{config.values.editor?.author}}
             </a>
@@ -20,9 +20,17 @@
         </tr>
         <tr>
           <td>Edition</td>
-          <td>:
+          <td style="width: 50%;">
             <a style="color:lightgray;font-variant: normal;font-style: normal;font-weight: normal;" [href]="config.values.editor?.website" target="_blank">
               <strong>{{config.values.editor?.name}}</strong>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>Conditions générales</td>
+          <td style="width: 50%;">
+            <a style="color:lightgray;font-variant: normal;font-style: normal;font-weight: normal;" title="Conditions d'utilisation" mat-list-item routerLink="cgu" id="cmdCGU">
+              CGU
             </a>
           </td>
         </tr>
