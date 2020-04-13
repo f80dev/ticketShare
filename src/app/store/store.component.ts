@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {$$, openGraph, showMessage, subscribe_socket, askForAuthent} from "../tools";
+import {$$, openGraph, showMessage, subscribe_socket, askForAuthent,now} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
@@ -73,7 +73,10 @@ export class StoreComponent implements OnInit {
 
           e["preview"]=true;
           e["showDate"]=false;
-          this.events.push(e);
+
+          debugger;
+          if(e["owner"]==this.config.user.address || e["onstore"]*1000>now())
+            this.events.push(e);
         }
       }
     },(err)=>{
