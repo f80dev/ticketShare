@@ -18,7 +18,9 @@
 
 
   <div *ngIf="selTemplate==null">
-    Sélectionner un modèle d'événement:<br><br>
+    Sélectionner un modèle d'événement
+    <app-faq-link faq="build_event"></app-faq-link>
+    <br><br>
     <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
       <div *ngFor="let template of templates"
            name="template"

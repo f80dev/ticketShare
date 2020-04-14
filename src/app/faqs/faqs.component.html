@@ -5,7 +5,12 @@
                        style="width:96%;margin:2%;">
 
     <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
-      <h3>{{faq.title}}</h3>
+      <span *ngIf="!faq.visible">
+        {{faq.title}}
+      </span>
+      <span *ngIf="faq.visible" style="color:blue">
+        {{faq.title}}
+      </span>
     </mat-expansion-panel-header>
 
     <div style="height:auto;">

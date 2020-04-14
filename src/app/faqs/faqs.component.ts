@@ -8,6 +8,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./faqs.component.sass']
 })
 export class FaqsComponent implements OnInit {
+  //Le parametre "open" permet d'ouvrir la FAQ
 
   faqs:any[]=[];
 
@@ -18,11 +19,11 @@ export class FaqsComponent implements OnInit {
   ngOnInit() {
     this.api.getfaqs().subscribe((faqs:any[])=>{
       var params = this.route.snapshot.queryParamMap;
-
       if(!params.has("open"))params["open"]="";
 
       for(let i=0;i<faqs.length;i++){
-        if(faqs[i]["index"]==params["open"]){
+        if(faqs[i]["index"]==params["params"]["open"]){
+
           faqs[i]["visible"]=true;
         }else{
           faqs[i]["visible"]=false;

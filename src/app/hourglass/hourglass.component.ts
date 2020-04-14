@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-hourglass',
@@ -10,12 +11,16 @@ export class HourglassComponent implements OnInit {
   @Input("message") message="";
   @Input("canCancel") canCancel=false;
   @Input("maxwidth") maxwidth="100vw";
+  @Input("faq") faq="";
   @Input("fontsize") fontsize="medium";
   @Output('cancel') oncancel: EventEmitter<any>=new EventEmitter();
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
   }
 
+  openfaq() {
+    this.router.navigate(["faq"],{queryParams:{open:this.faq}});
+  }
 }

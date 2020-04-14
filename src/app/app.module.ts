@@ -66,6 +66,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { OfferComponent } from './offer/offer.component';
 import { SearchComponent } from './search/search.component';
 import {MonacoEditorModule} from "ngx-monaco-editor";
+import { FaqLinkComponent } from './faq-link/faq-link.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -105,7 +106,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PromoComponent,
     FaqsComponent,
     OfferComponent,
-    SearchComponent
+    SearchComponent,
+    FaqLinkComponent
   ],
   entryComponents: [
     PromptComponent,

@@ -1,6 +1,8 @@
 <app-hourglass [message]="message"></app-hourglass>
 <div style="width:96%;margin-left:2%;text-align: center;" *ngIf="message.length==0">
-  <h3>Validation pour {{_event?.name}}</h3>
+  <h3>Validation pour {{_event?.name}}
+    <app-faq-link faq="validate"></app-faq-link>
+  </h3>
 
   <div *ngIf="config.webcamsAvailable>0">
 

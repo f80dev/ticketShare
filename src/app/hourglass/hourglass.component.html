@@ -7,8 +7,12 @@
       <td [ngStyle]="{'text-align': 'left','font-size':fontsize}">
         {{message}}
       </td>
+
       <td *ngIf="canCancel" style="text-align: right;cursor: pointer;">
         <mat-icon (click)="oncancel.emit()">cancel</mat-icon>
+      </td>
+      <td *ngIf="faq?.length>0" style="text-align: right;cursor: pointer;">
+        <mat-icon (click)="openfaq()">help</mat-icon>
       </td>
     </tr>
   </table>
