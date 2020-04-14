@@ -1,3 +1,6 @@
+<div class="mainform">
+
+
 <app-hourglass [message]="message"></app-hourglass>
 
 <div *ngIf="showLanding && events?.length>0"
@@ -7,7 +10,7 @@
        style="width:100%;height:100%;object-fit: cover;">
 </div>
 
-<div class="mainform" *ngIf="!showLanding">
+<div *ngIf="!showLanding">
 
   <app-tuto label="Retrouvez ici l'ensemble des événements disponibles sur {{config.values.appname}}"></app-tuto>
   <!--Zone de filtre-->
@@ -152,6 +155,7 @@
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
+                  *ngIf="event.preview"
                   (click)="sales(event)">
             Ventes
           </button>
@@ -290,14 +294,15 @@
 
   <br>
   <button class="app-button" style="margin-top: 10px;"
-          *ngIf="config.user?.offer?.create_event"
+          *ngIf="config.user?.offer?.create_event && message?.length==0"
           id="cmdCreateEvent"
           title="Créer un événement depuis les modèles disponibles"
           mat-button mat-raised-button
           (click)="openEventEditor()">
-    Créer votre événement
+    Créer un événement
   </button>
 
 
 
+</div>
 </div>

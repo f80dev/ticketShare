@@ -7,7 +7,7 @@
   <table style="width:80%;max-width: 400px;text-align: left;margin-left:10%;">
     <tr>
       <td>
-        Sur votre compte, vous disposez de
+        Solde de votre compte
       </td>
       <td style="text-align: right;">
         {{config.user?.money | number:'1.0-1'}}€
@@ -16,7 +16,7 @@
 
     <tr *ngIf="order?.nb_places>0">
       <td>
-        Vous souhaitez {{order?.nb_places}} places pour un total de
+        {{order?.nb_places}} places pour un total de
       </td>
       <td style="text-align: right;">
           -{{order?.total | number:'1.0-1'}}€
@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <td>
-        Solde après achat
+        Solde restant après achat
       </td>
       <td style="text-align: right;">
         {{this.config.user.money-this.order.total | number:'1.0-1'}}€

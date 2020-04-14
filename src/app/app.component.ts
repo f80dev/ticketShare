@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfigService} from './config.service';
 import {MatDialog, MatSidenav, MatSidenavContainer, MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
@@ -9,6 +9,7 @@ import {subscribe_socket,$$,showMessage} from "./tools";
 import {ActivatedRoute, Router} from "@angular/router";
 import Web3 from 'web3';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import {fromEvent,Observable,Subscription} from "rxjs";
 
 // export const WEB3 = new InjectionToken<Web3>('web3', {
 //   providedIn: 'root',
@@ -27,7 +28,12 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit,OnDestroy {
+
+  onlineEvent: Observable<Event>= fromEvent(window, 'online');
+  offlineEvent: Observable<Event>= fromEvent(window, 'offline');
+  subscriptions: Subscription[] = [];
+
   showFiller = false;
   message="";
   @ViewChild('drawer', {static: false}) drawer: MatSidenav;
@@ -50,6 +56,18 @@ export class AppComponent implements OnInit {
 
   }
 
+
+  init_event_for_network_status(){
+    this.subscriptions.push(this.onlineEvent.subscribe(e => {
+      this.api.connectionStatus = true;
+      showMessage(this,"Connexion retrouvée")
+    }));
+
+    this.subscriptions.push(this.offlineEvent.subscribe(e => {
+      this.api.connectionStatus =false;
+      showMessage(this,"Connexion perdue");
+    }));
+  }
 
   /**
    *
@@ -166,7 +184,9 @@ export class AppComponent implements OnInit {
     $$("Vérification de la connexion")
     this.api.infos().subscribe((r:any)=>{
       $$("Infos du serveur : ",r);
-    })
+    });
+
+    this.init_event_for_network_status();
 
 
     subscribe_socket(this,"refresh_sell");
@@ -271,5 +291,9 @@ export class AppComponent implements OnInit {
 
   closeMenu(){
     if(this.config.width_screen<800)this.drawer.close();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

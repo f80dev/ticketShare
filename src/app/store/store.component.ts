@@ -191,7 +191,9 @@ export class StoreComponent implements OnInit {
 
   sales(event:any){
     event.resume={};
+    event.treatment="Chargement des résultats";
     this.api.available(event._id).subscribe((places:any[])=>{
+      event.treatment="";
       for(let p of places){
         var price=p["price"];
         if(!event.resume.hasOwnProperty(p["price"]))event.resume[price]={"price":price,"free":0};

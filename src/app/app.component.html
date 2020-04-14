@@ -15,12 +15,16 @@
     menu
   </mat-icon>
 
-  &nbsp;&nbsp;
+  &nbsp;
+  <img src="./assets/icons/icon-72x72.png"
+       *ngIf="config.width_screen>800"
+       style="width:30px;display: inline;">
+  &nbsp;
+
   <span>
     {{config.values.appname}}
   </span>
   &nbsp;
-  <span style="font-size: xx-small;font-style: italic;">{{config.values.version}}</span >
 
   <span class="example-fill-remaining-space"></span>
 

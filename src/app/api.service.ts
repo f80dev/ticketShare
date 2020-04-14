@@ -11,6 +11,7 @@ export class ApiService {
   constructor(public http: HttpClient) {}
 
   user:any=null;
+  connectionStatus=true;
 
   _get(url,_timeoutInSec=60){
     return this.http.get(api(url)).pipe(timeout(_timeoutInSec*1000));

@@ -25,6 +25,7 @@ export class ConfigService {
   refresh_callback: () => void;
 
 
+
   constructor(private location: Location,
               private http: HttpClient,
               public platform:Platform,

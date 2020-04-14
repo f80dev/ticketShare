@@ -5,6 +5,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {$$, showMessage,isToday,getTime} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
+import {A11yModule} from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-validate',

@@ -1,6 +1,6 @@
 
 <div class="mainform" style="margin-left:10%;width:80%;">
-  <br><br>
+  <br>
   <span *ngIf="message && messageCode.length==0">
     {{message}}
     <app-faq-link faq="authent"></app-faq-link>
@@ -42,8 +42,9 @@
         {{messageCode}}<br>
         <br>
 
-        <mat-form-field class="form-field-style" style="width: 100px !important;" >
+        <mat-form-field class="form-field-style" style="width: 150px !important;text-align: center;font-size: large;" >
           <input type="text" matInput
+                 autofocus
                  id="txtCode"
                  maxlength=6
                  title="Saisissez votre code d'accès à 6 chiffres"
@@ -51,6 +52,7 @@
                  [(ngModel)]="code"
                  (change)="updateCode($event)">
         </mat-form-field>
+
         <br>
         <app-tuto label="Le code à 6 chiffres vous a été envoyé sur votre adresse mail à votre première authentification. Si vous ne retrouvez pas le mail vous pouvez vous le faire renvoyer par KERBERUS"></app-tuto>
 
@@ -86,8 +88,6 @@
     </div>
   </div>
 
-
-
   <!--Zone d'acceuil-->
   <div *ngIf="config.user.email.length>0">
     <h1>Bonjour {{config.user.pseudo}}</h1>
@@ -99,8 +99,8 @@
     <br><br>
 
 
-      Maintenant que votre mail est enregistré vous allez pouvoir acheter des places directement dans {{config.values.appname}}<br>
-      et même gérer les billets de vos propres événements si vous le souhaitez
+      Maintenant que votre mail est enregistré vous allez pouvoir acheter des places directement dans {{config.values.appname}}<br><br>
+      grâce à {{config.values.appname}} vous pouvez également gérer les billets de vos propres événements.
 
     <br>
     <br>
