@@ -22,6 +22,11 @@ export class EventeditorComponent implements OnInit {
   code:string="";
   private showPublish: boolean=false;
 
+  select_prop:any={};
+  properties:string[]=[];
+  yaml_help:any=null;
+
+
   constructor(
     public config:ConfigService,
     public router:Router,
@@ -37,6 +42,11 @@ export class EventeditorComponent implements OnInit {
     this.api.gettemplates().subscribe((r:any[])=>{
       this.templates=r;
     });
+
+    this.api._get("/yaml_properties").subscribe((r:any)=>{
+      this.properties=Object.keys(r);
+      this.yaml_help=r;
+    })
   }
 
 

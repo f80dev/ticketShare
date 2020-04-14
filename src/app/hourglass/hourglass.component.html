@@ -12,7 +12,7 @@
         <mat-icon (click)="oncancel.emit()">cancel</mat-icon>
       </td>
       <td *ngIf="faq?.length>0" style="text-align: right;cursor: pointer;">
-        <mat-icon (click)="openfaq()">help</mat-icon>
+        <app-faq-link [faq]="faq"></app-faq-link>
       </td>
     </tr>
   </table>

@@ -23,7 +23,7 @@
         <span *ngIf="_event.delayInSec<3600*5">{{_event.delayInSec/3600 | number:'1.0-1'}} heures</span>
       </span>
       <div *ngIf="!_event.expanded" style="margin:0;padding:0">
-        <app-hourglass style="font-size: small" [message]="message"></app-hourglass>
+        <app-hourglass style="font-size: small" [message]="message" faq="waiting"></app-hourglass>
         <span *ngIf="_event.error!=null && _event.error.message!=null && _event.treatment?.length==0"
               style="color: red;">
           {{_event.error.message}}

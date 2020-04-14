@@ -66,12 +66,32 @@
     </div>
 
     <div *ngIf="showCode" style="width:94%;margin-left:3%;touch-action: none;" (keypress)="updateCode($event)">
-      Vous pouvez directement modifier les paramètres du modèle pour créer votre événement.<br>
-      A la publication, le fichier de votre événement vous sera envoyé sur votre boite mail.
+      <table style="font-size: small;">
+        <tr>
+          <td>
+            <mat-form-field style="width:100px;" >
+              <mat-label>Propriétés</mat-label>
+              <mat-select [(value)]="select_prop">
+                <mat-option *ngFor="let prop of properties" [value]="prop">{{prop}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            {{yaml_help[select_prop]}}
+          </td>
+        </tr>
+      </table>
+
       <ngx-monaco-editor [options]="editorOptions"
                          style="text-align: left;height:400px;"
                          [(ngModel)]="code">
       </ngx-monaco-editor>
+      <br>
+      Vous pouvez directement modifier les paramètres du modèle pour créer votre événement.<br>
+      <br>
+      <hr>
+      <br>
+
       <button class="app-button"
               style="margin-top: 10px;"
               mat-button mat-raised-button
