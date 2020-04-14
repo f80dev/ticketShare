@@ -18,14 +18,14 @@
     <ng-content></ng-content>
   </mat-card-content>
   <mat-card-actions *ngIf="showAction">
-    <button class="app-button"
+    <button
             *ngIf="transferable"
             mat-button mat-flat-button mat-icon-button
             (click)="openShare(ticket)">
       <mat-icon>card_giftcard</mat-icon>
     </button>
 
-    <button class="app-button" mat-button mat-flat-button
+    <button mat-button mat-flat-button
             *ngIf="config?.infos_server.islocal && ticket.address?.length>0"
             mat-icon-button ngxClipboard [cbContent]="ticket.address">
       <mat-icon>code</mat-icon>

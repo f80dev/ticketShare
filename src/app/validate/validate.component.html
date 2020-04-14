@@ -1,5 +1,5 @@
 <app-hourglass [message]="message"></app-hourglass>
-<div style="width:96%;margin-left:2%;text-align: center;" *ngIf="message.length==0">
+<div class="mainform" *ngIf="message.length==0">
   <h3>Validation pour {{_event?.name}}
     <app-faq-link faq="validate"></app-faq-link>
   </h3>
@@ -21,8 +21,9 @@
     <br>
   </div>
 
-  <mat-form-field class="form-field-style" style="width: 70%;max-width: 300px;">
+  <mat-form-field class="form-field-style" style="text-align: center;width: 70%;max-width: 300px;font-size: large;">
     <input type="text" matInput
+           cdkFocusInitial
            id="txtAddress"
            title="Saisissez l'adresse de votre compte Ethereum"
            placeholder="Adresse du wallet du visiteur"
@@ -33,6 +34,7 @@
 
   <button class="app-button" mat-button mat-raised-button
           *ngIf="address!=null && address.startsWith('0x')"
+          title="Recherche des places sur le wallet spectacle du client"
           (click)="update_addr(address)">
     Recherche des places
   </button>
@@ -48,7 +50,7 @@
 
   <div *ngIf="_event?.owner==config.user?.address">
     <div *ngIf="_event?.validate.checkers?.length==1">
-      Vous êtes le seul habilité à valider les billets
+      Vous êtes le seul habilité à contrôler les billets
     </div>
 
 
@@ -63,15 +65,14 @@
           <td style="text-align: right;width:30px;">
             <mat-icon *ngIf="val!=config.user?.address"  (click)="removeChecker(val)">cancel</mat-icon>
           </td>
-
         </tr>
       </table>
-
       <br>
     </div>
 
 
     <button class="app-button" mat-button mat-raised-button
+            title="Ajouter une personne au contrôle des entrées"
             (click)="add_checker()">
       Ajouter
     </button>

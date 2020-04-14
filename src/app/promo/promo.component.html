@@ -1,6 +1,11 @@
 <div class="mainform" style="margin-left:10%;width:80%;">
   <br>
-  <h2>Faites connaître {{_event.name}}</h2>
+  <h2>
+    Faites connaître {{_event.name}}
+    <app-faq-link faq="promo"></app-faq-link>
+  </h2>
+
+
   <app-tuto [if]="config.user?.address!=_event?.owner"
             label="KERBERUS vous permet de partager le lien de l'événement"></app-tuto>
   <app-tuto [if]="config.user?.address==_event?.owner"

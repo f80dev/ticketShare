@@ -1,19 +1,21 @@
 
 
-  <app-ticket width="120px"
+  <app-ticket width="130px"
               style="margin:5px;"
               *ngFor="let ticket of tickets"
-              [title]="(ticket.date*1000) | date:'dd/MM/yy'"
+              [title]="(ticket.date*1000) | date:'dd/MM/yy - HH:mm'"
               [subtitle]="ticket.price+'€'"
               [showAction]="ticket.state=='sold'"
               [ticket]="ticket">
+
     <div *ngIf="ticket.state=='sold'">
       <div *ngIf="ticket.seat!=null">
         <mat-icon>event_seat</mat-icon>&nbsp;
-        {{ticket.seat}}
+        Place {{ticket.seat}}
       </div>
+
       <div *ngIf="ticket.seat==null">
-        Billet #{{ticket.ref}}<br>
+        Référence #{{ticket.ref}}<br>
         <div style="font-size: xx-small;line-height: 95%;">
           {{ticket.description}}
         </div>
