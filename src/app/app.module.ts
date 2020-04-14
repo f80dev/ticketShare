@@ -67,6 +67,7 @@ import { OfferComponent } from './offer/offer.component';
 import { SearchComponent } from './search/search.component';
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import { FaqLinkComponent } from './faq-link/faq-link.component';
+import { DateComponent } from './date/date.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -107,7 +108,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     FaqsComponent,
     OfferComponent,
     SearchComponent,
-    FaqLinkComponent
+    FaqLinkComponent,
+    DateComponent
   ],
   entryComponents: [
     PromptComponent,

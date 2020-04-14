@@ -4,7 +4,7 @@
   <br>
 
   <div *ngIf="config.user?.photo?.length==0">
-    Renforcer la sécurité de votre compte:<br><br>
+    Renforcer la sécurité de votre compte <app-faq-link faq="security"></app-faq-link>:<br><br>
     <button class="app-button large-button"
             mat-button mat-raised-button
             (click)="addImage($event)">
@@ -69,7 +69,7 @@
   <!--</div>-->
   <br><br>
 
-  Solde de votre compte<br>
+  Solde de votre compte<app-faq-link faq="payment"></app-faq-link><br>
   <span style="font-size: 4em">{{config.user?.money | number:'1.0-1'}}€</span>
   <br><br>
 

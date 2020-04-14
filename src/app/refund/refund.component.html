@@ -46,20 +46,20 @@
           {{user?.address?.substr(21)}}
         </div>
         <br>
-        <button class="app-button" mat-icon-button mat-button mat-flat-button
+        <button mat-icon-button mat-button mat-flat-button
                 title="Rafraichir le wallet pour afficher sa balance"
                 (click)="config.reload_user()">
           <mat-icon>refresh</mat-icon>
         </button>
 
-        <button class="app-button" mat-icon-button mat-button mat-flat-button
+        <button mat-icon-button mat-button mat-flat-button
                 title="Copier la commande permettant le rechargement"
                 (click)="faucet()">
           <mat-icon>attach_money</mat-icon>
         </button>
 
         <button mat-raised-button mat-button
-                mat-icon-button class="app-button"
+                mat-icon-button
                 title="cacher mon wallet"
                 (click)="show=false">
           <mat-icon>close</mat-icon>

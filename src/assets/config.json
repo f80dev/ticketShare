@@ -1,7 +1,7 @@
 {
   "appname": "KERBERUS",
   "title": "KERBERUS",
-  "version": "0.2.99.7-beta",
+  "version": "0.2.99.8-beta",
   "colors": {
     "bkuser": "#2C4050",
     "bkshop": "#142637",
@@ -14,7 +14,7 @@
   },
   "bkcolor": "#2a002a",
   "news": "Ajout des faqs",
-  "logo": "",
+  "logo": "/assets/icons/icon-192x192.png",
   "claim": "Achetez vos billets en toute sécurité",
   "support": {
     "forum": "http://kerberus.les-forums.com/",

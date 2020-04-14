@@ -101,7 +101,11 @@
 
     <table style="width: 100%;" *ngIf="!showCode">
       <tr style="font-size: small;">
-        <td style="width: 50%;">Créer un évenement fictif depuis ce modèle.<br>Cet évenement ne sera visible que des clients pilotes</td>
+        <td style="width: 50%;">
+          Créer un évenement fictif depuis ce modèle.<br>
+          Cet évenement ne sera visible que des clients pilotes
+          <app-faq-link faq="fictif"></app-faq-link>
+        </td>
         <td></td>
         <td *ngIf="config.user?.email">
           Recevoir ce modèle sur votre mail, le personnaliser<br>et le renvoyer pour créer votre événement

@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="498.74754"
-     inkscape:cy="572.47987"
+     inkscape:cx="99.864363"
+     inkscape:cy="676.72534"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,7 +35,7 @@
      inkscape:guide-bbox="true"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -58,25 +58,34 @@
        sodipodi:nodetypes="cccccc"
        inkscape:connector-curvature="0"
        id="path1389"
-       d="m 146.06057,103.11683 7.57535,-4.033144 C 134.00471,80.592133 133.09041,85.639188 128.1567,51.681803 l -34.844642,59.794747 -0.0076,24.5982 C 116.40531,93.148561 114.48645,95.804252 146.06057,103.11683 Z"
-       style="fill:#4d4d4d;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       d="m 145.81262,101.02602 7.55874,-4.289007 C 133.78321,77.072376 132.8709,82.439611 127.94802,46.328007 119.6556,69.339666 104.9515,88.957512 93.179789,109.91607 l -0.0076,26.15868 C 116.2224,90.42537 114.30774,93.249535 145.81262,101.02602 Z"
+       style="fill:#4d4d4d;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-xdpi="26.16"
+       inkscape:export-ydpi="26.16"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png" />
     <path
        style="fill:#4d4d4d;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 40.572973,103.11683 32.997621,99.083686 C 52.628828,80.592133 53.543135,85.639188 58.476845,51.681803 l 34.844662,59.794747 0.0076,24.5982 C 70.228229,93.148561 72.147089,95.804252 40.572973,103.11683 Z"
+       d="M 40.556358,101.02602 32.997619,96.737013 C 52.585776,77.072376 53.498078,82.439611 58.420968,46.328007 c 12.274778,31.69975 22.162407,40.398626 34.76825,63.588063 l 0.0076,26.15868 C 70.146582,90.42537 72.061234,93.249535 40.556358,101.02602 Z"
        id="path4518"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccc" />
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-xdpi="26.16"
+       inkscape:export-ydpi="26.16"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png" />
     <path
        style="fill:#000000;stroke:#000000;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 114.44732,74.982325 105.07249,52.490824 94.716113,75.327158 93.146694,75.303628 83.545099,52.062411 72.4342,76.086944 90.489421,123.821 h 5.902672 z"
+       d="M 114.2849,74.3085 104.93063,54.828612 94.596978,74.607161 93.031,74.586781 83.450461,54.457563 72.363927,75.265212 90.379554,116.60768 h 5.889727 z"
        id="path4522"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccc" />
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-xdpi="26.16"
+       inkscape:export-ydpi="26.16"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.16016388px;line-height:1.25;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none"
-       x="34.740993"
-       y="147.19635"
+       x="42.630432"
+       y="196.57826"
        id="text4562"
        transform="scale(0.91467558,1.0932838)"
        inkscape:export-xdpi="107.79"
@@ -84,8 +93,18 @@
        inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png"><tspan
          sodipodi:role="line"
          id="tspan4560"
-         x="34.740993"
-         y="147.19635"
+         x="42.630432"
+         y="196.57826"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.16016388px;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none">KERBERUS</tspan></text>
+    <rect
+       style="opacity:0.84100001;fill:none;fill-opacity:1;stroke:none;stroke-width:0.73580623;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:31.23401451;stroke-opacity:1"
+       id="rect821"
+       width="124.26419"
+       height="124.26419"
+       x="30.735996"
+       y="26.806644"
+       inkscape:export-xdpi="26.16"
+       inkscape:export-ydpi="26.16"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png" />
   </g>
 </svg>
