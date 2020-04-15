@@ -1,0 +1,18 @@
+{{prefix}}
+
+<span *ngIf="delay>0 && delay<24">
+  {{_date | date:'HH:mm'}}
+</span>
+
+<span *ngIf="delay>24 && delay<48">
+  {{_date | date:'dd/MM HH:mm'}}
+</span>
+
+<span *ngIf="delay>48 && delay<480">
+  {{_date | date:'dd/MM'}}
+</span>
+
+<span *ngIf="delay>480">
+  {{_date | date:'dd/MM/yy'}}
+</span>
+
