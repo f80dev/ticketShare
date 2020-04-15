@@ -110,4 +110,11 @@ export class EventeditorComponent implements OnInit {
   updateCode(event){
     this.showPublish=false;
   }
+
+
+  back_list(){
+    this.selTemplate=null;
+    this.showPublish=false;
+    this.showCode=false;
+  }
 }

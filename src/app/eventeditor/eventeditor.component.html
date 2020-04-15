@@ -10,8 +10,8 @@
   <button class="app-button"
           style="margin-top: 10px;"
           mat-button mat-raised-button
-          *ngIf="selTemplate!=null"
-          (click)="selTemplate=null">
+          *ngIf="selTemplate!=null && !showCode"
+          (click)="back_list()">
     <div class="bloc-bouton">Retour à la<br>liste des modèles</div>
   </button>
   <br>

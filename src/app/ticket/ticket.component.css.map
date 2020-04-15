@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,aAAa;EACX,KAAK,EAAE,EAAE;EACT,SAAS,EAAE,KAAK;EAChB,OAAO,EAAE,YAAY;EACrB,MAAM,EAAE,EAAE;EACV,gBAAgB,EAAE,OAAO",
+"mappings": "AAAA,aAAa;EACX,KAAK,EAAE,GAAG;EACV,SAAS,EAAE,KAAK;EAChB,OAAO,EAAE,GAAG;EACZ,OAAO,EAAE,YAAY;EACrB,MAAM,EAAE,GAAG;EACX,gBAAgB,EAAE,OAAO",
 "sources": ["ticket.component.sass"],
 "names": [],
 "file": "ticket.component.css"

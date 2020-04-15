@@ -1,7 +1,7 @@
 <mat-card class="example-card" [ngStyle]="{'width':width}">
-  <mat-card-header style="text-align: center !important;">
-    <mat-card-title style="line-height: 80% !important;" *ngIf="title">
-      <small>{{title}}</small>
+  <mat-card-header>
+    <mat-card-title style="font-size: medium;" *ngIf="title">
+      {{title}}
     </mat-card-title>
     <mat-card-subtitle *ngIf="subtitle">
       {{subtitle}}
@@ -9,7 +9,7 @@
   </mat-card-header>
 
   <img mat-card-image
-       style="height:100px;"
+       style="max-height:100px;width:105%;"
        *ngIf="ticket.visual?.length>0"
        [src]="ticket.visual"
        alt="Visuel du ticket">
@@ -17,7 +17,9 @@
   <mat-card-content>
     <ng-content></ng-content>
   </mat-card-content>
-  <mat-card-actions *ngIf="showAction">
+
+
+  <mat-card-actions *ngIf="showAction" style="padding:0px !important;">
     <button
             *ngIf="transferable"
             mat-button mat-flat-button mat-icon-button
@@ -30,5 +32,6 @@
             mat-icon-button ngxClipboard [cbContent]="ticket.address">
       <mat-icon>code</mat-icon>
     </button>
+
   </mat-card-actions>
 </mat-card>
