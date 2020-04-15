@@ -55,7 +55,7 @@
 
   <div style="width: 100%;text-align: center;">
     <div *ngIf="imageBase64 && !showEmoji"
-         style="display: inline-block;width:90%;max-width: 300px;">
+         style="display: inline-block;width:80%;max-width: 300px;">
       <image-cropper
         [imageBase64]="imageBase64"
         [maintainAspectRatio]="true"
@@ -72,16 +72,16 @@
     </div>
   </div>
 
-  <div style="width: 100%;text-align: center;overflow: hidden;">
+  <!--<div style="width: 100%;text-align: center;overflow: hidden;">-->
 
-    <img *ngIf="imageBase64!=null"
-         class="image-photo"
-         [src]="croppedImage">
+    <!--<img *ngIf="imageBase64!=null"-->
+         <!--class="image-photo"-->
+         <!--[src]="croppedImage">-->
 
-    <img [src]="data.result"
-                *ngIf="pictures?.length==0 && imageBase64==null"
-                [height]="data.height">
-  </div>
+    <!--<img [src]="data.result"-->
+                <!--*ngIf="pictures?.length==0 && imageBase64==null"-->
+                <!--[height]="data.height">-->
+  <!--</div>-->
 
 </mat-dialog-content>
 

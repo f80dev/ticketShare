@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit {
 
   addImage(event) {
     event.stopPropagation();
-    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'},maxWidth:400,maxHeight:700,width: '90vw',height:'90vh', data:
+    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'5vh'},maxWidth:400,maxHeight:700,width: '90vw',height:'85vh', data:
         {
           result:this.config.user.photo,
           width: 200,
