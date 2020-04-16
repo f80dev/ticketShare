@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1587048334414,
+  "timestamp": 1587051489094,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -134,7 +134,7 @@
   "dataGroups": [],
   "hashTable": {
     "https://app.kerberus.tech/assets/2020030101moteur-recherche-image.odt": "fadcc91de6596380bb8f8ed516316a31022100b4",
-    "https://app.kerberus.tech/assets/config.json": "6b28f78ab0431133c78bffdc5aaf1088ecf9e2ca",
+    "https://app.kerberus.tech/assets/config.json": "3b9136977617c51207297291241d6a68fc96e882",
     "https://app.kerberus.tech/assets/ether.png": "44bd7798d73172b5420215c8c5c1a281a8985cbe",
     "https://app.kerberus.tech/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://app.kerberus.tech/assets/icons/icon-128x128.png": "e8d701fd988cd5e715dff143dace193da21e3814",
