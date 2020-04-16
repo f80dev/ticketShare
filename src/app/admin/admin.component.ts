@@ -74,4 +74,16 @@ export class AdminComponent implements OnInit {
       this.refresh();
     });
   }
+
+  extern_store() {
+    let addr=localStorage.getItem("address");
+    this.api.getevents(addr).subscribe((evts:any)=>{
+      for(let e of evts){
+        var timestamp=(new Date().getTime()/1000+100000);
+        if(e.hasOwnProperty("store"))
+          open(
+            this.config.infos_server.domain+"/api/add_ticket/"+e._id+"/"+addr+"/2/"+timestamp,"_blank");
+      }
+    })
+  }
 }
