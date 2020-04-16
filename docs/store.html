@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/main.js"></script>
+</head>
+<body onload="run()">
+<form id="frm" method="post">
+  <div>
+    <label for="email">Email</label>
+    <input name="email" id="email" value="paul.dudule@gmail.com">
+  </div>
+  <div>
+    <label for="tickets">Combien de billets</label>
+    <input name="tickets" id="tickets" value="2">
+  </div>
+  <div>
+    <label for="price">Prix</label>
+    <input name="price" id="price" value="30">
+  </div>
+  <div>
+    <button>Command</button>
+  </div>
+</form>
+</body>
+<script>
+  function run(){
+    var idevent=getParam().event;
+    var domain=getParam().domain;
+    document.getElementById("frm").action="http://"+domain+"/api/add_ticket/"+idevent;
+  }
+</script>
+</html>
