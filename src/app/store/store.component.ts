@@ -137,12 +137,23 @@ export class StoreComponent implements OnInit {
    * @param _evt
    */
   buy(_evt: any) {
-    if(_evt.store!=null && _evt.store.startsWith("http")){
-      open(_evt.store,"_blank");
-    }else{
+     if(_evt.store!=null && _evt.store.startsWith("http")){
+       //open(_evt.store,"_blank");
+       this.extern_store(_evt);
+     }else{
       this.askForAuthent("Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
-        this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
-      })
+          this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
+      });
+     }
+  }
+
+  extern_store(e) {
+    let addr=localStorage.getItem("address");
+    var timestamp=(new Date().getTime()/1000+100000);
+    if(e.hasOwnProperty("store")){
+      var url=this.config.infos_server.domain+"/api/add_ticket/"+e._id+"/"+addr+"/2/"+timestamp;
+      $$("Création fictive de billets avec "+url);
+      open(url,"_blank");
     }
   }
 
@@ -181,7 +192,6 @@ export class StoreComponent implements OnInit {
         lbl_cancel:"non"
     }
     }).afterClosed().subscribe((r) => {
-      debugger;
       if(r=="yes"){
         this.message="Annulation de l'événement en cours";
         this.api.delevent(event._id).subscribe(()=>{
