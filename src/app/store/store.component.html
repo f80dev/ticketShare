@@ -92,13 +92,20 @@
           {{event.description}}
         </div>
 
-        <span *ngIf="event.dtStart!=event.dtEnd">
-          Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM'}}
-        </span>
+        <div *ngIf="event.tickets?.length==0 && event.owner==config.user?.address" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
+          IdEvent={{event._id}}<br>
+          dtStart={{event.dtStart}}
+        </div>
 
-        <span *ngIf="event.dtStart==event.dtEnd">
-          le {{event.dtStart*1000 | date:'dd/MM/yy'}}
-        </span>
+        <div *ngIf="event.tickets.length>0">
+          <span *ngIf="event.dtStart!=event.dtEnd">
+            Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM'}}
+          </span>
+
+          <span *ngIf="event.dtStart==event.dtEnd">
+            le {{event.dtStart*1000 | date:'dd/MM/yy'}}
+          </span>
+        </div>
       </div>
 
       <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">
@@ -205,7 +212,11 @@
       <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
 
         <table style="width:100%;text-align: left;">
-          <tr>
+          <tr *ngIf="event.tickets?.length==0">
+            <td>idEvent</td>
+            <td>{{event._id}}</td>
+          </tr>
+          <tr *ngIf="event.tickets?.length>0">
             <td>Dates</td>
             <td *ngIf="event.dtStart!=event.dtEnd">Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yy'}}</td>
             <td *ngIf="event.dtStart==event.dtEnd">le <app-date [date]="event.dtStart"></app-date></td>

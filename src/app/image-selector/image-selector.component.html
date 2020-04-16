@@ -53,7 +53,7 @@
          (click)="selIcon(icon)">
   </div>
 
-  <div style="width: 100%;text-align: center;">
+  <div style="width: 100%;height:75vh;text-align: center;">
     <div *ngIf="imageBase64 && !showEmoji"
          style="display: inline-block;width:80%;max-width: 300px;">
       <image-cropper
@@ -84,16 +84,16 @@
   <!--</div>-->
 
 </mat-dialog-content>
-
+<hr>
 <mat-dialog-actions style="text-align: center;width:100%;">
+
   <button id="cmdTurn" mat-button mat-raised-button mat-icon-button
           title="Permet de faire tourner la photo de 90 degrés"
           *ngIf="data.square && data.result.startsWith('data')"
           (click)="rotatePhoto()">
     <mat-icon>refresh</mat-icon>
   </button>
-  <br>
-  <hr>
+
   <button id="cmdCancel" mat-button mat-raised-button (click)="onNoClick()">Annuler</button>
   <button id="cmdValide" mat-button mat-raised-button [mat-dialog-close]="data.result" >Ok</button>
 </mat-dialog-actions>

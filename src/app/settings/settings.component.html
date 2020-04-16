@@ -5,12 +5,8 @@
 
   <div *ngIf="config.user?.photo?.length==0">
     Renforcer la sécurité de votre compte <app-faq-link faq="security"></app-faq-link>:<br><br>
-    <button class="app-button large-button"
-            mat-button mat-raised-button
-            (click)="addImage($event)">
-      Ajouter une photo
-    </button><br>
   </div>
+
 
   <button class="app-button large-button"
           *ngIf="config.user?.email?.length==0"
@@ -18,6 +14,17 @@
           (click)="router.navigate(['login'],{queryParam:{message:'Utilisez google ou facebook pour enregistrez simplement votre mail',redirect:'settings'}})">
     Ajouter une adresse mail
   </button>
+
+  <button class="app-button large-button"
+          *ngIf="config.user?.photo?.length==0"
+          mat-button mat-raised-button
+          (click)="addImage($event)">
+    Ajouter une photo
+  </button>
+
+
+
+
 
 
   <img [src]="config.user.photo"
@@ -27,24 +34,28 @@
        class="image-photo"
        (click)="addImage($event)">
   <br>
+
+
   <span *ngIf="config.user.email.length>0">{{config.user.email}}</span>
   <br><br>
 
-  <mat-form-field style="width:50%;max-width: 200px;text-align: center;">
-    <mat-label>Pseudo</mat-label>
-    <input matInput placeholder="Roger" [value]="config.user?.pseudo">
-  </mat-form-field>
+  <div *ngIf="config.user?.email?.length>0">
+    <mat-form-field style="width:50%;max-width: 200px;text-align: center;"  >
+      <mat-label>Pseudo</mat-label>
+      <input matInput placeholder="Roger" [value]="config.user?.pseudo">
+    </mat-form-field>
 
-  <br>
-  <button class="app-button"
-          id="cmdMakeCard"
-          title="Vous permet de vous fabriquer une version physique de votre wallet"
-          *ngIf="config.user.photo?.length>0"
-          mat-button mat-raised-button
-          (click)="makeCard()">
-    <div class="bloc-bouton">Fabriquer<br>une carte</div>
-  </button>
-  <br><br>
+    <br>
+    <button class="app-button"
+            id="cmdMakeCard"
+            title="Vous permet de vous fabriquer une version physique de votre wallet"
+            *ngIf="config.user.photo?.length>0"
+            mat-button mat-raised-button
+            (click)="makeCard()">
+      <div class="bloc-bouton">Fabriquer<br>une carte</div>
+    </button>
+  </div>
+
   <hr>
   <br>
 

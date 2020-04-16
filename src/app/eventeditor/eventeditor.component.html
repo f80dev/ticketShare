@@ -46,10 +46,14 @@
     </app-tuto>
 
     <div *ngIf="!showCode" style="width:100%;text-align: center;font-size: small;">
-      <img class="image-photo"
-           (click)="showCode=true"
-           [src]="selTemplate.visual"
-           style="width:250px;height:250px;">
+      <div class="image-photo" style="position:relative;width: 250px;height: 250px;display: inline-block;">
+        <img
+          (click)="showCode=true"
+          style="width: 100%;height:100%;object-fit: cover;"
+          [src]="selTemplate.visual"
+        >
+      </div>
+
       <br>
 
         <br>

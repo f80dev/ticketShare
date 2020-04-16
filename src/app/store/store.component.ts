@@ -137,9 +137,13 @@ export class StoreComponent implements OnInit {
    * @param _evt
    */
   buy(_evt: any) {
-    this.askForAuthent("Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
-      this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
-    })
+    if(_evt.store!=null && _evt.store.startsWith("http")){
+      open(_evt.store,"_blank");
+    }else{
+      this.askForAuthent("Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
+        this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
+      })
+    }
   }
 
 
