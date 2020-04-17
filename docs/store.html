@@ -6,32 +6,45 @@
     <script src="js/main.js"></script>
 </head>
 <body onload="run()">
-<form id="frm" method="post">
-  <div>
-    <label for="email">Email</label>
-    <input name="email" id="email" value="paul.dudule@gmail.com">
-  </div>
-  <br>
-  <div>
-    <label for="tickets">Combien de billets</label>
-    <input name="tickets" id="tickets" value="2">
-  </div>
-  <br>
-  <div>
-    <label for="price">Prix</label>
-    <input name="price" id="price" value="30">
-  </div>
-  <br>
-  <div>
-    <label for="date">Date</label>
-    <input name="date" id="date">
-  </div>
+<table>
+  <th>
+    <td>Exemple minimaliste de boutique</td>
+    <td>Procédure</td>
+  </th>
+  <tr>
+    <td>
+      <form id="frm" method="post">
+        <div>
+          <label for="email">Email</label>
+          <input name="email" id="email" value="paul.dudule@gmail.com">
+        </div>
+        <br>
+        <div>
+          <label for="tickets">Combien de billets</label>
+          <input name="tickets" type="number" id="tickets" value="2">
+        </div>
+        <br>
+        <div>
+          <label for="price">Prix</label>
+          <input name="price" type="number" id="price" value="30">
+        </div>
+        <br>
+        <div>
+          <label for="date">Date</label>
+          <input name="date" type="date" id="date">
+        </div>
 
 
-  <div>
-    <button>Commander</button>
-  </div>
-</form>
+        <div>
+          <button>Commander</button>
+        </div>
+      </form>
+    </td>
+    <td>
+      <iframe src="https://app.kerberus.tech/faq=extern_store"></iframe>
+    </td>
+  </tr>
+</table>
 </body>
 
 <script>

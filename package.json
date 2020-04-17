@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "store":"live-server --root=/docs/ --open=store.html?domain=http://localhost:6800"
+    "store":"live-server --root=/docs/ --open=store.html?domain=http://localhost:6800",
+    "faq":"live-server --open=./src/faqs.html?faq=extern_store"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+    <script src="js/main.js"></script>
+</head>
+<body onload="run()">
+<div id="zone" style="width: 100%;height:100%;border:none;margin:5px;">
+
+</div>
+</body>
+<script>
+  function run(){
+    fetch("https://server.f80.fr:6800/api/faqs").then(function (r)
+    {
+      debugger;
+      r.json().then(function (faqs) {
+        var faq=getParam().faq;
+        for(var i=0;i<faqs.length;i++){
+          if(faqs[i].index==faq)
+            document.getElementById("zone").innerHTML = faqs[i].content;
+        }
+
+      });
+    }
+    );
+  }
+</script>
+</html>

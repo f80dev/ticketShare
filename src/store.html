@@ -6,32 +6,44 @@
     <script src="js/main.js"></script>
 </head>
 <body onload="run()">
-<form id="frm" method="post">
-  <div>
-    <label for="email">Email</label>
-    <input name="email" id="email" value="paul.dudule@gmail.com">
-  </div>
-  <br>
-  <div>
-    <label for="tickets">Combien de billets</label>
-    <input name="tickets" id="tickets" value="2">
-  </div>
-  <br>
-  <div>
-    <label for="price">Prix</label>
-    <input name="price" id="price" value="30">
-  </div>
-  <br>
-  <div>
-    <label for="date">Date</label>
-    <input name="date" id="date">
-  </div>
+<table>
+  <th>
+    <td>Exemple minimaliste de boutique</td>
+    <td>Procédure</td>
+  </th>
+  <tr>
+    <td>
+      <form id="frm" method="post">
+        <div>
+          <label for="email">Email</label>
+          <input name="email" id="email" value="paul.dudule@gmail.com">
+        </div>
+        <br>
+        <div>
+          <label for="tickets">Combien de billets</label>
+          <input name="tickets" type="number" id="tickets" value="2">
+        </div>
+        <br>
+        <div>
+          <label for="price">Prix</label>
+          <input name="price" type="number" id="price" value="30">
+        </div>
+        <br>
+        <div>
+          <label for="date">Date</label>
+          <input name="date" type="date" id="date">
+        </div>
 
-
-  <div>
-    <button>Commander</button>
-  </div>
-</form>
+        <div>
+          <button>Commander</button>
+        </div>
+      </form>
+    </td>
+    <td>
+      <iframe id="faq" src="https://app.kerberus.tech/faq=extern_store"></iframe>
+    </td>
+  </tr>
+</table>
 </body>
 
 <script>
@@ -42,6 +54,8 @@
     url=url.replace("http//","http://").replace("https//","https://");
     document.getElementById("frm").action=url;
     document.getElementById("date").value=new Date().getTime()+100000;
+    if(!getParam().hasOwnProperty("faq"))
+      document.getElementById("frm").style.display="none";
   }
 </script>
 
