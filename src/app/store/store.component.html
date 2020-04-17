@@ -92,9 +92,11 @@
           {{event.description}}
         </div>
 
-        <div *ngIf="event.tickets?.length==0 && event.owner==config.user?.address" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
-          IdEvent={{event._id}}<br>
-          dtStart={{event.dtStart}}
+        <div *ngIf="event.store!=null && event.owner==config.user?.address" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
+          <br>
+          Création de ticket par l'API :<br>
+          {{config.infos_server.domain}}/api/add_ticket/{{event._id}}
+          <app-faq-link faq="extern_store"></app-faq-link>
         </div>
 
         <div *ngIf="event.tickets.length>0">
@@ -152,7 +154,8 @@
         </button>
 
         <!--Panel destiner à l'organisateur-->
-        <div *ngIf="event.owner==config.user?.address">
+        <div *ngIf="event.owner==config.user?.address" style="display: inline-block;">
+
           <button class="app-button" mat-button mat-flat-button
                   name="cmdPreview"
                   *ngIf="!event.preview"
