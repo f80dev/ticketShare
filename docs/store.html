@@ -34,14 +34,13 @@
           <input name="date" type="date" id="date">
         </div>
 
-
         <div>
           <button>Commander</button>
         </div>
       </form>
     </td>
     <td>
-      <iframe src="https://app.kerberus.tech/faq=extern_store"></iframe>
+      <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=extern_store"></iframe>
     </td>
   </tr>
 </table>
@@ -55,6 +54,8 @@
     url=url.replace("http//","http://").replace("https//","https://");
     document.getElementById("frm").action=url;
     document.getElementById("date").value=new Date().getTime()+100000;
+    if(!getParam().hasOwnProperty("faq"))
+      document.getElementById("frm").style.display="none";
   }
 </script>
 
