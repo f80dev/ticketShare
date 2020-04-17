@@ -38,7 +38,9 @@
   function run(){
     var idevent=getParam().idevent;
     var domain=getParam().domain;
-    document.getElementById("frm").action="http://"+domain+"/api/add_ticket/"+idevent;
+    var url=domain+"/api/add_ticket/"+idevent;
+    url=url.replace("http//","http://").replace("https//","https://");
+    document.getElementById("frm").action=url;
     document.getElementById("date").value=new Date().getTime()+100000;
   }
 </script>
