@@ -6,13 +6,13 @@
     <script src="js/main.js"></script>
 </head>
 <body onload="run()">
-<table>
-  <th>
-    <td>Exemple minimaliste de boutique</td>
-    <td>Procédure</td>
-  </th>
+<table style="width:100vw;">
   <tr>
-    <td>
+    <th>Exemple minimaliste de boutique</th>
+    <th>Procédure</th>
+  </tr>
+  <tr >
+    <td style="width: 300px;text-align: left;">
       <form id="frm" method="post">
         <div>
           <label for="email">Email</label>
@@ -21,26 +21,28 @@
         <br>
         <div>
           <label for="tickets">Combien de billets</label>
-          <input name="tickets" type="number" id="tickets" value="2">
+          <input name="tickets" type="number" size="3" id="tickets" value="2" max="10" min="0">
         </div>
         <br>
         <div>
           <label for="price">Prix</label>
-          <input name="price" type="number" id="price" value="30">
+          <input name="price" type="number" id="price" value="30" max="300" min="0">
         </div>
         <br>
         <div>
           <label for="date">Date</label>
-          <input name="date" type="date" id="date">
+          <input name="date" type="date" id="date" value="2021-01-01">
         </div>
 
         <div>
+          <br>
           <button>Commander</button>
         </div>
       </form>
     </td>
     <td>
-      <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=extern_store"></iframe>
+      <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=extern_store"
+              style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;"></iframe>
     </td>
   </tr>
 </table>
@@ -49,11 +51,13 @@
 <script>
   function run(){
     var idevent=getParam().idevent;
+    if(idevent==null)idevent=0;
+
     var domain=getParam().domain;
+    if(domain==null)domain="http://localhost:6800";
     var url=domain+"/api/add_ticket/"+idevent;
     url=url.replace("http//","http://").replace("https//","https://");
     document.getElementById("frm").action=url;
-    document.getElementById("date").value=new Date().getTime()+100000;
     if(!getParam().hasOwnProperty("faq"))
       document.getElementById("frm").style.display="none";
   }
