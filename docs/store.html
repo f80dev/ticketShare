@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Minimal store sample</title>
     <script src="js/main.js"></script>
 </head>
 <body onload="run()">
@@ -58,7 +58,7 @@
     var url=domain+"/api/add_ticket/"+idevent;
     url=url.replace("http//","http://").replace("https//","https://");
     document.getElementById("frm").action=url;
-    if(!getParam().hasOwnProperty("faq"))
+    if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
       document.getElementById("frm").style.display="none";
   }
 </script>
