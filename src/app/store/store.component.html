@@ -92,12 +92,6 @@
           {{event.description}}
         </div>
 
-        <div *ngIf="event.store!=null && event.owner==config.user?.address" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
-          <br>
-          Création de ticket par l'API :<br>
-          {{config.infos_server.domain}}/api/add_ticket/{{event._id}}
-          <app-faq-link faq="extern_store"></app-faq-link>
-        </div>
 
         <div *ngIf="event.tickets.length>0">
           <span *ngIf="event.dtStart!=event.dtEnd">
@@ -211,24 +205,31 @@
 
       <br>
 
+      <div *ngIf="event.store!=null" style="display: inline-block;width:70%;">
+        Cet événement utilise une billeterie externe
+        pour créer des billets elle doit appeler l'api<br><br>
+        <small><strong>{{config.infos_server.domain}}/api/add_ticket/{{event._id}}</strong></small><br><br>
+        en tranmettant les informations sur les billets à créer telles que préciser ici: <app-faq-link faq="extern_store"></app-faq-link>
+        <br><br>
+      </div>
+
+
       <!--Rechargement-->
       <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
 
+
+
         <table style="width:100%;text-align: left;">
-          <tr *ngIf="event.tickets?.length==0">
-            <td>idEvent</td>
-            <td>{{event._id}}</td>
-          </tr>
-          <tr *ngIf="event.tickets?.length>0">
+          <tr *ngIf="event.tickets?.length>0 && event.store==null">
             <td>Dates</td>
             <td *ngIf="event.dtStart!=event.dtEnd">Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yy'}}</td>
             <td *ngIf="event.dtStart==event.dtEnd">le <app-date [date]="event.dtStart"></app-date></td>
           </tr>
-          <tr>
+          <tr *ngIf="event?.store==null">
             <td title="Nombre de billets liés à l'événement">Ouverture de la vente</td>
             <td><app-date [date]="event.onstore"></app-date></td>
           </tr>
-          <tr>
+          <tr *ngIf="event?.store==null">
             <td title="Nombre de billets liés à l'événement">Nombre de billets</td>
             <td>{{event.tickets.length}}</td>
           </tr>
