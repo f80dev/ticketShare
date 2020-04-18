@@ -209,7 +209,12 @@ export class AppComponent implements OnInit,OnDestroy {
           this.initUser();
         }
         else{
-          if(p["address"]!=null){
+          if(p["address"]!=null && p["code"]!=null){
+            localStorage.setItem("address",p["address"]);
+            this.initUser();
+          }
+
+          if(p["address"]!=null && p["code"]==null){
             $$("A priori on cherche une connexion par email "+p["address"]);
             this.dialog.open(PromptComponent, {width: '250px',
               data: {
