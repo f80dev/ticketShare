@@ -205,7 +205,7 @@
 
       <br>
 
-      <div *ngIf="event.store!=null" style="display: inline-block;width:70%;">
+      <div *ngIf="event.store!=null && event.owner!=config.user.address" style="display: inline-block;width:70%;">
         Cet événement utilise une billeterie externe
         pour créer des billets elle doit appeler l'api<br><br>
         <small><strong>{{config.infos_server.domain}}/api/add_ticket/{{event._id}}</strong></small><br><br>
