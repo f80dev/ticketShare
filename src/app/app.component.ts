@@ -117,6 +117,7 @@ export class AppComponent implements OnInit,OnDestroy {
   /**
    *
    * @param func
+   * Attention: il est nécéssaire d'ajouter chaque nouveau paramètre à la fonction
    */
   analyse_params(func) {
     var url=this._location.path(); //Ne récupére pas le domaine de l'url
@@ -125,7 +126,7 @@ export class AppComponent implements OnInit,OnDestroy {
     if(url!=null && url.indexOf("?")>=0) {
       url= this._location.path().split("?")[1];
       $$('Récupération des paramètres', url);
-      for(let param of ["command","event","privatekey","address","faq"]){
+      for(let param of ["command","event","privatekey","address","faq","code"]){
         if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
       }
     }
@@ -209,9 +210,15 @@ export class AppComponent implements OnInit,OnDestroy {
           this.initUser();
         }
         else{
-          if(p["address"]!=null && p["code"]!=null){
-            localStorage.setItem("address",p["address"]);
-            this.initUser();
+          //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
+          if(p["address"]!=null && p["code"]!=null) {
+            var code=p["code"];
+            this.api.checkCode(p["address"], code).subscribe((r) => {
+              if (r != null) {
+                localStorage.setItem("address", p["address"]);
+                this.initUser();
+              }
+            });
           }
 
           if(p["address"]!=null && p["code"]==null){
