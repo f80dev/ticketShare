@@ -12,16 +12,13 @@
 </body>
 <script>
   function run(){
-    fetch("https://server.f80.fr:6800/api/faqs").then(function (r)
-    {
-      debugger;
+    fetch("https://server.f80.fr:6800/api/faqs").then(function (r) {
       r.json().then(function (faqs) {
         var faq=getParam().faq;
         for(var i=0;i<faqs.length;i++){
           if(faqs[i].index==faq)
             document.getElementById("zone").innerHTML = faqs[i].content;
         }
-
       });
     }
     );

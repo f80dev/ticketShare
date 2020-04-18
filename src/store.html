@@ -13,7 +13,7 @@
   </tr>
   <tr >
     <td style="width: 300px;text-align: left;">
-      <form id="frm" method="post">
+      <form id="frm">
         <div>
           <label for="email">Email</label>
           <input name="email" id="email" value="paul.dudule@gmail.com">
@@ -36,7 +36,7 @@
 
         <div>
           <br>
-          <button>Commander</button>
+          <button onclick="send()">Commander</button>
         </div>
       </form>
     </td>
@@ -50,16 +50,33 @@
 
 <script>
   function run(){
+
+
+
+
+    if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
+      document.getElementById("faq").style.display="none";
+  }
+
+  function send(){
+
     var idevent=getParam().idevent;
     if(idevent==null)idevent=0;
 
     var domain=getParam().domain;
     if(domain==null)domain="http://localhost:6800";
+
     var url=domain+"/api/add_ticket/"+idevent;
     url=url.replace("http//","http://").replace("https//","https://");
-    document.getElementById("frm").action=url;
-    if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
-      document.getElementById("frm").style.display="none";
+    debugger
+    fetch(url,
+      {
+        body: new FormData(document.getElementById('frm')),
+        method: "post"
+      }).then(function (r) {r.json().then(function (data) {
+        location.href=data.redirect;
+      });
+    });
   }
 </script>
 
