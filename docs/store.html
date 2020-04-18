@@ -11,7 +11,7 @@
     <th>Exemple minimaliste de boutique</th>
     <th>Procédure</th>
   </tr>
-  <tr >
+  <tr>
     <td style="width: 300px;text-align: left;">
       <form id="frm">
         <div>
@@ -36,9 +36,10 @@
 
         <div>
           <br>
-          <button onclick="send()">Commander</button>
         </div>
       </form>
+
+      <button onclick="send()">Commander</button>
     </td>
     <td>
       <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=extern_store"
@@ -50,10 +51,6 @@
 
 <script>
   function run(){
-
-
-
-
     if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
       document.getElementById("faq").style.display="none";
   }
@@ -73,9 +70,11 @@
         body: new FormData(document.getElementById('frm')),
         method: "post"
       }).then(function (r) {
-      r.json().then(function (data) {
-        location.href=data.redirect;
-      })
+        r.json().then(function (resp) {
+        location.href=resp.data.redirect;
+      });
+    },function(r) {
+      console.log(r);
     });
   }
 </script>
