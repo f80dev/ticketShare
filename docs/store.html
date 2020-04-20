@@ -55,6 +55,9 @@ add_ticket permetant d'intégrer des billets dans la blockchain</p>
   function run(){
     if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
       document.getElementById("faq").style.display="none";
+
+    if(getParam().hasOwnProperty("email"))
+      document.getElementById("email").value=getParam().email;
   }
 
   function send(){

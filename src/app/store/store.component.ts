@@ -139,6 +139,7 @@ export class StoreComponent implements OnInit {
   buy(_evt: any) {
      if(_evt.store!=null && _evt.store.web.startsWith("http")){
        var url=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id);
+       if(this.config.user.email.length>0)url=url+"&email="+this.config.user.email;
        open(url,"_blank");
        //this.extern_store(_evt);
      }else{
