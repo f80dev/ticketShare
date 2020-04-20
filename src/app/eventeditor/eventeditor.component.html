@@ -162,4 +162,29 @@
 
   </div>
 
+  <div *ngIf="config.user.offer?.extern_store">
+    <hr>
+    <br>
+    <p>
+    {{config.values.appname}} est pilotable par une billeterie externe via une API pour sécuriser vos billets dans la blockchain.
+    Récupérer votre clé et consulter la documentation développeur pour en savoir plus <app-faq-link faq="api_key"></app-faq-link>
+    </p>
+
+    <br>
+    <div   style="font-size: xx-small;display: inline-block;cursor: pointer;"
+            id="cmdCopieCle"
+            *ngIf="config.user?.access_token.length>20"
+            [cbContent]="config.user?.access_token"
+            ngxClipboard
+            (click)="informe_copy()">
+      <strong>Cliquer pour copier</strong><br>
+      {{config.user?.access_token.substr(0,config.user?.access_token.length/2)}}<br>
+      {{config.user?.access_token.substr(config.user?.access_token.length/2+1,config.user?.access_token.length-1)}}
+    </div>
+    <br><br>
+
+
+  </div>
+
+
 </div>

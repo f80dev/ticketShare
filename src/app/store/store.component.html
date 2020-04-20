@@ -225,7 +225,7 @@
             <td *ngIf="event.dtStart!=event.dtEnd">Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yy'}}</td>
             <td *ngIf="event.dtStart==event.dtEnd">le <app-date [date]="event.dtStart"></app-date></td>
           </tr>
-          <tr *ngIf="event?.store==null">
+          <tr *ngIf="event?.store==null && event?.onstore>now()">
             <td title="Nombre de billets liés à l'événement">Ouverture de la vente</td>
             <td><app-date [date]="event.onstore"></app-date></td>
           </tr>
