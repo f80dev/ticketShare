@@ -4,7 +4,7 @@
   <br>
 
   <div *ngIf="config.user?.photo?.length==0">
-    Renforcer la sécurité de votre compte <app-faq-link faq="security"></app-faq-link>:<br><br>
+    Renforcer la sécurité de votre compte <app-faq-link faq="security"></app-faq-link><br><br>
   </div>
 
 
@@ -99,8 +99,9 @@
           id="cmdAdvanced"
           mat-button mat-raised-button
           (click)="openWallet()">
-    Avancé
+    <div class="bloc-bouton">Paramétres<br>avancés</div>
   </button>
+  <br>
 
 
   <br>
