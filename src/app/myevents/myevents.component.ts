@@ -53,8 +53,14 @@ export class MyeventsComponent implements OnInit {
 
 
 
-
   myplaces(event) {
     event["showTickets"]=true;
+  }
+
+
+
+
+  buy_other(event) {
+    this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
   }
 }

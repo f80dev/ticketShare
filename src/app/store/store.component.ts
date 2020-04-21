@@ -23,6 +23,7 @@ export class StoreComponent implements OnInit {
   onlyMyEvents=false;
   filterEvent=null;
   tags: string[]=[];
+  _now=new Date().getTime();
   showLanding:boolean=false;
 
   constructor(public api:ApiService,

@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="560.47338"
-     inkscape:cy="879.07057"
+     inkscape:zoom="1.4"
+     inkscape:cx="481.6148"
+     inkscape:cy="824.57174"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,7 +35,7 @@
      inkscape:guide-bbox="true"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -91,40 +91,38 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.30741119px;line-height:1.25;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none"
-       x="29.567551"
-       y="92.077484"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.60735321px;line-height:1.25;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none"
+       x="45.081318"
+       y="86.182632"
        id="text4562"
-       transform="scale(0.91467558,1.0932838)"
+       transform="scale(0.93527162,1.0692081)"
        inkscape:export-xdpi="138.35001"
        inkscape:export-ydpi="138.35001"
        inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png"><tspan
          sodipodi:role="line"
          id="tspan4560"
-         x="29.567551"
-         y="92.077484"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.30741119px;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none">KERBERUS</tspan></text>
+         x="45.081318"
+         y="86.182632"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.60735321px;font-family:'Microsoft Yi Baiti';-inkscape-font-specification:'Microsoft Yi Baiti, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke:none;stroke-width:2.36500025;stroke-miterlimit:4;stroke-dasharray:none">KERBERUS</tspan></text>
     <g
-       id="g873"
-       transform="matrix(1,0,0,1.0501303,-202.59524,-98.460466)"
-       style="stroke-width:0.97583956"
-       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-512x512.png"
-       inkscape:export-xdpi="138.35001"
-       inkscape:export-ydpi="138.35001">
+       id="g869"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-128x128.png"
+       inkscape:export-xdpi="54.189999"
+       inkscape:export-ydpi="54.189999">
       <g
          inkscape:export-ydpi="39.25"
          inkscape:export-xdpi="39.25"
          inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-192x192.png"
-         transform="matrix(1,0,0,0.83163111,172.05476,71.037868)"
+         transform="matrix(0.65792477,0,0,0.82398298,10.819712,-18.449941)"
          id="g853"
-         style="stroke-width:1.07007217">
+         style="stroke-width:1.35816586">
         <g
            id="g833"
            transform="matrix(-1,0,0,1,186.60834,0)"
-           style="stroke-width:1.07007217">
+           style="stroke-width:1.35816586">
           <path
-             style="fill:#b3b3b3;stroke:none;stroke-width:0.28312328px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             d="M 47.763206,87.775558 43.678971,83.86527 C 63.267128,68.387823 58.83404,78.759412 63.75693,50.33705 76.031708,75.286974 80.573946,78.124556 93.179789,96.376268 l -0.65517,20.231412 C 69.474383,80.678411 62.573234,91.514725 47.763206,87.775558 Z"
+             style="fill:#b3b3b3;stroke:none;stroke-width:0.35934806px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="M 47.763206,87.775558 43.678971,83.86527 C 63.267128,68.387823 58.83404,78.759412 63.75693,50.33705 76.031708,75.286974 80.573946,78.124556 93.179789,96.376268 l -0.655173,8.784612 C 69.47438,69.231613 62.573234,91.514725 47.763206,87.775558 Z"
              id="path829"
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="cccccc"
@@ -140,18 +138,18 @@
            inkscape:connector-curvature="0"
            id="path842"
            d="m 116.8347,74.872795 c 2.69278,-1.005439 5.50441,-0.942448 8.55263,-0.143464 -2.92043,5.965726 -5.85433,5.064506 -8.55263,0.143464"
-           style="fill:#ffffff;stroke:none;stroke-width:0.28312322px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           style="fill:#ffffff;stroke:none;stroke-width:0.359348px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
       <g
          inkscape:export-ydpi="39.25"
          inkscape:export-xdpi="39.25"
          inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-192x192.png"
-         transform="matrix(1,0,0,0.82172978,178.93393,72.256137)"
+         transform="matrix(0.66872336,0,0,0.82765783,16.060104,-18.658078)"
          id="g848"
-         style="stroke-width:1.0764997">
+         style="stroke-width:1.34416127">
         <path
-           style="fill:#b3b3b3;stroke:none;stroke-width:0.28482389px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 47.763206,87.775558 43.678971,83.86527 C 63.267128,68.387823 58.83404,78.759412 63.75693,50.33705 76.031708,75.286974 80.573946,78.124556 93.179789,96.376268 l 0.0076,20.588722 C 70.137153,81.035721 62.573234,91.514725 47.763206,87.775558 Z"
+           style="fill:#b3b3b3;stroke:none;stroke-width:0.35564271px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 47.763206,87.775558 43.678971,83.86527 C 63.267128,68.387823 58.83404,78.759412 63.75693,50.33705 76.031708,75.286974 80.573946,78.124556 93.179789,96.376268 l -0.08551,8.569172 C 70.044045,69.016169 62.573234,91.514725 47.763206,87.775558 Z"
            id="path4518"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="cccccc"
@@ -159,7 +157,7 @@
            inkscape:export-ydpi="26.16"
            inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-128x128.png" />
         <path
-           style="fill:#ffffff;stroke:none;stroke-width:0.28482386px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#ffffff;stroke:none;stroke-width:0.35564268px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 60.982301,74.729331 c 2.692777,-1.005439 5.504403,-0.942448 8.552625,-0.143464 -2.920424,5.965726 -5.854329,5.064506 -8.552625,0.143464"
            id="path818"
            inkscape:connector-curvature="0"
@@ -172,11 +170,11 @@
          inkscape:export-ydpi="39.25"
          inkscape:export-xdpi="39.25"
          inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-192x192.png"
-         transform="matrix(1,0,0,0.92083321,175.75893,60.520504)"
+         transform="matrix(0.75781173,0,0,0.86838331,4.8236488,-32.926067)"
          id="g860"
-         style="stroke-width:1.01692271">
+         style="stroke-width:1.23271763">
         <path
-           style="fill:#000000;stroke:#000000;stroke-width:0.26906079px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#000000;stroke:#000000;stroke-width:0.32615653px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 110.69413,74.497488 -6.8994,-15.659833 -7.251366,15.891677 -7.057619,0.0579 -6.436188,-15.98654 -7.66182,16.842495 14.991817,40.964493 h 5.889727 z"
            id="path4522"
            inkscape:connector-curvature="0"
@@ -192,9 +190,9 @@
            inkscape:connector-curvature="0"
            id="path835"
            d="m 82.957834,80.430625 c 2.692777,-1.005439 5.504403,-0.942448 8.552625,-0.143464 -2.920424,5.965726 -5.854329,5.064506 -8.552625,0.143464"
-           style="fill:#ffffff;stroke:none;stroke-width:0.26906076px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           style="fill:#ffffff;stroke:none;stroke-width:0.32615653px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
         <path
-           style="fill:#ffffff;stroke:none;stroke-width:0.26906076px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#ffffff;stroke:none;stroke-width:0.32615653px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 94.282924,80.287161 c 2.692777,-1.005439 5.504403,-0.942448 8.552626,-0.143464 -2.920428,5.965726 -5.85433,5.064506 -8.552626,0.143464"
            id="path840"
            inkscape:connector-curvature="0"
@@ -284,5 +282,15 @@
          inkscape:export-xdpi="26.16"
          inkscape:export-ydpi="26.16" />
     </g>
+    <rect
+       style="opacity:0.84100001;fill:none;fill-opacity:1;stroke:none;stroke-width:0.73580635;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:31.23401451;stroke-opacity:1"
+       id="rect871"
+       width="60.000004"
+       height="60.000004"
+       x="45"
+       y="13.429031"
+       inkscape:export-filename="C:\Users\hhoareau\IdeaProjects\ticketShare\src\assets\icons\icon-128x128.png"
+       inkscape:export-xdpi="54.189999"
+       inkscape:export-ydpi="54.189999" />
   </g>
 </svg>

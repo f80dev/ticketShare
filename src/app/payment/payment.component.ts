@@ -77,6 +77,7 @@ export class PaymentComponent implements OnInit {
   }
 
   buy(paymentMode= 'ether') {
+    this.message = 'Validation de la transaction';
     this.api.buy(paymentMode, this.order.client, this.order.tickets, this.order.event).subscribe((r: any) => {
         this.message = '';
         if (r != null) {
