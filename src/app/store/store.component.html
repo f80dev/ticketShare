@@ -192,7 +192,6 @@
         <button class="app-button" mat-button mat-flat-button
                 *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
                 name="cmdValidate"
-                ngxClipboard [cbContent]="event.validate_link"
                 (click)="validate(event)">
           <div class="bloc-bouton">Gérer les<br>entrées</div>
         </button>
