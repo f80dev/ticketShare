@@ -80,6 +80,11 @@ export class EventeditorComponent implements OnInit {
   }
 
 
+  download_template() {
+    this.api.get_yaml_code(this.config.user.address,this.selTemplate.filename).subscribe((code:any)=>{
+
+    })
+  }
 
 
   sendDemo() {
@@ -123,5 +128,6 @@ export class EventeditorComponent implements OnInit {
       this.router.navigate(["faq"],{queryParams:{faq:"api_key"}});
     },"En savoir plus");
   }
+
 
 }

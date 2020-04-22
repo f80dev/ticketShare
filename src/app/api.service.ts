@@ -51,6 +51,10 @@ export class ApiService {
     return this.http.get(api('get_yaml_code/'+user+"/"+yaml_file));
   }
 
+  get_yaml_file(user:string,yaml_file:string) {
+    return this.http.get(api('get_yaml_file/'+user+"/"+yaml_file));
+  }
+
 
   getfaqs() {
     return this.http.get(api('faqs'));

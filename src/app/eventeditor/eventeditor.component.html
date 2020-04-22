@@ -132,7 +132,7 @@
         </td>
         <td></td>
         <td *ngIf="config.user?.email">
-          Recevoir ce modèle sur votre mail, le personnaliser<br>et le renvoyer pour créer votre événement
+          Récupérer le modèle pour le personnaliser depuis votre ordinateur
         </td>
       </tr>
       <tr></tr>
@@ -154,7 +154,16 @@
                   *ngIf="config.user?.email"
                   mat-button mat-raised-button
                   (click)="sendDemo()">
-              Recevoir ce modèle
+              Par mail
+          </button>
+          &nbsp;
+          <button class="app-button "
+                  style="margin-top: 10px;"
+                  id="cmdDownloadTemplate"
+                  *ngIf="config.user?.email"
+                  mat-button mat-raised-button
+                  (click)="download_template()">
+            Télécharger
           </button>
         </td>
       </tr>
@@ -173,7 +182,7 @@
     <br>
     <div   style="font-size: xx-small;display: inline-block;cursor: pointer;"
             id="cmdCopieCle"
-            *ngIf="config.user?.access_token.length>20"
+            *ngIf="config.user?.access_token?.length>20"
             [cbContent]="config.user?.access_token"
             ngxClipboard
             (click)="informe_copy()">

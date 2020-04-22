@@ -90,7 +90,19 @@
   </app-refund>
 
   <br>
-  <br>
+
+  <div *ngIf="config.user.histo?.length>0">
+    <br><strong>Transactions</strong><br>
+    <table style="display: inline-block;text-align: left;font-size: small;">
+      <tr *ngFor="let line of config.user.histo">
+        <td>{{line.dtLog*1000 | date:'dd/MM'}}</td>
+        <td>-</td>
+        <td>{{line.text}}</td>
+      </tr>
+    </table>
+    <br><br>
+  </div>
+
 
 
   <br>
