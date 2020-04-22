@@ -26,12 +26,12 @@
            name="template"
            style="cursor:pointer;font-size:x-small;width:150px;height:250px;text-align: center;margin: 15px;"
            (click)="openModele(template)">
-        <div style="height:25px;">{{template.title}}</div>
+
+        <div style="height:45px;font-size: x-small">{{template.description}}</div>
         <img class="image-photo"
              [src]="template.visual"
-             style="width:150px;height:150px;">
-        <br>
-        {{template.description}}
+             style="width:150px;height:150px;"><br>
+        <div>{{template.title}}</div>
       </div>
     </div>
   </div>

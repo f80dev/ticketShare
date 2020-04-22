@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Minimal store sample</title>
-    <script src="js/main.js"></script>
 </head>
+
 <body onload="run()">
 <p>Dans cette page, vous n'êtes plus dans KEREBUS mais dans une billeterie minimal visant à illustrer l'usage de l'API
 add_ticket permetant d'intégrer des billets dans la blockchain</p>
@@ -52,6 +52,12 @@ add_ticket permetant d'intégrer des billets dans la blockchain</p>
 </body>
 
 <script>
+  function getParam() {
+    var vars = {};
+    window.location.href.replace(location.hash, '').replace(/[?&]+([^=&]+)=?([^&]*)?/gi, function (m, key, value) { vars[key] = value !== undefined ? value : ''; });
+    return vars;
+  }
+
   function run(){
     if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
       document.getElementById("faq").style.display="none";
@@ -68,14 +74,17 @@ add_ticket permetant d'intégrer des billets dans la blockchain</p>
     var domain=getParam().domain;
     if(domain==null)domain="http://localhost:6800";
 
-    var url=domain+"/api/add_ticket/1587572044"; //+idevent;
+    var access_token=getParam().access_token;
+    if(access_token==null)access_token="tkeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjB4OGU2NTBkMTAwOEIxOTc4N0FDZDE3NzU5MzRjQzM2ZEQ1MDE1NDczZiIsInBhc3N3b3JkIjoiMjI5NjEzIn0.4o9lBDPFi8sd4PQgWbrY-tbcULEouQMKNAn8-Z5zUkA";
+
+    var url=domain+"/api/add_ticket/+idevent";
     url=url.replace("http//","http://").replace("https//","https://");
     fetch(url,
       {
         body: new FormData(document.getElementById('frm')),
         method: "post",
         headers:{
-          "access_token":"tkeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjB4OGU2NTBkMTAwOEIxOTc4N0FDZDE3NzU5MzRjQzM2ZEQ1MDE1NDczZiIsInBhc3N3b3JkIjoiMjI5NjEzIn0.4o9lBDPFi8sd4PQgWbrY-tbcULEouQMKNAn8-Z5zUkA"
+          "access_token":access_token
         }
       }).then(function (r) {
         r.json().then(function (resp) {

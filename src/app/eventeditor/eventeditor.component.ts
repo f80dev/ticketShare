@@ -39,8 +39,10 @@ export class EventeditorComponent implements OnInit {
 
   ngOnInit() {
     checkLogin(this.router);
+    this.message="Chargement des modèles";
     this.api.gettemplates().subscribe((r:any[])=>{
       this.templates=r;
+      this.message="";
     });
 
     this.api._get("/yaml_properties").subscribe((r:any)=>{
