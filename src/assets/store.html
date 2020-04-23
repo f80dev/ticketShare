@@ -6,8 +6,11 @@
 </head>
 
 <body onload="run()">
-<p>Dans cette page, vous n'êtes plus dans KEREBUS mais dans une billeterie minimal visant à illustrer l'usage de l'API
-add_ticket permetant d'intégrer des billets dans la blockchain</p>
+<div id="message">
+  <p>Dans cette page, vous n'êtes plus dans KEREBUS mais dans une billeterie minimal visant à illustrer l'usage de l'API
+    add_ticket permetant d'intégrer des billets dans la blockchain</p>
+</div>
+
 <table style="width:100vw;">
   <tr>
     <th>Exemple minimaliste de boutique</th>
@@ -97,7 +100,8 @@ add_ticket permetant d'intégrer des billets dans la blockchain</p>
         }
       }).then(function (r) {
         r.json().then(function (resp) {
-        location.href=resp.data.redirect;
+          var email=document.getElementById("email").value;
+          document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
       });
     },function(r) {
       console.log(r);

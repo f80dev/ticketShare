@@ -61,6 +61,11 @@ export class MyeventsComponent implements OnInit {
 
 
   buy_other(event) {
-    this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
+    if(event.hasOwnProperty('store')){
+      this.router.navigate(["store"],{queryParams:{event:event._id}});
+    }else{
+      this.router.navigate(["places"],{queryParams:{event:event._id,etherprice:event.etherprice}});
+    }
+
   }
 }

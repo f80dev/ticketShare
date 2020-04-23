@@ -3,7 +3,7 @@
   <app-ticket width="150px"
               style="margin:5px;"
               *ngFor="let ticket of tickets"
-              [title]="(ticket.date*1000) | date:'le dd/MM à HH:mm'"
+              [title]="(ticket.date*1000) | date:ticket.format_date"
               [subtitle]="ticket.price+'€'"
               [showAction]="ticket.state=='sold'"
               [ticket]="ticket">
