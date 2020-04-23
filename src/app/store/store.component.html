@@ -65,6 +65,11 @@
 
       <app-tuto [if]="!event.preview" label="A tout instant vous pouvez savoir combien de billets sont encore en vente"></app-tuto>
 
+      <div *ngIf="event.store!=null && event.owner==config.user.address" style="display: inline-block;width:70%;">
+        Cet événement utilise la billeterie {{event.store.name}}
+        pour créer des billets celle-ci doit utiliser l'api <app-faq-link faq="extern_store"></app-faq-link>:<br>
+        <small><strong>{{config.infos_server.domain}}/api/add_ticket/{{event._id}}</strong></small><br><br>
+      </div>
 
       <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
            style="width:100%;text-align: left;overflow: hidden;">
@@ -204,13 +209,7 @@
 
       <br>
 
-      <div *ngIf="event.store!=null && event.owner==config.user.address" style="display: inline-block;width:70%;">
-        Cet événement utilise la billeterie {{event.store.name}}
-        pour créer des billets elle doit appeler l'api<br><br>
-        <small><strong>{{config.infos_server.domain}}/api/add_ticket/{{event._id}}</strong></small><br><br>
-        en tranmettant les informations sur les billets à créer telles que préciser ici: <app-faq-link faq="extern_store"></app-faq-link>
-        <br><br>
-      </div>
+
 
 
       <!--Rechargement-->

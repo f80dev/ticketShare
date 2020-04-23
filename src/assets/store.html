@@ -58,16 +58,24 @@ add_ticket permetant d'intégrer des billets dans la blockchain</p>
     return vars;
   }
 
+  /**
+   * Fonction appelée à l'ouverture de la page
+   */
   function run(){
+    //faq consiste à afficher de l'aide
     if(!getParam().hasOwnProperty("faq") || screen.availWidth<500)
       document.getElementById("faq").style.display="none";
 
+    //permet un pré-remplissage de l'identité du client
     if(getParam().hasOwnProperty("email"))
       document.getElementById("email").value=getParam().email;
   }
 
-  function send(){
 
+  /**
+   * Fonction appelée pour créer le billet
+   */
+  function send(){
     var idevent=getParam().idevent;
     if(idevent==null)idevent=0;
 
@@ -83,6 +91,7 @@ add_ticket permetant d'intégrer des billets dans la blockchain</p>
       {
         body: new FormData(document.getElementById('frm')),
         method: "post",
+        mode: 'no-cors',
         headers:{
           "access_token":access_token
         }
