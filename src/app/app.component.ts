@@ -86,7 +86,6 @@ export class AppComponent implements OnInit,OnDestroy {
       localStorage.setItem('address', r.address);
       func(r);
     },(err)=>{
-      debugger
       if(err.status==0)
         showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard",0,()=>{
           this.initUser();
@@ -125,20 +124,24 @@ export class AppComponent implements OnInit,OnDestroy {
    * @param func
    * Attention: il est nécéssaire d'ajouter chaque nouveau paramètre à la fonction
    */
-  analyse_params(func) {
-    var url=this._location.path(); //Ne récupére pas le domaine de l'url
+  analyse_params(func,url="") {
+    if(url.length==0)
+      url=this._location.path(); //Ne récupére pas le domaine de l'url
+
     localStorage.setItem('firsturl', url);
     var params={};
     if(url!=null && url.indexOf("?")>=0) {
-      url= this._location.path().split("?")[1];
+      url= url.split("?")[1];
       $$('Récupération des paramètres', url);
       for(let param of ["command","event","privatekey","address","faq","code","new"]){
         if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
       }
     }
-    $$('Netoyage de l\'url de lancement:' + this._location.path());
-    this._location.replaceState(this._location.path().split('?')[0], '');
-    this._location.replaceState(this._location.path().split('/home')[0], '');
+    if(this._location.path().indexOf("?")>=0){
+      $$('Netoyage de l\'url de lancement:' + this._location.path());
+      this._location.replaceState(this._location.path().split('?')[0], '');
+      this._location.replaceState(this._location.path().split('/home')[0], '');
+    }
 
     $$("Appel du callback avec params=",params);
     this.config.params=params;
@@ -154,11 +157,13 @@ export class AppComponent implements OnInit,OnDestroy {
     //TODO: tous les paramètres transmis ici doivent être encrypté
     this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
     $$("Pas de compte connu, Appel de create_user avec text=", text);
-    this.create_user(text, (u) => {
+    this.
+    create_user(text, (u) => {
       this.message = "";
       localStorage.setItem("address",u["address"]);
       this.showIntro=false;
       showMessage(this, "Nouveau compte créé");
+      this.analyse_params((p: any) => {this.use_params(p);},localStorage.getItem("firsturl"));
     },(err)=>{
       showMessage(this, "Ce compte existe déjà");
       localStorage.removeItem("address");
@@ -219,7 +224,6 @@ export class AppComponent implements OnInit,OnDestroy {
         this.initUser(p["privatekey"]);
       }
 
-
       if(this.config.user!=null){
         $$("Le user est initialiser, on peut prendre en compte certains paramétres")
         if(p["event"]!=null){
@@ -247,7 +251,6 @@ export class AppComponent implements OnInit,OnDestroy {
       if(p.hasOwnProperty("faq")){
         this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
       }
-
 
 
       $$("Aucun paramètre n'a été transmis pour le lancement");
