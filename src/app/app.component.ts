@@ -79,20 +79,20 @@ export class AppComponent implements OnInit,OnDestroy {
    *
    * @param result
    */
-  create_user(info,func){
+  create_user(info,func,func_error){
     if(info==null)info="";
     this.api.adduser(info).subscribe((r: any) => {
       this.config.user = r;
       localStorage.setItem('address', r.address);
       func(r);
     },(err)=>{
+      debugger
       if(err.status==0)
         showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard",0,()=>{
           this.initUser();
         },"Reconnexion");
       else{
-        showMessage(this,"Adresse incorrecte "+err.message);
-        this.initUser();
+        func_error();
       }
     });
   }
@@ -132,7 +132,7 @@ export class AppComponent implements OnInit,OnDestroy {
     if(url!=null && url.indexOf("?")>=0) {
       url= this._location.path().split("?")[1];
       $$('Récupération des paramètres', url);
-      for(let param of ["command","event","privatekey","address","faq","code"]){
+      for(let param of ["command","event","privatekey","address","faq","code","new"]){
         if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
       }
     }
@@ -159,6 +159,9 @@ export class AppComponent implements OnInit,OnDestroy {
       localStorage.setItem("address",u["address"]);
       this.showIntro=false;
       showMessage(this, "Nouveau compte créé");
+    },(err)=>{
+      showMessage(this, "Ce compte existe déjà");
+      localStorage.removeItem("address");
     });
   }
 
@@ -232,6 +235,11 @@ export class AppComponent implements OnInit,OnDestroy {
 
         if(p["command"]=="myevents"){
           this.router.navigate(["myevents"]);
+        }
+      } else {
+        if(p["new"]!=null && localStorage.getItem("address")==null){
+          $$("Le lancement doit immédiatement importer un wallet existant")
+          this.initUser(p["new"]);
         }
       }
 
