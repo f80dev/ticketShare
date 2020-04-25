@@ -1,47 +1,78 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<div style="height: 100vh;width:100vw;text-align: center;"
+     *ngIf="showIntro">
 
-<app-tuto title="Bienvenue dans KERBERUS"
-          subtitle="La première billeterie totalement sécurisée par la blockchain"
-          main_button="Démarrer"
-          [force]="true"
-          image="https://app.kerberus.tech/assets/logo_sanstitre.png">
-</app-tuto>
+  <h2>Bienvenue dans {{config.values.appname}}</h2>
+  La première billeterie totalement sécurisée par la blockchain
+  <br>
 
-<mat-toolbar style="height:40px;" (mousedown)="closeMenu()">
-  <mat-icon *ngIf="config.width_screen<=800"
-            id="cmdMenu"
-            (click)="drawer.toggle()"
-            style="cursor: pointer;">
-    menu
-  </mat-icon>
+  <img src="https://app.kerberus.tech/assets/logo_sanstitre.png"
+       style="max-width: 300px;max-height: 300px;display: inline-block;">
+  <br>
 
-  &nbsp;
-  <img src="./assets/icons/icon-72x72.png"
-       *ngIf="config.width_screen>800"
-       style="width:30px;display: inline;">
-  &nbsp;
+  <br>
+  Vous souhaitez:<br>
+  <button class="app-button"
+          style="margin-top: 40px;width: 200px;"
+          mat-button mat-raised-button
+          (click)="initUser()">
+    <div class="bloc-bouton">
+      Créer un compte<br>pour la première fois
+    </div>
+  </button>
+  <br>
+  <button class="app-button"
+          style="margin-top: 40px;width: 200px;"
+          mat-button mat-raised-button
+          (click)="import_wallet()">
+    <div class="bloc-bouton">
+      Importer un<br>wallet existant
+    </div>
+  </button>
 
-  <span>
+  <br>
+  <br>
+</div>
+
+
+<div *ngIf="!showIntro">
+  <mat-toolbar style="height:40px;" (mousedown)="closeMenu()">
+    <mat-icon *ngIf="config.width_screen<=800"
+              id="cmdMenu"
+              (click)="drawer.toggle()"
+              style="cursor: pointer;">
+      menu
+    </mat-icon>
+
+    &nbsp;
+    <img src="./assets/icons/icon-72x72.png"
+         *ngIf="config.width_screen>800"
+         style="width:30px;display: inline;">
+    &nbsp;
+
+    <span>
     {{config.values.appname}}
   </span>
-  &nbsp;
+    &nbsp;
 
-  <span class="example-fill-remaining-space"></span>
+    <span class="example-fill-remaining-space"></span>
 
-  <mat-icon *ngIf="config.user?.email?.length>0" (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
-</mat-toolbar>
+    <mat-icon *ngIf="config.user?.email?.length>0" (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
+  </mat-toolbar>
 
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side" >
-    <app-home *ngIf="message.length==0" (click)="closeMenu()"></app-home>
-  </mat-drawer>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" >
+      <app-home *ngIf="message.length==0" (click)="closeMenu()"></app-home>
+    </mat-drawer>
 
-  <div class="example-sidenav-content" (mousedown)="closeMenu()">
-    <app-hourglass [message]="message"></app-hourglass>
-    <router-outlet *ngIf="message.length==0"></router-outlet>
-  </div>
+    <div class="example-sidenav-content" (mousedown)="closeMenu()">
+      <app-hourglass [message]="message"></app-hourglass>
+      <router-outlet *ngIf="message.length==0"></router-outlet>
+    </div>
 
-</mat-drawer-container>
+  </mat-drawer-container>
+
+</div>
+
 
 
 

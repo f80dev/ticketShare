@@ -35,6 +35,7 @@ export class AppComponent implements OnInit,OnDestroy {
   subscriptions: Subscription[] = [];
 
   showFiller = false;
+  showIntro=true;
   message="";
   @ViewChild('drawer', {static: false}) drawer: MatSidenav;
 
@@ -57,6 +58,8 @@ export class AppComponent implements OnInit,OnDestroy {
   }
 
 
+
+
   init_event_for_network_status(){
     this.subscriptions.push(this.onlineEvent.subscribe(e => {
       this.api.connectionStatus = true;
@@ -69,13 +72,16 @@ export class AppComponent implements OnInit,OnDestroy {
     }));
   }
 
+
+
+
   /**
    *
    * @param result
    */
-  create_user(result,func){
-    if(result==null)result="";
-    this.api.adduser(result).subscribe((r: any) => {
+  create_user(info,func){
+    if(info==null)info="";
+    this.api.adduser(info).subscribe((r: any) => {
       this.config.user = r;
       localStorage.setItem('address', r.address);
       func(r);
@@ -146,49 +152,140 @@ export class AppComponent implements OnInit,OnDestroy {
    */
   initUser(text=""):void {
     //TODO: tous les paramètres transmis ici doivent être encrypté
-    $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
-    const address = localStorage.getItem('address');
-    $$("Address récupérée sur le device ", address);
-
-    if (!address) {
-      //TODO: intégrer la problématique d'obsolescence des cookies
-      $$("Pas de compte connu sur ce device");
-      this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
-      $$("Pas de compte connu, Appel de create_user avec text=", text);
-      this.create_user(text, (u) => {
-        this.message = "";
-        showMessage(this, "Nouveau compte créé");
-        this.onResize();
-      });
-    } else {
-      this.message="Reconnexion au compte "+address;
-      this.api.getuser(address,30).subscribe((r: any) => {
-        if(text!=r.address){
-          $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
-        }
-
-        this.message="";
-        this.config.user = r;
-      },(err)=>{
-        if(err.status==400){
-          showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
-          localStorage.removeItem("address");
-          setTimeout(()=>{this.initUser();},1000);
-        } else
-          showMessage(this,err.message);
-      });
-    }
+    this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
+    $$("Pas de compte connu, Appel de create_user avec text=", text);
+    this.create_user(text, (u) => {
+      this.message = "";
+      localStorage.setItem("address",u["address"]);
+      this.showIntro=false;
+      showMessage(this, "Nouveau compte créé");
+    });
   }
 
-  ngOnInit(): void {
 
-    $$("Vérification de la connexion")
-    this.api.infos().subscribe((r:any)=>{
-      $$("Infos du serveur : ",r);
+  /**
+   * Cette fonction est appelée pour traiter les paramétres
+   * @param p
+   */
+  use_params(p:any){
+      //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
+      if(p["address"]!=null) {
+        $$("Le paramétre address force une connexion sur "+p["address"]);
+
+        if (p["code"] != null) {
+          $$("Le lancement doit immédiatement se reconnecter sur " + p["address"]);
+          var code = p["code"];
+          this.api.checkCode(p["address"], code).subscribe((r) => {
+            if (r != null) {
+              localStorage.setItem("address", p["address"]);
+              this.initUser();
+            }
+          });
+        }
+
+        if (p["code"] == null) {
+          $$("Le code n'a pas été transmit donc on le demande");
+          this.dialog.open(PromptComponent, {
+            width: '250px',
+            data: {
+              title: 'Accès à votre compte',
+              question: "Veuillez renseigner votre code d'accès à 6 chiffres pour votre wallet associé à " + p["address"],
+              onlyConfirm: false,
+              emojis: false,
+              type: "number",
+              lbl_ok: "Valider",
+              lbl_cancel: "Annuler"
+            }
+          }).afterClosed().subscribe((code) => {
+            this.api.checkCode(p["address"], code).subscribe((r) => {
+              if (r != null) {
+                localStorage.setItem("address", r["address"]);
+                this.initUser();
+              }
+            }, (err) => {
+              showMessage(this, "Connexion sur un nouveau compte");
+              this.initUser();
+            });
+          });
+        }
+      }
+
+
+      if(p["privatekey"]!=null){
+        $$("Le lancement doit immédiatement importer un wallet existant")
+        this.initUser(p["privatekey"]);
+      }
+
+
+      if(this.config.user!=null){
+        $$("Le user est initialiser, on peut prendre en compte certains paramétres")
+        if(p["event"]!=null){
+          $$("on demande une bascule immédiate sur l'événement "+p["event"])
+          if(p["command"]=="validate"){
+            this.router.navigate(["validate"],{queryParams:{event:p["event"]}});
+          }
+
+          if(p["command"]=="store"){
+            this.router.navigate(["store"],{queryParams:{event:p["event"]}});
+          }
+        }
+
+        if(p["command"]=="myevents"){
+          this.router.navigate(["myevents"]);
+        }
+      }
+
+
+      if(p.hasOwnProperty("faq")){
+        this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
+      }
+
+
+
+      $$("Aucun paramètre n'a été transmis pour le lancement");
+      if(this.config.user!=null){
+        this.showIntro=false;
+      } else {
+        $$("Le user n'a pas été chargé, on affiche le menu d'introduction");
+      }
+  }
+
+
+
+
+
+  import_wallet() {
+    /**
+     * Rattache un wallet existant
+     * @param func callback
+     */
+    this.dialog.open(PromptComponent, {width: '250px',
+      data: {
+        title: 'Rattachez un wallet',
+        question: "Renseigné la clé privée de votre wallet",
+        result:"567E753E69EB31B532272697D687B6D607BBE86A0A699148F9A81541582724C8",
+        onlyConfirm: false,
+        canEmoji: false,
+        lbl_ok:"Ok",
+        lbl_cancel:"Annuler"
+      }
+    }).afterClosed().subscribe((result_key) => {
+      if(result_key!=null && result_key.length>0){
+        this.initUser(result_key);
+      }
     });
+  }
+
+
+
+
+
+
+  ngOnInit(): void {
+    $$("Vérification de la connexion")
+    this.api.infos().subscribe((r:any)=>{$$("Infos du serveur : ",r);});
 
     this.init_event_for_network_status();
-
 
     subscribe_socket(this,"refresh_sell");
 
@@ -203,86 +300,42 @@ export class AppComponent implements OnInit,OnDestroy {
     // }
     // const accounts = this.web3.eth.getAccounts();
 
-    setTimeout(()=>{
-      this.analyse_params((p:any)=>{
-        if(localStorage.getItem("address")!=null){
-          $$("Avant toute tentative de connexion via les paramétres c'est le device qui prime");
-          this.initUser();
-        }
-        else{
-          //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
-          if(p["address"]!=null && p["code"]!=null) {
-            var code=p["code"];
-            this.api.checkCode(p["address"], code).subscribe((r) => {
-              if (r != null) {
-                localStorage.setItem("address", p["address"]);
-                this.initUser();
-              }
-            });
-          }
+    setTimeout(()=> {
+      $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
 
-          if(p["address"]!=null && p["code"]==null){
-            $$("A priori on cherche une connexion par email "+p["address"]);
-            this.dialog.open(PromptComponent, {width: '250px',
-              data: {
-                title: 'Accès à votre compte',
-                question: "Veuillez renseigner votre code d'accès à 6 chiffres pour votre wallet associé à "+p["address"],
-                onlyConfirm: false,
-                emojis: false,
-                type: "number",
-                lbl_ok:"Valider",
-                lbl_cancel:"Annuler"
-              }
-            }).afterClosed().subscribe((code) => {
-              this.api.checkCode(p["address"],code).subscribe((r)=>{
-                if(r!=null){
-                  localStorage.setItem("address",r["address"]);
-                  this.initUser();
-                }
-              },(err)=>{
-                showMessage(this,"Connexion sur un nouveau compte");
-                this.initUser();
-              });
-            });
-          }
-
-          if(p["privatekey"]!=null){
-            this.initUser(p["privatekey"]);
-          }
-          else{
-            if(p["address"]!=null){
-              this.initUser(p["address"]);
-            } else {
-              this.initUser();
-            }
-          }
-        }
+      const address = localStorage.getItem('address');
+      $$("Address récupérée sur le device "+address+". On se reconnecte au compte");
 
 
-        if(p.hasOwnProperty("event")){
-          if(p["command"]=="validate"){
-            this.router.navigate(["validate"],{queryParams:{event:p["event"]}});
-          }
+      if(address){
+        this.message="Reconnexion a votre compte";
+        this.api.getuser(address,30).subscribe((r: any) => {
+          // if(address!=r.address){
+          //   $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
+          // }
+          this.message="";
+          this.config.user = r;
+          this.analyse_params((p: any) => {this.use_params(p);});
+        },(err)=>{
+          if(err.status==400){
+            showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
+            localStorage.removeItem("address");
+            setTimeout(()=>{window.location.reload();},500);
 
-          if(p["command"]=="store"){
-            this.router.navigate(["store"],{queryParams:{event:p["event"]}});
-          }
-        }
+          } else
+            showMessage(this,err.message);
+        });
+      } else {
+        this.analyse_params((p: any) => {this.use_params(p);});
+      }
+      },200);
 
-        if(p.hasOwnProperty("faq")){
-          this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
-        }
-
-        if(p["command"]=="myevents"){
-          this.router.navigate(["myevents"]);
-        }
-
-      });
-      if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();
-    },500);
-
-
+    if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();
   }
+
+
+
+
 
   logout() {
     this.dialog.open(PromptComponent, {width: '250px',
