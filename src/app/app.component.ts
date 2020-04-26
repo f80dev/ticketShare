@@ -55,6 +55,10 @@ export class AppComponent implements OnInit,OnDestroy {
       this.api.infos().subscribe((infos:any)=>{
         config.infos_server=infos;
         this.showZoneOptions=true;
+      },()=>{
+        setTimeout(()=>{
+          window.location.reload();
+        },2000)
       })
     });
 
@@ -367,8 +371,10 @@ export class AppComponent implements OnInit,OnDestroy {
       localStorage.removeItem('address');
       window.location.reload();
     });
-
   }
+
+
+
 
   closeMenu(){
     if(this.config.width_screen<800)this.drawer.close();
