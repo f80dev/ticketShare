@@ -7,50 +7,17 @@
 
 <body onload="init_form()">
 <div id="message" style="width: 100%;text-align: center;">
-  <p>Dans cette page illustre l'usage de l'API KERBERUS permetant de sécuriser vos billets dans la blockchain</p>
+  <p>Cette page illustre l'usage de l'API KERBERUS permetant de valider les billets via la blockchain</p>
 </div>
 
-<table style="width:100vw;" id="store_zone">
+<table style="width:100vw;" id="validate_zone">
   <tr>
     <th>Exemple minimaliste de boutique</th>
     <th>Procédure</th>
   </tr>
   <tr>
     <td style="width: 300px;text-align: left;vertical-align:top;" >
-      <form id="frm">
-        <div>
-          <label for="email">Email</label>
-          <input name="email" id="email" value="paul.dudule@gmail.com">
-        </div>
-        <br>
-        <div id="events_zone" style="display: none;">
-          <label for="selectEvent">Sélectionner un événement</label>
-          <select id="selectEvent">
-          </select>
-          <br><br>
-        </div>
-
-        <div>
-          <label for="tickets">Combien de billets</label>
-          <input name="tickets" type="number" size="3" id="tickets" value="2" max="10" min="0">
-        </div>
-        <br>
-        <div>
-          <label for="price">Prix</label>
-          <input name="price" type="number" id="price" value="30" max="300" min="0">
-        </div>
-        <br>
-        <div>
-          <label for="date">Date</label>
-          <input name="date" type="date" id="date" value="2021-01-01">
-        </div>
-
-        <div>
-          <br>
-        </div>
-      </form>
-
-      <button onclick="send()">Commander</button>
+      <input type="file" accept="image/*;capture=camera">
     </td>
     <td>
       <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=extern_store"

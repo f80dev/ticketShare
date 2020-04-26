@@ -166,7 +166,7 @@ export class ValidateComponent implements OnInit {
 
   update_addr($event) {
     const addr=$event.currentTarget.value;
-    if(addr!=null && addr.length==42 && addr.startsWith("0x")){
+    if(addr!=null){
       this.onflash_event({data:addr});
     }
   }

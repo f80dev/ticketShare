@@ -41,6 +41,7 @@ export class ShareComponent implements OnInit {
   }
 
   onflash(evt){
+    showMessage(this,"Adresse du wallet : "+evt.data,4000);
     $$("Lecture de l'adresse : "+evt.data);
     this.transfert(evt.data);
   }

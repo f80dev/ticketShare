@@ -8,7 +8,9 @@
   <img src="https://app.kerberus.tech/assets/logo_sanstitre.png"
        style="max-width: 300px;max-height: 300px;display: inline-block;">
   <br>
-  <app-hourglass *ngIf="!showZoneOptions" message="Connexion en cours ..."></app-hourglass>
+  <app-hourglass *ngIf="!showZoneOptions"
+                 message="Connexion en cours ...">
+  </app-hourglass>
   <br>
 
   <div *ngIf="showZoneOptions">

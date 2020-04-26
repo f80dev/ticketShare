@@ -33,7 +33,7 @@
   <br>
 
   <button class="app-button" mat-button mat-raised-button
-          *ngIf="address!=null && address.startsWith('0x')"
+          *ngIf="address!=null && address?.length>2"
           title="Recherche des places sur le wallet spectacle du client"
           (click)="update_addr(address)">
     Recherche des places
