@@ -152,7 +152,7 @@ export class LoginComponent implements OnInit {
 
   updateCode(event){
     var code=event.target.value.trim();
-    if(code.length<6)return;
+    if(code>10000)return;
     this.wait_message="Vérification du code";
     this.api.checkCode(this.email, code).subscribe((r: any) => {
       this.wait_message="";

@@ -76,8 +76,14 @@ export class ApiService {
     return this.http.get(api("job/"+iter));
   }
 
+  /**
+   *
+   * @param userid
+   * @param sortField : peut
+   * @param filterField
+   */
   getevents(userid:string="",sortField:string="",filterField:string=""){
-    var url="events/"+userid
+    var url="events/"+userid;
     if(sortField!="")url=url+"/"+sortField;
     if(filterField!="")url=url+"/"+filterField;
     return this._get(url);

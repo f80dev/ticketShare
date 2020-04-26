@@ -38,6 +38,7 @@ export class AppComponent implements OnInit,OnDestroy {
   showIntro=true;
   message="";
   @ViewChild('drawer', {static: false}) drawer: MatSidenav;
+  showZoneOptions=false;
 
   constructor(public config: ConfigService,
               public dialog: MatDialog,
@@ -50,8 +51,10 @@ export class AppComponent implements OnInit,OnDestroy {
               public _location: Location) {
 
     config.init(()=>{
+      $$("Vérification de la connexion")
       this.api.infos().subscribe((infos:any)=>{
         config.infos_server=infos;
+        this.showZoneOptions=true;
       })
     });
 
@@ -98,7 +101,8 @@ export class AppComponent implements OnInit,OnDestroy {
 
 
   onResize() {
-    if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();
+    if(this.config.width_screen>=800 && this.drawer!=null)
+      this.drawer.open();
   }
 
 
@@ -293,8 +297,8 @@ export class AppComponent implements OnInit,OnDestroy {
 
 
   ngOnInit(): void {
-    $$("Vérification de la connexion")
-    this.api.infos().subscribe((r:any)=>{$$("Infos du serveur : ",r);});
+
+    //this.api.infos().subscribe((r:any)=>{$$("Infos du serveur : ",r);});
 
     this.init_event_for_network_status();
 
@@ -312,6 +316,7 @@ export class AppComponent implements OnInit,OnDestroy {
     // const accounts = this.web3.eth.getAccounts();
 
     setTimeout(()=> {
+
       $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
 
       const address = localStorage.getItem('address');
@@ -341,7 +346,7 @@ export class AppComponent implements OnInit,OnDestroy {
       }
       },200);
 
-    if(this.config.width_screen>=800 && this.drawer!=null)this.drawer.open();
+    setTimeout(()=>{this.onResize();},2000);
   }
 
 

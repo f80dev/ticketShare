@@ -8,28 +8,42 @@
   <img src="https://app.kerberus.tech/assets/logo_sanstitre.png"
        style="max-width: 300px;max-height: 300px;display: inline-block;">
   <br>
+  <br>
+  <app-hourglass *ngIf="!showZoneOptions" message="Connexion au serveur"></app-hourglass>
+  <br>
 
-  <br>
-  Vous souhaitez:<br>
-  <button class="app-button"
-          style="margin-top: 40px;width: 200px;"
-          mat-button mat-raised-button
-          (click)="initUser()">
-    <div class="bloc-bouton">
-      Créer un compte<br>pour la première fois
-    </div>
-  </button>
-  <br>
-  <button class="app-button"
-          style="margin-top: 40px;width: 200px;"
-          mat-button mat-raised-button
-          (click)="import_wallet()">
-    <div class="bloc-bouton">
-      Importer un<br>wallet existant
-    </div>
-  </button>
+  <div *ngIf="showZoneOptions">
+    Vous souhaitez:<br>
+    <button class="app-button"
+            style="margin-top: 40px;width: 200px;"
+            mat-button mat-raised-button
+            (click)="initUser()">
+      <div class="bloc-bouton">
+        Créer un compte<br>pour la première fois
+      </div>
+    </button>
+    <br><br>
+    <button class="app-button"
+            style="margin-top: 40px;width: 200px;"
+            mat-button mat-raised-button
+            (click)="initUser()">
 
-  <br>
+      Acheter des billets
+    </button>
+
+    <br><br>
+    <button class="app-button"
+            style="margin-top: 40px;width: 200px;"
+            mat-button mat-raised-button
+            (click)="import_wallet()">
+      <div class="bloc-bouton">
+        Importer un<br>wallet existant
+      </div>
+    </button>
+    <br>
+
+  </div>
+
   <br>
 </div>
 
