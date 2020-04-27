@@ -47,7 +47,8 @@
                  matInput
                  autofocus
                  id="txtCode"
-                 maxlength=6
+                 min="10000"
+                 max="999999"
                  title="Saisissez votre code d'accès à 6 chiffres"
                  placeholder="Code d'accès"
                  [(ngModel)]="code"
@@ -60,7 +61,7 @@
         <br>
         <button class="app-button login-button"
                 mat-button mat-raised-button
-                *ngIf="code.length>3 && code.length<7"
+                *ngIf="code>10000"
                 id="cmdValider"
                 (click)="updateCode({target:{value:code}})">
           Valider

@@ -17,20 +17,17 @@ export class FaqsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.getfaqs().subscribe((faqs:any[])=>{
-      var params = this.route.snapshot.queryParamMap;
-      if(!params.has("open"))params["open"]="";
+    this.api.getfaqs().subscribe((rc:any[])=>{
+      var params= this.route.snapshot.queryParamMap;
 
-      for(let i=0;i<faqs.length;i++){
-        if(faqs[i]["index"]==params["params"]["open"]){
+      this.faqs=[];
 
-          faqs[i]["visible"]=true;
-        }else{
-          faqs[i]["visible"]=false;
+      rc.forEach((faq)=> {
+        if (!params.has("open") || faq["index"].indexOf(params.get("open")) > -1) {
+          faq.visible = params.has("open");
+          this.faqs.push(faq)
         }
-      }
-
-      this.faqs=faqs;
+      });
     });
   }
 

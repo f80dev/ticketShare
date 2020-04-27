@@ -151,8 +151,7 @@ export class LoginComponent implements OnInit {
   }
 
   updateCode(event){
-    var code=event.target.value.trim();
-    if(code>10000)return;
+    var code=event.target.value;
 
     this.wait_message="Vérification du code";
 
