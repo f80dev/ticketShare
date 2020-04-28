@@ -351,6 +351,7 @@ export class AppComponent implements OnInit,OnDestroy {
       },200);
 
     setTimeout(()=>{this.onResize();},2000);
+    setTimeout(()=>{this.onResize();},8000);
   }
 
 

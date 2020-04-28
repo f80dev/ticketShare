@@ -1,7 +1,7 @@
 
 
-  <app-ticket width="150px"
-              style="margin:5px;"
+  <app-ticket width="140px"
+              style="margin:3px;"
               *ngFor="let ticket of tickets"
               [title]="(ticket.date*1000) | date:ticket.format_date"
               [subtitle]="ticket.price+'€'"
