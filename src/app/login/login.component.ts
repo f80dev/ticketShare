@@ -150,6 +150,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+
   updateCode(event){
     var code=event.target.value;
 

@@ -41,17 +41,9 @@ export class ValidateComponent implements OnInit {
 
   //http://localhost:4200/?event=1582301601&command=validate
   ngOnInit() {
-
-
-    //Chargement des fichiers audios
-    this.audio_ok = new Audio();
-    this.audio_ok.src = "/assets/ok.mp3";
-    this.audio_ok.load();
-
-    //Chargement des fichiers audios
-    this.audio_ko = new Audio();
-    this.audio_ko.src = "/assets/ko.mp3";
-    this.audio_ko.load();
+    $$("Chargement des fichiers audios");
+    this.audio_ok = new Audio();this.audio_ok.src = "/assets/ok.mp3";this.audio_ok.load();
+    this.audio_ko = new Audio();this.audio_ko.src = "/assets/ko.mp3";this.audio_ko.load();
 
 
     var idEvent=localStorage.getItem("validation");
@@ -60,9 +52,11 @@ export class ValidateComponent implements OnInit {
       showMessage(this,"impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
     } else {
+      this.message="Récupération de l'ensemble des ventes";
       this.api.getevent(idEvent).subscribe((r:any)=>{
         this._event=r;
         this.api.getbalances(idEvent,true).subscribe((all:any)=>{
+          this.message="";
           this.all_tickets=all;
           if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
             this.router.navigate(["login"], {
@@ -90,16 +84,34 @@ export class ValidateComponent implements OnInit {
 
 
   getplaces(addr,idevent,func,func_error=null){
-    if(this.all_tickets.hasOwnProperty(addr)) {
-      $$("L'utilisateur est bien dans la liste des billets, on affiche le résultats")
-      func({tickets: this.all_tickets[addr],photo:this.all_tickets["identities"][addr].photo,pseudo:this.all_tickets["identities"][addr].pseudo});
-    }else{
-      this.api.use(addr,this._event["_id"]).subscribe((r:any)=> {
-        func(r);
-      },()=>{
-        func_error();
+    if(addr.length<42){
+      addr=addr.replace("#","")
+      $$("On effectue une recherche sur la base de la référence du ticket")
+      Object.keys(this.all_tickets).forEach((k)=>{
+        if(k.startsWith("0x") && addr.length<42){
+          this.all_tickets[k].forEach((t)=>{
+            if(addr.length<42 && t.ref==addr && t.state=="sold"){
+              addr=t.params;
+            }
+          });
+        }
       });
     }
+
+    if(addr.length==42 && this.all_tickets.hasOwnProperty(addr)) {
+      $$("L'utilisateur est bien dans la liste des billets, on affiche le résultats")
+      func({tickets: this.all_tickets[addr],photo:this.all_tickets["identities"][addr].photo,pseudo:this.all_tickets["identities"][addr].pseudo});
+      return true;
+    }
+
+
+    $$("Le billet n'a pas été trouvé dans la dernière récupération, on interoge la blocchain");
+    this.api.use(addr,this._event["_id"]).subscribe((r:any)=> {
+      func(r);
+    },()=>{
+      func_error();
+    });
+
   }
 
 
@@ -132,7 +144,12 @@ export class ValidateComponent implements OnInit {
         if(this.tickets.length==0){
           this.audio_ko.play();
           this.api.removeEvt(addr,this._event["_id"]).subscribe(()=>{});
-          showMessage(this,"Pas de ticket pour cet événement");
+
+          if(addr.length==42)
+            showMessage(this,"Pas de ticket pour cet événement");
+          else
+            showMessage(this,"Référence incorrect ou billet non vendu");
+
           this.showScanner=true;
         } else {
           this.audio_ok.play();

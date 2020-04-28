@@ -26,7 +26,7 @@
            autofocus
            id="txtAddress"
            title="Saisissez l'adresse de votre compte Ethereum"
-           placeholder="Adresse du wallet du visiteur"
+           placeholder="Référence du billet ou du wallet"
            [(ngModel)]="address"
            (change)="update_addr($event)">
   </mat-form-field>
@@ -39,21 +39,20 @@
     Recherche des places
   </button>
 
-  <div  *ngIf="config.webcamsAvailable==0" style="font-size: x-small">
-    <br><br>
+  <div  *ngIf="config.webcamsAvailable==0 && address.length==0 && tickets.length==0" style="font-size: x-small">
+    <br>
     Aucune caméra détectée sur ce device pour<br>
     valider les entrées sur la base du QRCode<br>
   </div>
 
-  <br><br>
 
 
-  <div *ngIf="_event?.owner==config.user?.address">
+
+  <div *ngIf="_event?.owner==config.user?.address && tickets.length==0">
+    <br><br>
     <div *ngIf="_event?.validate.checkers?.length==1">
       Vous êtes le seul habilité à contrôler les billets
     </div>
-
-
 
     <div *ngIf="_event?.validate.checkers?.length>1" style="width: 100%;text-align: center;">
       <h2>Liste des valideurs</h2>
@@ -83,7 +82,7 @@
 
 <div style="width:100%;text-align: center;margin-top:10%;" *ngIf="tickets.length>0 && message.length==0">
   <div *ngIf="_user?.photo?.length>0">
-    <h2>Propriétaire des billets</h2>
+    <h3>Propriétaire des billets</h3>
     {{_user?.pseudo}}<br>
     <img [src]="_user?.photo"
          class="image-photo"

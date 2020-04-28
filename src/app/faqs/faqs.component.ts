@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ActivatedRoute} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-faqs',
@@ -13,6 +14,7 @@ export class FaqsComponent implements OnInit {
   faqs:any[]=[];
 
   constructor(public api:ApiService,
+              public _location:Location,
               public route:ActivatedRoute) {
   }
 
