@@ -35,16 +35,25 @@
 
   <!--Zone de filtre-->
   <div style="width: 100%;text-align: left;margin-left:3%;" *ngIf="cats!=null && message.length==0">
-    <mat-form-field style="width:200px;">
-      <mat-label>Date</mat-label>
-      <mat-select [(value)]="selectDate" (valueChange)="refresh()">
-        <mat-option *ngFor="let dt of _dates" [value]="dt">
-          {{dt*1000| date:'dd/MM/yyyy'}} à {{dt*1000| date:'HH:mm'}}
+    <mat-form-field style="width:120px;">
+      <mat-label>Dates</mat-label>
+      <mat-select [(value)]="selectDate" (valueChange)="init_hours()">
+        <mat-option *ngFor="let dt of days" [value]="dt">
+          {{dt}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     &nbsp;
-    <mat-form-field style="width: 200px;" *ngIf="cats?.length>1">
+    <mat-form-field style="width:70px;">
+      <mat-label>Heures</mat-label>
+      <mat-select [(value)]="selectTime" (valueChange)="refresh()">
+        <mat-option *ngFor="let tm of hours" [value]="tm">
+          {{tm}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field style="width: 150px;" *ngIf="cats?.length>1">
       <mat-label>Catégorie</mat-label>
       <mat-select [(value)]="selectCategorie">
         <mat-option *ngFor="let cat of cats" [value]="cat.value">

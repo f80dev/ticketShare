@@ -34,7 +34,7 @@ export class PromoComponent implements OnInit {
   ngOnInit() {
     if(!this.route.snapshot.queryParamMap.has("event"))this.router.navigate(["store"]);
     this.api.getevent(this.route.snapshot.queryParamMap.get("event")).subscribe((e:any)=>{
-      e.qrcode=environment.root_api+"/qrcode?url="+encodeURIComponent(e.share_link);
+      e.qrcode=environment.domain_server+"/api/qrcode?url="+encodeURIComponent(e.share_link);
       this._event=e;
     })
   }

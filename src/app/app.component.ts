@@ -5,7 +5,7 @@ import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
-import {subscribe_socket,$$,showMessage} from "./tools";
+import {subscribe_socket, $$, showMessage, askForAuthent} from "./tools";
 import {ActivatedRoute, Router} from "@angular/router";
 import Web3 from 'web3';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
@@ -161,17 +161,18 @@ export class AppComponent implements OnInit,OnDestroy {
   /**
    * Chargement du cookier pour restauration du compte du device
    */
-  initUser(text=""):void {
+  initUser(text="",func=null):void {
     //TODO: tous les paramètres transmis ici doivent être encrypté
     this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
     $$("Pas de compte connu, Appel de create_user avec text=", text);
     this.
     create_user(text, (u) => {
       this.message = "";
-      localStorage.setItem("address",u["address"]);
+      this.onResize();
       this.showIntro=false;
       showMessage(this, "Nouveau compte créé");
       this.analyse_params((p: any) => {this.use_params(p);},localStorage.getItem("firsturl"));
+      if(func!=null)func();
     },(err)=>{
       showMessage(this, "Ce compte existe déjà");
       localStorage.removeItem("address");
@@ -383,5 +384,12 @@ export class AppComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  create_event() {
+    this.showIntro=false;
+    this.initUser("",()=>{
+      this.router.navigate(['store'],{queryParams:{command:'create'}});
+    });
   }
 }

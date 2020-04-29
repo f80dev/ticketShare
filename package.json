@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --prod=false --sourceMap=true",
     "start prod": "ng serve --prod=true --sourceMap=true",
+    "start test": "ng serve --test=true --sourceMap=true",
     "build": "ng build --prod --base-href=https://app.kerberus.tech --outputPath=./docs",
     "test": "ng test",
     "lint": "ng lint",

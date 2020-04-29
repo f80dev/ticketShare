@@ -23,12 +23,17 @@ export class PlacesComponent implements OnInit {
   categories={};
   l_categories:string[]=[];
   cats:any[]=[];
-  _dates:number[]=[];
+
+  days=[];
+  hours=[];
+  _dates:Date[]=[];
+
   nb_places=0;
   sel_tickets: any;
   etherprice=0;
   breakpoint: number;
-  selectDate=0;
+  selectDate="";
+  selectTime="";
   selectCategorie="*";
 
 
@@ -54,15 +59,41 @@ export class PlacesComponent implements OnInit {
       this.message="";
       this.tickets=[];
       this._dates=[];
+      this.days=[];
       for(let _t of r){
         if(_t.state=="available"){
-          if(this._dates.indexOf(_t.date)==-1)this._dates.push(_t.date);
+          var d:Date=new Date(_t.date*1000);
+          if(this._dates.indexOf(d)==-1){
+            this._dates.push(d);
+            if(this.days.indexOf(d.toLocaleDateString())==-1)this.days.push(d.toLocaleDateString());
+          }
           this.tickets.push(_t);
         }
       }
+      this.selectDate=this.days[0];
+      this.init_hours();
       func();
     },(err)=>{func_error(err)});
   }
+
+
+  /**
+   * Initialise la liste des heures des événements
+   */
+  init_hours(){
+    $$("Chargement des heures disponibles pour "+this.selectDate);
+    this.hours=[];
+    for(let dt of this._dates){
+      let s=dt.toLocaleTimeString().substr(0,dt.toLocaleTimeString().lastIndexOf(":"));
+      if(dt.toLocaleDateString()==this.selectDate && this.hours.indexOf(s)==-1){
+        this.hours.push(s);
+      }
+    }
+    if(this.hours.length>0)this.selectTime=this.hours[0];
+    this.refresh();
+  }
+
+
 
 
   clearFilter(){
@@ -79,8 +110,9 @@ export class PlacesComponent implements OnInit {
       } else {
         this.categories={};
         $$("On parcours l'ensemble des tickets pour identifier les catégories");
+        var currentDate=new Date(this.selectDate.split("/")[1]+"-"+this.selectDate.split("/")[0]+"-"+this.selectDate.split("/")[2]+" "+this.selectTime).getTime()/1000;
         for(let _t of this.tickets){
-          if(_t.date==this.selectDate){
+          if(_t.date==currentDate){
             if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};
             this.categories[_t.price].description=_t.description;
             this.categories[_t.price].visual=_t.visual;
@@ -90,7 +122,7 @@ export class PlacesComponent implements OnInit {
               this.categories[_t.price].title="Gratuit";
             else
               this.categories[_t.price].title=_t.price+"€";
-            this.categories[_t.price].range=range(0,this.categories[_t.price].to_buy)
+            this.categories[_t.price].range=range(0,this.categories[_t.price].to_buy);
             this.categories[_t.price].tickets.push(_t);
           }
         }
@@ -115,7 +147,7 @@ export class PlacesComponent implements OnInit {
     checkLogin(this.router);
     this.config.reload_user();
     this.load_tickets(()=>{
-      this.selectDate=this._dates[0];
+      this.selectDate=this._dates[0].toLocaleDateString();
       this.refresh();
     },(err)=>{showMessage(this, err.message);this._location.back();});
     if(localStorage.getItem("dtBuy")!=null){

@@ -100,6 +100,8 @@ export class StoreComponent implements OnInit {
       });
     }
 
+    if(params.has("command") && params.get("command")=='create'){this.openEventEditor();}
+
     if(params.has("onlyMyEvents")){
       this.onlyMyEvents=params.get("onlyMyEvents")=='true';
     }
@@ -257,7 +259,7 @@ export class StoreComponent implements OnInit {
 
   job(){
     $$("Lancement du traitement des événements");
-    window.open(environment.root_api+"/job/1","_blank");
+    window.open(environment.domain_server+"/api/job/1","_blank");
   }
 
 

@@ -38,14 +38,14 @@ export function api(service: string , param: string= '', encode: boolean = true)
   service=service.replace("//","/");
   if (encode) { param = encodeURI(param); }
   if(param.length==0)
-    return(environment.root_api + '/' + service);
+    return(environment.domain_server + '/api/' + service);
   else
-    return(environment.root_api + '/' + service + '?' + param);
+    return(environment.domain_server + '/api/' + service + '?' + param);
 }
 
 export function direct_api(service: string , param: string, encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
-  return(environment.root_api+ '/' + service + '?' + param);
+  return(environment.domain_server+ '/api/' + service + '?' + param);
 }
 
 export function hashCode(s) {
@@ -139,8 +139,7 @@ export function sendToPrint(section="print-section"){
  * @param tx
  */
 export function openGraph(tx:string){
-  var domain_server="https://server.f80.fr";
-  domain_server="http://localhost";
+  var domain_server="http://localhost";
 
   var graph_url=domain_server+":6800/api/getgraph/"+tx+"/50/gpickle";
   var url=domain_server+":5500/graph/b64="
@@ -690,10 +689,7 @@ export function checkLogin(router: Router, params: any = null) {
   }
 }
 
-export function openGraphForShop(idshop:string,_type="coupon"){
-  var domain_server="https://server.f80.fr";
-  //domain_server="http://localhost";
-
+export function openGraphForShop(idshop:string,_type="coupon",domain_server="https://server.f80.fr"){
   var graph_url=domain_server+":5500/api/getgraph/"+idshop+"/hh4271/gpickle/"+_type;
   var url=domain_server+":5000/graph/b64="
     +btoa(graph_url)+"/fr?algo_comm=self&dir=public&axis=False&notext=True&metrics=True&add_property=False&autorotate=False" +

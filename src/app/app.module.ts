@@ -70,7 +70,7 @@ import { FaqLinkComponent } from './faq-link/faq-link.component';
 import { DateComponent } from './date/date.component';
 import { IntroComponent } from './intro/intro.component';
 
-const config: SocketIoConfig = { url: environment.socket_server, options: {} };
+const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
 @NgModule({
   declarations: [

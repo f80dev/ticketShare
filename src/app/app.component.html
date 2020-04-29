@@ -15,15 +15,7 @@
 
   <div *ngIf="showZoneOptions">
     Vous souhaitez:<br>
-    <button class="app-button"
-            style="margin-top: 40px;width: 200px;"
-            mat-button mat-raised-button
-            (click)="initUser()">
-      <div class="bloc-bouton">
-        Créer un compte<br>pour la première fois
-      </div>
-    </button>
-    <br><br>
+    <br>
     <button class="app-button"
             style="margin-top: 40px;width: 200px;"
             mat-button mat-raised-button
@@ -32,6 +24,13 @@
       Acheter des billets
     </button>
 
+    <br><br>
+    <button class="app-button"
+            style="margin-top: 40px;width: 200px;"
+            mat-button mat-raised-button
+            (click)="create_event()">
+        Vendre des billets
+    </button>
     <br><br>
     <button class="app-button"
             style="margin-top: 40px;width: 200px;"
