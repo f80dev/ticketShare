@@ -1,14 +1,12 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ConfigService} from './config.service';
-import {MatDialog, MatSidenav, MatSidenavContainer, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSidenav,  MatSnackBar} from '@angular/material';
 import {PromptComponent} from './prompt/prompt.component';
 import {ApiService} from './api.service';
 import {Location} from "@angular/common";
 import {Socket} from "ngx-socket-io";
 import {subscribe_socket, $$, showMessage, askForAuthent} from "./tools";
 import {ActivatedRoute, Router} from "@angular/router";
-import Web3 from 'web3';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
 import {fromEvent,Observable,Subscription} from "rxjs";
 
 // export const WEB3 = new InjectionToken<Web3>('web3', {
@@ -164,6 +162,7 @@ export class AppComponent implements OnInit,OnDestroy {
   initUser(text="",func=null):void {
     //TODO: tous les paramètres transmis ici doivent être encrypté
     this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
+    this.showIntro=false;
     $$("Pas de compte connu, Appel de create_user avec text=", text);
     this.
     create_user(text, (u) => {
@@ -376,6 +375,12 @@ export class AppComponent implements OnInit,OnDestroy {
   }
 
 
+  openMyTickets(){
+    this.showIntro=false;
+    this.initUser("",()=>{
+      askForAuthent(this,"Vous devez vous authentifier pour accèder à vos billets","/myevents");
+    });
+  }
 
 
   closeMenu(){

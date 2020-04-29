@@ -309,16 +309,11 @@ export function showMessage(vm:any,s:string="",duration=2000,func=null,label_but
   }
 }
 
-export function askForAuthent(vm:any,message:string,redirect:string,func:Function){
+export function askForAuthent(vm:any,message:string,redirect:string,func:Function=null){
   if(vm.config.user!=null && vm.config.user.email==""){
-    vm.router.navigate(["login"],{queryParams:
-        {
-          message:message,
-          redirect:redirect
-        }
-    });
+    vm.router.navigate(["login"],{queryParams:{message:message,redirect:redirect}});
   } else {
-    func();
+    if(func!=null)func();
   }
 }
 

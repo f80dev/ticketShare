@@ -14,7 +14,7 @@
   <br>
 
   <div *ngIf="showZoneOptions">
-    Vous souhaitez:<br>
+    Que voulez-vous faire ?<br>
     <br>
     <button class="app-button"
             style="margin-top: 40px;width: 200px;"
@@ -27,8 +27,17 @@
     <button class="app-button"
             style="margin-top: 40px;width: 200px;"
             mat-button mat-raised-button
-            (click)="router.navigate(['mytickets'])">
-      Voir mes billets
+            (click)="import_wallet()">
+      <div class="bloc-bouton">
+        Importer un<br>wallet existant
+      </div>
+    </button>
+    <br><br>
+    <button class="app-button"
+            style="margin-top: 40px;width: 200px;"
+            mat-button mat-raised-button
+            (click)="openMyTickets()">
+      Utilisez vos billets
     </button>
     <br><br>
     <button class="app-button"
@@ -37,16 +46,7 @@
             (click)="create_event()">
         Vendre des billets
     </button>
-    <br><br>
-    <button class="app-button"
-            style="margin-top: 40px;width: 200px;"
-            mat-button mat-raised-button
-            (click)="import_wallet()">
-      <div class="bloc-bouton">
-        Importer un<br>wallet existant
-      </div>
-    </button>
-    <br>
+
 
   </div>
 

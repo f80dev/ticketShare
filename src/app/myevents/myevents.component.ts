@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {checkConfig, subscribe_socket} from "../tools";
+import {checkConfig, checkLogin, subscribe_socket} from "../tools";
 import {Socket} from "ngx-socket-io";
 
 @Component({
@@ -32,6 +32,7 @@ export class MyeventsComponent implements OnInit {
    */
   ngOnInit() {
     checkConfig(this);
+    checkLogin(this.router);
     this.refresh();
     var params:ParamMap=this.route.snapshot.queryParamMap;
     if(params.has("event")){

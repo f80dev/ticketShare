@@ -21,7 +21,7 @@
   </qr-code>
 </div>
 
-<div *ngIf="config.user.nextEvent<7000">
+<div *ngIf="config.user?.nextEvent<7000">
   Présenter ce QRCode au contrôle des billets<br>
   <qr-code [size]="150"
            style="display: inline-block;vertical-align: middle;"

@@ -9,7 +9,8 @@
   background-color: white;
   height: 100%;
   width: 100%;
-  justify-content: center; }
+  justify-content: center;
+  text-align: center; }
 
 .example-sidenav {
   padding: 20px; }
