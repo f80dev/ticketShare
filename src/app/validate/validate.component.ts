@@ -174,7 +174,9 @@ export class ValidateComponent implements OnInit {
 
 
   onflash_event($event: any) {
-    this.refresh($event.data);
+    var addr=$event.data;
+    addr=addr.replace("ethereum:","")
+    this.refresh(addr);
     $event.data="";
   }
 
@@ -195,6 +197,7 @@ export class ValidateComponent implements OnInit {
 
 
   reload(){
+    $$("Rechargement des données");
     this.message="";
     this.showScanner=true;
     this.to_burn=[];

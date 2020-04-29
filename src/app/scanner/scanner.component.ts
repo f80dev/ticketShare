@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import jsQR from "jsqr";
+import {$$} from '../tools';
 
 @Component({
   selector: 'app-scanner',
@@ -34,6 +35,7 @@ export class ScannerComponent implements OnInit,OnDestroy {
   }
 
   stopScanner(){
+    $$("Arrêt du scanner");
     clearInterval(this.handle);
   }
 
@@ -42,7 +44,6 @@ export class ScannerComponent implements OnInit,OnDestroy {
     var decoded =jsQR(rc.data,rc.width,rc.height);
     if(decoded!=null && decoded.data!=null && (this.filter.length==0 || decoded.data.indexOf(this.filter)>-1)){
       this.onflash.emit({data:decoded.data});
-      this.stopScanner();
     }
   }
 

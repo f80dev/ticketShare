@@ -18,7 +18,7 @@
   </div>
 
   <app-scanner [size]="320"
-               *ngIf="config.webcamsAvailable>0"
+               *ngIf="config.webcamsAvailable>0 && showScanner"
                (flash)="onflash($event)">
   </app-scanner>
 

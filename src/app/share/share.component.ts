@@ -16,6 +16,7 @@ export class ShareComponent implements OnInit {
   ticketid: string = "";
   eventid: string = "";
   address="";
+  showScanner=true;
   message: string="";
 
   constructor(public config:ConfigService,
@@ -30,6 +31,7 @@ export class ShareComponent implements OnInit {
   }
 
   transfert(_to:string){
+    _to=_to.replace("ethereum:","");
     this.message="Demande de transfert en cours vers "+_to;
     this.api.transfert(this.config.user.address,_to,this.eventid,this.ticketid).subscribe((r)=>{
       this.message="";
@@ -41,8 +43,8 @@ export class ShareComponent implements OnInit {
   }
 
   onflash(evt){
-    showMessage(this,"Adresse du wallet : "+evt.data,4000);
     $$("Lecture de l'adresse : "+evt.data);
+    this.showScanner=false;
     this.transfert(evt.data);
   }
 
