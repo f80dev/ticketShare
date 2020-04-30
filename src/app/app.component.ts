@@ -264,6 +264,11 @@ export class AppComponent implements OnInit,OnDestroy {
       $$("Aucun paramètre n'a été transmis pour le lancement");
       if(this.config.user!=null){
         this.showIntro=false;
+        if(this.config.user.email.length>0){
+          $$("On utilise le profil du compte pour orienter vers l'écran le plus pertinent");
+          if(this.config.user.myevents.online>0 || this.config.user.myevents.draft>0)this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
+          if(this.config.user.mytickets>0)this.router.navigate(["myevents"])
+        }
       } else {
         $$("Le user n'a pas été chargé, on affiche le menu d'introduction");
       }
@@ -335,7 +340,9 @@ export class AppComponent implements OnInit,OnDestroy {
           // }
           this.message="";
           this.config.user = r;
-          this.analyse_params((p: any) => {this.use_params(p);});
+          this.analyse_params((p: any) => {
+            this.use_params(p);
+          });
         },(err)=>{
           if(err.status==400){
             showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
