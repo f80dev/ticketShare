@@ -3,40 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Minimal store sample</title>
+  <style type="text/css">
+    label {
+      min-width: 200px;
+      color:gray;
+      margin: 5px;
+      margin-right: 10px;
+      font-variant: titling-caps;
+      font-size: large;
+      font-family: Arial;
+    }
+
+    input, select {
+      font-family: Arial;
+      border: lightgrey solid thin;
+      font-size: large;
+      padding: 5px;
+    }
+  </style>
 </head>
 
 <body onload="init_form()">
-<div id="message" style="width: 100%;text-align: center;">
-  <p>Dans cette page illustre l'usage de l'API KERBERUS permetant de sécuriser vos billets dans la blockchain</p>
+<div id="message" style="width: 100%;text-align: center;color: red;">
+
 </div>
 
-<table style="width:100vw;" id="store_zone">
-  <tr>
-    <th>Exemple minimaliste de boutique</th>
-    <th>Procédure</th>
-  </tr>
-  <tr>
-    <td style="width: 300px;text-align: left;vertical-align:top;" >
-      <form id="frm">
+<div style="width:100vw;text-align: center;" id="store_zone">
+
+  <h2>Exemple minimaliste de boutique</h2>
+  <br>
+
+      <form id="frm" style="width: 80%;display: inline-block;text-align: center;">
         <div>
-          <label for="email">Email</label>
+          <label for="email" class="label_style">Email</label>
           <input name="email" id="email" value="paul.dudule@gmail.com">
         </div>
         <br>
         <div id="events_zone" style="display: none;">
-          <label for="selectEvent">Sélectionner un événement</label>
+          <label for="selectEvent">Evénement</label>
           <select id="selectEvent">
           </select>
           <br><br>
         </div>
 
         <div>
-          <label for="tickets">Combien de billets</label>
+          <label for="tickets">Nombre de billets</label>
           <input name="tickets" type="number" size="3" id="tickets" value="2" max="10" min="0">
         </div>
         <br>
         <div>
-          <label for="price">Prix</label>
+          <label for="price">Prix (€)</label>
           <input name="price" type="number" id="price" value="30" max="300" min="0">
         </div>
         <br>
@@ -50,14 +66,20 @@
         </div>
       </form>
 
-      <button onclick="send()">Commander</button>
-    </td>
-    <td>
-      <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=extern_store"
-              style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;"></iframe>
-    </td>
-  </tr>
-</table>
+  <div style="width: 100%;text-align: center;">
+    <br>
+    <button onclick="send()" style="font-size: large;padding: 10px;">Commander</button>
+  </div>
+
+
+  <br><br>
+</div>
+
+  <hr>
+      <iframe id="faq"
+              src="https://app.kerberus.tech/faqs.html?faq=extern_store"
+              style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;font-family: Arial;">
+      </iframe>
 </body>
 
 <script>
@@ -65,6 +87,7 @@
   var domain="http://localhost:6800";
   var idevent=0;
 
+  //Récupére les paramétres passés dans l'url
   function getParam() {
     var vars = {};
     window.location.href.replace(location.hash, '').replace(/[?&]+([^=&]+)=?([^&]*)?/gi, function (m, key, value) { vars[key] = value !== undefined ? value : ''; });
@@ -75,19 +98,20 @@
    * Fonction appelée à l'ouverture de la page
    */
   function init_form() {
+
+    //Cet exemple intégre la récupération de certains paramètre passés via l'url pour pouvoir servir d'exemple
+    //a plusieurs événement. Dans une configuration normale, la billeterie externe n'a aucun paramètre à récupérer
+
     //faq consiste à afficher de l'aide
-    if (!getParam().hasOwnProperty("faq") || screen.availWidth < 500)
-      document.getElementById("faq").style.display = "none";
-
+    if (!getParam().hasOwnProperty("faq") || screen.availWidth < 500)document.getElementById("faq").style.display = "none";
     //permet un pré-remplissage de l'identité du client
-    if (getParam().hasOwnProperty("email"))
-      document.getElementById("email").value = getParam().email;
-
+    if (getParam().hasOwnProperty("email"))document.getElementById("email").value = getParam().email;
     if (getParam().idevent != null) idevent = getParam().idevent;
-
     if (getParam().domain != null) domain = getParam().domain;
 
     if (idevent == 0) {
+      //Si l'événement n'a pas été transmit à l'ouverture de la billeterie, on appelle une API pour proposer les différents
+      //événements
       document.getElementById("events_zone").style.display="inline-block";
       fetch(domain + "/api/events/_/dtCreate/online,with_store").then(function (r) {
         r.json().then(function (resp) {
@@ -119,20 +143,27 @@
 
     var url=domain+"/api/add_ticket/"+idevent;
     url=url.replace("http//","http://").replace("https//","https://");
-    fetch(url,
-      {
-        body: new FormData(document.getElementById('frm')),
-        method: "post",
-        mode: 'no-cors',
-        headers:{"access_token":access_token}
-      }).then(function (r) {
+
+    document.getElementById("message").innerHTML="La page transmet l'ensemble du formulaire via l'API : <pre>"+url+"</pre><br>";
+    window.scrollTo(0,0);
+
+    setTimeout(function(){
+      fetch(url,
+        {
+          body: new FormData(document.getElementById('frm')),
+          method: "post",
+          mode: 'no-cors',
+          headers:{"access_token":access_token}
+        }).then(function (r) {
         r.json().then(function (resp) {
           var email=document.getElementById("email").value;
           document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
+        });
+      },function(r) {
+        console.log(r);
       });
-    },function(r) {
-      console.log(r);
-    });
+    },2000);
+
   }
 </script>
 

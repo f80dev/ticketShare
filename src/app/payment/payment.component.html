@@ -1,8 +1,8 @@
 <!--Résumé de la commande-->
 
-<div style="width: 100%;text-align: center;">
+<div class="mainform">
 
-<br>
+  <br>
   <br>
   <table style="width:80%;max-width: 400px;text-align: left;margin-left:10%;">
     <tr>
@@ -39,13 +39,15 @@
   <div *ngIf="order?.total>0 && config.user?.money<order?.total" style="color:darkred;">
     <br>
     Il manque {{-amount_to_credit | number:'1.0-1'}}€ sur votre compte pour acheter les places
+    <br>
   </div>
-<br>
-<br>
 
-  <div *ngIf="order.total<=config.user?.money">
+  <br>
+
+<div>
+
+
     <button class="app-button" mat-button mat-flat-button
-            *ngIf="order?.total<=config.user?.money"
             (click)="_location.back()">
       <mat-icon>keyboard_arrow_left</mat-icon>
       Modifier
@@ -59,7 +61,8 @@
       <span *ngIf="order?.total==0">Réserver</span>
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
-  </div>
+</div>
+  <br>
 
   <div *ngIf="order.total>config.user?.money">
     <app-refund [amounts]="[-amount_to_credit,50,100]"

@@ -172,6 +172,7 @@
           <button class="app-button" mat-button mat-flat-button
                   ngxClipboard [cbContent]="event.share_link"
                   name="cmdShare"
+                  *ngIf="event.store==null"
                   (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
             Promotion
           </button>
@@ -185,7 +186,9 @@
           </button>
 
 
-          <button class="app-button" mat-button mat-flat-button
+          <button class="app-button"
+                  mat-button mat-flat-button
+                  *ngIf="event.store==null"
                   name="cmdCancelEvent"
                   (click)="cancel(event)">
             Annuler

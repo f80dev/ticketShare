@@ -7,9 +7,11 @@
 
 
   <app-tuto [if]="config.user?.address!=_event?.owner"
-            label="KERBERUS vous permet de partager le lien de l'événement"></app-tuto>
+            label="KERBERUS vous permet de partager le lien de l'événement">
+  </app-tuto>
+
   <app-tuto [if]="config.user?.address==_event?.owner"
-            label="KERBERUS vous simplifie la fabrication du visuel de votre événement en produisant un fichier contenant l'ensemble des éléments nécéssaire à la réalisation d'une affiche">
+            label="KERBERUS simplifie la fabrication du visuel de votre événement en produisant un fichier au format standard SVG contenant l'ensemble des éléments nécéssaires à la réalisation d'une affiche">
   </app-tuto>
 
   <button class="app-button" mat-button mat-flat-button

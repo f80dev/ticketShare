@@ -59,7 +59,7 @@ export class PromoComponent implements OnInit {
 
   openPrinter(_event:any){
     //sendToPrint("print-section");
-    debugger;
+
     open(api("build_affiche/"+_event._id),"_blank")
   }
 
