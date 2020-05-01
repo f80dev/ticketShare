@@ -3,6 +3,7 @@
   <app-ticket width="140px"
               style="margin:3px;"
               *ngFor="let ticket of tickets"
+              align="center"
               [title]="(ticket.date*1000) | date:ticket.format_date"
               [subtitle]="ticket.price+'€'"
               [showAction]="ticket.state=='sold'"
@@ -15,7 +16,7 @@
       </div>
 
       <div *ngIf="ticket.seat==null">
-        Référence #{{ticket.ref}}<br>
+        #{{ticket.ref}}<br>
         <div style="font-size: xx-small;line-height: 95%;">
           {{ticket.description}}
         </div>

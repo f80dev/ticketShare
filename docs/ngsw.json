@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1588323979025,
+  "timestamp": 1588340834626,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,7 +10,7 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.106ad18712311ad3d953.js",
+        "https://app.kerberus.tech/main.4e68ea3139f65b949702.js",
         "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js",
         "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js",
         "https://app.kerberus.tech/runtime.458556a34b891ea32398.js",
@@ -39,7 +39,9 @@
         "https://app.kerberus.tech/assets/img/concert.jpg",
         "https://app.kerberus.tech/assets/img/football.jpg",
         "https://app.kerberus.tech/assets/img/musee.jpg",
+        "https://app.kerberus.tech/assets/img/ticket_marge.png",
         "https://app.kerberus.tech/assets/img/tickets.jpg",
+        "https://app.kerberus.tech/assets/img/tickets.png",
         "https://app.kerberus.tech/assets/img/tips.png",
         "https://app.kerberus.tech/assets/ko.mp3",
         "https://app.kerberus.tech/assets/logo.png",
@@ -151,7 +153,9 @@
     "https://app.kerberus.tech/assets/img/concert.jpg": "009e34992c3e5d2bf4c78715049655ea735ae666",
     "https://app.kerberus.tech/assets/img/football.jpg": "8bfa4face9b207fa0612060bd0ffcec786f5407f",
     "https://app.kerberus.tech/assets/img/musee.jpg": "c07358e175af25de62c972e5dda23bd9a9a563b0",
+    "https://app.kerberus.tech/assets/img/ticket_marge.png": "cf9078c1f33f3bac0b965d8fb239337166f2d7a1",
     "https://app.kerberus.tech/assets/img/tickets.jpg": "70bd0b71b15217de7702ede51d86609084f70942",
+    "https://app.kerberus.tech/assets/img/tickets.png": "a2fc9358c4c79d21a82640ad2e7a10741c568da9",
     "https://app.kerberus.tech/assets/img/tips.png": "f7b9e7372227902dd4cc5e68d5a2239cb1c4ad18",
     "https://app.kerberus.tech/assets/ko.mp3": "8cddaacaec46cdca7b80e8a51310af4703f96610",
     "https://app.kerberus.tech/assets/logo.png": "606b34a25858efb2bab58889bb266091340e1896",
@@ -242,8 +246,8 @@
     "https://app.kerberus.tech/assets/store.html": "370e9c38f4980d5e2c7cd33da0b19e1af19db02b",
     "https://app.kerberus.tech/assets/use.html": "33f25e938acb848df7039f3cd744f36054639f7b",
     "https://app.kerberus.tech/favicon.ico": "d3bb29f413917e45b59439c2456716ecc4ba41c8",
-    "https://app.kerberus.tech/index.html": "c0c03e039e08b77b659fff51c0a54d39b03d5d31",
-    "https://app.kerberus.tech/main.106ad18712311ad3d953.js": "e976bfa92a79c7c2abd7effe2976b95737424be0",
+    "https://app.kerberus.tech/index.html": "7c554d67b6b2505ff85b4377dccf1cbad7cbfe34",
+    "https://app.kerberus.tech/main.4e68ea3139f65b949702.js": "cc3d6f10889f86f34da0a5e4a693a7cf772fb551",
     "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js": "f6468420664dc84d3233ce5bbb8425610e84ab8d",
     "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js": "c8b1721e71d9b5c8fc6e7fd886b4152944c41743",
     "https://app.kerberus.tech/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
