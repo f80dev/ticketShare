@@ -31,7 +31,7 @@ export class ShareComponent implements OnInit {
   }
 
   transfert(_to:string){
-    _to=_to.replace("ethereum:","");
+    if(_to.indexOf(":")>-1)_to=_to.split(":")[1];
     this.message="Demande de transfert en cours vers "+_to;
     this.api.transfert(this.config.user.address,_to,this.eventid,this.ticketid).subscribe((r)=>{
       this.message="";

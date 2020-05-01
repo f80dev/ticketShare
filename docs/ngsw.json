@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1588286430143,
+  "timestamp": 1588320175425,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,7 +10,7 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.8417642704f5ad9c202e.js",
+        "https://app.kerberus.tech/main.92aa6151ae941ccc6c48.js",
         "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js",
         "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js",
         "https://app.kerberus.tech/runtime.458556a34b891ea32398.js",
@@ -239,11 +239,11 @@
     "https://app.kerberus.tech/assets/monaco/vs/loader.js": "8dffcad06874610e2ae2cb89be4e8bea9414aa46",
     "https://app.kerberus.tech/assets/moteur-recherche-image.odt": "dbb0f9e3c475a49c91bc88c84e547d0a57811d44",
     "https://app.kerberus.tech/assets/ok.mp3": "7c8e7c225aba894aa59d1d330e70c7d921ec73ae",
-    "https://app.kerberus.tech/assets/store.html": "6d55a0224dd6b14c5b43e80797f8b521b6855878",
+    "https://app.kerberus.tech/assets/store.html": "370e9c38f4980d5e2c7cd33da0b19e1af19db02b",
     "https://app.kerberus.tech/assets/use.html": "33f25e938acb848df7039f3cd744f36054639f7b",
     "https://app.kerberus.tech/favicon.ico": "d3bb29f413917e45b59439c2456716ecc4ba41c8",
-    "https://app.kerberus.tech/index.html": "c88e8409fe7bcdabdaf99305f63146c76dbed34a",
-    "https://app.kerberus.tech/main.8417642704f5ad9c202e.js": "436e0065fb04391236a69c9bb7e3ab5d6c6a730e",
+    "https://app.kerberus.tech/index.html": "3150910cb61a3bf55f7555ccd79da09857f340e4",
+    "https://app.kerberus.tech/main.92aa6151ae941ccc6c48.js": "3deabd7e3fc444f19691198453c626c89011598e",
     "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js": "f6468420664dc84d3233ce5bbb8425610e84ab8d",
     "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js": "c8b1721e71d9b5c8fc6e7fd886b4152944c41743",
     "https://app.kerberus.tech/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",

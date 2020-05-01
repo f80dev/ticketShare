@@ -25,16 +25,20 @@
   </style>
 </head>
 
+
+
+
+
+
 <body onload="init_form()">
-<div id="message" style="width: 100%;text-align: center;color: red;">
 
-</div>
+<!--Zone d'affichage des message-->
+<div id="message" style="width: 100%;text-align: center;color: red;"></div>
 
+<!--Section principale de la boutique-->
 <div style="width:100vw;text-align: center;" id="store_zone">
-
   <h3>Exemple minimaliste de billeterie</h3>
   <br>
-
       <form id="frm" style="width: 80%;display: inline-block;text-align: center;">
         <div>
           <label for="email" class="label_style">Email</label>
@@ -78,10 +82,18 @@
 </div>
 
   <hr>
-      <iframe id="faq"
+  <!--Section lié à la documentation de l'API-->
+    <div id="faq">
+      <iframe
               src="https://app.kerberus.tech/faqs.html?faq=extern_store"
-              style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;font-family: Arial;">
+              style="border:none;overflow:hidden;width:100%;min-height:300px;background: none;font-family: Arial;">
       </iframe>
+      <br>
+      <iframe
+        src="https://app.kerberus.tech/faqs.html?faq=api_add_ticket"
+        style="border:none;overflow:hidden;width:100%;min-height:300px;background: none;font-family: Arial;">
+      </iframe>
+    </div>
 </body>
 
 <script>
