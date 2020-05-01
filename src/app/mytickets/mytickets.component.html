@@ -1,31 +1,37 @@
+<app-ticket width="140px"
+            style="margin:3px;"
+            *ngFor="let ticket of tickets"
+            align="center"
+            [title]="(ticket.date*1000) | date:ticket.format_date"
+            [subtitle]="ticket.price+'€'"
+            [showAction]="ticket.state=='sold'"
+            [ticket]="ticket">
 
 
-  <app-ticket width="140px"
-              style="margin:3px;"
-              *ngFor="let ticket of tickets"
-              align="center"
-              [title]="(ticket.date*1000) | date:ticket.format_date"
-              [subtitle]="ticket.price+'€'"
-              [showAction]="ticket.state=='sold'"
-              [ticket]="ticket">
-
-    <div *ngIf="ticket.state=='sold'">
-      <div *ngIf="ticket.seat!=null">
-        <mat-icon>event_seat</mat-icon>&nbsp;
-        Place {{ticket.seat}}
-      </div>
-
-      <div *ngIf="ticket.seat==null">
-        #{{ticket.ref}}<br>
-        <div style="font-size: xx-small;line-height: 95%;">
-          {{ticket.description}}
-        </div>
-      </div>
+  <div *ngIf="ticket.state=='sold'">
+    <div *ngIf="ticket.seat!=null">
+      <mat-icon>event_seat</mat-icon>&nbsp;
+      Place {{ticket.seat}}
     </div>
 
-    <app-hourglass fontsize="small" *ngIf="ticket.state=='reserved' || ticket.state=='to_create'" message="En cours de sécurisation" faq="waiting"></app-hourglass>
-    <app-hourglass fontsize="small" *ngIf="ticket.state=='to_transfer'" message="En cours de transfert" faq="waiting"></app-hourglass>
+    <div *ngIf="ticket.seat==null">
+      #{{ticket.ref}}<br>
+      <div style="font-size: xx-small;line-height: 95%;">
+        {{ticket.description}}
+      </div>
+    </div>
+  </div>
 
-  </app-ticket>
+  <app-hourglass fontsize="small"
+                 *ngIf="ticket.state=='reserved' || ticket.state=='to_create'"
+                 message="En cours de sécurisation"
+                 faq="waiting">
+  </app-hourglass>
 
+  <app-hourglass fontsize="small"
+                 *ngIf="ticket.state=='to_transfer'"
+                 message="En cours de transfert"
+                 faq="waiting">
+  </app-hourglass>
 
+</app-ticket>
