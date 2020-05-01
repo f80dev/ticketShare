@@ -50,7 +50,7 @@ export class AdminComponent implements OnInit {
 
 
   log(){
-    open(this.config.infos_server.domain+":6800/api/infos/log","_blank");
+    open(this.config.infos_server.domain+"/api/infos/log","_blank");
   }
 
    /**
