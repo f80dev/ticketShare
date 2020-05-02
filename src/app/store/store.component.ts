@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {$$, openGraph, showMessage, subscribe_socket, askForAuthent,now} from "../tools";
+import {$$, openGraph, showMessage, subscribe_socket, askForAuthent} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
@@ -121,18 +121,18 @@ export class StoreComponent implements OnInit {
   }
 
 
-  askForAuthent(message:string,redirect:string,func:Function){
-    if(this.config.user!=null && this.config.user.email==""){
-      this.router.navigate(["login"],{queryParams:
-          {
-            message:message,
-            redirect:redirect
-          }
-      });
-    } else {
-      func();
-    }
-  }
+  // askForAuthent(message:string,redirect:string,func:Function){
+  //   if(this.config.user!=null && this.config.user.email==""){
+  //     this.router.navigate(["login"],{queryParams:
+  //         {
+  //           message:message,
+  //           redirect:redirect
+  //         }
+  //     });
+  //   } else {
+  //     func();
+  //   }
+  // }
 
 
 /**
@@ -140,15 +140,15 @@ export class StoreComponent implements OnInit {
    * @param _evt
    */
   buy(_evt: any) {
-    this.askForAuthent("Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/places?event="+_evt._id+"&etherprice="+_evt.etherprice,()=>{
-    if(_evt.store!=null && _evt.store.web.startsWith("http")){
-       var url=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
-       if(this.config.user.email!=null && this.config.user.email.length>0)url=url+"&email="+this.config.user.email;
-       open(url,"_blank");
-       //this.extern_store(_evt);
-     }else{
-          this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
-     }
+    askForAuthent(this,"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/store?event="+_evt._id,()=>{
+      if(_evt.store!=null && _evt.store.web.startsWith("http")){
+         var url=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
+         if(this.config.user.email!=null && this.config.user.email.length>0)url=url+"&email="+this.config.user.email;
+         open(url,"_blank");
+         //this.extern_store(_evt);
+       }else{
+            this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
+       }
     });
   }
 
