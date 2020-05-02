@@ -135,7 +135,7 @@ export class StoreComponent implements OnInit {
   // }
 
 
-/**
+  /**
    *
    * @param _evt
    */
@@ -151,6 +151,9 @@ export class StoreComponent implements OnInit {
        }
     });
   }
+
+
+
 
   extern_store(e) {
     let addr=localStorage.getItem("address");

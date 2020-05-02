@@ -165,6 +165,7 @@
           mode: 'no-cors',
           headers:{"access_token":access_token}
         }).then(function (r) {
+          console.log(r);
         r.json().then(function (resp) {
           var email=document.getElementById("email").value;
           document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
