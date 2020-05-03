@@ -195,12 +195,12 @@ export class StoreComponent implements OnInit {
     this.dialog.open(PromptComponent,{width: '250px',data: {
       title: "Annulation de l'événement",
         question: "Etês vous sûr de vouloir annuler cet évenement et ainsi déclencher le remboursement de tous les billets",
-        onlyConfirm:true,
-        lbl_ok:"oui",
-        lbl_cancel:"non"
+        onlyConfirm:false,
+        lbl_ok:"Annuler",
+        lbl_cancel:"Non"
     }
-    }).afterClosed().subscribe((r) => {
-      if(r=="yes"){
+    }).afterClosed().subscribe((r:any) => {
+      if(r=="oui"){
         this.message="Annulation de l'événement en cours";
         this.api.delevent(event._id).subscribe(()=>{
           this.message="";
