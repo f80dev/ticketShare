@@ -221,7 +221,7 @@ export class AppComponent implements OnInit,OnDestroy {
       this.onResize();
       this.showIntro=false;
       showMessage(this, "Nouveau compte créé");
-      this.analyse_params((p: any) => {this.use_params(p);},localStorage.getItem("firsturl"));
+      //this.analyse_params((p: any) => {this.use_params(p);},localStorage.getItem("firsturl"));
       if(func!=null)func();
     },(err)=>{
       showMessage(this, "Ce compte existe déjà");
@@ -287,6 +287,7 @@ export class AppComponent implements OnInit,OnDestroy {
       }
 
       if(p["command"]=="store"){
+        this.initUser();
         this.router.navigate(["store"],{queryParams:{event:p["event"]}});
       }
 
