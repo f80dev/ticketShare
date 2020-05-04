@@ -188,9 +188,6 @@ export class StoreComponent implements OnInit {
 
 
 
-
-
-
   cancel(event:any){
     this.dialog.open(PromptComponent,{width: '250px',data: {
       title: "Annulation de l'événement",

@@ -62,6 +62,57 @@ export class AppComponent implements OnInit,OnDestroy {
 
   }
 
+  ngOnInit(): void {
+    this.init_event_for_network_status();
+
+    $$("Positionnement des événements")
+    subscribe_socket(this,"refresh_sell");
+    subscribe_socket(this,"refresh_buy",(mes,data)=>{
+      localStorage.removeItem("dtBuy");
+      this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
+    });
+
+    //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
+    // if ('enable' in this.web3.currentProvider) {
+    //   this.web3.currentProvider.enable();
+    // }
+    // const accounts = this.web3.eth.getAccounts();
+
+    setTimeout(()=> {
+
+      $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
+
+      const address = localStorage.getItem('address');
+      if(address){
+        $$("Address récupérée sur le device "+address+". On se reconnecte au compte");
+        this.message="Reconnexion a votre compte";
+        this.api.getuser(address,30).subscribe((r: any) => {
+          // if(address!=r.address){
+          //   $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
+          // }
+          this.message="";
+          this.config.user = r;
+          this.analyse_params((p: any) => {
+            this.use_params(p);
+          });
+        },(err)=>{
+          if(err.status==400){
+            showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
+            localStorage.removeItem("address");
+            setTimeout(()=>{window.location.reload();},500);
+
+          } else
+            showMessage(this,err.message);
+        });
+      } else {
+        $$("Première connexion sur ce device");
+        this.analyse_params((p: any) => {this.use_params(p);});
+      }
+    },200);
+
+    setTimeout(()=>{this.onResize();},2000);
+    setTimeout(()=>{this.onResize();},8000);
+  }
 
 
 
@@ -177,6 +228,8 @@ export class AppComponent implements OnInit,OnDestroy {
       localStorage.removeItem("address");
     });
   }
+
+
 
 
   /**
@@ -299,68 +352,6 @@ export class AppComponent implements OnInit,OnDestroy {
       }
     });
   }
-
-
-
-
-
-
-  ngOnInit(): void {
-
-    //this.api.infos().subscribe((r:any)=>{$$("Infos du serveur : ",r);});
-
-    this.init_event_for_network_status();
-
-    subscribe_socket(this,"refresh_sell");
-
-    subscribe_socket(this,"refresh_buy",(mes,data)=>{
-      localStorage.removeItem("dtBuy");
-      this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
-    });
-
-    //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
-    // if ('enable' in this.web3.currentProvider) {
-    //   this.web3.currentProvider.enable();
-    // }
-    // const accounts = this.web3.eth.getAccounts();
-
-    setTimeout(()=> {
-
-      $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
-
-      const address = localStorage.getItem('address');
-      $$("Address récupérée sur le device "+address+". On se reconnecte au compte");
-
-
-      if(address){
-        this.message="Reconnexion a votre compte";
-        this.api.getuser(address,30).subscribe((r: any) => {
-          // if(address!=r.address){
-          //   $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
-          // }
-          this.message="";
-          this.config.user = r;
-          this.analyse_params((p: any) => {
-            this.use_params(p);
-          });
-        },(err)=>{
-          if(err.status==400){
-            showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
-            localStorage.removeItem("address");
-            setTimeout(()=>{window.location.reload();},500);
-
-          } else
-            showMessage(this,err.message);
-        });
-      } else {
-        this.analyse_params((p: any) => {this.use_params(p);});
-      }
-      },200);
-
-    setTimeout(()=>{this.onResize();},2000);
-    setTimeout(()=>{this.onResize();},8000);
-  }
-
 
 
 
