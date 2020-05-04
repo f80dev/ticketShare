@@ -238,6 +238,7 @@ export class AppComponent implements OnInit,OnDestroy {
    */
   use_params(p:any){
       //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
+
       if(p["address"]!=null) {
         $$("Le paramétre address force une connexion sur "+p["address"]);
 
@@ -285,16 +286,16 @@ export class AppComponent implements OnInit,OnDestroy {
         this.initUser(p["privatekey"]);
       }
 
+      if(p["command"]=="store"){
+        this.router.navigate(["store"],{queryParams:{event:p["event"]}});
+      }
+
       if(this.config.user!=null){
         $$("Le user est initialiser, on peut prendre en compte certains paramétres")
         if(p["event"]!=null){
           $$("on demande une bascule immédiate sur l'événement "+p["event"])
           if(p["command"]=="validate"){
             this.router.navigate(["validate"],{queryParams:{event:p["event"]}});
-          }
-
-          if(p["command"]=="store"){
-            this.router.navigate(["store"],{queryParams:{event:p["event"]}});
           }
         }
 
