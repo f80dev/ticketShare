@@ -30,7 +30,7 @@
 
 
 
-<body onload="init_form()">
+<body onload="onload()">
 
 <!--Zone d'affichage des message-->
 <div id="message" style="width: 100%;text-align: center;color: red;"></div>
@@ -105,6 +105,9 @@
     return vars;
   }
 
+
+
+
   //Méthode d'affichage dans la console
   function $$(s,obj) {
     if(s!=null && s.startsWith("!")){
@@ -128,7 +131,7 @@
   /**
    * Fonction appelée à l'ouverture de la page
    */
-  function init_form() {
+  function onload() {
 
     //Cet exemple intégre la récupération de certains paramètre passés via l'url pour pouvoir servir d'exemple
     //a plusieurs événement. Dans une configuration normale, la billeterie externe n'a aucun paramètre à récupérer
@@ -162,37 +165,37 @@
 
 
 
-  function build_tickets(frm){
-    $$("Méthode de fabrication des billets sur base des paramètres du formulaire");
-    var datas=new FormData(frm);
-    var rc=[];
-    for(var i=0;i<datas.get("tickets");i++){
-      rc.push({
-        ref:"tkt"+i,
-        seat:i,
-        visual:"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/seat_1f4ba.png",
-        price:datas.get("price")
-      });
-    }
-    return rc;
-  }
+  // function build_tickets(frm){
+  //   $$("Méthode de fabrication des billets sur base des paramètres du formulaire");
+  //   var datas=new FormData(frm);
+  //   var rc=[];
+  //   for(var i=0;i<datas.get("tickets");i++){
+  //     rc.push({
+  //       ref:"tkt"+i,
+  //       seat:i,
+  //       visual:"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/seat_1f4ba.png",
+  //       price:datas.get("price")
+  //     });
+  //   }
+  //   return rc;
+  // }
 
 
-  function create_ticket_with_form(url){
-    document.getElementById("message").innerHTML="La page transmet l'ensemble du formulaire via l'API : <pre>"+url+"</pre><br>";
-    fetch(url,
-      {
-        body: new FormData(document.getElementById('frm')),
-        method: "post",
-        mode: 'no-cors',
-        headers:{"access_token":access_token}
-      }).then(function (r) {
-      console.log(r);
-      r.json().then(informe,function(r) {
-      console.log(r);
-    });
-    });
-  }
+  // function create_ticket_with_form(url){
+  //   document.getElementById("message").innerHTML="La page transmet l'ensemble du formulaire via l'API : <pre>"+url+"</pre><br>";
+  //   fetch(url,
+  //     {
+  //       body: new FormData(document.getElementById('frm')),
+  //       method: "post",
+  //       mode: 'no-cors',
+  //       headers:{"access_token":access_token}
+  //     }).then(function (r) {
+  //     console.log(r);
+  //     r.json().then(informe,function(r) {
+  //     console.log(r);
+  //   });
+  //   });
+  // }
 
 
 
@@ -222,21 +225,19 @@
 
     setTimeout(function(){
       //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
-      var delay=(new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24);
+      var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24));
       for(var i=0;i<params.get("tickets");i++){
-        var ref_ticket="tkt"+i;
+        var ref_ticket="tkt"+new Date().getTime()+i;
         fetch(url+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay,
           {
-            method: "get",
             mode: 'no-cors',
             headers:{"access_token":access_token}
-          }).then(function (r) {console.log(r);
-          r.json().then(informe);
-        },function(r) {
-          console.log(r);
-        });
+          }).then(function (r) {
+            console.log(r);
+            r.json().then(informe);
+            },
+          function(r) {console.log(r);});
       }
-
     },2000);
 
   }

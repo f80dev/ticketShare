@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1588683481494,
+  "timestamp": 1588697469548,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -243,7 +243,7 @@
     "https://app.kerberus.tech/assets/monaco/vs/loader.js": "8dffcad06874610e2ae2cb89be4e8bea9414aa46",
     "https://app.kerberus.tech/assets/moteur-recherche-image.odt": "dbb0f9e3c475a49c91bc88c84e547d0a57811d44",
     "https://app.kerberus.tech/assets/ok.mp3": "7c8e7c225aba894aa59d1d330e70c7d921ec73ae",
-    "https://app.kerberus.tech/assets/store.html": "a6a518082ef796a0ed13082573b3b7551c98f13b",
+    "https://app.kerberus.tech/assets/store.html": "d814a66f7007df1ac6ac30709ed9ccd2086786d1",
     "https://app.kerberus.tech/assets/use.html": "33f25e938acb848df7039f3cd744f36054639f7b",
     "https://app.kerberus.tech/favicon.ico": "d3bb29f413917e45b59439c2456716ecc4ba41c8",
     "https://app.kerberus.tech/index.html": "a4ebbcda43bcc3898266f0c2b80f36341f539e0f",
