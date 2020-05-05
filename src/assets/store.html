@@ -97,6 +97,7 @@
   var domain="http://localhost:6800";
   var idevent=0;
 
+  //Méthodes outils ________________________________________________________________________________________________________________________________________________
   //Récupére les paramétres passés dans l'url
   function getParam() {
     var vars = {};
@@ -104,6 +105,26 @@
     return vars;
   }
 
+  //Méthode d'affichage dans la console
+  function $$(s,obj) {
+    if(s!=null && s.startsWith("!")){
+      debugger;
+    }
+    var lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
+    if (obj != null) {
+      obj = JSON.stringify(obj);
+    } else {
+      obj = '';
+    }
+    console.log(lg + ' ' + obj);
+    if (lg.indexOf('!!') > -1) {alert(lg); }
+  }
+
+
+
+
+
+  //______________________________________________________________________________________________________________________________
   /**
    * Fonction appelée à l'ouverture de la page
    */
@@ -141,6 +162,46 @@
 
 
 
+  function build_tickets(frm){
+    $$("Méthode de fabrication des billets sur base des paramètres du formulaire");
+    var datas=new FormData(frm);
+    var rc=[];
+    for(var i=0;i<datas.get("tickets");i++){
+      rc.push({
+        ref:"tkt"+i,
+        seat:i,
+        visual:"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/seat_1f4ba.png",
+        price:datas.get("price")
+      });
+    }
+    return rc;
+  }
+
+
+  function create_ticket_with_form(url){
+    document.getElementById("message").innerHTML="La page transmet l'ensemble du formulaire via l'API : <pre>"+url+"</pre><br>";
+    fetch(url,
+      {
+        body: new FormData(document.getElementById('frm')),
+        method: "post",
+        mode: 'no-cors',
+        headers:{"access_token":access_token}
+      }).then(function (r) {
+      console.log(r);
+      r.json().then(informe,function(r) {
+      console.log(r);
+    });
+    });
+  }
+
+
+
+  function informe(resp) {
+    var email=document.getElementById("email").value;
+    document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
+  }
+
+
   /**
    * Fonction appelée pour créer le billet
    */
@@ -154,28 +215,28 @@
     var url=domain+"/api/add_ticket/"+idevent;
     url=url.replace("http//","http://").replace("https//","https://");
 
-    document.getElementById("message").innerHTML="La page transmet l'ensemble du formulaire via l'API : <pre>"+url+"</pre><br>";
     window.scrollTo(0,0);
 
+    var params=new FormData(document.getElementById('frm'));
+
     setTimeout(function(){
-      fetch(url,
-        {
-          body: new FormData(document.getElementById('frm')),
-          method: "post",
-          mode: 'no-cors',
-          headers:{"access_token":access_token}
-        }).then(function (r) {
+      debugger
+      //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
+      for(var i=0;i<params.get("tickets");i++)
+        fetch(url+"/"+params.get("userid")+"/tkt"+i+"/"+params.get("price")+"/30",
+          {
+            method: "get",
+            mode: 'no-cors',
+            headers:{"access_token":access_token}
+          }).then(function (r) {console.log(r);
+          r.json().then(informe);
+        },function(r) {
           console.log(r);
-        r.json().then(function (resp) {
-          var email=document.getElementById("email").value;
-          document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
         });
-      },function(r) {
-        console.log(r);
-      });
     },2000);
 
   }
+
 </script>
 
 </html>
