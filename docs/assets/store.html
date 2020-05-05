@@ -96,6 +96,7 @@
 
   var domain="http://localhost:6800";
   var idevent=0;
+  var api="";
 
   //Méthodes outils ________________________________________________________________________________________________________________________________________________
   //Récupére les paramétres passés dans l'url
@@ -132,7 +133,6 @@
    * Fonction appelée à l'ouverture de la page
    */
   function onload() {
-
     //Cet exemple intégre la récupération de certains paramètre passés via l'url pour pouvoir servir d'exemple
     //a plusieurs événement. Dans une configuration normale, la billeterie externe n'a aucun paramètre à récupérer
 
@@ -161,6 +161,11 @@
         });
       });
     }
+
+    api=domain+"/api/add_ticket/"+idevent;
+    api=api.replace("http//","http://").replace("https//","https://");
+
+    informe("Appel de l'url "+api);
   }
 
 
@@ -199,9 +204,8 @@
 
 
 
-  function informe(resp) {
-    var email=document.getElementById("email").value;
-    document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
+  function informe(html) {
+    document.getElementById("message").innerHTML=html;
   }
 
 
@@ -216,9 +220,6 @@
 
     if(idevent==0)idevent=document.getElementById("selectEvent").value;
 
-    var url=domain+"/api/add_ticket/"+idevent;
-    url=url.replace("http//","http://").replace("https//","https://");
-
     window.scrollTo(0,0);
 
     var params=new FormData(document.getElementById('frm'));
@@ -228,15 +229,16 @@
       var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24));
       for(var i=0;i<params.get("tickets");i++){
         var ref_ticket="tkt"+new Date().getTime()+i;
-        fetch(url+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay,
+        fetch(api+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay,
           {
             mode: 'no-cors',
             headers:{"access_token":access_token}
-          }).then(function (r) {
-            console.log(r);
-            r.json().then(informe);
-            },
-          function(r) {console.log(r);});
+          }).then(function(r) {
+              r.text().then(function(resp){
+                var email=document.getElementById("email").value;
+                informe("Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>");
+              });
+            },function(r) {console.log(r);});
       }
     },2000);
 
