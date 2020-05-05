@@ -42,7 +42,7 @@
       <form id="frm" style="width: 80%;display: inline-block;text-align: center;">
         <div>
           <label for="email" class="label_style">Email</label>
-          <input name="email" id="email" value="paul.dudule@gmail.com">
+          <input name="email" id="email" value="sophie.dudule@gmail.com">
         </div>
         <br>
         <div id="events_zone" style="display: none;">
@@ -85,8 +85,8 @@
   <!--Section lié à la documentation de l'API-->
     <div id="faq">
       <iframe
-              src="https://server.f80.fr:6800/api/faqs/extern_store,api_add_ticket"
-              style="border:none;overflow:hidden;width:100%;background: none;font-family: Arial;">
+              src="https://server.f80.fr:6800/api/faqs/extern_store,api_add_ticket,api_build_event"
+              style="border:none;overflow:hidden;height:600px;width:100%;background: none;font-family: Arial;">
       </iframe>
       <br>
     </div>
@@ -204,9 +204,10 @@
 
   /**
    * Fonction appelée pour créer le billet
+   *
+   * http://localhost:8080/assets/store.html
    */
   function send(){
-
     var access_token=getParam().access_token;
     if(access_token==null)access_token="tkhh4271!!";
 
@@ -220,10 +221,11 @@
     var params=new FormData(document.getElementById('frm'));
 
     setTimeout(function(){
-      debugger
       //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
-      for(var i=0;i<params.get("tickets");i++)
-        fetch(url+"/"+params.get("userid")+"/tkt"+i+"/"+params.get("price")+"/30",
+      var delay=(new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24);
+      for(var i=0;i<params.get("tickets");i++){
+        var ref_ticket="tkt"+i;
+        fetch(url+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay,
           {
             method: "get",
             mode: 'no-cors',
@@ -233,6 +235,8 @@
         },function(r) {
           console.log(r);
         });
+      }
+
     },2000);
 
   }
