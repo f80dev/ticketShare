@@ -215,13 +215,11 @@ export class AppComponent implements OnInit,OnDestroy {
     this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
     this.showIntro=false;
     $$("Pas de compte connu, Appel de create_user avec text=", text);
-    this.
-    create_user(text, (u) => {
+    this.create_user(text, (u) => {
       this.message = "";
       this.onResize();
       this.showIntro=false;
       showMessage(this, "Nouveau compte créé");
-      //this.analyse_params((p: any) => {this.use_params(p);},localStorage.getItem("firsturl"));
       if(func!=null)func();
     },(err)=>{
       showMessage(this, "Ce compte existe déjà");
@@ -240,6 +238,7 @@ export class AppComponent implements OnInit,OnDestroy {
       //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
 
       if(p["address"]!=null) {
+        debugger
         $$("Le paramétre address force une connexion sur "+p["address"]);
 
         if (p["code"] != null) {
@@ -247,8 +246,10 @@ export class AppComponent implements OnInit,OnDestroy {
           var code = p["code"];
           this.api.checkCode(p["address"], code).subscribe((r) => {
             if (r != null) {
-              localStorage.setItem("address", p["address"]);
-              this.initUser();
+              $$("Le code est vérifié, on initialise l'utilisateur");
+              localStorage.setItem("address", r["address"]);
+              this.config.user=r;
+              return;
             }
           });
         }
@@ -287,7 +288,7 @@ export class AppComponent implements OnInit,OnDestroy {
       }
 
       if(p["command"]=="store"){
-        this.initUser();
+        if(this.config.user==null)this.initUser();
         this.router.navigate(["store"],{queryParams:{event:p["event"]}});
       }
 

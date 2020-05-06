@@ -13,11 +13,9 @@
       margin-right: 10px;
       font-variant: titling-caps;
       font-size: large;
-      font-family: Arial;
     }
 
     input, select {
-      font-family: Arial;
       border: lightgrey solid thin;
       font-size: large;
       padding: 5px;
@@ -162,10 +160,6 @@
       });
     }
 
-    api=domain+"/api/add_ticket/"+idevent;
-    api=api.replace("http//","http://").replace("https//","https://");
-
-    informe("Appel de l'url "+api);
   }
 
 
@@ -219,6 +213,8 @@
     if(access_token==null)access_token="tkhh4271!!";
 
     if(idevent==0)idevent=document.getElementById("selectEvent").value;
+    api=domain+"/api/add_ticket/"+idevent;
+    api=api.replace("http//","http://").replace("https//","https://");
 
     window.scrollTo(0,0);
 
@@ -228,15 +224,17 @@
       //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
       var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24));
       for(var i=0;i<params.get("tickets");i++){
-        var ref_ticket="tkt"+new Date().getTime()+i;
-        fetch(api+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay,
+        var ref_ticket="tkt_"+new Date().getTime()+"_"+i;
+        var url_api=api+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay;
+        $$("Appel de "+url_api);
+        fetch(url_api,
           {
             mode: 'no-cors',
             headers:{"access_token":access_token}
           }).then(function(r) {
               r.text().then(function(resp){
                 var email=document.getElementById("email").value;
-                informe("Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>");
+                informe("Vous billets sont en cours de réservation. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>");
               });
             },function(r) {console.log(r);});
       }
