@@ -224,11 +224,12 @@
       //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
       var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24));
       for(var i=0;i<params.get("tickets");i++){
-        var ref_ticket="tkt_"+new Date().getTime()+"_"+i;
-        var url_api=api+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay;
+        var ref_ticket=new Date().getTime().toString(32).toUpperCase();
+        var url_api=api+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay+"?access_token="+access_token;
         $$("Appel de "+url_api);
         fetch(url_api,
           {
+            method: 'get',
             mode: 'no-cors',
             headers:{"access_token":access_token}
           }).then(function(r) {
@@ -236,7 +237,10 @@
                 var email=document.getElementById("email").value;
                 informe("Vous billets sont en cours de réservation. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>");
               });
-            },function(r) {console.log(r);});
+            },function(r) {
+          informe("Problème technique, veuillez recommencer l'opération");
+            console.log(r);
+          });
       }
     },2000);
 
