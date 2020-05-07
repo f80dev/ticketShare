@@ -104,7 +104,7 @@ export class EventeditorComponent implements OnInit {
   }
 
   check_event() {
-    this.api._post("check_event",this.code).subscribe((result)=>{
+    this.api._post("check_event/"+this.config.user.address,this.code).subscribe((result)=>{
       showMessage(this,"Evénement correct");
       this.showPublish=true;
     },(err:any)=>{
