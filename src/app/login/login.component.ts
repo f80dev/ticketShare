@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         this._location.back();
       else{
         $$("Redirection vers "+this.redirect);
-        if(this.redirect.indexOf(environment.domain_appli)==-1){
+        if(this.redirect.startsWith("http") && this.redirect.indexOf(environment.domain_appli)==-1){
           open(this.redirect,"_blank");
         }
         else{

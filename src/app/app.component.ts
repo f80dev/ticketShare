@@ -238,7 +238,6 @@ export class AppComponent implements OnInit,OnDestroy {
       //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
 
       if(p["address"]!=null) {
-        debugger
         $$("Le paramétre address force une connexion sur "+p["address"]);
 
         if (p["code"] != null) {

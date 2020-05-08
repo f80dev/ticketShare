@@ -324,7 +324,7 @@ export function askForAuthent(vm:any,message:string,redirect:string,extra_params
     if(func_already_login!=null)
       func_already_login();
     else{
-      if(redirect.indexOf(environment.domain_appli)==-1){
+      if(redirect.startsWith("http") && redirect.indexOf(environment.domain_appli)==-1){
         open(redirect,"_blank");
       } else{
         vm.router.navigate(redirect,extra_params);
