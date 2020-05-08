@@ -43,9 +43,7 @@ export class StoreComponent implements OnInit {
   }
 
   openEventEditor() {
-    askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
-      this.router.navigate(['eventeditor']);
-    });
+    askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor');
   }
 
   refresh(){
@@ -140,18 +138,13 @@ export class StoreComponent implements OnInit {
    * @param _evt
    */
   buy(_evt: any) {
-    askForAuthent(this,"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations","/store?event="+_evt._id,()=>{
-      if(_evt.store!=null && _evt.store.web.startsWith("http")){
-         var url=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
-         if(this.config.user.email!=null && this.config.user.email.length>0)url=url+"&email="+this.config.user.email;
-         open(url,"_blank");
-         //this.extern_store(_evt);
-       }else{
-            this.router.navigate(["places"],{queryParams:{event:_evt._id,etherprice:_evt.etherprice}});
-       }
-    });
+    var url_redirect="/places?event="+_evt._id+"&etherprice="+_evt.etherprice;
+    if(_evt.hasOwnProperty("store")){
+      url_redirect=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
+      if(this.config.user.email.length>0)url_redirect=url_redirect+"&email="+this.config.user.email;
+    }
+    askForAuthent(this,"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",url_redirect);
   }
-
 
 
 

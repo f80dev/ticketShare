@@ -249,7 +249,7 @@ export class AppComponent implements OnInit,OnDestroy {
               $$("Le code est vérifié, on initialise l'utilisateur");
               localStorage.setItem("address", r["address"]);
               this.config.user=r;
-              return;
+              window.location.reload();
             }
           });
         }
@@ -288,6 +288,7 @@ export class AppComponent implements OnInit,OnDestroy {
       }
 
       if(p["command"]=="store"){
+        debugger
         if(this.config.user==null)this.initUser();
         this.router.navigate(["store"],{queryParams:{event:p["event"]}});
       }

@@ -12,6 +12,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from "@angular/ma
 import {ConfigService} from "../config.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {Location} from "@angular/common";
+import {environment} from "../../environments/environment";
 
 
 
@@ -47,12 +48,12 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    $$("Ouverture de la fenêtre de login")
+    $$("Ouverture de la fenêtre de login");
     var params: ParamMap = this.route.snapshot.queryParamMap;
     this.redirect = params.get("redirect");
     if (params.has("message")) this.message = params.get("message");
     if (params.has("address")) {
-      $$("Récupération de l'adresse " + params.get("address"))
+      $$("Récupération de l'adresse " + params.get("address"));
       localStorage.setItem("lastEmail", params.get("address"));
       this.email_login();
     }
@@ -67,8 +68,17 @@ export class LoginComponent implements OnInit {
     else {
       if (this.redirect == "back" || this.config.user.email.length==0)
         this._location.back();
-      else
-        this.router.navigateByUrl(this.redirect);
+      else{
+        $$("Redirection vers "+this.redirect);
+        if(this.redirect.indexOf(environment.domain_appli)==-1){
+          open(this.redirect,"_blank");
+        }
+        else{
+          this.router.navigateByUrl(this.redirect);
+        }
+
+      }
+
     }
   }
 
@@ -156,7 +166,6 @@ export class LoginComponent implements OnInit {
     var code=event.target.value;
 
     this.wait_message="Vérification du code";
-
     this.api.checkCode(this.email, code).subscribe((r: any) => {
       this.wait_message="";
       if (r != null) {
@@ -183,15 +192,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+
+
   initUser(data:any,askForCode=false){
     $$("Recherche d'un compte ayant ce mail");
+    this.wait_message="Récupération de l'utilisateur";
     this.api.getuser(data.email).subscribe((_old_user:any)=> {
+      this.wait_message="";
       this.messageCode="Le compte "+_old_user.email+" existe déjà, veuillez indiquer son code à 6 chiffres";
         this.email=data.email;
     },(err)=>{
         $$("Il n'y a pas de compte à cet email");
         this.email=data.email;
         this.message="";
+        this.wait_message="";
         this.api.setuser(this.config.user.address, {
           "email": data.email,
           "pseudo": data.firstname,
@@ -208,6 +223,9 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+
+
 
   public socialSignIn(socialPlatform : string) {
     let socialPlatformProvider;

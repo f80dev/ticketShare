@@ -309,11 +309,29 @@ export function showMessage(vm:any,s:string="",duration=2000,func=null,label_but
   }
 }
 
-export function askForAuthent(vm:any,message:string,redirect:string,func:Function=null){
+
+/**
+ * Demande l'authentification
+ * @param vm
+ * @param message
+ * @param redirect
+ * @param func
+ */
+export function askForAuthent(vm:any,message:string,redirect:string,extra_params={},func_already_login:Function=null){
   if(vm.config.user!=null && vm.config.user.email==""){
-    vm.router.navigate(["login"],{queryParams:{message:message,redirect:redirect}});
+    vm.router.navigate(["login"],{queryParams:{message:message,redirect:redirect,extra_params:extra_params}});
   } else {
-    if(func!=null)func();
+    if(func_already_login!=null)
+      func_already_login();
+    else{
+      if(redirect.indexOf(environment.domain_appli)==-1){
+        open(redirect,"_blank");
+      } else{
+        vm.router.navigate(redirect,extra_params);
+      }
+
+    }
+
   }
 }
 

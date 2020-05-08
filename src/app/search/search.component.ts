@@ -36,8 +36,6 @@ export class SearchComponent implements OnInit {
 
 
   openEventEditor() {
-    askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor',()=>{
-      this.router.navigate(['eventeditor']);
-    });
+    askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'/eventeditor');
   }
 }
