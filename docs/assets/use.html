@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Minimal store sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Validation des billets</title>
 
     <style>
       input, select {
@@ -54,9 +55,9 @@
 
 
   <br><hr><br>
-
-      <iframe id="faq" src="https://server.f80.fr:6800/api/faqs/validate,api_validate,all_api,dev_token?format=html&sort=False"
-              style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;"></iframe>
+  <h2>Questions Fréquentes</h2>
+      <iframe id="faq" src="https://server.f80.fr:6800/api/faqs/validate,api_validate,all_api,dev_token?format=html&sort=False&summary=True"
+              style="border:none;overflow:hidden;min-height:800px;width:100%;background: none;"></iframe>
 
 </div>
 </body>
@@ -87,12 +88,16 @@
       fetch(domain + "/api/events/_/dtCreate/online").then(function (r) {
         r.json().then(function (resp) {
           src="";
-          resp.forEach(function(item){
-            src="<option value='"+item._id+"'>"+item.name+"</option>";
-          });
-          document.getElementById("selectEvent").innerHTML=src;
+
           if(resp==null || resp.length==0){
-            document.getElementById("message").innerHTML="<h2>Aucun événement n'est disponible actuellement</h2><br><a href='https://app.kerberus.tech'>CREER LE VOTRE</a>";
+            informe("<h2>Aucun événement n'est disponible actuellement</h2><br><a href='https://app.kerberus.tech'>CREER LE VOTRE</a>");
+            document.getElementById("events_zone").style.display="none";
+          } else {
+            document.getElementById("selectEvent").style.display="inline";
+            resp.forEach(function(item){
+              src="<option value='"+item._id+"'>"+item.name+"</option>";
+            });
+            document.getElementById("selectEvent").innerHTML=src;
           }
         });
       });

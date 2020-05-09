@@ -267,4 +267,8 @@ export class ValidateComponent implements OnInit {
       showMessage(this,err.message);
     });
   }
+
+  open_douchette(){
+    open("https://app.kerberus.tech/assets/use.html?faq&idevent="+this._event._id);
+  }
 }
