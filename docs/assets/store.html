@@ -83,7 +83,7 @@
   <!--Section lié à la documentation de l'API-->
     <div id="faq">
       <iframe
-              src="https://server.f80.fr:6800/api/faqs/extern_store,all_api,api_add_ticket,api_build_event?format=html&summary=True"
+              src="https://server.f80.fr:6800/api/faqs/extern_store,api_add_ticket,all_api,api_build_event,dev_token?format=html&summary=True&sort=False"
               style="border:none;overflow:hidden;height:600px;width:100%;background: none;font-family: Arial;">
       </iframe>
       <br>
@@ -136,6 +136,7 @@
 
     //faq consiste à afficher de l'aide
     if (!getParam().hasOwnProperty("faq"))document.getElementById("faq").style.display = "none";
+
     //permet un pré-remplissage de l'identité du client
     if (getParam().hasOwnProperty("email"))document.getElementById("email").value = getParam().email;
     if (getParam().idevent != null) idevent = getParam().idevent;

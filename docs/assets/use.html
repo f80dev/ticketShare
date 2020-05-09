@@ -29,9 +29,8 @@
   <p>Cette page illustre l'usage de l'API KERBERUS permetant de valider les billets via la blockchain</p>
 </div>
 
-<div id="validate_zone">
+<div id="validate_zone" style="text-align: center;">
 
-  <form id="frm" style="width:100%;text-align: center;">
 
     <h2>Exemple de douchette</h2>
 
@@ -43,17 +42,20 @@
         </div>
         <br>
         Référence du billet ou compte du porteur<br>
-        <input id="ref" style="font-size: large;border: lightgrey solid 1px;text-align: center;" type="text" value="#001"><br><br>
+        <input id="ref" style="font-size: large;border: lightgrey solid 1px;text-align: center;"
+               type="text" value="#001" onkeypress="if(event.keyCode==13)check()"><br><br>
 
         <!--<input type="file" accept="image/*;capture=camera"><br><br>-->
 
         <button onclick="check()">VERIFIER</button>
-  </form>
+    <br><br>
+
+  <div id="zone_resultat" style="display: none;"></div>
 
 
   <br><hr><br>
 
-      <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=validate"
+      <iframe id="faq" src="https://server.f80.fr:6800/api/faqs/validate,api_validate,all_api,dev_token?format=html&sort=False"
               style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;"></iframe>
 
 </div>
@@ -61,7 +63,7 @@
 
 <script>
 
-  var domain="http://localhost:6800";
+  var domain="https://server.f80.fr:6800";
   var idevent=0;
 
   function getParam() {
@@ -70,13 +72,14 @@
     return vars;
   }
 
+
   /**
    * Fonction appelée à l'ouverture de la page
    */
   function init_form() {
-    if (!getParam().hasOwnProperty("faq") || screen.availWidth < 500)
-      document.getElementById("faq").style.display = "none";
+    if (!getParam().hasOwnProperty("faq"))document.getElementById("faq").style.display = "none";
 
+    if (getParam().domain != null) domain= getParam().domain;
     if (getParam().idevent != null) idevent = getParam().idevent;
 
     if (idevent == 0) {
@@ -97,38 +100,53 @@
   }
 
 
+  function informe(message){
+    var zone_resultat=document.getElementById("zone_resultat");
+    if(message.length==0)
+      zone_resultat.style.display="none";
+    else{
+      zone_resultat.innerHTML=message;
+      zone_resultat.style.display="inline";
+    }
+  }
 
   /**
    * Fonction appelée pour créer le billet
    */
   function check(){
 
+    //La récupération de l'access token est lié au contexte de démonstrateur de cette page
+    //En configuration normal, celui-ci est inclu dans la page
     var access_token=getParam().access_token;
-    if(access_token==null)access_token="demo_token";
+    if(!access_token)access_token="demo_token";
 
-    var ref="";
-    ref=document.getElementById("ref").value;
-    ref=ref.replace("#","");
+    var ref=document.getElementById("ref").value.replace("#","");
+    if(ref.length==0){
+      informe("Vous devez renseigné une référence de billet ou un compte utilisateur de KERBERUS");
+      return;
+    }
 
     if(idevent==0)idevent=document.getElementById("selectEvent").value;
 
     var url=domain+"/api/use/"+ref+"/"+idevent+"?access_token="+access_token;
-    url=url.replace("http//","http://").replace("https//","https://");
+    //url=url.replace("http//","http://").replace("https//","https://");
 
+    console.log("Appel de l'api : "+url);
 
-      window.fetch(url,
-        {
-          method: "get",
-          mode: 'no-cors'
-        }).then(function (r) {
-        r.json().then(function (resp) {
-          rc="";
-          for(var t in resp.tickets){
-            rc=rc+t.ref+"<br>"
-          }
-          document.getElementById("zone_resultat").innerHTML=rc;
-        });
+    informe("Vérification en cours via l'appel de "+url);
+    fetch(url).then(
+      function (r) {
+        if(r.status==204){
+          informe("Client inconnu");
+        }else{
+          r.json().then(function (resp) {
+            var html="<h4>"+resp.user.email+"</h4><img src='"+resp.user.photo+"' style='width:200px;'><br><br>";
+            resp.tickets.forEach(function(t){html=html+t.ref+"<br>";});
+            informe(html);
+          })
+        }
       },function(r) {
+        debugger;
         console.log(r);
       });
 
