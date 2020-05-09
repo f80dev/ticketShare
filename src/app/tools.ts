@@ -317,17 +317,22 @@ export function showMessage(vm:any,s:string="",duration=2000,func=null,label_but
  * @param redirect
  * @param func
  */
-export function askForAuthent(vm:any,message:string,redirect:string,extra_params={},func_already_login:Function=null){
+export function askForAuthent(vm:any,message:string,redirect:string,func_already_login=null){
   if(vm.config.user!=null && vm.config.user.email==""){
-    vm.router.navigate(["login"],{queryParams:{message:message,redirect:redirect,extra_params:extra_params}});
+    vm.router.navigate(["login"],{queryParams:{message:message,redirect:redirect}});
   } else {
+    if(vm.config!=null && vm.config.user!=null)
     if(func_already_login!=null)
       func_already_login();
     else{
       if(redirect.startsWith("http") && redirect.indexOf(environment.domain_appli)==-1){
+        redirect=redirect.replace("&email","&email="+vm.config.user.email);
         open(redirect,"_blank");
       } else{
-        vm.router.navigate(redirect,extra_params);
+        if(redirect.indexOf("?")>-1)
+          vm.router.navigateByUrl(redirect);
+        else
+          vm.router.navigate([redirect]);
       }
 
     }

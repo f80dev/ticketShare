@@ -53,8 +53,9 @@
 
     </div>
 
-
-
+  <div *ngIf="message.length>0" style="font-size: large;">
+    {{message}}<br>
+  </div>
 
 
   <div id="results" style="text-align: left;width: 100%;" *ngIf="query.length>0">

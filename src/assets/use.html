@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Minimal store sample</title>
+
+    <style>
+      input, select {
+        border: lightgrey solid thin;
+        font-size: large;
+        padding: 5px;
+      }
+
+      button {
+        padding: 15px;
+        border: none;
+        font-family: Arial;
+        background-color: #b4b7ff;
+        border-radius: 15px;
+        font-size: large;
+        width: 150px;
+      }
+    </style>
+
 </head>
 
 <body onload="init_form()">
@@ -10,35 +29,34 @@
   <p>Cette page illustre l'usage de l'API KERBERUS permetant de valider les billets via la blockchain</p>
 </div>
 
-<table style="width:100vw;" id="validate_zone">
-  <tr>
-    <th>Exemple de douchette</th>
-    <th>Procédure</th>
-  </tr>
-  <tr>
-    <td style="width: 300px;text-align: left;vertical-align:top;" >
-      <form id="frm">
+<div id="validate_zone">
+
+  <form id="frm" style="width:100%;text-align: center;">
+
+    <h2>Exemple de douchette</h2>
 
         <div id="events_zone" style="display: none;">
-          <label for="selectEvent">Sélectionner un événement:</label>
-          <select id="selectEvent">
+          <label for="selectEvent">Sélectionner un événement:</label><br>
+          <select id="selectEvent" class="field-style">
           </select>
           <br><br>
         </div>
         <br>
-        Référence:
-        <input id="ref" type="text" value="#001"><br><br>
+        Référence du billet ou compte du porteur<br>
+        <input id="ref" style="font-size: large;border: lightgrey solid 1px;text-align: center;" type="text" value="#001"><br><br>
 
-        <input type="file" accept="image/*;capture=camera"><br><br>
-        <button onclick="send()">Commander</button>
-      </form>
-    </td>
-    <td>
+        <!--<input type="file" accept="image/*;capture=camera"><br><br>-->
+
+        <button onclick="check()">VERIFIER</button>
+  </form>
+
+
+  <br><hr><br>
+
       <iframe id="faq" src="https://app.kerberus.tech/faqs.html?faq=validate"
               style="border:none;overflow:hidden;min-height:500px;width:100%;background: none;"></iframe>
-    </td>
-  </tr>
-</table>
+
+</div>
 </body>
 
 <script>
@@ -63,7 +81,7 @@
 
     if (idevent == 0) {
       document.getElementById("events_zone").style.display="inline-block";
-      fetch(domain + "/api/events/_/dtCreate/online,with_store").then(function (r) {
+      fetch(domain + "/api/events/_/dtCreate/online").then(function (r) {
         r.json().then(function (resp) {
           src="";
           resp.forEach(function(item){
@@ -72,7 +90,6 @@
           document.getElementById("selectEvent").innerHTML=src;
           if(resp==null || resp.length==0){
             document.getElementById("message").innerHTML="<h2>Aucun événement n'est disponible actuellement</h2><br><a href='https://app.kerberus.tech'>CREER LE VOTRE</a>";
-            document.getElementById("store_zone").style.display="none";
           }
         });
       });
@@ -84,34 +101,37 @@
   /**
    * Fonction appelée pour créer le billet
    */
-  function send(){
+  function check(){
 
     var access_token=getParam().access_token;
-    if(access_token==null)access_token="tkhh4271!!";
+    if(access_token==null)access_token="demo_token";
 
     var ref="";
     ref=document.getElementById("ref").value;
-    ref=ref.replace("#","")
+    ref=ref.replace("#","");
 
     if(idevent==0)idevent=document.getElementById("selectEvent").value;
 
-    var url=domain+"/api/use/"+ref+"/"+idevent;
+    var url=domain+"/api/use/"+ref+"/"+idevent+"?access_token="+access_token;
     url=url.replace("http//","http://").replace("https//","https://");
 
-    fetch(url,
-      {
-        body: new FormData(document.getElementById('frm')),
-        method: "post",
-        mode: 'no-cors',
-        headers:{"access_token":access_token}
-      }).then(function (r) {
+
+      window.fetch(url,
+        {
+          method: "get",
+          mode: 'no-cors'
+        }).then(function (r) {
         r.json().then(function (resp) {
-          var email=document.getElementById("email").value;
-          document.getElementById("message").innerHTML="Vous billets sont réservés. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>";
+          rc="";
+          for(var t in resp.tickets){
+            rc=rc+t.ref+"<br>"
+          }
+          document.getElementById("zone_resultat").innerHTML=rc;
+        });
+      },function(r) {
+        console.log(r);
       });
-    },function(r) {
-      console.log(r);
-    });
+
   }
 </script>
 

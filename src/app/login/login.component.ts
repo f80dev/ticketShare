@@ -71,10 +71,14 @@ export class LoginComponent implements OnInit {
       else{
         $$("Redirection vers "+this.redirect);
         if(this.redirect.startsWith("http") && this.redirect.indexOf(environment.domain_appli)==-1){
+          this.redirect=this.redirect.replace("&email","&email="+this.config.user.email);
           open(this.redirect,"_blank");
         }
         else{
-          this.router.navigateByUrl(this.redirect);
+          if(this.redirect.indexOf("?")>-1)
+            this.router.navigateByUrl(this.redirect);
+          else
+            this.router.navigate([this.redirect]);
         }
 
       }

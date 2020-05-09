@@ -15,7 +15,8 @@
     </div>
 
     <div *ngIf="ticket.seat==null">
-      #{{ticket.ref}}<br>
+      <span style="font-size: xx-small">Référence</span><br>
+      #{{ticket.ref}}
       <div style="font-size: xx-small;line-height: 95%;">
         {{ticket.description}}
       </div>

@@ -137,6 +137,7 @@ export class AppComponent implements OnInit,OnDestroy {
    */
   create_user(info,func,func_error){
     if(info==null)info="";
+    debugger
     this.api.adduser(info).subscribe((r: any) => {
       this.config.user = r;
       localStorage.setItem('address', r.address);
@@ -256,10 +257,10 @@ export class AppComponent implements OnInit,OnDestroy {
         if (p["code"] == null) {
           $$("Le code n'a pas été transmit donc on le demande");
           this.dialog.open(PromptComponent, {
-            width: '250px',
+            width: '300px',
             data: {
               title: 'Accès à votre compte',
-              question: "Veuillez renseigner votre code d'accès à 6 chiffres pour votre wallet associé à " + p["address"],
+              question: "Veuillez renseigner votre code d'accès à 6 chiffres",
               onlyConfirm: false,
               emojis: false,
               type: "number",
@@ -270,7 +271,8 @@ export class AppComponent implements OnInit,OnDestroy {
             this.api.checkCode(p["address"], code).subscribe((r) => {
               if (r != null) {
                 localStorage.setItem("address", r["address"]);
-                this.initUser();
+                this.config.user=r;
+                window.location.reload();
               }
             }, (err) => {
               showMessage(this, "Connexion sur un nouveau compte");
@@ -287,7 +289,6 @@ export class AppComponent implements OnInit,OnDestroy {
       }
 
       if(p["command"]=="store"){
-        debugger
         if(this.config.user==null)this.initUser();
         this.router.navigate(["store"],{queryParams:{event:p["event"]}});
       }
@@ -379,7 +380,7 @@ export class AppComponent implements OnInit,OnDestroy {
   openMyTickets(){
     this.showIntro=false;
     this.initUser("",()=>{
-      askForAuthent(this,"Vous devez vous authentifier pour accèder à vos billets","/myevents");
+      askForAuthent(this,"Vous devez vous authentifier pour accèder à vos billets","myevents");
     });
   }
 
