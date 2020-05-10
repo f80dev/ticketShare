@@ -132,4 +132,8 @@ export class EventeditorComponent implements OnInit {
   }
 
 
+  update_config(evt:any) {
+    evt.stopPropagation();
+    this.showPublish=false;
+  }
 }

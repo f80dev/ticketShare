@@ -88,6 +88,7 @@
 
       <ngx-monaco-editor [options]="editorOptions"
                          style="text-align: left;height:400px;"
+                         (keydown)="update_config($event)"
                          [(ngModel)]="code">
       </ngx-monaco-editor>
       <br>
