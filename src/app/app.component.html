@@ -77,12 +77,17 @@
 
     <span class="example-fill-remaining-space"></span>
 
-    <mat-icon *ngIf="config.user?.email?.length>0" (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
+    <mat-icon *ngIf="config.user?.email?.length>0"
+              title="Se déconnecter de l'application"
+              (click)="logout()" style="cursor: pointer;">exit_to_app</mat-icon>
   </mat-toolbar>
 
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side" >
-      <app-home *ngIf="message.length==0" (click)="closeMenu()"></app-home>
+      <app-home *ngIf="message.length==0"
+                [money]="config.user.money"
+                (click)="closeMenu()">
+      </app-home>
     </mat-drawer>
 
     <div class="example-sidenav-content" (mousedown)="closeMenu()">

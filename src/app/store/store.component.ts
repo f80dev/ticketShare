@@ -140,7 +140,7 @@ export class StoreComponent implements OnInit {
   buy(_evt: any) {
     var url_redirect="/places?event="+_evt._id+"&etherprice="+_evt.etherprice;
     if(_evt.hasOwnProperty("store")){
-      url_redirect=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token)+"&email";
+      url_redirect=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
     }
     askForAuthent(this,"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",url_redirect);
   }

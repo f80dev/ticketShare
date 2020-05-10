@@ -326,7 +326,7 @@ export function askForAuthent(vm:any,message:string,redirect:string,func_already
       func_already_login();
     else{
       if(redirect.startsWith("http") && redirect.indexOf(environment.domain_appli)==-1){
-        redirect=redirect.replace("&email","&email="+vm.config.user.email);
+        redirect=redirect.replace("{{email}}",vm.config.user.email);
         open(redirect,"_blank");
       } else{
         if(redirect.indexOf("?")>-1)

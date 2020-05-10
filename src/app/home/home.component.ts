@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ConfigService} from '../config.service';
@@ -6,8 +6,7 @@ import {MatSnackBar} from '@angular/material';
 import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {$$, subscribe_socket,showMessage} from '../tools';
-import {Socket, SocketIoModule} from "ngx-socket-io";
-import {FaqsComponent} from "../faqs/faqs.component";
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-home',
@@ -17,6 +16,7 @@ import {FaqsComponent} from "../faqs/faqs.component";
 export class HomeComponent implements OnInit {
 
   ethPrice=0;
+  @Input("money") money=0;
 
   constructor(
               public meta: Meta,

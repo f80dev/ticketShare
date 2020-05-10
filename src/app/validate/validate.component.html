@@ -45,13 +45,6 @@
     valider les entrées sur la base du QRCode<br>
   </div>
 
-  <button class="app-button" mat-button
-          *ngIf="_event.fictif"
-          mat-raised-button (click)="open_douchette()">
-    <div class="bloc-bouton">Douchette<br>Externe</div>
-  </button>
-
-
 
 
   <div *ngIf="_event?.owner==config.user?.address && tickets.length==0">
@@ -146,6 +139,13 @@
 
 
   </div>
+
+  <br>
+  <button class="app-button" mat-button
+          *ngIf="_event.fictif"
+          mat-raised-button (click)="open_douchette()">
+    <div class="bloc-bouton">Tester la douchette<br>Externe</div>
+  </button>
 
 
 
