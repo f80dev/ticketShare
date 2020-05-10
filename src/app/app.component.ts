@@ -49,8 +49,9 @@ export class AppComponent implements OnInit,OnDestroy {
               public _location: Location) {
 
     config.init(()=>{
-      $$("Vérification de la connexion")
+      this.message="Connexion en cours ...";
       this.api.infos().subscribe((infos:any)=>{
+        this.message="";
         config.infos_server=infos;
         this.showZoneOptions=true;
       },()=>{
@@ -86,11 +87,12 @@ export class AppComponent implements OnInit,OnDestroy {
       if(address){
         $$("Address récupérée sur le device "+address+". On se reconnecte au compte");
         this.message="Reconnexion a votre compte";
+        this.showZoneOptions=false;
+        this.showIntro=false;
         this.api.getuser(address,30).subscribe((r: any) => {
           // if(address!=r.address){
           //   $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
           // }
-          this.message="";
           this.config.user = r;
           this.analyse_params((p: any) => {
             this.use_params(p);
@@ -241,6 +243,7 @@ export class AppComponent implements OnInit,OnDestroy {
       if(p["address"]!=null) {
         $$("Le paramétre address force une connexion sur "+p["address"]);
 
+
         if (p["code"] != null) {
           $$("Le lancement doit immédiatement se reconnecter sur " + p["address"]);
           var code = p["code"];
@@ -253,6 +256,7 @@ export class AppComponent implements OnInit,OnDestroy {
             }
           });
         }
+
 
         if (p["code"] == null) {
           $$("Le code n'a pas été transmit donc on le demande");

@@ -145,8 +145,11 @@
           informe("Client inconnu");
         }else{
           r.json().then(function (resp) {
-            var html="<h4>"+resp.user.email+"</h4><img src='"+resp.user.photo+"' style='width:200px;'><br><br>";
-            resp.tickets.forEach(function(t){html=html+t.ref+"<br>";});
+            if(resp.user.pseudo=="")resp.user.pseudo="ANONYME";
+            if(resp.user.photo=="")resp.user.photo="https://app.kerberus.tech/assets/img/anonymous.png";
+
+            var html="<h4>"+resp.user.pseudo+"</h4><img src='"+resp.user.photo+"' style='width:200px;'><br><br>";
+            resp.tickets.forEach(function(t){html=html+"Billet #"+t.ref+"<br>";});
             informe(html);
           })
         }

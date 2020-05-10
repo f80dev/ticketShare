@@ -269,6 +269,6 @@ export class ValidateComponent implements OnInit {
   }
 
   open_douchette(){
-    open("https://app.kerberus.tech/assets/use.html?faq&idevent="+this._event._id);
+    open("https://app.kerberus.tech/assets/use.html?faq&idevent="+this._event._id+"&domain="+this.config.infos_server.domain);
   }
 }

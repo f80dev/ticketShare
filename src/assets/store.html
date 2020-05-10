@@ -233,30 +233,31 @@
 
     var params=new FormData(document.getElementById('frm'));
 
-    setTimeout(function(){
+
       //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
       var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24));
-      for(var i=0;i<params.get("tickets");i++){
-        var ref_ticket=new Date().getTime().toString(32).toUpperCase();
-        var url_api=api+"/"+params.get("email")+"/"+ref_ticket+"/"+params.get("price")+"/+"+delay+"?access_token="+access_token;
-        $$("Appel de "+url_api);
-        fetch(url_api,
-          {
-            method: 'get',
-            mode: 'no-cors',
-            headers:{"access_token":access_token}
-          }).then(function(r) {
-              r.text().then(function(resp){
-                var email=document.getElementById("email").value;
-                informe("Vous billets sont en cours de réservation. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email="+email+"' target='_blank'>KERBERUS</a>");
-              });
-            },function(r) {
-          informe("Problème technique, veuillez recommencer l'opération");
+      for(var i=0;i<params.get("tickets");i++) {
+
+        setTimeout(function (i) {
+          var ref_ticket = new Date().getTime().toString(32).toUpperCase();
+          var url_api = api + "/" + params.get("email") + "/" + ref_ticket + "/" + params.get("price") + "/+" + delay + "?access_token=" + access_token;
+          $$("Appel de " + url_api);
+          fetch(url_api,
+            {
+              method: 'get',
+              mode: 'no-cors',
+              headers: {"access_token": access_token}
+            }).then(function (r) {
+            r.text().then(function (resp) {
+              var email = document.getElementById("email").value;
+              informe("Vous billets sont en cours de réservation. Retrouvez les dans l'application <a href='https://app.kerberus.tech/?email=" + email + "' target='_blank'>KERBERUS</a>");
+            });
+          }, function (r) {
+            informe("Problème technique, veuillez recommencer l'opération");
             console.log(r);
           });
+        }, i * 1000 + 100);
       }
-    },2000);
-
   }
 
 </script>
