@@ -25,6 +25,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input('icon') icon:string="";
   @Input('color') color:string="darkgrey";
   @Input('force') force:boolean=false;
+  @Input('faq') faq:string="";
   @Input('button') _button:string="";
   @Input('height') height:string="auto";
 

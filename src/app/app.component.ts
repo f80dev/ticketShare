@@ -306,6 +306,11 @@ export class AppComponent implements OnInit,OnDestroy {
           }
         }
 
+        if(p["command"]=="dev"){
+          this.router.navigate(["developper"]);
+        }
+
+
         if(p["command"]=="myevents"){
           this.router.navigate(["myevents"]);
         }

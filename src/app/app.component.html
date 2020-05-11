@@ -85,7 +85,7 @@
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side" >
       <app-home *ngIf="message.length==0"
-                [money]="config.user.money"
+                [money]="config.user?.money"
                 (click)="closeMenu()">
       </app-home>
     </mat-drawer>

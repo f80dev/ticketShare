@@ -19,7 +19,7 @@ import {
   MatDialogModule,
   MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
   MatProgressSpinnerModule,
-  MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule,
+  MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
 import {HttpClientModule} from "@angular/common/http";
@@ -69,6 +69,7 @@ import {MonacoEditorModule} from "ngx-monaco-editor";
 import { FaqLinkComponent } from './faq-link/faq-link.component';
 import { DateComponent } from './date/date.component';
 import { IntroComponent } from './intro/intro.component';
+import { DevelopperComponent } from './developper/developper.component';
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
@@ -111,7 +112,8 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     SearchComponent,
     FaqLinkComponent,
     DateComponent,
-    IntroComponent
+    IntroComponent,
+    DevelopperComponent
   ],
   entryComponents: [
     PromptComponent,
@@ -142,6 +144,7 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     MatExpansionModule,
     MatSelectModule,
     HttpClientModule,
+    MatTabsModule,
     WebcamModule,
     MatCheckboxModule,
     MatStepperModule,

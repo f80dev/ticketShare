@@ -20,6 +20,7 @@ import {FaqsComponent} from "./faqs/faqs.component";
 import {OfferComponent} from "./offer/offer.component";
 import {SearchComponent} from "./search/search.component";
 import {CguComponent} from "./cgu/cgu.component";
+import {DevelopperComponent} from "./developper/developper.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'faqs', component: FaqsComponent},
   { path: 'offer', component: OfferComponent},
   { path: 'search', component: SearchComponent},
+  { path: 'developper', component: DevelopperComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about/cgu', component: CguComponent},
   { path: 'about', component: AboutComponent},

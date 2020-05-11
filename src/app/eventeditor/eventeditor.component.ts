@@ -125,11 +125,6 @@ export class EventeditorComponent implements OnInit {
     this.showCode=false;
   }
 
-  informe_copy(){
-    showMessage(this,"Votre clé d'API est disponible dans le presse-papier",3000,()=>{
-      this.router.navigate(["faq"],{queryParams:{faq:"api_key"}});
-    },"En savoir plus");
-  }
 
 
   update_config(evt:any) {

@@ -113,6 +113,14 @@
           (click)="openWallet()">
     <div class="bloc-bouton">Paramétres<br>avancés</div>
   </button>
+  &nbsp;
+  <button class="app-button"
+          *ngIf="config.user.email.length>0"
+          id="cmdOpenDev"
+          mat-button mat-raised-button
+          (click)="router.navigate(['developper'])">
+    <div class="bloc-bouton">Developpeur</div>
+  </button>
   <br>
 
 

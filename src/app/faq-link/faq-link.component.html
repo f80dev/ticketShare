@@ -1,6 +1,8 @@
-<mat-icon style="color:lightgrey;font-size: medium;cursor: pointer;"
-          title="En savoir plus"
-          [routerLink]="['/faq']"
-          [queryParams]="{'open':faq}">
-  help
-</mat-icon>
+<div style="display: inline-block;cursor: pointer;" [routerLink]="['/faq']" [queryParams]="{'open':faq}">
+  <mat-icon style="color:lightgrey;font-size: medium;"
+            title="En savoir plus">
+    help
+  </mat-icon>
+  <ng-content></ng-content>
+</div>
+
