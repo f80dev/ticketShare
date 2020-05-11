@@ -1,0 +1,59 @@
+<div class="mainform">
+
+  <h2>
+    <mat-icon (click)="_location.back()" style="cursor: pointer;">
+      arrow_back_ios
+    </mat-icon>
+    Section développeur
+  </h2>
+
+  <app-tuto label="La section développeur est réservé aux organisateurs d'événement souhaitant interfacer KERBERUS avec leur propre système de billeterie"></app-tuto>
+  <app-tuto faq="api_key" [delay]="5" label="La clé développeur doit être insérer dans chaque appel d'API en paramètre ou de façon plus sécurisé dans le header de la requête"></app-tuto>
+
+
+  <br><br>
+  <div   style="font-size: xx-small;display: inline-block;cursor: pointer;"
+         id="cmdCopieCle"
+         *ngIf="config.user?.access_token?.length>20"
+         [cbContent]="config.user?.access_token"
+         ngxClipboard
+         (click)="informe_copy()">
+    <strong>Copier votre clé développeur</strong><br>
+    {{config.user?.access_token.substr(0,config.user?.access_token.length/2)}}<br>
+    {{config.user?.access_token.substr(config.user?.access_token.length/2+1,config.user?.access_token.length-1)}}
+  </div>
+
+
+  <br><br>
+  <h3>Vous souhaitez ?</h3>
+  <mat-tab-group>
+    <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
+      <br>
+      <div style="width:80%;display: inline-block;">
+        {{tab.intro}} grâce à l'API
+        <br>
+        <pre>{{config.infos_server.domain}}/api/{{tab.api}}</pre>
+        <br>
+      </div>
+
+      <br>
+      <button class="app-button" mat-button mat-flat-button
+              name="cmdOpenAPI"
+              (click)="open_api(tab.api)">
+        <div class="bloc-bouton">Exemple d'appel <br>de l'API</div>
+      </button>
+      <br><br>
+      <a [href]="tab.sample" target="_blank">Démonstration</a>
+      &nbsp;
+      <a [href]="tab.source" target="_blank">Code source</a>
+      <br><br><br><br>
+
+      <iframe [src]="tab.faq | safe:'resourceUrl'" style="width: 95%;height:400px;border:none;"></iframe>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+
+</div>
