@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigService} from "../config.service";
 import {MatDialog} from "@angular/material";
-import {Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ApiService} from "../api.service";
 import {checkLogin, showMessage} from "../tools";
 import {Location} from "@angular/common";
@@ -24,7 +24,7 @@ export class DevelopperComponent implements OnInit {
       },
       {
         label:"Sécuriser vos billets",
-        api:"add_ticket/last/{{userid}}/TKT_cat1_05/10",
+        api:"add_ticket/{{eventid}}/paul.dudule@gmail.com/TKT_cat1_05/10",
         intro:"Ajouter le ticket transmit à l'API à la blockchain",
         sample:"https://app.kerberus.tech/assets/store.html",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
@@ -32,7 +32,7 @@ export class DevelopperComponent implements OnInit {
       },
       {
         label:"Valider les billets",
-        api:"use/{{userid}}/last",
+        api:"use/paul.dudule@gmail.com/{{eventid}}",
         sample:"https://app.kerberus.tech/assets/use.html",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
         intro:"Développer votre propre système de validation des billets ou intégrer les billets KERBERUS à un système de validation existant",
@@ -46,6 +46,7 @@ export class DevelopperComponent implements OnInit {
   constructor(
     public config:ConfigService,
     public router:Router,
+    public route:ActivatedRoute,
     public _location:Location,
     public api:ApiService
   ) {
@@ -53,10 +54,13 @@ export class DevelopperComponent implements OnInit {
   }
 
   ngOnInit() {
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    var idevent=params.get("event_target");
+    if(!idevent)idevent="last";
     checkLogin(this.router);
     if(this.config.user){
       for(let i=0;i<this.tabs.length;i++){
-        this.tabs[i].api=this.tabs[i].api.replace("{{userid}}",this.config.user._id)
+        this.tabs[i].api=this.tabs[i].api.replace("{{userid}}",this.config.user._id).replace("{{eventid}}",idevent);
       }
     }
   }

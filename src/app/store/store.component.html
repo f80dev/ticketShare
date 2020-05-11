@@ -66,9 +66,7 @@
       <app-tuto [if]="!event.preview" label="A tout instant vous pouvez savoir combien de billets sont encore en vente"></app-tuto>
 
       <div *ngIf="event.store!=null && event.owner==config.user.address" style="display: inline-block;width:70%;">
-        Cet événement utilise une billeterie externe ({{event.store.name}})<br>
-        Pour créer des billets utiliser l'api <app-faq-link faq="extern_store"></app-faq-link>:
-        <small><strong>{{config.infos_server.domain}}/api/add_ticket/{{event._id}}</strong></small><br><br>
+        Cet événement utilise une billeterie externe<br>
       </div>
 
       <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
@@ -260,11 +258,16 @@
         </div>
 
         <button class="app-button" mat-button mat-flat-button
+                *ngIf="event.store"
+                (click)="router.navigate(['developper'],{queryParams:{event_target:event._id}})">
+          Développeur
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
                 name="cmdPublish"
                 title="Votre événement sera disponible dans la billeterie"
                 *ngIf="config.user.money>=event.cost"
                 (click)="publish(event)">
-
           Publier
         </button>
 
