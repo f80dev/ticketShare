@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1589219466945,
+  "timestamp": 1589223681549,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,7 +10,7 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.8d0c6afafad4b94da2c1.js",
+        "https://app.kerberus.tech/main.8e9f7c996c5d657d4ef6.js",
         "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js",
         "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js",
         "https://app.kerberus.tech/runtime.458556a34b891ea32398.js",
@@ -248,8 +248,8 @@
     "https://app.kerberus.tech/assets/store.html": "2404c1b918d7e8eb93ef2737f97a003a497d3720",
     "https://app.kerberus.tech/assets/use.html": "ae3ca52d547e0835919c03ed48da6e9a7853e556",
     "https://app.kerberus.tech/favicon.ico": "d3bb29f413917e45b59439c2456716ecc4ba41c8",
-    "https://app.kerberus.tech/index.html": "6d9db49a6ec070eb6b7e901d289b11b8184c39e6",
-    "https://app.kerberus.tech/main.8d0c6afafad4b94da2c1.js": "190f62c1e632abc53abb336742878e297ccf0328",
+    "https://app.kerberus.tech/index.html": "5a428a776ea876e62a012bbd99b0f1758947cf72",
+    "https://app.kerberus.tech/main.8e9f7c996c5d657d4ef6.js": "936d02fd90f8034090938ca97ba22575a781bd4f",
     "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js": "f6468420664dc84d3233ce5bbb8425610e84ab8d",
     "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js": "c8b1721e71d9b5c8fc6e7fd886b4152944c41743",
     "https://app.kerberus.tech/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",

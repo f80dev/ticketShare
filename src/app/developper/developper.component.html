@@ -10,16 +10,15 @@
   <app-tuto label="La section développeur est réservé aux organisateurs d'événement souhaitant interfacer KERBERUS avec leur propre système de billeterie"></app-tuto>
   <app-tuto faq="api_key" [delay]="5" label="La clé développeur doit être insérer dans chaque appel d'API en paramètre ou de façon plus sécurisé dans le header de la requête"></app-tuto>
 
-  <div   style="font-size: xx-small;display: inline-block;cursor: pointer;"
+  <button
+          class="app-button" mat-button mat-flat-button
          id="cmdCopieCle"
          *ngIf="config.user?.access_token?.length>20"
          [cbContent]="config.user?.access_token"
          ngxClipboard
-         (click)="informe_copy()">
-    <strong>Copier votre clé développeur</strong><br>
-    {{config.user?.access_token.substr(0,config.user?.access_token.length/2)}}<br>
-    {{config.user?.access_token.substr(config.user?.access_token.length/2+1,config.user?.access_token.length-1)}}
-  </div>
+         (click)="informe_copy('Votre clé développeur est disponible')">
+    <div class="bloc-bouton">Copier votre clé<br>d'authentification</div>
+  </button>
 
 
   <br><br>
@@ -30,7 +29,10 @@
       <div style="width:80%;display: inline-block;">
         {{tab.intro}} grâce à l'API
         <br>
-        <pre>{{config.infos_server.domain}}/api/{{tab.api}}</pre>
+        <div style="overflow-wrap: break-word;margin:10px;width: 80%;display: inline-block;color:grey;font-size: small;font-family: SansSerif;">
+          {{config.infos_server.domain}}/api/{{tab.api}}
+        </div>
+
         <br>
       </div>
 
