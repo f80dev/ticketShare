@@ -317,15 +317,13 @@ export function showMessage(vm:any,s:string="",duration=2000,func=null,label_but
  * @param redirect
  * @param func
  */
-export function askForAuthent(vm:any,message:string,redirect:string,func_already_login=null){
+export function askForAuthent(vm:any,message:string,redirect:string){
   if(vm.config.user!=null && vm.config.user.email==""){
+    $$("L'utilisateur n'est pas encore authentifié, il est renvoyé vers la page de login");
     vm.router.navigate(["login"],{queryParams:{message:message,redirect:redirect}});
   } else {
-    if(vm.config!=null && vm.config.user!=null)
-    if(func_already_login!=null)
-      func_already_login();
-    else{
-      if(redirect.startsWith("http") && redirect.indexOf(environment.domain_appli)==-1){
+      $$("Email renseigne "+vm.config.user.email+", redirection vers "+redirect);
+      if(redirect.startsWith("http")){
         redirect=redirect.replace("{{email}}",vm.config.user.email);
         open(redirect,"_blank");
       } else{
@@ -334,8 +332,6 @@ export function askForAuthent(vm:any,message:string,redirect:string,func_already
         else
           vm.router.navigate([redirect]);
       }
-
-    }
 
   }
 }
