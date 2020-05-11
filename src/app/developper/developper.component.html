@@ -27,13 +27,13 @@
     <mat-tab *ngFor="let tab of tabs" [label]="tab.label">
       <br>
       <div style="width:80%;display: inline-block;">
-        {{tab.intro}} grâce à l'API
+        {{tab.intro}} grâce à l'API: '<strong>{{tab.api_name}}</strong>'
         <br>
         <div style="overflow-wrap: break-word;margin:10px;width: 80%;display: inline-block;color:grey;font-size: small;font-family: SansSerif;">
           {{config.infos_server.domain}}/api/{{tab.api}}
         </div>
 
-        <br>
+        <br><br>
       </div>
 
       <br>
@@ -42,10 +42,17 @@
               (click)="open_api(tab.api)">
         <div class="bloc-bouton">Exemple d'appel <br>de l'API</div>
       </button>
-      <br><br>
-      <a [href]="tab.sample" target="_blank">Démonstration</a>
       &nbsp;
-      <a [href]="tab.source" target="_blank">Code source</a>
+      <button class="app-button" mat-button mat-flat-button
+              (click)="open(tab.sample,'_blank')">
+        <div class="bloc-bouton">Démonstration<br>d'utilisation</div>
+      </button>
+      &nbsp;
+      <button class="app-button" mat-button mat-flat-button
+              (click)="open(tab.source,'_blank')">
+        <div class="bloc-bouton">Voir le<br>code source</div>
+      </button>
+
       <br><br><br><br>
 
       <iframe [src]="tab.faq | safe:'resourceUrl'" style="width: 95%;height:400px;border:none;"></iframe>

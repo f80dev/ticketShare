@@ -18,6 +18,7 @@ export class DevelopperComponent implements OnInit {
       {
         label:"Créer un événement",
         api:"add_event/fnac",
+        api_name:"add_event",
         intro:"Publiez un événement sur la base d'un modèle ou d'un fichier de configuration",
         sample:"https://app.kerberus.tech/assets/store.html?idevent={{eventid}}&faq",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
@@ -26,6 +27,7 @@ export class DevelopperComponent implements OnInit {
       {
         label:"Sécuriser vos billets",
         api:"add_ticket/{{eventid}}/paul.dudule@gmail.com/TKT_cat1_05/10",
+        api_name:"add_ticket",
         intro:"Ajouter un ticket à la blockchain",
         sample:"https://app.kerberus.tech/assets/store.html?idevent={{eventid}}&faq",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
@@ -33,6 +35,7 @@ export class DevelopperComponent implements OnInit {
       },
       {
         label:"Valider les billets",
+        api_name:"use",
         api:"use/paul.dudule@gmail.com/{{eventid}}",
         sample:"https://app.kerberus.tech/assets/use.html",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html?idevent={{eventid}}&faq",
