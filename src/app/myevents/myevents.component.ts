@@ -11,6 +11,8 @@ import {Socket} from "ngx-socket-io";
 })
 export class MyeventsComponent implements OnInit {
 
+  events=[];
+  message="";
 
   constructor(public router:Router,
               public route:ActivatedRoute,
@@ -19,10 +21,21 @@ export class MyeventsComponent implements OnInit {
   }
 
 
+
+
+
   refresh(){
+    this.message="Chargement de vos événements";
     this.config.reload_user(()=>{
-      if(this.config.user._events.length==1)
-        this.myplaces(this.config.user._events[0]);
+      this.message="";
+      this.events=[];
+      Object.values(this.config.user._events).forEach((_e:any)=>{
+        if(_e.owner!=this.config.user.address){
+          this.events.push(_e);
+        }
+      });
+      if(this.events.length==1)
+        this.myplaces(this.events[0]);
     });
   }
 

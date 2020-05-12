@@ -126,8 +126,13 @@ export class ApiService {
     return this._get("adduser/"+result);
   }
 
-  delevent(id: string) {
-    return this._get("delevent/"+id);
+  delevent(id: string,auto:boolean,refund_address="") {
+    refund_address=encodeURIComponent(refund_address);
+    return this._get("delevent/"+id+"/"+auto+"/"+refund_address,120);
+  }
+
+  can_delevent(id: string) {
+    return this._get("candelevent/"+id);
   }
 
   sendevent(id: string,to:string) {

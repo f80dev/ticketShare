@@ -66,7 +66,7 @@
       <app-tuto [if]="!event.preview" label="A tout instant vous pouvez savoir combien de billets sont encore en vente"></app-tuto>
 
       <div *ngIf="event.store!=null && event.owner==config.user.address" style="display: inline-block;width:70%;">
-        Cet événement utilise une billeterie externe<br>
+        Cet événement utilise une billeterie externe<app-faq-link faq="extern_store"></app-faq-link><br>
       </div>
 
       <div *ngIf="event.state=='draft' && event.owner==config.user?.address"

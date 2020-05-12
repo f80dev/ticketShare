@@ -33,7 +33,7 @@
 
   </mat-expansion-panel-header>
 
-  <div [ngStyle]="{'width': '100%','min-height': height}">
+  <div [ngStyle]="{'width': '100%','min-height': height}" *ngIf="_event.state!='cancel' && _event.state!='manual_cancel'">
     <img class="visual-event" [src]="_event.visual" alt="Visuel du ticket">
   </div>
   <br>

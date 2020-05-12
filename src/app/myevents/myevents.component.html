@@ -1,5 +1,6 @@
 <div class="mainform">
 
+  <app-hourglass [message]="message"></app-hourglass>
 
 <div *ngIf="config.user?._events==null || config.user?._events?.length==0" >
   <br>Actuellement, vous n'avez pas de billets.
@@ -21,6 +22,9 @@
   </qr-code>
 </div>
 
+
+
+
 <div *ngIf="config.user?.nextEvent<7000">
   Présenter ce QRCode au contrôle des billets<br>
   <qr-code [size]="150"
@@ -38,21 +42,29 @@
 <app-event width="95%"
            maxwidth="600px"
            height="0"
-           *ngFor="let event of config.user?._events"
+           *ngFor="let event of events"
            [event]="event">
-  <div *ngIf="event.state=='cancel'">
-    Evénement annulé
+  <div *ngIf="event.state=='cancel' || event.state=='manual_cancel'">
+    <span style="color: red;font-size: large;">Evénement annulé</span>
+    <br>
+    <div *ngIf="event.state=='manual_cancel'">
+      Rendez-vous <strong>{{event.refund_address}}</strong>
+      <br>pour obtenir le remboursement des billets</div>
+    <br>
   </div>
 
   <div *ngIf="event.state=='closed'">
-    Evénement terminé
+    <span style="color: red;font-size: large;">Evénement terminé</span>
   </div>
 
   <app-tuto label="Après achat, KERBERUS sécurise votre achat. Ce traitement peut prendre quelques minutes"></app-tuto>
 
+
   <div *ngIf="event.state!='reserved' && event.state!='cancel' && event.state!='closed'">
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
-      <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">Voir mes billets</button>
+      <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">
+        <div class="bloc-bouton">Voir mes<br>billets</div>
+      </button>
     </div>
     <div *ngIf="event?.showTickets" style="width: 100%;">
       <app-tuto label="Si vous le souhaitez vous pouvez envoyer/offrir vos billets à des amis" icon="card_gift"></app-tuto>
@@ -64,6 +76,7 @@
 
   <button class="app-button"
           mat-button mat-flat-button
+          *ngIf="event?.state?.indexOf('cancel')==-1"
           (click)="buy_other(event)">
     <div class="bloc-bouton">Acheter plus<br>de billets</div>
   </button>

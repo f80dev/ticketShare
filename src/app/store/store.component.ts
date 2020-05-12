@@ -46,6 +46,9 @@ export class StoreComponent implements OnInit {
     askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'eventeditor');
   }
 
+
+
+
   refresh(){
     this.message="Chargement des événements disponibles";
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
@@ -74,7 +77,8 @@ export class StoreComponent implements OnInit {
           e["showDate"]=false;
 
           if(e["owner"]==this.config.user.address || e["onstore"]*1000<new Date().getTime())
-            this.events.push(e);
+            if(e.state.indexOf("cancel")==-1)
+              this.events.push(e);
         }
       }
     },(err)=>{
@@ -181,25 +185,14 @@ export class StoreComponent implements OnInit {
 
 
   cancel(event:any){
-    this.dialog.open(PromptComponent,{width: '250px',data: {
-      title: "Annulation de l'événement",
-        question: "Etês vous sûr de vouloir annuler cet évenement et ainsi déclencher le remboursement de tous les billets",
-        onlyConfirm:false,
-        lbl_ok:"Annuler",
-        lbl_cancel:"Non"
-    }
-    }).afterClosed().subscribe((r:any) => {
-      if(r=="oui"){
-        this.message="Annulation de l'événement en cours";
-        this.api.delevent(event._id).subscribe(()=>{
-          this.message="";
-          this.refresh();
-        });
-      }
-    });
+      this.router.navigate(["cancel"],{queryParams:{idevent:event._id}})
   }
 
 
+  /**
+   * Analyse des ventes
+   * @param event
+   */
   sales(event:any){
     event.resume={};
     event.treatment="Chargement des résultats";
@@ -280,12 +273,18 @@ export class StoreComponent implements OnInit {
 
   delete(event:any,func=null){
     this.message="Suppression en cours ...";
-    this.api.delevent(event["_id"]).subscribe(()=>{
+    this.api.delevent(event._id,true,"").subscribe(()=>{
       this.message="";
       this.refresh();
       if(func!=null)func();
+    },()=>{
+      this.message="";
+      showMessage(this,"Problème technique de suppression de l'événement");
     })
   }
+
+
+
 
   onCancel(event:any) {
     if(event.state=="in treatment"){

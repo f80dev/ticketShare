@@ -70,6 +70,7 @@ import { FaqLinkComponent } from './faq-link/faq-link.component';
 import { DateComponent } from './date/date.component';
 import { IntroComponent } from './intro/intro.component';
 import { DevelopperComponent } from './developper/developper.component';
+import { CancelComponent } from './cancel/cancel.component';
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
@@ -113,7 +114,8 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     FaqLinkComponent,
     DateComponent,
     IntroComponent,
-    DevelopperComponent
+    DevelopperComponent,
+    CancelComponent
   ],
   entryComponents: [
     PromptComponent,
