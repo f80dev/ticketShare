@@ -1,0 +1,68 @@
+<div class="mainform">
+
+  <div style="width:80%;display: inline-block;text-align: center;" *ngIf="message.length==0">
+          <mat-icon style="cursor: pointer;font-size: x-large;" (click)="_location.back()">keyboard_arrow_left</mat-icon>
+          &nbsp;
+          Annuler {{_event?.name}} ?
+    <br>
+  </div>
+
+  <app-hourglass [message]="message"></app-hourglass>
+
+
+
+  <br><br>
+
+  <div *ngIf="_event?.stats?.sold+_event?.stats?.reserved>0">
+    <app-tuto label="Deux types d'annulation sont possibles, vous demandez aux clients de vous rendre sur un lieu pour présenter leur(s) billet(s) et se faire rembourser ou vous créditer le compte de vos acheteur du montant du billet"></app-tuto>
+    <br>
+    <mat-tab-group>
+      <mat-tab label="Remboursement sur place">
+        <br>
+        <mat-form-field class="form-field-style" style="width: 80% !important;text-align: center;" >
+          <input type="text"
+                 matInput
+                 autofocus
+                 id="txtRefund_address"
+                 min="10000"
+                 max="999999"
+                 title="Adresse d'obtention du remboursement"
+                 placeholder="Adresse d'obtention du remboursement"
+                 [(ngModel)]="_event.refund_address">
+        </mat-form-field>
+        <br><br>
+        Vos clients seront invités par mail à présenter leur(s) billet(s)<br>
+        à cette adresse pour obtenir le remboursement
+
+        <br><br>
+
+        <button class="app-button large-button" mat-button mat-flat-button
+                *ngIf="_event.refund_address?.length>0"
+                (click)="cancel_event(false)">
+          Confirmer l'annulation
+        </button>
+      </mat-tab>
+
+      <mat-tab label="Remboursement automatique">
+        <app-tuto label="Le remboursement automatique nécéssite d'avoir un solde de compte suffisant pour rembourser l'ensemble des billets acheter"></app-tuto>
+        <br>
+        <button class="app-button large-button" mat-button mat-flat-button
+                (click)="cancel_event(true)">
+          Confirmer l'annulation
+        </button>
+      </mat-tab>
+
+
+    </mat-tab-group>
+  </div>
+
+  <div *ngIf="_event?.stats?.sold+_event?.stats?.reserved==0" style="width: 80%;display: inline-block;">
+    Aucun billet n'a été vendu, l'annulation correspond juste à repasser l'événement en mode DRAFT.<br>
+    <br>
+    <button class="app-button" mat-button mat-flat-button
+            (click)="to_draft()">
+      Draft
+    </button>
+  </div>
+
+</div>
