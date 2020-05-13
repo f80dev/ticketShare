@@ -84,9 +84,7 @@ export class EventeditorComponent implements OnInit {
 
 
   download_template() {
-    this.api.get_yaml_code(this.config.user.address,this.selTemplate.filename).subscribe((code:any)=>{
-
-    })
+    open(this.config.infos_server.domain+"/api/get_yaml_file/"+this.selTemplate.filename);
   }
 
 

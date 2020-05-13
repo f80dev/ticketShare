@@ -9,10 +9,9 @@
   <div *ngIf="config.user.email.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
-      <div *ngIf="messageCode.length==0">
+      <div *ngIf="messageCode.length==0 && showAuthentPlatform">
         <button class="app-button login-button"
                 id="cmdGoogle"
-
                 mat-button mat-raised-button
                 (click)="socialSignIn('google')">
           Google

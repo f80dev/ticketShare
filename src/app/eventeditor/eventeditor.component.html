@@ -56,6 +56,7 @@
 
       <br>
 
+      <div *ngIf="!config.device.isMobile">
         <br>
 
         Adapter ce modèle à votre événement<br>
@@ -65,6 +66,13 @@
                 (click)="showCode=true">
           Editer
         </button>
+      </div>
+
+      <div *ngIf="config.device.isMobile" style="width: 80%;">
+        <br>
+        Personnalisation impossible depuis un mobile, connectez vous depuis un ordinateur si besoin.
+      </div>
+
 
 
     </div>
@@ -126,13 +134,13 @@
 
     <table style="width: 100%;" *ngIf="!showCode">
       <tr style="font-size: small;">
-        <td style="width: 50%;">
-          Créer un évenement fictif depuis ce modèle<br>
-          pour tester gratuitement {{config.values.appname}}
+        <td style="width: 40%;">
+          Evenement fictif depuis ce modèle
+          pour tester {{config.values.appname}}
           <app-faq-link faq="fictif"></app-faq-link>
         </td>
         <td></td>
-        <td *ngIf="config.user?.email">
+        <td *ngIf="config.user?.email" style="width: 40%;">
           Récupérer le modèle pour le personnaliser depuis votre ordinateur
         </td>
       </tr>
@@ -144,27 +152,27 @@
                   id="cmdCreateFictif"
                   mat-button mat-raised-button
                   (click)="fictif()">
-              Evénement fictif
+              Tester
           </button>
         </td>
         <td style="width: 10%;"></td>
         <td>
-          <button class="app-button "
-                  style="margin-top: 10px;"
+          <button
                   id="cmdSendTemplate"
                   *ngIf="config.user?.email"
-                  mat-button mat-raised-button
+                  title="Recevoir le fichier de configuration de l'événement sur son mail"
+                  mat-button mat-raised-button mat-icon-button
                   (click)="sendDemo()">
-              Par mail
+            <mat-icon>email</mat-icon>
           </button>
           &nbsp;
-          <button class="app-button "
-                  style="margin-top: 10px;"
+          <button
                   id="cmdDownloadTemplate"
                   *ngIf="config.user?.email"
-                  mat-button mat-raised-button
+                  title="Télécharger le fichier de configuration de l'événement"
+                  mat-button mat-raised-button mat-icon-button
                   (click)="download_template()">
-            Télécharger
+            <mat-icon>get_app</mat-icon>
           </button>
         </td>
       </tr>

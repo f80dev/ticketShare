@@ -5,6 +5,7 @@ import {environment} from '../environments/environment';
 import {initAvailableCameras, isLocal} from "./tools";
 import {Platform} from "@angular/cdk/platform";
 import {ApiService} from "./api.service";
+import { DeviceDetectorService } from 'ngx-device-detector';
 import {ActivatedRoute} from "@angular/router";
 
 @Injectable({
@@ -20,6 +21,7 @@ export class ConfigService {
   waiting:boolean=false;
   webcamsAvailable:number=0;
   width_screen=300;
+  device:any={};
   params:any={};
   user:any=null;
   refresh_callback: () => void;
@@ -29,10 +31,18 @@ export class ConfigService {
   constructor(private location: Location,
               private http: HttpClient,
               public platform:Platform,
+              public deviceService: DeviceDetectorService,
               public api:ApiService){
 
     if(localStorage.getItem("activeBrand")!=null)
       this.activeBrand=Number(localStorage.getItem("activeBrand"));
+
+    this.device={
+      isMobile:this.deviceService.isMobile(),
+      isTablet:this.deviceService.isTablet(),
+      isDesktopDevice:this.deviceService.isDesktop(),
+      infos:this.deviceService.getDeviceInfo()
+    }
   }
 
 

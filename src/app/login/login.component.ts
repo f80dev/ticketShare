@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   wait_message="";
   redirect = null;
   code="";
+  showAuthentPlatform=true;
 
   shareObj = {
     href: "FACEBOOK-SHARE-LINK",
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
               public config: ConfigService,
               public route: ActivatedRoute,
               private socialAuthService: SocialService) {
+    if(this.config.device.isMobile && this.config.device.infos.brower=="Opera")this.showAuthentPlatform=false;
   }
 
 
