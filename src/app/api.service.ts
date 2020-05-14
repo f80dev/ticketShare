@@ -148,6 +148,10 @@ export class ApiService {
     return this._get("available/"+event+buyer);
   }
 
+  stats(eventid:string) {
+    return this._get("stats/"+eventid);
+  }
+
   getevent(_id:string){
     return this._get("getevent"+"/"+_id);
   }

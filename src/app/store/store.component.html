@@ -107,23 +107,43 @@
         </div>
       </div>
 
-      <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">
-        Il reste <br><br>
-        <table style="width:100%;text-align: center;">
-          <tr *ngFor="let r of event.rows">
-            <td>
-              {{r.free}}
-            </td>
-            <td>
-              places à
-            </td>
-            <td>
-              {{r.price}}€
-            </td>
-          </tr>
-        </table>
+      <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:250px;width: 100%;text-align: center;">
+
+        <mat-tab-group>
+          <mat-tab *ngFor="let chart of charts" [label]="chart.title">
+            <google-chart
+                          style="background: none;"
+                          [type]="chart.type"
+                          [data]="chart.data"
+                          [columns]="chart.columnNames"
+                          [options]="chart.options">
+            </google-chart>
+          </mat-tab>
+        </mat-tab-group>
+
+
 
       </div>
+
+      <!--<div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">-->
+        <!--Il reste <br><br>-->
+        <!--<table style="width:100%;text-align: center;">-->
+          <!--<tr *ngFor="let r of event.rows">-->
+            <!--<td>-->
+              <!--{{r.free}}-->
+            <!--</td>-->
+            <!--<td>-->
+              <!--places à-->
+            <!--</td>-->
+            <!--<td>-->
+              <!--{{r.price}}€-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+      <!--</div>-->
+
+
+
 
       <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
         <div *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1">

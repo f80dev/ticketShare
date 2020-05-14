@@ -8,6 +8,7 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
 import {ClipboardService} from "ngx-clipboard";
 import {PromptComponent} from "../prompt/prompt.component";
+import {ChartType} from "angular-google-charts";
 
 @Component({
   selector: 'app-store',
@@ -18,6 +19,7 @@ export class StoreComponent implements OnInit {
 
   events=[];
   message="";
+  charts:any[]=[]
   sortField: string="dtCreate=desc";
   filterField: string="";
   onlyMyEvents=false;
@@ -193,7 +195,7 @@ export class StoreComponent implements OnInit {
    * Analyse des ventes
    * @param event
    */
-  sales(event:any){
+  sales_old(event:any){
     event.resume={};
     event.treatment="Chargement des résultats";
     this.api.available(event._id).subscribe((places:any[])=>{
@@ -206,6 +208,25 @@ export class StoreComponent implements OnInit {
       event.rows=Object.values(event.resume);
       event.preview=false;
     });
+  }
+
+  sales(event:any){
+    this.api.stats(event._id).subscribe((r:any)=>{
+      var option={backgroundColor: "none",is3D: true,width:'100%',height:'200px'};
+      this.charts=[{
+        title:"Ventes",
+        type:ChartType.PieChart,
+        data:r.stats,
+        options: option
+      },{
+        title:"Ventes par catégorie",
+        type:ChartType.PieChart,
+        data:r.cats,
+        options: option
+      }];
+      event.preview=false;
+    });
+
   }
 
 

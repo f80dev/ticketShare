@@ -253,9 +253,7 @@ export class ValidateComponent implements OnInit {
           this._event.validate.checkers.push(result);
         });
       }
-
     });
-
   }
 
   removeChecker(val) {

@@ -71,6 +71,7 @@ import { DateComponent } from './date/date.component';
 import { IntroComponent } from './intro/intro.component';
 import { DevelopperComponent } from './developper/developper.component';
 import { CancelComponent } from './cancel/cancel.component';
+import {GoogleChartsModule} from "angular-google-charts";
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
@@ -160,7 +161,8 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     FormsModule,
     MatSnackBarModule,
     DeviceDetectorModule.forRoot(),
-    MatSortModule
+    MatSortModule,
+    GoogleChartsModule
   ],
   providers: [
     ApiService,TransPipe,SafePipe,ClipboardService,
