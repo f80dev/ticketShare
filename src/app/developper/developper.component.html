@@ -1,15 +1,15 @@
 <div class="mainform">
 
-  <h2>
-    <mat-icon (click)="_location.back()" style="cursor: pointer;">
-      arrow_back_ios
-    </mat-icon>
-    Section développeur
-  </h2>
-
   <app-tuto label="La section développeur est réservé aux organisateurs d'événement souhaitant interfacer KERBERUS avec leur propre système de billeterie"></app-tuto>
   <app-tuto faq="api_key" [delay]="5" label="La clé développeur doit être insérer dans chaque appel d'API en paramètre ou de façon plus sécurisé dans le header de la requête"></app-tuto>
 
+  <button
+    title="Retour"
+    mat-button mat-raised-button mat-icon-button
+    (click)="_location.back()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  &nbsp;
   <button
           class="app-button" mat-button mat-flat-button
          id="cmdCopieCle"
@@ -44,17 +44,18 @@
       </button>
       &nbsp;
       <button class="app-button" mat-button mat-flat-button
-              (click)="open(tab.sample,'_blank')">
+              (click)="open_frame(tab.sample)">
         <div class="bloc-bouton">Démonstration<br>d'utilisation</div>
       </button>
       &nbsp;
       <button class="app-button" mat-button mat-flat-button
-              (click)="open(tab.source,'_blank')">
+              (click)="open_frame(tab.source)">
         <div class="bloc-bouton">Voir le<br>code source</div>
       </button>
 
-      <br><br><br><br>
+      <br><br><br><hr><br>
 
+      <h3>Questions fréquentes</h3>
       <iframe [src]="tab.faq | safe:'resourceUrl'" style="width: 95%;height:400px;border:none;"></iframe>
 
     </mat-tab>

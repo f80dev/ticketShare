@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1589365720355,
+  "timestamp": 1589456115707,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,11 +10,11 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.9574209b862a1e3b0634.js",
+        "https://app.kerberus.tech/main.7fd87f676d3c28af7b52.js",
         "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js",
         "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js",
         "https://app.kerberus.tech/runtime.458556a34b891ea32398.js",
-        "https://app.kerberus.tech/styles.ce2d2ea15bcf85ab19f9.css"
+        "https://app.kerberus.tech/styles.3c9af371256f1e35fffa.css"
       ],
       "patterns": []
     },
@@ -248,12 +248,12 @@
     "https://app.kerberus.tech/assets/store.html": "2404c1b918d7e8eb93ef2737f97a003a497d3720",
     "https://app.kerberus.tech/assets/use.html": "ae3ca52d547e0835919c03ed48da6e9a7853e556",
     "https://app.kerberus.tech/favicon.ico": "d3bb29f413917e45b59439c2456716ecc4ba41c8",
-    "https://app.kerberus.tech/index.html": "42e53a6c5e7f4b28e8ecfce80fbbad6889518bac",
-    "https://app.kerberus.tech/main.9574209b862a1e3b0634.js": "84291863f13619c59f2b0ffec097dd9c11aeeba6",
+    "https://app.kerberus.tech/index.html": "94fe4d23700c4aa74a32beae1d3868f20653927e",
+    "https://app.kerberus.tech/main.7fd87f676d3c28af7b52.js": "cfb92d536d3a0178d6e5f85d7c43e7b498577ea7",
     "https://app.kerberus.tech/polyfills-es5.c50ebb71b464fefe5562.js": "f6468420664dc84d3233ce5bbb8425610e84ab8d",
     "https://app.kerberus.tech/polyfills.e86266e84c0d70106182.js": "c8b1721e71d9b5c8fc6e7fd886b4152944c41743",
     "https://app.kerberus.tech/runtime.458556a34b891ea32398.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://app.kerberus.tech/styles.ce2d2ea15bcf85ab19f9.css": "06f1ba2c90410c5c40d6eddada2f80f19cc10f97"
+    "https://app.kerberus.tech/styles.3c9af371256f1e35fffa.css": "7dfa7e2cdd9d5bd87b3e492800cbaa6e10bd8c04"
   },
   "navigationUrls": [
     {

@@ -1,11 +1,11 @@
 <div class="mainform">
 
-  <div style="width:80%;display: inline-block;text-align: center;" *ngIf="message.length==0">
-          <mat-icon style="cursor: pointer;font-size: x-large;" (click)="_location.back()">keyboard_arrow_left</mat-icon>
-          &nbsp;
-          Annuler {{_event?.name}} ?
-    <br>
-  </div>
+
+  <button class="app-button" mat-button mat-flat-button
+          (click)="_location.back()">
+    Retour
+  </button>
+  <br>
 
   <app-hourglass [message]="message"></app-hourglass>
 

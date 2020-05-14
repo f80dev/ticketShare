@@ -88,4 +88,8 @@ export class DevelopperComponent implements OnInit {
       open(url,"api_sample");
     },1000);
   }
+
+  open_frame(url: string) {
+    open(url,"_blank");
+  }
 }

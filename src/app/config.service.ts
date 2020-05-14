@@ -40,7 +40,7 @@ export class ConfigService {
     this.device={
       isMobile:this.deviceService.isMobile(),
       isTablet:this.deviceService.isTablet(),
-      isDesktopDevice:this.deviceService.isDesktop(),
+      isDesktop:this.deviceService.isDesktop(),
       infos:this.deviceService.getDeviceInfo()
     }
   }
