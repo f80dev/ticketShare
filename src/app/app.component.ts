@@ -193,7 +193,7 @@ export class AppComponent implements OnInit,OnDestroy {
     if(url!=null && url.indexOf("?")>=0) {
       url= url.split("?")[1];
       $$('Récupération des paramètres', url);
-      for(let param of ["command","event","privatekey","address","faq","code","new"]){
+      for(let param of ["command","event","privatekey","address","faq","code","new","debug"]){
         if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
       }
     }
@@ -286,7 +286,6 @@ export class AppComponent implements OnInit,OnDestroy {
         }
       }
 
-
       if(p["privatekey"]!=null){
         $$("Le lancement doit immédiatement importer un wallet existant")
         this.initUser(p["privatekey"]);
@@ -309,6 +308,9 @@ export class AppComponent implements OnInit,OnDestroy {
         if(p["command"]=="dev"){
           this.router.navigate(["developper"]);
         }
+
+        if(!p.hasOwnProperty("debug"))p["debug"]="0";
+        localStorage.setItem("debug",p["debug"]);
 
 
         if(p["command"]=="myevents"){

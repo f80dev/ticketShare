@@ -188,9 +188,8 @@ export function subscribe_socket(vm:any,event_name:string,func=null){
 
 
 
-
 export function $$(s: string, obj: any= null) {
-  if(s!=null && s.startsWith("!")){
+  if((s!=null && s.startsWith("!")) || localStorage.getItem("debug")=="1"){
     debugger;
   }
   const lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
@@ -200,7 +199,7 @@ export function $$(s: string, obj: any= null) {
     obj = '';
   }
   console.log(lg + ' ' + obj);
-  if (lg.indexOf('!!') > -1) {alert(lg); }
+  if (lg.indexOf('!!') > -1  || localStorage.getItem("debug")=="2") {alert(lg); }
 }
 
 

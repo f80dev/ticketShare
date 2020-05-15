@@ -217,9 +217,12 @@ export class StoreComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Statistique de ventes
+   * @param event
+   */
   sales(event:any){
-    this.api.stats(event._id).subscribe((r:any)=>{
-      debugger
       var option={backgroundColor: "none",is3D: true,width:'100%',height:'200px'};
       this.charts=[{
         title:"Ventes",
@@ -229,16 +232,22 @@ export class StoreComponent implements OnInit {
       }];
       if(r.cats.length>0){
         this.charts.push({
-            title:"Ventes par catégorie",
+            title:"Par catégorie",
             type:ChartType.PieChart,
             data:r.cats,
             options: option
           });
       }
+      if(r.statsDates.length>0){
+        this.charts.push({
+          title:"Par Dates",
+          type:ChartType.PieChart,
+          data:r.statsDates,
+          options: option
+        });
+      }
 
       event.preview=false;
-    });
-
   }
 
 
