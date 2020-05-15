@@ -112,7 +112,7 @@
         <mat-tab-group>
           <mat-tab *ngFor="let chart of charts" [label]="chart.title">
             <google-chart
-                          style="background: none;"
+                          style="background: none;overflow: hidden;"
                           [type]="chart.type"
                           [data]="chart.data"
                           [columns]="chart.columnNames"

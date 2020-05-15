@@ -6,7 +6,7 @@
     <app-faq-link faq="authent"></app-faq-link>
   </span><br><br>
   <app-hourglass maxwidth="300px" [message]="wait_message" faq="authent"></app-hourglass>
-  <div *ngIf="config.user.email.length==0">
+  <div *ngIf="config.user?.email?.length==0">
     <span *ngIf="message?.length==0">Vous connecter avec</span><br>
     <div style="width: 100%;text-align: center;">
       <div *ngIf="messageCode.length==0 && showAuthentPlatform">

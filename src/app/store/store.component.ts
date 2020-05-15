@@ -52,14 +52,15 @@ export class StoreComponent implements OnInit {
 
 
   refresh(){
+    if(this.config.user==null)return;
+
     this.message="Chargement des événements disponibles";
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
       this.message="";
       this.events=[];
       this.tags=[];
       for(let e of l_events){
-
-        if((this.filterEvent==null || this.filterEvent==e._id) && this.config.user!=null && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
+        if((this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
           }
@@ -218,18 +219,23 @@ export class StoreComponent implements OnInit {
 
   sales(event:any){
     this.api.stats(event._id).subscribe((r:any)=>{
+      debugger
       var option={backgroundColor: "none",is3D: true,width:'100%',height:'200px'};
       this.charts=[{
         title:"Ventes",
         type:ChartType.PieChart,
         data:r.stats,
         options: option
-      },{
-        title:"Ventes par catégorie",
-        type:ChartType.PieChart,
-        data:r.cats,
-        options: option
       }];
+      if(r.cats.length>0){
+        this.charts.push({
+            title:"Ventes par catégorie",
+            type:ChartType.PieChart,
+            data:r.cats,
+            options: option
+          });
+      }
+
       event.preview=false;
     });
 

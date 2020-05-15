@@ -2,7 +2,7 @@
 
   <app-hourglass [message]="message"></app-hourglass>
 
-<div *ngIf="config.user?._events==null || config.user?._events?.length==0" >
+<div *ngIf="events?.length==0 && message.length==0" >
   <br>Actuellement, vous n'avez pas de billets.
   <br><br>
   <button class="app-button"
@@ -20,6 +20,8 @@
            [cbContent]="config.user?.address"
            [value]="config.user?.address">
   </qr-code>
+  <br>
+  <app-tuto label="Vous amis peuvent vous envoyer des billets sur votre compte en flashant ce code après avoir demandé le transfert des billets sur l'application"></app-tuto>
 </div>
 
 

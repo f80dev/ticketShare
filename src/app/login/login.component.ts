@@ -249,7 +249,10 @@ export class LoginComponent implements OnInit {
       $$("Resultat de l'authentification ",socialUser);
         this.initUser({"email":socialUser.email,"firstname":socialUser.name.split(" ")[0],"photo":socialUser.image});
       },
-      (err)=>{showError(this,err);}
+      (err)=>{
+      this.wait_message="";
+      showError(this,err);
+    }
     );
   }
 }
