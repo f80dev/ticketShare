@@ -78,9 +78,15 @@ export class StoreComponent implements OnInit {
           e["preview"]=true;
           e["showDate"]=false;
 
-          if(e["owner"]==this.config.user.address || e["onstore"]*1000<new Date().getTime())
-            if(e.state.indexOf("cancel")==-1)
+          if(e["owner"]==this.config.user.address || e["onstore"]*1000<new Date().getTime()){
+            if(e.state.indexOf("cancel")==-1){
               this.events.push(e);
+            }
+          }
+
+          if(!e.preview){
+            this.sales(e);
+          }
         }
       }
     },(err)=>{
