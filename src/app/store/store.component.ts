@@ -227,22 +227,22 @@ export class StoreComponent implements OnInit {
       this.charts=[{
         title:"Ventes",
         type:ChartType.PieChart,
-        data:r.stats,
+        data:event.stats,
         options: option
       }];
-      if(r.cats.length>0){
+      if(event.hasOwnProperty("cats") && event.cats.length>0){
         this.charts.push({
             title:"Par catégorie",
             type:ChartType.PieChart,
-            data:r.cats,
+            data:event.cats,
             options: option
           });
       }
-      if(r.statsDates.length>0){
+      if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
         this.charts.push({
           title:"Par Dates",
           type:ChartType.PieChart,
-          data:r.statsDates,
+          data:event.statsDates,
           options: option
         });
       }
