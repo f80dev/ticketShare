@@ -223,35 +223,37 @@ export class StoreComponent implements OnInit {
    * @param event
    */
   sales(event:any){
+    debugger
       var option={
-        backgroundColor: "none",is3D: true,width:'100%',height:'200px',
-        chartArea: {width: '50%'},
-        hAxis: {title: 'Jours',minValue: 0},
-        vAxis: {title: 'Ventes'}
+        backgroundColor: "none",is3D: true,width:'95%',height:'200px',
+        chartArea: {width: '70%'}
       };
       this.charts=[{
         title:"Ventes",
         type:ChartType.PieChart,
         data:event.stats,
+        columnNames:["Catégorie","Nombre de billets"],
         options: option
       }];
       if(event.hasOwnProperty("cats") && event.cats.length>0){
         this.charts.push({
             title:"Par catégorie",
             type:ChartType.PieChart,
+            columnNames:["Prix","Nb de ventes"],
             data:event.cats,
             options: option
           });
       }
       if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
-        var rc=[['Jour', 'Vendus',{ role: 'annotation' }]];
+        var rc=[];
         for(let dt of event.statsDates){
-          rc.push([new Date(dt[0]).toLocaleDateString(),dt[1],dt[1]]);
+          rc.push([new Date(dt[0]).toLocaleDateString(),dt[1]]);
         }
 
         this.charts.push({
           title:"Par Dates",
           type:ChartType.BarChart,
+          columnNames:["Dates","Nb de ventes"],
           data:rc,
           options: option
         });
