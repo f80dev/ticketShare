@@ -72,6 +72,7 @@ import { IntroComponent } from './intro/intro.component';
 import { DevelopperComponent } from './developper/developper.component';
 import { CancelComponent } from './cancel/cancel.component';
 import {GoogleChartsModule} from "angular-google-charts";
+import { StatsComponent } from './stats/stats.component';
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
@@ -116,7 +117,8 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     DateComponent,
     IntroComponent,
     DevelopperComponent,
-    CancelComponent
+    CancelComponent,
+    StatsComponent
   ],
   entryComponents: [
     PromptComponent,

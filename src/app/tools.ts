@@ -7,6 +7,7 @@ import {WebcamUtil} from "ngx-webcam";
 import {MatSnackBar} from "@angular/material";
 import {stringify} from "querystring";
 import {ICreateOrderRequest, ITransactionItem} from 'ngx-paypal';
+import {ChartType} from "angular-google-charts";
 
 export const ADMIN_PASSWORD="hh4271";
 
@@ -184,6 +185,50 @@ export function subscribe_socket(vm:any,event_name:string,func=null){
     $$("Impossibilité d'installer la socket pour "+event_name);
     debugger;
   }
+}
+
+
+export function create_charts(event:any){
+  var return_list:any[]=[];
+  var option={
+    backgroundColor: "none",is3D: true,width:'95%',height:'200px',
+    chartArea: {width: '70%'}
+  };
+  return_list=[{
+    title:"Ventes",
+    type:ChartType.PieChart,
+    data:event.stats,
+    columnNames:["Catégorie","Nombre de billets"],
+    options: option
+  }];
+
+  if(event.hasOwnProperty("cats") && event.cats.length>0){
+    return_list.push({
+      title:"Par catégorie",
+      type:ChartType.PieChart,
+      columnNames:["Prix","Nb de ventes"],
+      data:event.cats,
+      options: option
+    });
+  }
+
+
+  if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
+    var rc=[];
+    for(let dt of event.statsDates){
+      rc.push([new Date(dt[0]).toLocaleDateString(),dt[1]]);
+    }
+
+    return_list.push({
+      title:"Par Dates",
+      type:ChartType.BarChart,
+      columnNames:["Dates","Nb de ventes"],
+      data:rc,
+      options: option
+    });
+  }
+
+  return return_list;
 }
 
 

@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {$$, openGraph, showMessage, subscribe_socket, askForAuthent} from "../tools";
+import {$$, openGraph, showMessage, subscribe_socket, askForAuthent,create_charts} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
 import {ClipboardService} from "ngx-clipboard";
-import {PromptComponent} from "../prompt/prompt.component";
-import {ChartType} from "angular-google-charts";
 
 @Component({
   selector: 'app-store',
@@ -19,7 +17,7 @@ export class StoreComponent implements OnInit {
 
   events=[];
   message="";
-  charts:any[]=[]
+  charts:any[]=[];
   sortField: string="dtCreate=desc";
   filterField: string="";
   onlyMyEvents=false;
@@ -31,7 +29,6 @@ export class StoreComponent implements OnInit {
   constructor(public api:ApiService,
               public config:ConfigService,
               public dialog: MatDialog,
-              private _clipboardService: ClipboardService,
               public socket:Socket,
               public toast:MatSnackBar,
               public route:ActivatedRoute,
@@ -223,42 +220,7 @@ export class StoreComponent implements OnInit {
    * @param event
    */
   sales(event:any){
-    debugger
-      var option={
-        backgroundColor: "none",is3D: true,width:'95%',height:'200px',
-        chartArea: {width: '70%'}
-      };
-      this.charts=[{
-        title:"Ventes",
-        type:ChartType.PieChart,
-        data:event.stats,
-        columnNames:["Catégorie","Nombre de billets"],
-        options: option
-      }];
-      if(event.hasOwnProperty("cats") && event.cats.length>0){
-        this.charts.push({
-            title:"Par catégorie",
-            type:ChartType.PieChart,
-            columnNames:["Prix","Nb de ventes"],
-            data:event.cats,
-            options: option
-          });
-      }
-      if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
-        var rc=[];
-        for(let dt of event.statsDates){
-          rc.push([new Date(dt[0]).toLocaleDateString(),dt[1]]);
-        }
-
-        this.charts.push({
-          title:"Par Dates",
-          type:ChartType.BarChart,
-          columnNames:["Dates","Nb de ventes"],
-          data:rc,
-          options: option
-        });
-      }
-
+      this.charts=create_charts(event);
       event.preview=false;
   }
 

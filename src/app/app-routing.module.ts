@@ -22,6 +22,7 @@ import {SearchComponent} from "./search/search.component";
 import {CguComponent} from "./cgu/cgu.component";
 import {DevelopperComponent} from "./developper/developper.component";
 import {CancelComponent} from "./cancel/cancel.component";
+import {StatsComponent} from "./stats/stats.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'promo', component: PromoComponent},
   { path: 'faqs', component: FaqsComponent},
   { path: 'offer', component: OfferComponent},
+  { path: 'stats', component: StatsComponent},
   { path: 'search', component: SearchComponent},
   { path: 'cancel', component: CancelComponent},
   { path: 'developper', component: DevelopperComponent},

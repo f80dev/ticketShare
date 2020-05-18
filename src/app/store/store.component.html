@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:250px;width: 100%;text-align: center;">
+      <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:300px;width: 100%;text-align: center;">
         <mat-tab-group>
           <mat-tab *ngFor="let chart of charts" [label]="chart.title">
             <google-chart
@@ -119,9 +119,11 @@
             </google-chart>
           </mat-tab>
         </mat-tab-group>
-
-
-
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdStats"
+                (click)="router.navigate(['stats'],{queryParams:{event:event._id}})">
+          Statistiques
+        </button>
       </div>
 
       <!--<div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">-->
