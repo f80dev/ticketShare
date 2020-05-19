@@ -261,10 +261,10 @@ export class AppComponent implements OnInit,OnDestroy {
         if (p["code"] == null) {
           $$("Le code n'a pas été transmit donc on le demande");
           this.dialog.open(PromptComponent, {
-            width: '300px',
+            width: '350px',
             data: {
               title: 'Accès à votre compte',
-              question: "Veuillez renseigner votre code d'accès à 6 chiffres",
+              question: "Bonjour "+p["address"]+". Veuillez renseigner votre code d'accès à 6 chiffres",
               onlyConfirm: false,
               emojis: false,
               type: "number",

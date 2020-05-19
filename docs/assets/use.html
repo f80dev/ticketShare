@@ -67,6 +67,7 @@
   var domain="https://server.f80.fr:6800";
   var idevent=0;
 
+
   function getParam() {
     var vars = {};
     window.location.href.replace(location.hash, '').replace(/[?&]+([^=&]+)=?([^&]*)?/gi, function (m, key, value) { vars[key] = value !== undefined ? value : ''; });
@@ -115,6 +116,8 @@
     }
   }
 
+
+
   /**
    * Fonction appelée pour créer le billet
    */
@@ -134,7 +137,6 @@
     if(idevent==0)idevent=document.getElementById("selectEvent").value;
 
     var url=domain+"/api/use/"+ref+"/"+idevent+"?access_token="+access_token;
-    //url=url.replace("http//","http://").replace("https//","https://");
 
     console.log("Appel de l'api : "+url);
 
