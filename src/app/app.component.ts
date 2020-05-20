@@ -28,36 +28,36 @@ import {fromEvent,Observable,Subscription} from "rxjs";
 })
 export class AppComponent implements OnInit,OnDestroy {
 
-  onlineEvent: Observable<Event>= fromEvent(window, 'online');
-  offlineEvent: Observable<Event>= fromEvent(window, 'offline');
+  onlineEvent: Observable<Event> = fromEvent(window, 'online');
+  offlineEvent: Observable<Event> = fromEvent(window, 'offline');
   subscriptions: Subscription[] = [];
 
   showFiller = false;
-  showIntro=true;
-  message="";
+  showIntro = true;
+  message = "";
   @ViewChild('drawer', {static: false}) drawer: MatSidenav;
-  showZoneOptions=false;
+  showZoneOptions = false;
 
   constructor(public config: ConfigService,
               public dialog: MatDialog,
               public api: ApiService,
-              public toast:MatSnackBar,
-              public socket:Socket,
-              public route:ActivatedRoute,
-              public router:Router,
+              public toast: MatSnackBar,
+              public socket: Socket,
+              public route: ActivatedRoute,
+              public router: Router,
               //@Inject(WEB3) private web3: Web3,
               public _location: Location) {
 
-    config.init(()=>{
-      this.message="Connexion en cours ...";
-      this.api.infos().subscribe((infos:any)=>{
-        this.message="";
-        config.infos_server=infos;
-        this.showZoneOptions=true;
-      },()=>{
-        setTimeout(()=>{
+    config.init(() => {
+      this.message = "Connexion en cours ...";
+      this.api.infos().subscribe((infos: any) => {
+        this.message = "";
+        config.infos_server = infos;
+        this.showZoneOptions = true;
+      }, () => {
+        setTimeout(() => {
           window.location.reload();
-        },2000)
+        }, 2000)
       })
     });
 
@@ -67,10 +67,10 @@ export class AppComponent implements OnInit,OnDestroy {
     this.init_event_for_network_status();
 
     $$("Positionnement des événements")
-    subscribe_socket(this,"refresh_sell");
-    subscribe_socket(this,"refresh_buy",(mes,data)=>{
+    subscribe_socket(this, "refresh_sell");
+    subscribe_socket(this, "refresh_buy", (mes, data) => {
       localStorage.removeItem("dtBuy");
-      this.router.navigate(["myevents"],{queryParams:{event:data.param.event}})
+      this.router.navigate(["myevents"], {queryParams: {event: data.param.event}})
     });
 
     //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
@@ -79,17 +79,17 @@ export class AppComponent implements OnInit,OnDestroy {
     // }
     // const accounts = this.web3.eth.getAccounts();
 
-    setTimeout(()=> {
+    setTimeout(() => {
 
       $$("Initialisation de l'utilisateur, recupération de l'adresse de wallet du device");
 
       const address = localStorage.getItem('address');
-      if(address){
-        $$("Address récupérée sur le device "+address+". On se reconnecte au compte");
-        this.message="Reconnexion a votre compte";
-        this.showZoneOptions=false;
-        this.showIntro=false;
-        this.api.getuser(address,30).subscribe((r: any) => {
+      if (address) {
+        $$("Address récupérée sur le device " + address + ". On se reconnecte au compte");
+        this.message = "Reconnexion a votre compte";
+        this.showZoneOptions = false;
+        this.showIntro = false;
+        this.api.getuser(address, 30).subscribe((r: any) => {
           // if(address!=r.address){
           //   $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
           // }
@@ -97,59 +97,63 @@ export class AppComponent implements OnInit,OnDestroy {
           this.analyse_params((p: any) => {
             this.use_params(p);
           });
-        },(err)=>{
-          if(err.status==400){
-            showMessage(this,"Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
+        }, (err) => {
+          if (err.status == 400) {
+            showMessage(this, "Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
             localStorage.removeItem("address");
-            setTimeout(()=>{window.location.reload();},500);
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
 
           } else
-            showMessage(this,err.message);
+            showMessage(this, err.message);
         });
       } else {
         $$("Première connexion sur ce device");
-        this.analyse_params((p: any) => {this.use_params(p);});
+        this.analyse_params((p: any) => {
+          this.use_params(p);
+        });
       }
-    },200);
+    }, 200);
 
-    setTimeout(()=>{this.onResize();},2000);
-    setTimeout(()=>{this.onResize();},8000);
+    setTimeout(() => {
+      this.onResize();
+    }, 2000);
+    setTimeout(() => {
+      this.onResize();
+    }, 8000);
   }
 
 
-
-  init_event_for_network_status(){
+  init_event_for_network_status() {
     this.subscriptions.push(this.onlineEvent.subscribe(e => {
       this.api.connectionStatus = true;
-      showMessage(this,"Connexion retrouvée")
+      showMessage(this, "Connexion retrouvée")
     }));
 
     this.subscriptions.push(this.offlineEvent.subscribe(e => {
-      this.api.connectionStatus =false;
-      showMessage(this,"Connexion perdue");
+      this.api.connectionStatus = false;
+      showMessage(this, "Connexion perdue");
     }));
   }
-
-
 
 
   /**
    *
    * @param result
    */
-  create_user(info,func,func_error){
-    if(info==null)info="";
-    debugger
+  create_user(info, func, func_error) {
+    if (info == null) info = "";
     this.api.adduser(info).subscribe((r: any) => {
       this.config.user = r;
       localStorage.setItem('address', r.address);
       func(r);
-    },(err)=>{
-      if(err.status==0)
-        showMessage(this,"Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard",0,()=>{
+    }, (err) => {
+      if (err.status == 0)
+        showMessage(this, "Le serveur n'est pas disponible, vérifier votre connexion ou essayer de vous reconnecter plus tard", 0, () => {
           this.initUser();
-        },"Reconnexion");
-      else{
+        }, "Reconnexion");
+      else {
         func_error();
       }
     });
@@ -157,21 +161,22 @@ export class AppComponent implements OnInit,OnDestroy {
 
 
   onResize() {
-    if(this.config.width_screen>=800 && this.drawer!=null)
+    if (this.config.width_screen >= 800 && this.drawer != null)
       this.drawer.open();
   }
 
 
-  linkEmail(func){
-    this.dialog.open(PromptComponent, {width: '250px',
+  linkEmail(func) {
+    this.dialog.open(PromptComponent, {
+      width: '250px',
       data: {
         title: 'Indiquer votre mail',
         question: "Je dois vous envoyez certaines informations confidentielles sur votre nouveu wallet. Pouvez-vous m'indiquer votre mail",
-        result:"hhoareau@gmail.com",
+        result: "hhoareau@gmail.com",
         onlyConfirm: false,
         canEmoji: false,
-        lbl_ok:"Envoyer",
-        lbl_cancel:""
+        lbl_ok: "Envoyer",
+        lbl_cancel: ""
       }
     }).afterClosed().subscribe((result_email) => {
       func(result_email);
@@ -184,162 +189,146 @@ export class AppComponent implements OnInit,OnDestroy {
    * @param func
    * Attention: il est nécéssaire d'ajouter chaque nouveau paramètre à la fonction
    */
-  analyse_params(func,url="") {
-    if(url.length==0)
-      url=this._location.path(); //Ne récupére pas le domaine de l'url
+  analyse_params(func, url = "") {
+    if (url.length == 0)
+      url = this._location.path(); //Ne récupére pas le domaine de l'url
 
     localStorage.setItem('firsturl', url);
-    var params={};
-    if(url!=null && url.indexOf("?")>=0) {
-      url= url.split("?")[1];
+    var params = {};
+    if (url != null && url.indexOf("?") >= 0) {
+      url = url.split("?")[1];
       $$('Récupération des paramètres', url);
-      for(let param of ["command","event","privatekey","address","faq","code","new","debug"]){
-        if(url.indexOf(param+"=")>-1)params[param]=url.split(param+"=")[1].split("&")[0];
+      for (let param of ["command", "event", "privatekey", "address", "faq", "code", "new", "debug"]) {
+        if (url.indexOf(param + "=") > -1) params[param] = url.split(param + "=")[1].split("&")[0];
       }
     }
-    if(this._location.path().indexOf("?")>=0){
+    if (this._location.path().indexOf("?") >= 0) {
       $$('Netoyage de l\'url de lancement:' + this._location.path());
       this._location.replaceState(this._location.path().split('?')[0], '');
       this._location.replaceState(this._location.path().split('/home')[0], '');
     }
 
-    $$("Appel du callback avec params=",params);
-    this.config.params=params;
+    $$("Appel du callback avec params=", params);
+    this.config.params = params;
     func(params);
   }
-
 
 
   /**
    * Chargement du cookier pour restauration du compte du device
    */
-  initUser(text="",func=null):void {
+  initUser(text = "", func = null): void {
     //TODO: tous les paramètres transmis ici doivent être encrypté
     this.message = "Premier lancement sur ce terminal, création d'un nouveau compte";
-    this.showIntro=false;
+    this.showIntro = false;
     $$("Pas de compte connu, Appel de create_user avec text=", text);
     this.create_user(text, (u) => {
       this.message = "";
       this.onResize();
-      this.showIntro=false;
+      this.showIntro = false;
       showMessage(this, "Nouveau compte créé");
-      if(func!=null)func();
-    },(err)=>{
+      if (func != null) func();
+    }, (err) => {
       showMessage(this, "Ce compte existe déjà");
       localStorage.removeItem("address");
     });
   }
 
 
-
-
   /**
    * Cette fonction est appelée pour traiter les paramétres
    * @param p
    */
-  use_params(p:any){
-      //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
+  use_params(p: any) {
+    //ex: http://localhost:4200/?address=0x34b1d8eD88a43a4b85B9aC5550ad4fDDEe3872Aa&code=410518
 
-      if(p["address"]!=null) {
-        $$("Le paramétre address force une connexion sur "+p["address"]);
+    $$("Gestion du drapeau de debug");
+    if (!p.hasOwnProperty("debug")) p["debug"] = "0";
+    localStorage.setItem("debug", p["debug"]);
 
 
-        if (p["code"] != null) {
+    $$("On commence par évaluer la page que l'on va devoir prendre");
+    var redirect = "";
+    if (p.hasOwnProperty("command")) redirect = p["command"];
+    $$("Page de débranchement " + redirect);
+
+    if(p.hasOwnProperty("faq")){
+      $$("Demande d'ouverture des FAQs");
+      this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
+    }
+
+    if (this.config.user == null){
+      $$("On ne connait pas l'utilisateur");
+
+      var info_for_user_create="";
+      if(p.hasOwnProperty("address")) {
+        this.showIntro=false;
+        $$("Le paramétre address force une connexion sur " + p["address"]);
+        info_for_user_create = p["address"];
+
+        if (p.hasOwnProperty("code")) {
           $$("Le lancement doit immédiatement se reconnecter sur " + p["address"]);
           var code = p["code"];
           this.api.checkCode(p["address"], code).subscribe((r) => {
             if (r != null) {
               $$("Le code est vérifié, on initialise l'utilisateur");
               localStorage.setItem("address", r["address"]);
-              this.config.user=r;
-              window.location.reload();
+              this.config.user = r;
             }
           });
-        }
-
-
-        if (p["code"] == null) {
-          $$("Le code n'a pas été transmit donc on le demande");
-          this.dialog.open(PromptComponent, {
-            width: '350px',
-            data: {
-              title: 'Accès à votre compte',
-              question: "Bonjour "+p["address"]+". Veuillez renseigner votre code d'accès à 6 chiffres",
-              onlyConfirm: false,
-              emojis: false,
-              type: "number",
-              lbl_ok: "Valider",
-              lbl_cancel: "Annuler"
-            }
-          }).afterClosed().subscribe((code) => {
-            this.api.checkCode(p["address"], code).subscribe((r) => {
-              if (r != null) {
-                localStorage.setItem("address", r["address"]);
-                this.config.user=r;
-                window.location.reload();
-              }
-            }, (err) => {
-              showMessage(this, "Connexion sur un nouveau compte");
-              this.initUser();
-            });
+        } else {
+          $$("Le code n'a pas été transmit donc on le demande en débranchant vers login");
+          this.initUser("",()=>{
+            this.router.navigate(["login"], {queryParams: {address: p["address"], redirect: redirect,event:p["event"]}});
+            return;
           });
+          // this.dialog.open(PromptComponent, {
+          //   width: '350px',
+          //   data: {
+          //     title: 'Accès à votre compte',
+          //     question: "Bonjour "+p["address"]+". Veuillez renseigner votre code d'accès à 6 chiffres",
+          //     onlyConfirm: false,
+          //     emojis: false,
+          //     type: "number",
+          //     lbl_ok: "Valider",
+          //     lbl_cancel: "Annuler"
+          //   }
+          // }).afterClosed().subscribe((code) => {
+          //   this.api.checkCode(p["address"], code).subscribe((r) => {
+          //     if (r != null) {
+          //       localStorage.setItem("address", r["address"]);
+          //       this.config.user=r;
+          //       window.location.reload();
+          //     }
+          //   }, (err) => {
+          //     showMessage(this, "Connexion sur un nouveau compte");
+          //     this.initUser();
+          //   });
+          // });
         }
       }
+      if(p.hasOwnProperty("privatekey"))info_for_user_create=p["privatekey"]
+      $$("On demande sa fabrication avec le paramètre "+info_for_user_create);
 
-      if(p["privatekey"]!=null){
-        $$("Le lancement doit immédiatement importer un wallet existant")
-        this.initUser(p["privatekey"]);
+      if(info_for_user_create.length>0)this.initUser(info_for_user_create,()=>{});
+
+    } else {
+      $$("On connait l'utilisateur à l'adresse "+this.config.user._id);
+      this.router.navigate([redirect],{queryParams:{event:p["event"]}})
+
+      this.showIntro=false;
+      if(redirect.length==0){
+        $$("On utilise le profil du compte pour orienter vers l'écran le plus pertinent");
+        if(this.config.user.myevents.online>0 || this.config.user.myevents.draft>0)redirect="/store?onlyMyEvents=true";
+        if(this.config.user.mytickets>0)redirect="myevents";
       }
-
-      if(p["command"]=="store"){
-        if(this.config.user==null)this.initUser();
-        this.router.navigate(["store"],{queryParams:{event:p["event"]}});
-      }
-
-      if(this.config.user!=null){
-        $$("Le user est initialiser, on peut prendre en compte certains paramétres")
-        if(p["event"]!=null){
-          $$("on demande une bascule immédiate sur l'événement "+p["event"])
-          if(p["command"]=="validate"){
-            this.router.navigate(["validate"],{queryParams:{event:p["event"]}});
-          }
-        }
-
-        if(p["command"]=="dev"){
-          this.router.navigate(["developper"]);
-        }
-
-        if(!p.hasOwnProperty("debug"))p["debug"]="0";
-        localStorage.setItem("debug",p["debug"]);
+    }
 
 
-        if(p["command"]=="myevents"){
-          this.router.navigate(["myevents"]);
-        }
-      } else {
-        if(p["new"]!=null && localStorage.getItem("address")==null){
-          $$("Le lancement doit immédiatement importer un wallet existant")
-          this.initUser(p["new"]);
-        }
-      }
-
-
-      if(p.hasOwnProperty("faq")){
-        this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
-      }
-
-
-      $$("Aucun paramètre n'a été transmis pour le lancement");
-      if(this.config.user!=null){
-        this.showIntro=false;
-        if(this.config.user.email.length>0){
-          $$("On utilise le profil du compte pour orienter vers l'écran le plus pertinent");
-          if(this.config.user.myevents.online>0 || this.config.user.myevents.draft>0)this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
-          if(this.config.user.mytickets>0)this.router.navigate(["myevents"])
-        }
-      } else {
-        $$("Le user n'a pas été chargé, on affiche le menu d'introduction");
-      }
+    if(redirect.startsWith("/"))
+      this.router.navigateByUrl(redirect);
+    else
+      this.router.navigate([redirect], {queryParams: {event: p["event"]}});
   }
 
 

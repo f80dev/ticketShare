@@ -50,13 +50,16 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
+    debugger;
     $$("Ouverture de la fenêtre de login");
     var params: ParamMap = this.route.snapshot.queryParamMap;
     this.redirect = params.get("redirect");
     if (params.has("message")) this.message = params.get("message");
-    if (params.has("address")) {
-      $$("Récupération de l'adresse " + params.get("address"));
-      localStorage.setItem("lastEmail", params.get("address"));
+    if (params.has("address") || params.has("email")) {
+      var addr=params.get("address");
+      if(!addr)addr=params.get("email");
+      $$("Récupération de l'adresse " + addr);
+      localStorage.setItem("lastEmail", addr);
       this.email_login();
     }
   }

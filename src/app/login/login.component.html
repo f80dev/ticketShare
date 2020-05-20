@@ -90,11 +90,11 @@
   </div>
 
   <!--Zone d'acceuil-->
-  <div *ngIf="config.user.email.length>0">
-    <h1>Bonjour {{config.user.pseudo}}</h1>
+  <div *ngIf="config.user?.email?.length>0">
+    <h1>Bonjour {{config.user?.pseudo}}</h1>
     <br>
-    <img *ngIf="config.user.photo?.length>0"
-         [src]="config.user.photo" width="150px"
+    <img *ngIf="config.user?.photo?.length>0"
+         [src]="config.user?.photo" width="150px"
          height="150px"
          class="image-photo">
     <br><br>

@@ -101,6 +101,7 @@ export class StoreComponent implements OnInit {
 
     if(params.has("event")){
       this.filterEvent=params.get("event");
+      $$("On affiche après filtrage sur l'événement "+this.filterEvent);
       this.api.getevent(this.filterEvent).subscribe((r:any)=>{
         this.showLanding=(r.landing_page.length>0);
         if(this.showLanding)
@@ -111,6 +112,7 @@ export class StoreComponent implements OnInit {
     if(params.has("command") && params.get("command")=='create'){this.openEventEditor();}
 
     if(params.has("onlyMyEvents")){
+      $$("On affiche uniquement les événements du propriétaire");
       this.onlyMyEvents=params.get("onlyMyEvents")=='true';
     }
 

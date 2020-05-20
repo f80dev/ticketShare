@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent},
   { path: 'cancel', component: CancelComponent},
   { path: 'developper', component: DevelopperComponent},
+  { path: 'dev', component: DevelopperComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about/cgu', component: CguComponent},
   { path: 'about', component: AboutComponent},
