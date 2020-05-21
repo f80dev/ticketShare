@@ -45,7 +45,11 @@ export class LoginComponent implements OnInit {
               public config: ConfigService,
               public route: ActivatedRoute,
               private socialAuthService: SocialService) {
-    if(this.config.device.isMobile && this.config.device.infos.brower=="Opera")this.showAuthentPlatform=false;
+    if(this.config.device.isMobile && this.config.device.infos.brower=="Opera"){
+      $$("L'usage des plateformes d'authentification n'est pas compatible avec Opera pour smarphone");
+      this.showAuthentPlatform=false;
+    }
+
   }
 
 
@@ -67,6 +71,7 @@ export class LoginComponent implements OnInit {
 
 
   next() {
+    $$("Traitement de la rediction vers "+this.redirect);
     clearTimeout(this.handle);
     if (this.redirect == null)
       this.router.navigate(["search"]);
@@ -85,13 +90,12 @@ export class LoginComponent implements OnInit {
           else
             this.router.navigate([this.redirect]);
         }
-
       }
-
     }
   }
 
   quit() {
+    $$("On quitte le login");
     this.handle = setTimeout(() => {
       this.next();
     }, 20000);
@@ -182,7 +186,9 @@ export class LoginComponent implements OnInit {
           if(r.address!=this.config.user.address){
             $$("On supprime le compte courant qui avait été créé");
             this.api.deluser(this.config.user.address).subscribe(() => {
-              window.location.reload();
+              this.config.reload_user(()=>{this.quit();},r.address);
+            },(err)=>{
+              showError(this,err);
             });
           } else {
             showMessage(this, "Connexion vérifié, Profil mise a jour");

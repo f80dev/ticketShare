@@ -250,12 +250,8 @@ export class AppComponent implements OnInit,OnDestroy {
     $$("On commence par évaluer la page que l'on va devoir prendre");
     var redirect = "";
     if (p.hasOwnProperty("command")) redirect = p["command"];
-    $$("Page de débranchement " + redirect);
+    $$("Page de débranchement prévue " + redirect);
 
-    if(p.hasOwnProperty("faq")){
-      $$("Demande d'ouverture des FAQs");
-      this.router.navigate(["faqs"],{queryParams:{open:p["faq"]}});
-    }
 
     if (this.config.user == null){
       $$("On ne connait pas l'utilisateur");
@@ -277,62 +273,49 @@ export class AppComponent implements OnInit,OnDestroy {
             }
           });
         } else {
-          $$("Le code n'a pas été transmit donc on le demande en débranchant vers login");
+          $$("L'addresse à été transmise mais pas le code donc on demande un débranchement vers le login après création du user");
+          this.showIntro=false;
           this.initUser("",()=>{
             this.router.navigate(["login"], {queryParams: {address: p["address"], redirect: redirect,event:p["event"]}});
             return;
           });
-          // this.dialog.open(PromptComponent, {
-          //   width: '350px',
-          //   data: {
-          //     title: 'Accès à votre compte',
-          //     question: "Bonjour "+p["address"]+". Veuillez renseigner votre code d'accès à 6 chiffres",
-          //     onlyConfirm: false,
-          //     emojis: false,
-          //     type: "number",
-          //     lbl_ok: "Valider",
-          //     lbl_cancel: "Annuler"
-          //   }
-          // }).afterClosed().subscribe((code) => {
-          //   this.api.checkCode(p["address"], code).subscribe((r) => {
-          //     if (r != null) {
-          //       localStorage.setItem("address", r["address"]);
-          //       this.config.user=r;
-          //       window.location.reload();
-          //     }
-          //   }, (err) => {
-          //     showMessage(this, "Connexion sur un nouveau compte");
-          //     this.initUser();
-          //   });
-          // });
         }
       }
+
       if(p.hasOwnProperty("privatekey"))info_for_user_create=p["privatekey"]
+
       $$("On demande sa fabrication avec le paramètre "+info_for_user_create);
 
-      if(info_for_user_create.length>0)this.initUser(info_for_user_create,()=>{});
+      this.initUser(info_for_user_create,()=>{
+        this.go_redirect(redirect,p);
+      });
 
     } else {
-      $$("On connait l'utilisateur à l'adresse "+this.config.user._id);
-      this.router.navigate([redirect],{queryParams:{event:p["event"]}})
+      $$("On connait l'utilisateur à l'adresse "+this.config.user.address);
 
       this.showIntro=false;
       if(redirect.length==0){
         $$("On utilise le profil du compte pour orienter vers l'écran le plus pertinent");
         if(this.config.user.myevents.online>0 || this.config.user.myevents.draft>0)redirect="/store?onlyMyEvents=true";
         if(this.config.user.mytickets>0)redirect="myevents";
+      } else {
+        $$("On déclenche la rediction vers "+redirect);
+        this.router.navigate([redirect],{queryParams:{event:p["event"]}});
       }
     }
 
-
-    if(redirect.startsWith("/"))
-      this.router.navigateByUrl(redirect);
-    else
-      this.router.navigate([redirect], {queryParams: {event: p["event"]}});
+    this.go_redirect(redirect,p);
   }
 
 
-
+  go_redirect(redirect="",p:any={}){
+    this.showIntro=false;
+    $$("On déclenche la redirection vers "+redirect);
+    if(redirect.startsWith("/"))
+      this.router.navigateByUrl(redirect);
+    else
+      this.router.navigate([redirect], {queryParams: {event: p["event"],open:p["faq"]}});
+  }
 
 
   import_wallet() {

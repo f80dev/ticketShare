@@ -3,7 +3,7 @@ import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {$$, showMessage,isToday,getTime} from "../tools";
+import {$$, showMessage,isToday,getTime,checkLogin} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {A11yModule} from '@angular/cdk/a11y';
 
@@ -45,40 +45,42 @@ export class ValidateComponent implements OnInit {
     this.audio_ok = new Audio();this.audio_ok.src = "/assets/ok.mp3";this.audio_ok.load();
     this.audio_ko = new Audio();this.audio_ko.src = "/assets/ko.mp3";this.audio_ko.load();
 
-
+    $$("Lecture de l'événement")
     var idEvent=localStorage.getItem("validation");
     if(idEvent==null)idEvent=this.config.params["event"];
     if(idEvent==null){
       showMessage(this,"impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
     } else {
-      this.message="Récupération de l'ensemble des ventes";
-      this.api.getevent(idEvent).subscribe((r:any)=>{
-        this._event=r;
-        this.api.getbalances(idEvent,true).subscribe((all:any)=>{
-          this.message="";
-          this.all_tickets=all;
-          if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
-            this.router.navigate(["login"], {
-              queryParams:
-                {
-                  message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
-                  redirect: "/validate?event=" + r._id
-                }
-            });
-          }else{
-            if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
-              showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
-              this.router.navigate(["search"]);
-            } else {
-              localStorage.setItem("validation", r["_id"]);
+      if(checkLogin(this,{redirect:"validate",event:idEvent})){
+        this.message="Récupération de l'ensemble des ventes";
+        this.api.getevent(idEvent).subscribe((r:any)=>{
+          this._event=r;
+          this.api.getbalances(idEvent,true).subscribe((all:any)=>{
+            this.message="";
+            this.all_tickets=all;
+            if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
+              this.router.navigate(["login"], {
+                queryParams:
+                  {
+                    message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
+                    redirect: "/validate?event=" + r._id
+                  }
+              });
+            }else{
+              if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
+                showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
+                this.router.navigate(["search"]);
+              } else {
+                localStorage.setItem("validation", r["_id"]);
+              }
             }
-          }
-        })
-      },(err)=>{
-        showMessage(this,"L'evenement à valider n'existe pas");
-        this.router.navigate(['store']);
-      });
+          })
+        },(err)=>{
+          showMessage(this,"L'evenement à valider n'existe pas");
+          this.router.navigate(['store']);
+        });
+      }
     }
   }
 

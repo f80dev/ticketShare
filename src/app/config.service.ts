@@ -85,7 +85,6 @@ export class ConfigService {
    * @param func
    */
   init(func=null){
-
     this.width_screen=window.innerWidth;
 
     initAvailableCameras((res)=>{
@@ -99,9 +98,15 @@ export class ConfigService {
   }
 
 
-  reload_user(func=null){
+  /**
+   * Permet de changer d'utilisateur
+   * @param func
+   */
+  reload_user(func=null,address=""){
+    if(address.length==0)address=this.user.address;
+    localStorage.setItem("address",address);
     if(this.user!=null){
-      this.api.getuser(this.user.address).subscribe((r:any)=>{
+      this.api.getuser(address).subscribe((r:any)=>{
         if(r!=null)this.user=r;
         if(func)func(r);
       });

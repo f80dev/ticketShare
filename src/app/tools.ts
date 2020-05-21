@@ -738,9 +738,10 @@ export function checkConfig(vm:any) {
   }
 }
 
-export function checkLogin(router: Router, params: any = null) {
-  if (!localStorage.getItem('address')) {
-    router.navigate(['home'], {queryParams: params});
+export function checkLogin(vm,params: any = null,router: Router=null, ) {
+  if (!localStorage.getItem('address') || vm.config.user.email=="") {
+    if(router==null)router=vm.router;
+    router.navigate(['login'], {queryParams: params});
     return false;
   } else {
     return true;

@@ -45,7 +45,7 @@ export class MyeventsComponent implements OnInit {
    */
   ngOnInit() {
     checkConfig(this);
-    checkLogin(this.router);
+    checkLogin(this);
     this.refresh();
     var params:ParamMap=this.route.snapshot.queryParamMap;
     if(params.has("event")){

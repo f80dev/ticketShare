@@ -61,7 +61,7 @@ export class DevelopperComponent implements OnInit {
     var params:ParamMap=this.route.snapshot.queryParamMap;
     var idevent=params.get("event_target");
     if(!idevent)idevent="last";
-    checkLogin(this.router);
+    checkLogin(this);
     if(this.config.user){
       for(let i=0;i<this.tabs.length;i++){
         this.tabs[i].api=this.tabs[i].api.replace("{{userid}}",this.config.user._id).replace("{{eventid}}",idevent);

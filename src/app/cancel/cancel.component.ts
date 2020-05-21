@@ -30,7 +30,7 @@ export class CancelComponent implements OnInit {
   }
 
   ngOnInit() {
-    checkLogin(this.router);
+    checkLogin(this);
     var params:ParamMap=this.route.snapshot.queryParamMap;
     if(this.config.user){
       this.message="Chargement de l'événement";

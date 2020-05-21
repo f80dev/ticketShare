@@ -144,7 +144,7 @@ export class PlacesComponent implements OnInit {
 
   ngOnInit() {
     this.onResize({event:{target:window}});
-    checkLogin(this.router);
+    checkLogin(this);
     this.config.reload_user();
     this.load_tickets(()=>{
       this.selectDate=this._dates[0].toLocaleDateString();
