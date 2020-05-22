@@ -46,8 +46,7 @@ export class ValidateComponent implements OnInit {
     this.audio_ko = new Audio();this.audio_ko.src = "/assets/ko.mp3";this.audio_ko.load();
 
     $$("Lecture de l'événement")
-    var idEvent=localStorage.getItem("validation");
-    if(idEvent==null)idEvent=this.config.params["event"];
+    var idEvent=this.config.params["event"];
     if(idEvent==null){
       showMessage(this,"impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
