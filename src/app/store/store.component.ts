@@ -229,7 +229,6 @@ export class StoreComponent implements OnInit {
 
 
   validate(event:any){
-    localStorage.setItem("validation",event._id);
     this.router.navigate(
       ["validate"],
       {queryParams:{event:event._id}}

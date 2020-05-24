@@ -45,12 +45,14 @@ export class ValidateComponent implements OnInit {
     this.audio_ok = new Audio();this.audio_ok.src = "/assets/ok.mp3";this.audio_ok.load();
     this.audio_ko = new Audio();this.audio_ko.src = "/assets/ko.mp3";this.audio_ko.load();
 
-    $$("Lecture de l'événement")
-    var idEvent=this.config.params["event"];
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    var idEvent=params.get("event");
+    if(idEvent==null)idEvent=this.config.params["event"];
     if(idEvent==null){
       showMessage(this,"impossible de rester dans validate sans indiquer l'événement a valider");
       this.router.navigate(["store"]);
     } else {
+      $$("Lecture de l'événement "+idEvent);
       if(checkLogin(this,{redirect:"validate",event:idEvent})){
         this.message="Récupération de l'ensemble des ventes";
         this.api.getevent(idEvent).subscribe((r:any)=>{
