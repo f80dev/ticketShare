@@ -34,8 +34,6 @@ export class StatsComponent implements OnInit {
 
 
   refresh(){
-    debugger;
-    this.charts=[];
     this.api.stats(this._event._id).subscribe((r:any)=>{
       this._event=r;
       this.charts=create_charts(r);
@@ -49,7 +47,7 @@ export class StatsComponent implements OnInit {
 
     this._event={"_id":this.route.snapshot.queryParamMap.get("event")};
     this.refresh();
-    subscribe_socket(this,"refresh_sell");
+    subscribe_socket(this,"refresh_stats");
   }
 
 }
