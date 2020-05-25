@@ -1,23 +1,24 @@
 <app-ticket width="140px"
-            style="margin:3px;"
+            style="margin:5px;"
             *ngFor="let ticket of tickets"
             align="center"
+            height="240px"
             [title]="(ticket.date*1000) | date:ticket.format_date"
             [subtitle]="ticket.price+'€'"
             [showAction]="ticket.state=='sold'"
             [ticket]="ticket">
 
 
-  <div *ngIf="ticket.state=='sold'">
+  <div *ngIf="ticket.state=='sold'" style="line-height: 95%;">
     <div *ngIf="ticket.seat!=null">
       <mat-icon>event_seat</mat-icon>&nbsp;
       Place {{ticket.seat}}
     </div>
 
-    <div *ngIf="ticket.seat==null">
+    <div *ngIf="ticket.seat==null" style="line-height: 90%;">
       <span style="font-size: xx-small">Référence</span><br>
       #{{ticket.ref}}
-      <div style="font-size: xx-small;line-height: 95%;">
+      <div style="font-size: xx-small;line-height: 95%;margin-top:3px;">
         {{ticket.description}}
       </div>
     </div>

@@ -204,7 +204,7 @@ export function create_charts(event:any){
 
   if(event.hasOwnProperty("cats") && event.cats.length>0){
     return_list.push({
-      title:"Par catégorie",
+      title:"Par catégories",
       type:ChartType.PieChart,
       columnNames:["Prix","Nb de ventes"],
       data:event.cats,
@@ -220,7 +220,7 @@ export function create_charts(event:any){
     }
 
     return_list.push({
-      title:"Par Dates",
+      title:"Par dates",
       type:ChartType.BarChart,
       columnNames:["Dates","Nb de ventes"],
       data:rc,

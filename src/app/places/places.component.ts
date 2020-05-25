@@ -110,7 +110,9 @@ export class PlacesComponent implements OnInit {
       } else {
         this.categories={};
         $$("On parcours l'ensemble des tickets pour identifier les catégories");
-        var currentDate=new Date(this.selectDate.split("/")[1]+"-"+this.selectDate.split("/")[0]+"-"+this.selectDate.split("/")[2]+" "+this.selectTime).getTime()/1000;
+        var s=this.selectDate.split("/")[1]+"-"+this.selectDate.split("/")[0]+"-"+this.selectDate.split("/")[2]+" ";
+        var currentDate=new Date(s+this.selectTime).getTime()/1000;
+        if(!currentDate)currentDate=new Date(this.selectDate+" "+this.selectTime).getTime()/1000;
         for(let _t of this.tickets){
           if(_t.date==currentDate){
             if(this.categories[_t.price]==null)this.categories[_t.price]={"to_buy":0,"buy":0,"tickets":[]};

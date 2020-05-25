@@ -17,7 +17,6 @@ export class StoreComponent implements OnInit {
 
   events=[];
   message="";
-  charts:any[]=[];
   sortField: string="dtCreate=desc";
   filterField: string="";
   onlyMyEvents=false;
@@ -81,10 +80,7 @@ export class StoreComponent implements OnInit {
               this.events.push(e);
             }
           }
-
-          if(!e.preview){
-            this.sales(e);
-          }
+          e.charts=create_charts(e);
         }
       }
     },(err)=>{
@@ -222,7 +218,6 @@ export class StoreComponent implements OnInit {
    * @param event
    */
   sales(event:any){
-      this.charts=create_charts(event);
       event.preview=false;
   }
 
@@ -244,10 +239,7 @@ export class StoreComponent implements OnInit {
 
 
   onpayment(){
-    this.config.reload_user(()=>{
-      this.refresh();
-      }
-    );
+    this.config.reload_user(()=>{this.refresh();});
   }
 
 

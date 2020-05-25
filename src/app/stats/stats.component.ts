@@ -35,9 +35,10 @@ export class StatsComponent implements OnInit {
 
   refresh(){
     var charts=create_charts(this._event);
-    debugger
     this.chart=charts[0];
   }
+
+
 
   ngOnInit() {
     if(!this.route.snapshot.queryParamMap.has("event"))this.router.navigate(["store"]);

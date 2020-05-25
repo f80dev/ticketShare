@@ -109,7 +109,7 @@
 
       <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:300px;width: 100%;text-align: center;">
         <mat-tab-group>
-          <mat-tab *ngFor="let chart of charts" [label]="chart.title">
+          <mat-tab *ngFor="let chart of event.charts" [label]="chart.title">
             <google-chart
                           style="background: none;overflow: hidden;"
                           [type]="chart.type"
@@ -122,7 +122,7 @@
         <button class="app-button" mat-button mat-flat-button
                 name="cmdStats"
                 (click)="router.navigate(['stats'],{queryParams:{event:event._id}})">
-          Statistiques
+          Autres stats
         </button>
       </div>
 

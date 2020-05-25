@@ -1,6 +1,6 @@
-<mat-card class="example-card" [ngStyle]="{'width':width}">
+<mat-card class="example-card" [ngStyle]="{'width':width,'height':height}">
   <mat-card-header>
-    <mat-card-title [ngStyle]="{'font-size':'medium','text-align':align}" *ngIf="title">
+    <mat-card-title [ngStyle]="{'font-size':'small','text-align':align}" *ngIf="title">
       {{title}}
     </mat-card-title>
     <mat-card-subtitle *ngIf="subtitle" [ngStyle]="{'text-align':align}">
@@ -17,7 +17,6 @@
   <mat-card-content>
     <ng-content></ng-content>
   </mat-card-content>
-
 
   <mat-card-actions *ngIf="showAction" style="padding: 0px;margin:0px;">
     <button

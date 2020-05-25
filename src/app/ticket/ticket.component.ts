@@ -14,6 +14,7 @@ export class TicketComponent implements OnInit {
   @Input("title") title=null;
   @Input("subtitle") subtitle=null;
   @Input("width") width="150px";
+  @Input("height") height="270px";
   @Input("align") align="center";
   @Input("transferable") transferable=true;
   @Input("showAction") showAction=true;

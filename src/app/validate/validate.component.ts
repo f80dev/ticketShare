@@ -20,6 +20,7 @@ export class ValidateComponent implements OnInit {
   audio_ko=null;
   lastAddress="";
   tickets=[];
+  hInterval=null;
   all_tickets=[];
   address="";
   _event:any;
@@ -38,6 +39,33 @@ export class ValidateComponent implements OnInit {
 
   }
 
+  
+  getOfflinePlaces(){
+    this.api.getbalances(this._event._id,true).subscribe((all:any)=>{
+      this.message="";
+      this.all_tickets=all;
+      if(this.config.user!=null && this.config.user.email.length==0 && this._event.validate.checkers.indexOf("*")==-1) {
+        this.router.navigate(["login"], {
+          queryParams:
+            {
+              message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
+              redirect: "/validate?event=" + this._event._id
+            }
+        });
+      }else{
+        if (this._event.validate.checkers.indexOf(this.config.user.email) == -1 && this._event.validate.checkers.indexOf(this.config.user.address)==-1) {
+          showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
+          this.router.navigate(["search"]);
+        } else {
+          localStorage.setItem("validation", this._event._id);
+        }
+      }
+    })
+  }
+
+
+
+  
 
   //http://localhost:4200/?event=1582301601&command=validate
   ngOnInit() {
@@ -57,26 +85,8 @@ export class ValidateComponent implements OnInit {
         this.message="Récupération de l'ensemble des ventes";
         this.api.getevent(idEvent).subscribe((r:any)=>{
           this._event=r;
-          this.api.getbalances(idEvent,true).subscribe((all:any)=>{
-            this.message="";
-            this.all_tickets=all;
-            if(this.config.user!=null && this.config.user.email.length==0 && r.validate.checkers.indexOf("*")==-1) {
-              this.router.navigate(["login"], {
-                queryParams:
-                  {
-                    message: "La validation des événements nécessite d'être authentifié et autorisé par l'organisateur",
-                    redirect: "/validate?event=" + r._id
-                  }
-              });
-            }else{
-              if (r.validate.checkers.indexOf(this.config.user.email) == -1 && r.validate.checkers.indexOf(this.config.user.address)==-1) {
-                showMessage(this, "Vous ne faites pas partie de la liste des validateurs autorisés");
-                this.router.navigate(["search"]);
-              } else {
-                localStorage.setItem("validation", r["_id"]);
-              }
-            }
-          })
+          this.getOfflinePlaces();
+          this.hInterval=setInterval(()=>{this.getOfflinePlaces();},3000*60)
         },(err)=>{
           showMessage(this,"L'evenement à valider n'existe pas");
           this.router.navigate(['store']);
@@ -100,6 +110,7 @@ export class ValidateComponent implements OnInit {
         }
       });
     }
+
 
     if(addr.length==42 && this.all_tickets.hasOwnProperty(addr)) {
       $$("L'utilisateur est bien dans la liste des billets, on affiche le résultats")
@@ -220,11 +231,13 @@ export class ValidateComponent implements OnInit {
     var tickets="";
     for(let t of this.to_burn){
       if(t.value!=null)
-        tickets=tickets+t.value+","
+        tickets=tickets+t.value+",";
       else{
         tickets=tickets+t._id+","
       }
     }
+
+
 
     this.api.burn(this.lastAddress,this._event["_id"],tickets.substr(0,tickets.length-1)).subscribe((r:any)=>{
       this.address="";

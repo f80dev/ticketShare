@@ -46,6 +46,7 @@
            height="0"
            *ngFor="let event of events"
            [event]="event">
+
   <div *ngIf="event.state=='cancel' || event.state=='manual_cancel'">
     <span style="color: red;font-size: large;">Evénement annulé</span>
     <br>
