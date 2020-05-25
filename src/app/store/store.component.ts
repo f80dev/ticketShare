@@ -6,7 +6,6 @@ import {$$, openGraph, showMessage, subscribe_socket, askForAuthent,create_chart
 import {Socket} from "ngx-socket-io";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
-import {ClipboardService} from "ngx-clipboard";
 
 @Component({
   selector: 'app-store',

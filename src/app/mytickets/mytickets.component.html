@@ -2,7 +2,7 @@
             style="margin:5px;"
             *ngFor="let ticket of tickets"
             align="center"
-            height="240px"
+            height="80px"
             [title]="(ticket.date*1000) | date:ticket.format_date"
             [subtitle]="ticket.price+'€'"
             [showAction]="ticket.state=='sold'"

@@ -167,8 +167,8 @@ export function subscribe_socket(vm:any,event_name:string,func=null){
   if(vm.socket!=null){
     $$("Installation de la socket pour l'event "+event_name);
     vm.socket.on(event_name, (data: any) => {
-      $$("Réception de "+event_name+" avec data=",data);
       if (data.to == vm.config.user.address || data.to=="*") {
+        $$("Réception de "+event_name+" avec data=",data);
         if(vm.toast!=null && data.message!=null && data.message.length>0)showMessage(vm,data.message);
 
         setTimeout(()=>{
@@ -187,12 +187,13 @@ export function subscribe_socket(vm:any,event_name:string,func=null){
   }
 }
 
-
+//google charts option
 export function create_charts(event:any){
   var return_list:any[]=[];
-  var option={
+  var option:any={
     backgroundColor: "none",is3D: true,width:'95%',height:'200px',
-    chartArea: {width: '70%'}
+    chartArea: {width: '80%'},
+    pieSliceText:"value"
   };
   return_list=[{
     title:"Ventes",
@@ -219,12 +220,15 @@ export function create_charts(event:any){
       rc.push([new Date(dt[0]).toLocaleDateString(),dt[1]]);
     }
 
+    var new_option=JSON.parse(JSON.stringify(option));
+    new_option["legend"]="none";
+    new_option["vAxis"]={title:"Date"};
     return_list.push({
       title:"Par dates",
       type:ChartType.BarChart,
       columnNames:["Dates","Nb de ventes"],
       data:rc,
-      options: option
+      options: new_option
     });
   }
 
@@ -739,7 +743,7 @@ export function checkConfig(vm:any) {
 }
 
 export function checkLogin(vm,params: any = null,router: Router=null, ) {
-  if (!localStorage.getItem('address') || vm.config.user.email=="") {
+  if (!localStorage.getItem('address') || (vm.config.user!=null && vm.config.user.email=="")) {
     if(router==null)router=vm.router;
     router.navigate(['login'], {queryParams: params});
     return false;

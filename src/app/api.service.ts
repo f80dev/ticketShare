@@ -152,6 +152,10 @@ export class ApiService {
     return this._get("stats/"+eventid);
   }
 
+  renew_dev_token(userid){
+    return this._get("renew_dev_token/"+userid);
+  }
+
   getevent(_id:string){
     return this._get("getevent"+"/"+_id);
   }

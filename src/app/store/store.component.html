@@ -181,7 +181,7 @@
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
-                  *ngIf="event.preview"
+                  *ngIf="event.preview && event.tickets.length>0"
                   (click)="sales(event)">
             Ventes
           </button>

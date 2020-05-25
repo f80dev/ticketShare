@@ -1,4 +1,4 @@
-<mat-card class="example-card" [ngStyle]="{'width':width,'height':height}">
+<mat-card class="example-card" [ngStyle]="{'width':width}">
   <mat-card-header>
     <mat-card-title [ngStyle]="{'font-size':'small','text-align':align}" *ngIf="title">
       {{title}}
@@ -14,23 +14,26 @@
        [src]="ticket.visual"
        alt="Visuel du ticket">
 
-  <mat-card-content>
+  <mat-card-content [ngStyle]="{'height':height}">
     <ng-content></ng-content>
   </mat-card-content>
 
   <mat-card-actions *ngIf="showAction" style="padding: 0px;margin:0px;">
-    <button
-            *ngIf="transferable"
-            mat-button mat-flat-button mat-icon-button
-            (click)="openShare(ticket)">
-      <mat-icon>card_giftcard</mat-icon>
-    </button>
+    <div style="margin-bottom:3px;width:100%;text-align: center;">
+      <button
+        *ngIf="transferable"
+        mat-button mat-flat-button mat-icon-button
+        (click)="openShare(ticket)">
+        <mat-icon>card_giftcard</mat-icon>
+      </button>
 
-    <button mat-button mat-flat-button
-            *ngIf="config?.infos_server.islocal && ticket.address?.length>0"
-            mat-icon-button ngxClipboard [cbContent]="ticket.address">
-      <mat-icon>code</mat-icon>
-    </button>
+      <button mat-button mat-flat-button
+              *ngIf="config?.infos_server.islocal && ticket.address?.length>0"
+              mat-icon-button ngxClipboard [cbContent]="ticket.address">
+        <mat-icon>code</mat-icon>
+      </button>
+
+    </div>
 
   </mat-card-actions>
 </mat-card>

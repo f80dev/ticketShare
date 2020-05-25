@@ -6,6 +6,7 @@ import {ApiService} from "../api.service";
 import {checkLogin, showMessage} from "../tools";
 import {Location} from "@angular/common";
 import {ClipboardService} from "ngx-clipboard";
+import {PromptComponent} from "../prompt/prompt.component";
 
 @Component({
   selector: 'app-developper',
@@ -19,16 +20,16 @@ export class DevelopperComponent implements OnInit {
         label:"Créer un événement",
         api:"add_event/fnac",
         api_name:"add_event",
-        intro:"Publiez un événement sur la base d'un modèle ou d'un fichier de configuration",
-        sample:"https://app.kerberus.tech/assets/store.html?idevent={{eventid}}&faq",
-        source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
+        intro:"Enregistrez votre événement en vue de sécuriser les billets",
+        sample:"",
+        source:"",
         faq:"https://server.f80.fr:6800/api/faqs/api_build_event?format=html"
       },
       {
         label:"Sécuriser vos billets",
         api:"add_ticket/{{eventid}}/paul.dudule@gmail.com/TKT_cat1_05/10",
         api_name:"add_ticket",
-        intro:"Ajouter un ticket à la blockchain",
+        intro:"sécuriser un billet de votre billeterie en l'envoyant dans la blockchaine",
         sample:"https://app.kerberus.tech/assets/store.html?idevent={{eventid}}&faq",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
         faq:"https://server.f80.fr:6800/api/faqs/api_add_ticket?format=html"
@@ -48,6 +49,7 @@ export class DevelopperComponent implements OnInit {
   constructor(
     public config:ConfigService,
     public router:Router,
+    public dialog: MatDialog,
     public toast:MatSnackBar,
     public clipboard:ClipboardService,
     public route:ActivatedRoute,
@@ -91,5 +93,25 @@ export class DevelopperComponent implements OnInit {
 
   open_frame(url: string) {
     open(url,"_blank");
+  }
+
+  renew_key() {
+    this.dialog.open(PromptComponent, {width: '250px',
+      data: {
+        title: 'Renouveller la clé développeur',
+        question: "Attention le renouvellement de votre clé développeur impliquer de mettre à jour le code de votre billeterie avec la nouvelle clé. Etes vous sûr de vouloir renouveller votre clé ?",
+        result:"",
+        onlyConfirm: true,
+        canEmoji: false,
+        lbl_ok:"Renouveller",
+        lbl_cancel:"Annuler"
+      }
+    }).afterClosed().subscribe((result) => {
+      if(result=="oui"){
+        this.api.renew_dev_token(this.config.user._id).subscribe(()=>{
+
+        });
+      }
+    });
   }
 }

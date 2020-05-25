@@ -2,7 +2,7 @@
 
   <app-hourglass [message]="message"></app-hourglass>
 
-<div *ngIf="events?.length==0 && message.length==0" >
+<div *ngIf="events?.length==0 && message.length==0" style="display: inline-block;width:80%;">
   <br>Actuellement, vous n'avez pas de billets.
   <br><br>
   <button class="app-button"
@@ -12,7 +12,11 @@
   </button>
 
   <br><br><br>
-  en recevoir directement<br><br>
+  <p>
+    Vous pouvez en recevoir directement
+    en montrant ce code bar à l'expéditeur
+  </p>
+  <br>
   <qr-code [size]="150"
            style="display: inline-block;vertical-align: middle;"
            title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
