@@ -20,9 +20,24 @@
   <div *ngIf="selTemplate==null && message.length==0">
     Sélectionner un modèle d'événement
     <app-faq-link faq="build_event"></app-faq-link>
-    <br><br>
+    <br>
+    <br>
+    <!--Zone de filtre des templates-->
+    <div style="width: 100%;">
+      <mat-form-field style="width: 150px;" *ngIf="cats?.length>1">
+        <mat-label>Type d'événement</mat-label>
+        <mat-select [(value)]="selectCategorie">
+          <mat-option *ngFor="let cat of cats" [value]="cat">
+            {{cat}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <br>
+
+    <br>
     <div style="display: flex;flex-wrap: wrap;width:100%;justify-content: center;">
-      <div *ngFor="let template of templates"
+      <div *ngFor="let template of templates | filter:['category',selectCategorie]"
            name="template"
            style="cursor:pointer;font-size:x-small;width:150px;height:250px;text-align: center;margin: 15px;"
            (click)="openModele(template)">

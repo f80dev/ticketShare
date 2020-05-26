@@ -229,11 +229,9 @@
 
       <br>
 
-
-
-
+      
       <!--Rechargement-->
-      <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='draft'">
+      <div style="text-align: center;width: 100%;" *ngIf="event.state=='draft'">
         <table style="width:100%;text-align: left;">
           <tr *ngIf="event.tickets?.length>0 && event.store==null">
             <td>Dates</td>
@@ -246,7 +244,7 @@
           </tr>
           <tr *ngIf="event?.store==null">
             <td title="Nombre de billets liés à l'événement">Nombre de billets</td>
-            <td>{{event.tickets.length}}</td>
+            <td>{{event.tickets.length}}&nbsp;<small>(pour l'ensemble des dates)</small></td>
           </tr>
           <tr *ngIf="event.cost>0" >
             <td title="Les frais de mise en ligne sont principalement calculés en fonction du nombre de billets à émèttre et de votre offre">

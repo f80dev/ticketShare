@@ -196,7 +196,7 @@ export function create_charts(event:any){
     pieSliceText:"value"
   };
   return_list=[{
-    title:"Ventes",
+    title:"Status des billets",
     type:ChartType.PieChart,
     data:event.stats,
     columnNames:["Catégorie","Nombre de billets"],
@@ -205,14 +205,13 @@ export function create_charts(event:any){
 
   if(event.hasOwnProperty("cats") && event.cats.length>0){
     return_list.push({
-      title:"Par catégories",
+      title:"Catégories vendues",
       type:ChartType.PieChart,
       columnNames:["Prix","Nb de ventes"],
       data:event.cats,
       options: option
     });
   }
-
 
   if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
     var rc=[];
@@ -224,7 +223,7 @@ export function create_charts(event:any){
     new_option["legend"]="none";
     new_option["vAxis"]={title:"Date"};
     return_list.push({
-      title:"Par dates",
+      title:"Ventes par dates",
       type:ChartType.BarChart,
       columnNames:["Dates","Nb de ventes"],
       data:rc,

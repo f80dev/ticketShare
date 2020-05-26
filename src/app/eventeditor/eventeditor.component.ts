@@ -13,6 +13,7 @@ import {MatSnackBar} from "@angular/material";
 })
 export class EventeditorComponent implements OnInit {
 
+  selectCategorie="divers";
   message="";
   showCode=false;
   showRefund=false;
@@ -21,6 +22,7 @@ export class EventeditorComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'yaml'};
   code:string="";
   private showPublish: boolean=false;
+  cats=[];
 
   select_prop:any={};
   properties:string[]=[];
@@ -42,6 +44,10 @@ export class EventeditorComponent implements OnInit {
     this.message="Chargement des modèles";
     this.api.gettemplates().subscribe((r:any[])=>{
       this.templates=r;
+      this.cats=[];
+      for(let _t of r){
+        if(this.cats.indexOf(_t.category)==-1)this.cats.push(_t.category);
+      }
       this.message="";
     });
 
