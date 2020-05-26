@@ -79,9 +79,6 @@
                         [subtitle]="categories[cat]?.description"
                         [showAction]="false"
             >
-
-
-
               <mat-form-field style="width: 100px;line-height: 90%;" *ngIf="categories[cat].to_buy>0">
                 <mat-label>Acheter</mat-label>
                 <mat-select [(value)]="categories[cat].buy" (valueChange)="update_total($event)">

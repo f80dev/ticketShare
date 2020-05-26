@@ -1,11 +1,6 @@
 <div class="mainform">
   <br>
-  <button class="app-button" mat-button mat-flat-button
-          name="cmdBack"
-          (click)="_location.back()">
-    Retour
-  </button>
-  <br>
+  <app-tuto label="Vous avez accès ici aux statistiques de ventes et validation de votre événement en temps réel"></app-tuto>
   <br>
   <div *ngFor="let chart of charts" style="width:100%;">
     <google-chart
@@ -16,5 +11,13 @@
       [options]="chart.options">
     </google-chart>
   </div>
+
+  <br><hr><br>
+
+  <button class="app-button" mat-button mat-flat-button
+          name="cmdBack"
+          (click)="_location.back()">
+    Retour
+  </button>
 
 </div>

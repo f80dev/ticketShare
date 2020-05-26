@@ -217,7 +217,7 @@ export function create_charts(event:any){
   if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
     var rc=[];
     for(let dt of event.statsDates){
-      rc.push([new Date(dt[0]).toLocaleDateString(),dt[1]]);
+      rc.push([new Date(dt[0]).toLocaleDateString().split("/")[0],dt[1]]);
     }
 
     var new_option=JSON.parse(JSON.stringify(option));
