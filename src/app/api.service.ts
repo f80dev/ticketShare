@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { timeout} from 'rxjs/operators';
 import {api,ADMIN_PASSWORD} from './tools';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,16 @@ export class ApiService {
   }
 
   _post(url,body,_timeoutInSec=60){
-    return this.http.post(api(url),body).pipe(timeout(_timeoutInSec*1000));
+    let token="demo_token";
+    if(this.user)token=this.user.access_token;
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    };
+
+    return this.http.post(api(url),body,httpOptions).pipe(timeout(_timeoutInSec*1000));
   }
 
   raz() {
@@ -133,6 +143,10 @@ export class ApiService {
 
   can_delevent(id: string) {
     return this._get("candelevent/"+id);
+  }
+
+  add_ticket(id: string,data:any,access_token="demo_token",preview=false) {
+    return this._post("add_ticket/"+id+"?access_token="+access_token+"&preview="+preview,data);
   }
 
   sendevent(id: string,to:string) {

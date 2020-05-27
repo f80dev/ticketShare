@@ -229,7 +229,7 @@
 
       <br>
 
-      
+
       <!--Rechargement-->
       <div style="text-align: center;width: 100%;" *ngIf="event.state=='draft'">
         <table style="width:100%;text-align: left;">
@@ -280,6 +280,12 @@
                 *ngIf="event.store"
                 (click)="router.navigate(['developper'],{queryParams:{event_target:event._id}})">
           Développeur
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="event.store"
+                (click)="router.navigate(['importer'],{queryParams:{event:event._id}})">
+          <div class="bloc-bouton">Importer<br>des tickets</div>
         </button>
 
         <button class="app-button" mat-button mat-flat-button

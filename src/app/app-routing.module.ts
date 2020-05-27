@@ -23,6 +23,7 @@ import {CguComponent} from "./cgu/cgu.component";
 import {DevelopperComponent} from "./developper/developper.component";
 import {CancelComponent} from "./cancel/cancel.component";
 import {StatsComponent} from "./stats/stats.component";
+import {ImporterComponent} from "./importer/importer.component";
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent},
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'cancel', component: CancelComponent},
   { path: 'developper', component: DevelopperComponent},
   { path: 'dev', component: DevelopperComponent},
+  { path: 'importer', component: ImporterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'about/cgu', component: CguComponent},
   { path: 'about', component: AboutComponent},
