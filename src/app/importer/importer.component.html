@@ -1,0 +1,43 @@
+<div class="mainform">
+
+  <app-hourglass [message]="message"></app-hourglass>
+
+  <div *ngIf="message.length==0">
+
+    <app-faq-link faq="import_tickets" *ngIf="tickets.length==0">Quel format utiliser ?</app-faq-link>
+    <br><br>
+
+    <div *ngIf="tickets.length==0">
+      <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="import($event)" accept=".csv"/>
+      <button mat-raised-button mat-button class="app-button" (click)="csvInput.click()">Importer des billets</button>
+    </div>
+
+    <div *ngIf="tickets.length>0" style="width:100%;text-align: center;">
+      Importation réussi. Vérifier les billets:<br><br>
+      <table style="border: none;display: inline-block;">
+        <tr style="background-color: lightgrey;">
+          <td>Référence</td><td>Titulaire</td><td>Prix</td><td>Dates</td>
+        </tr>
+        <tr *ngFor="let t of tickets" style="padding:5px;font-size: medium;">
+          <td>{{t.ref}}</td><td>{{t.owner}}</td><td>{{t.price}}€</td><td>{{t.date | date:'dd/MM HH:mm'}}</td>
+        </tr>
+      </table>
+
+      <br><br>
+
+      <button
+        class="app-button" mat-button mat-flat-button
+        id="cmdBuild" *ngIf="tickets.length>0"
+        (click)="build_tickets()">
+        <div class="bloc-bouton">Fabriquer<br>les billets</div>
+      </button>
+
+    </div>
+
+    <br><br>
+
+
+  </div>
+
+
+</div>
