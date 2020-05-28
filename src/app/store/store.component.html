@@ -181,7 +181,7 @@
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
-                  *ngIf="event.preview && event.tickets.length>0"
+                  *ngIf="event.preview"
                   (click)="sales(event)">
             Ventes
           </button>
@@ -213,6 +213,11 @@
 
         </div>
 
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="event.store"
+                (click)="router.navigate(['importer'],{queryParams:{event:event._id}})">
+          <div class="bloc-bouton">Importer<br>des tickets</div>
+        </button>
 
         <button class="app-button" mat-button mat-flat-button
                 *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
@@ -280,12 +285,6 @@
                 *ngIf="event.store"
                 (click)="router.navigate(['developper'],{queryParams:{event_target:event._id}})">
           Développeur
-        </button>
-
-        <button class="app-button" mat-button mat-flat-button
-                *ngIf="event.store"
-                (click)="router.navigate(['importer'],{queryParams:{event:event._id}})">
-          <div class="bloc-bouton">Importer<br>des tickets</div>
         </button>
 
         <button class="app-button" mat-button mat-flat-button
