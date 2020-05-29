@@ -166,7 +166,7 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     MatSnackBarModule,
     DeviceDetectorModule.forRoot(),
     MatSortModule,
-    GoogleChartsModule
+    GoogleChartsModule.forRoot({})
   ],
   providers: [
     ApiService,TransPipe,SafePipe,ClipboardService,

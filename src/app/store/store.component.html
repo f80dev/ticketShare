@@ -119,11 +119,7 @@
             </google-chart>
           </mat-tab>
         </mat-tab-group>
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdStats"
-                (click)="router.navigate(['stats'],{queryParams:{event:event._id}})">
-          Autres stats
-        </button>
+
       </div>
 
       <!--<div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">-->
@@ -180,6 +176,13 @@
           </button>
 
           <button class="app-button" mat-button mat-flat-button
+                  name="cmdStats"
+                  *ngIf="!event.preview"
+                  (click)="router.navigate(['stats'],{queryParams:{event:event._id}})">
+            Statistiques
+          </button>
+
+          <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
                   *ngIf="event.preview"
                   (click)="sales(event)">
@@ -205,7 +208,7 @@
 
           <button class="app-button"
                   mat-button mat-flat-button
-                  *ngIf="event.store==null"
+                  *ngIf="event.store==null && event.preview"
                   name="cmdCancelEvent"
                   (click)="cancel(event)">
             Annuler
