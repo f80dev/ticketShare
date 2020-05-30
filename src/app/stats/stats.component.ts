@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {NgNavigatorShareService} from "ng-navigator-share";
-import {ClipboardService} from "ngx-clipboard";
 import {ApiService} from "../api.service";
 import {Location} from "@angular/common";
 import {create_charts, subscribe_socket} from "../tools";
