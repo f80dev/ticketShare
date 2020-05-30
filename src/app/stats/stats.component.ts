@@ -17,6 +17,8 @@ import {Socket} from "ngx-socket-io";
 export class StatsComponent implements OnInit {
   _event: any;
   charts:any[]=[];
+  message="";
+
 
   constructor(
     public socket:Socket,
@@ -32,8 +34,11 @@ export class StatsComponent implements OnInit {
 
 
   refresh(){
+    this.charts=[];
+    this.message="Chargement des statistiques ...";
     this.api.stats(this._event._id).subscribe((r:any)=>{
       this._event=r;
+      this.message="";
       this.charts=create_charts(r);
     });
   }

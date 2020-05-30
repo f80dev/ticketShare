@@ -189,9 +189,20 @@ h2 {
 }
 
 .app-table {
-  padding:10px;
-  border: none;
+  font-size: small;
+  border-collapse: collapse;
   border-color: lightgrey;
-  width:90%;
   text-align: center;
+  display: inline-block;
 }
+
+th {
+  background-color: lightgrey;
+}
+
+table, th, td {
+  border: none;
+  padding:4px;
+}
+
+

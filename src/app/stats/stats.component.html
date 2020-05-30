@@ -3,31 +3,33 @@
   <app-tuto label="Vous avez accès ici aux statistiques de ventes et validation de votre événement en temps réel"></app-tuto>
   <br>
 
+  <app-hourglass [message]="message"></app-hourglass>
 
-  <table class="app-table">
-    <tr>
-      <th>Catégories</th><th>Billets</th>
-    </tr>
-    <tr *ngFor="let r of charts[0].data">
-      <td>{{r[0]}}</td><td>{{r[1]}}</td>
-    </tr>
-  </table>
-  <br><br>
+  <div *ngIf="charts.length>0" style="max-width: 1200px;width:100%;display: inline-block;text-align: center;">
+    <table class="app-table">
+      <tr>
+        <th>Catégories</th><th>Billets</th>
+      </tr>
+      <tr *ngFor="let r of charts[0].data">
+        <td>{{r[0]}}</td><td>{{r[1]}}</td>
+      </tr>
+    </table>
+    <br><br>
 
+    <div *ngFor="let chart of charts" style="width:100%;">
+      <google-chart
+        style="width:100%;background: none;"
+        [type]="chart.type"
+        [title]="chart.title"
+        [data]="chart.data"
+        [columns]="chart.columnNames"
+        [options]="chart.options">
+      </google-chart>
+    </div>
 
-
-  <div *ngFor="let chart of charts" style="width:100%;">
-    <google-chart
-      style="width:100%;background: none;"
-      [type]="chart.type"
-      [title]="chart.title"
-      [data]="chart.data"
-      [columns]="chart.columnNames"
-      [options]="chart.options">
-    </google-chart>
+    <br><hr><br>
   </div>
 
-  <br><hr><br>
 
   <button class="app-button" mat-button mat-flat-button
           name="cmdBack"
