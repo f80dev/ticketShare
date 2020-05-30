@@ -70,10 +70,10 @@ import { DateComponent } from './date/date.component';
 import { IntroComponent } from './intro/intro.component';
 import { DevelopperComponent } from './developper/developper.component';
 import { CancelComponent } from './cancel/cancel.component';
-import {GoogleChartsModule} from "angular-google-charts";
 import { StatsComponent } from './stats/stats.component';
 import { ImporterComponent } from './importer/importer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
@@ -166,7 +166,7 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     MatSnackBarModule,
     DeviceDetectorModule.forRoot(),
     MatSortModule,
-    GoogleChartsModule.forRoot({})
+    GoogleChartsModule
   ],
   providers: [
     ApiService,TransPipe,SafePipe,ClipboardService,

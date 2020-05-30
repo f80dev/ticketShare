@@ -5,9 +5,9 @@ import {
 } from "ngx-social-button";
 import {WebcamUtil} from "ngx-webcam";
 import {MatSnackBar} from "@angular/material";
-import {stringify} from "querystring";
-import {ICreateOrderRequest, ITransactionItem} from 'ngx-paypal';
 import {ChartType} from "angular-google-charts";
+
+
 
 export const ADMIN_PASSWORD="hh4271";
 
@@ -234,6 +234,7 @@ export function create_charts(event:any){
 
   return return_list;
 }
+
 
 
 
