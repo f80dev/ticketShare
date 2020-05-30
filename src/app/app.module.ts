@@ -22,7 +22,6 @@ import {
   MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
-import {HttpClientModule} from "@angular/common/http";
 import {ImageCropperModule} from "ngx-image-cropper";
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {FlipModule} from "ngx-flip";
@@ -74,6 +73,7 @@ import { CancelComponent } from './cancel/cancel.component';
 import {GoogleChartsModule} from "angular-google-charts";
 import { StatsComponent } from './stats/stats.component';
 import { ImporterComponent } from './importer/importer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 

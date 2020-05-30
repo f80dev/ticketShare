@@ -19,8 +19,6 @@ export class StatsComponent implements OnInit {
   charts:any[]=[];
 
   constructor(
-    public ngNavigatorShareService: NgNavigatorShareService,
-    public _clipboardService:ClipboardService,
     public socket:Socket,
     public api:ApiService,
     public _location:Location,

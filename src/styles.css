@@ -161,4 +161,11 @@ h2 {
 .faq-content {
   padding-left: 20px; }
 
+.app-table {
+  padding: 10px;
+  border: none;
+  border-color: lightgrey;
+  width: 90%;
+  text-align: center; }
+
 /*# sourceMappingURL=styles.css.map */

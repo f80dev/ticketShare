@@ -2,6 +2,20 @@
   <br>
   <app-tuto label="Vous avez accès ici aux statistiques de ventes et validation de votre événement en temps réel"></app-tuto>
   <br>
+
+
+  <table class="app-table">
+    <tr>
+      <th>Catégories</th><th>Billets</th>
+    </tr>
+    <tr *ngFor="let r of charts[0].data">
+      <td>{{r[0]}}</td><td>{{r[1]}}</td>
+    </tr>
+  </table>
+  <br><br>
+
+
+
   <div *ngFor="let chart of charts" style="width:100%;">
     <google-chart
       style="width:100%;background: none;"
