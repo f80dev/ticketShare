@@ -294,8 +294,9 @@ export class AppComponent implements OnInit,OnDestroy {
       $$("On connait l'utilisateur à l'adresse "+this.config.user.address);
 
       this.showIntro=false;
-      if(redirect.length==0){
+      if(!redirect || redirect.length==0){
         $$("On utilise le profil du compte pour orienter vers l'écran le plus pertinent");
+        redirect="store";
         if(this.config.user.myevents.online>0 || this.config.user.myevents.draft>0)redirect="/store?onlyMyEvents=true";
         if(this.config.user.mytickets>0)redirect="myevents";
       } else {
