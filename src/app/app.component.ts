@@ -198,7 +198,7 @@ export class AppComponent implements OnInit,OnDestroy {
     if (url != null && url.indexOf("?") >= 0) {
       url = url.split("?")[1];
       $$('Récupération des paramètres', url);
-      for (let param of ["command", "event", "privatekey", "address", "faq", "code", "new", "debug"]) {
+      for (let param of ["command", "event", "privatekey", "address", "faq", "code", "new", "debug","onlyMyEvents"]) {
         if (url.indexOf(param + "=") > -1) params[param] = url.split(param + "=")[1].split("&")[0];
       }
     }

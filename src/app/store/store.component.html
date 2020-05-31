@@ -140,9 +140,7 @@
       <!--</div>-->
 
 
-
-
-      <div style="margin-top: 10px;text-align: center;width: 100%;" *ngIf="event.state=='online'">
+      <div style="margin-top: 10px;text-align: center;width: 100%;display: inline-block;" *ngIf="event.state=='online'">
         <div *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1">
           <button class="app-button" mat-button mat-flat-button
                   name="cmdBuy"
@@ -213,7 +211,7 @@
                   name="cmdCancelEvent"
                   title="Annuler un evénément"
                   (click)="cancel(event)">
-            <mat-icon>cancel</mat-icon>
+            <mat-icon>clear</mat-icon>
           </button>
 
         </div>
@@ -225,13 +223,19 @@
           <mat-icon>cloud_upload</mat-icon>
         </button>
 
-        <button class="app-button" mat-button mat-flat-button
-                *ngIf="event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1"
-                name="cmdValidate"
-                (click)="validate(event)">
-          <div class="bloc-bouton">Gérer les<br>entrées</div>
-        </button>
+
       </div>
+
+      <button class="app-button" mat-button mat-flat-button
+              *ngIf="(event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1) &&
+               (event.state=='online' || event.state=='onprogress')
+              "
+              name="cmdValidate"
+              (click)="validate(event)">
+        <div class="bloc-bouton">Contrôler<br>les entrées</div>
+      </button>
+
+
 
       <app-hourglass [message]="event.treatment"
                      [canCancel]="true"

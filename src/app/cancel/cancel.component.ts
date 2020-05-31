@@ -5,7 +5,7 @@ import {MatSnackBar} from "@angular/material";
 import {ClipboardService} from "ngx-clipboard";
 import {Location} from "@angular/common";
 import {ApiService} from "../api.service";
-import {checkLogin, showMessage} from "../tools";
+import {checkLogin, showMessage, $$} from "../tools";
 
 @Component({
   selector: 'app-cancel',
@@ -32,13 +32,14 @@ export class CancelComponent implements OnInit {
   ngOnInit() {
     checkLogin(this);
     var params:ParamMap=this.route.snapshot.queryParamMap;
-    if(this.config.user){
-      this.message="Chargement de l'événement";
-      this.config.reload_user(()=>{
-        this.message="";
-        this._event=this.config.user._events[params.get("idevent")];
-      })
-    }
+    this.message="Chargement de l'événement";
+    $$("Récupération de l'utilisateur");
+    this.config.reload_user(()=>{
+      this.message="";
+      this._event=this.config.user._events[params.get("idevent")];
+      if(!this._event.stats.hasOwnProperty("reserved"))this._event.stats["reserved"]=0;
+      if(!this._event.stats.hasOwnProperty("sold"))this._event.stats["sold"]=0;
+    })
   }
 
   cancel_event(auto){

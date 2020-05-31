@@ -2,7 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {$$, openGraph, showMessage, subscribe_socket, askForAuthent,create_charts} from "../tools";
+import {
+  $$,
+  openGraph,
+  showMessage,
+  subscribe_socket,
+  askForAuthent,
+  create_charts,
+  checkLogin,
+  checkConfig
+} from "../tools";
 import {Socket} from "ngx-socket-io";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {environment} from '../../environments/environment';
@@ -47,9 +56,9 @@ export class StoreComponent implements OnInit {
 
 
   refresh(){
-    if(this.config.user==null)return;
-
+    checkConfig(this);
     this.message="Chargement des événements disponibles";
+    $$("Récupération des événements");
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
       this.message="";
       this.events=[];
@@ -83,6 +92,7 @@ export class StoreComponent implements OnInit {
         }
       }
     },(err)=>{
+
       this.message="";
       showMessage(this,"Problème technique, vérifier votre connexion",0,()=>{this.refresh()},"Réessayer ?");
     });
