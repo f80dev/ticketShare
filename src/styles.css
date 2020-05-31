@@ -52,12 +52,16 @@ body {
   cursor: pointer; }
 
 .app-button {
-  background-color: lightgrey;
   margin: 3px !important;
-  min-width: 100px !important; }
+  min-width: 100px !important;
+  background-color: rgba(46, 138, 255, 0.31); }
+
+.app-logo-button {
+  margin: 3px !important;
+  background-color: rgba(46, 138, 255, 0.31); }
 
 .login-button {
-  background-color: lightgrey;
+  background-color: rgba(46, 138, 255, 0.31);
   margin: 3px !important;
   width: 150px; }
 

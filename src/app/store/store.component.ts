@@ -146,7 +146,7 @@ export class StoreComponent implements OnInit {
    */
   buy(_evt: any) {
     var url_redirect="/places?event="+_evt._id+"&etherprice="+_evt.etherprice;
-    if(_evt.hasOwnProperty("store")){
+    if(_evt.hasOwnProperty("stores")){
       url_redirect=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
     }
     askForAuthent(this,"Pour acheter des places, vous devez indiquer un email pour recevoir les confirmations",url_redirect);
@@ -157,7 +157,7 @@ export class StoreComponent implements OnInit {
   extern_store(e) {
     let addr=localStorage.getItem("address");
     var timestamp=(new Date().getTime()/1000+100000);
-    if(e.hasOwnProperty("store")){
+    if(e.hasOwnProperty("stores")){
       var url=this.config.infos_server.domain+"/api/add_ticket/"+e._id+"/"+addr+"/2/"+timestamp;
       $$("Création fictive de billets avec "+url);
       open(url,"_blank");
