@@ -10,6 +10,7 @@
     <div *ngIf="tickets.length==0">
       <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="import($event)" accept=".csv"/>
       <button mat-raised-button mat-button class="app-button" (click)="csvInput.click()">Importer des billets</button>
+      <button mat-raised-button mat-button class="app-button" (click)="download_sample()">Télécharger un exemple</button>
     </div>
 
     <div *ngIf="tickets.length>0" style="width:100%;text-align: center;">

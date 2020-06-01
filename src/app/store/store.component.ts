@@ -64,7 +64,7 @@ export class StoreComponent implements OnInit {
       this.events=[];
       this.tags=[];
       for(let e of l_events){
-        if((this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
+        if((e.state!='closed' || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
           }
@@ -103,7 +103,6 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     const params = this.route.snapshot.queryParamMap;
-
     if(params.has("event")){
       this.filterEvent=params.get("event");
       $$("On affiche après filtrage sur l'événement "+this.filterEvent);
@@ -316,5 +315,13 @@ export class StoreComponent implements OnInit {
   }
 
 
+  use_as_template(event) {
+    this.router.navigate(["eventeditor"],{queryParams:{event:event._id}});
+  }
 
+  tr_delete(event) {
+    this.api.delevent(event._id,true).subscribe(()=>{
+      this.refresh();
+    });
+  }
 }

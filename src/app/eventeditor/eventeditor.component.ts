@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {showMessage, $$, checkLogin} from '../tools';
 import {ApiService} from '../api.service';
@@ -32,6 +32,7 @@ export class EventeditorComponent implements OnInit {
   constructor(
     public config:ConfigService,
     public router:Router,
+    public route: ActivatedRoute,
     public toaster:MatSnackBar,
     public _location:Location,
     public api:ApiService
@@ -41,15 +42,27 @@ export class EventeditorComponent implements OnInit {
 
   ngOnInit() {
     checkLogin(this);
+
     this.message="Chargement des modèles";
-    this.api.gettemplates().subscribe((r:any[])=>{
-      this.templates=r;
-      this.cats=[];
-      for(let _t of r){
-        if(this.cats.indexOf(_t.category)==-1)this.cats.push(_t.category);
-      }
-      this.message="";
-    });
+
+    const params = this.route.snapshot.queryParamMap;
+    if(params.has("event")){
+      this.api.geteventastemplate(params.get("event")).subscribe((r)=>{
+        this.openModele(r);
+        this.message="";
+      })
+    } else {
+      this.api.gettemplates().subscribe((r:any[])=>{
+        this.templates=r;
+        this.cats=[];
+        for(let _t of r){
+          if(this.cats.indexOf(_t.category)==-1)this.cats.push(_t.category);
+        }
+        this.message="";
+      });
+    }
+
+
 
     this.api._get("/yaml_properties").subscribe((r:any)=>{
       this.properties=Object.keys(r);
@@ -125,9 +138,15 @@ export class EventeditorComponent implements OnInit {
 
 
   back_list(){
-    this.selTemplate=null;
-    this.showPublish=false;
-    this.showCode=false;
+    const params = this.route.snapshot.queryParamMap;
+    if(params.has("event")){
+      this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
+    } else {
+      this.selTemplate=null;
+      this.showPublish=false;
+      this.showCode=false;
+    }
+
   }
 
 

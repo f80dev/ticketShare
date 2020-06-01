@@ -66,4 +66,10 @@ export class ImporterComponent implements OnInit {
       showError(this,err);
     });
   }
+
+
+
+  download_sample(){
+    open("https://app.kerberus.tech/assets/tickets.csv")
+  }
 }

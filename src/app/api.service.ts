@@ -56,6 +56,10 @@ export class ApiService {
     return this.http.get(api('templates'));
   }
 
+  geteventastemplate(idevent) {
+    return this.http.get(api('templates/'+idevent));
+  }
+
 
   get_yaml_code(user:string,yaml_file:string) {
     return this.http.get(api('get_yaml_code/'+user+"/"+yaml_file));

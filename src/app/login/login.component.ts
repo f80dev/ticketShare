@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    debugger;
     $$("Ouverture de la fenêtre de login");
     var params: ParamMap = this.route.snapshot.queryParamMap;
     this.redirect = params.get("redirect");

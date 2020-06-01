@@ -140,8 +140,8 @@
       <!--</div>-->
 
 
-      <div style="margin-top: 10px;text-align: center;width: 100%;display: inline-block;" *ngIf="event.state=='online'">
-        <div *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1">
+      <div style="margin-top: 10px;text-align: center;width: 100%;display: inline-block;" >
+        <div *ngIf="event.validate.checkers?.indexOf(config.user?.address)==-1 && event.state=='online'">
           <button class="app-button" mat-button mat-flat-button
                   name="cmdBuy"
                   (click)="buy(event)">
@@ -168,21 +168,21 @@
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdPreview"
-                  *ngIf="!event.preview"
+                  *ngIf="!event.preview && event.state=='online'"
                   (click)="preview(event)">
             Preview
           </button>
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdStats"
-                  *ngIf="!event.preview"
+                  *ngIf="!event.preview && event.state=='online'"
                   (click)="router.navigate(['stats'],{queryParams:{event:event._id}})">
             Statistiques
           </button>
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
-                  *ngIf="event.preview"
+                  *ngIf="event.preview && event.state=='online'"
                   (click)="sales(event)">
             Ventes
           </button>
@@ -191,6 +191,7 @@
                   mat-button mat-flat-button mat-icon-button
                   ngxClipboard [cbContent]="event.share_link"
                   name="cmdShare"
+                  *ngIf="event.state=='online'"
                   title="Faire la promotion d'un événement"
                   (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
             <mat-icon>share</mat-icon>
@@ -207,7 +208,7 @@
 
           <button class="app-logo-button"
                   mat-button mat-flat-button mat-icon-button
-                  *ngIf="event.preview"
+                  *ngIf="event.preview && event.state=='online'"
                   name="cmdCancelEvent"
                   title="Annuler un evénément"
                   (click)="cancel(event)">
@@ -218,22 +219,41 @@
 
         <button class="app-logo-button"
                 mat-button mat-flat-button mat-icon-button
-                *ngIf="event.stores"
+                *ngIf="event.stores && event.state=='online'"
                 (click)="router.navigate(['importer'],{queryParams:{event:event._id}})">
           <mat-icon>cloud_upload</mat-icon>
         </button>
 
 
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="(event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1) &&
+               (event.state=='online' || event.state=='closed')
+              "
+                name="cmdValidate"
+                (click)="validate(event)">
+          <div class="bloc-bouton">Contrôler<br>les entrées</div>
+        </button>
+
+        <button class="app-button" mat-button mat-flat-button
+                *ngIf="config.user.address==event.owner && (event.state=='closed')"
+                name="cmdUseAsTemplate"
+                (click)="use_as_template(event)">
+          Cloner
+        </button>
+
+
+        <button class="app-logo-button" mat-button mat-flat-button mat-icon-button
+                *ngIf="config.user.address==event.owner && (event.state=='closed')"
+                name="cmdDelete"
+                title="Supprimer cet événement"
+                (click)="tr_delete(event)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+
       </div>
 
-      <button class="app-button" mat-button mat-flat-button
-              *ngIf="(event.validate.checkers?.indexOf(config.user?.address)>-1 || event.validate.checkers?.indexOf(config.user?.email)>-1) &&
-               (event.state=='online' || event.state=='onprogress')
-              "
-              name="cmdValidate"
-              (click)="validate(event)">
-        <div class="bloc-bouton">Contrôler<br>les entrées</div>
-      </button>
+
 
 
 
