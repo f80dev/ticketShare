@@ -107,7 +107,9 @@
         </div>
       </div>
 
-      <div *ngIf="!event.preview && event.owner==config.user?.address" style="height:300px;width: 100%;text-align: center;">
+
+      <!--Module statistiques-->
+      <div *ngIf="!event.preview && event.owner==config.user?.address" style="width: 100%;text-align: center;">
         <mat-tab-group>
           <mat-tab *ngFor="let chart of event.charts" [label]="chart.title">
             <google-chart
@@ -119,7 +121,6 @@
             </google-chart>
           </mat-tab>
         </mat-tab-group>
-
       </div>
 
       <!--<div *ngIf="!event.preview && event.owner==config.user?.address" style="height:200px;">-->
@@ -166,11 +167,21 @@
         <!--Panel destiner à l'organisateur-->
         <div *ngIf="event.owner==config.user?.address" style="display: inline-block;">
 
+          <button class="app-logo-button"
+                  mat-button mat-flat-button mat-icon-button
+                  ngxClipboard [cbContent]="event.share_link"
+                  name="cmdShare"
+                  *ngIf="event.state=='online'"
+                  title="Faire la promotion d'un événement"
+                  (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
+            <mat-icon>share</mat-icon>
+          </button>
+
           <button class="app-button" mat-button mat-flat-button
                   name="cmdPreview"
                   *ngIf="!event.preview && event.state=='online'"
                   (click)="preview(event)">
-            Preview
+            Description
           </button>
 
           <button class="app-button" mat-button mat-flat-button
@@ -187,15 +198,7 @@
             Ventes
           </button>
 
-          <button class="app-logo-button"
-                  mat-button mat-flat-button mat-icon-button
-                  ngxClipboard [cbContent]="event.share_link"
-                  name="cmdShare"
-                  *ngIf="event.state=='online'"
-                  title="Faire la promotion d'un événement"
-                  (click)="router.navigate(['promo'],{queryParams:{'event':event['_id']}})">
-            <mat-icon>share</mat-icon>
-          </button>
+
 
 
           <button class="app-button" mat-button mat-flat-button

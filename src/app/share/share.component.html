@@ -12,10 +12,8 @@
 <!--</div>-->
 
 <div class="mainform" *ngIf="true || config.user?.ether>0">
-  <h2>Offrir un billet</h2>
-  <div style="width: 80%;margin-left:10%;">
-    Attention, le transfert d'un billet est définitif. En cas d'erreur vous ne pourrez le récupérer que si le destinataire accepte de vous le renvoyer
-  </div>
+  <h2>Envoyer un billet</h2>
+
 
   <app-scanner [size]="320"
                *ngIf="config.webcamsAvailable>0 && showScanner"
@@ -35,15 +33,30 @@
   </mat-form-field>
   <br>
   <br>
-  <button class="app-button" mat-button mat-raised-button
-          (click)="transfert(address)">
-    Envoyer
-  </button>
+  <div style="width: 80%;margin-left:10%;">
+    Attention, le transfert d'un billet est définitif. En cas d'erreur vous ne pourrez le récupérer que si le destinataire accepte de vous le renvoyer
+  </div>
+  <br>
 
 
   <app-tuto [if]="config.webcamsAvailable==0"
             label="Lorsqu'on dispose d'une caméra, KERBERUS permet le transfert des billets en flashant simplement le wallet du destinataire">
   </app-tuto>
+
+  <br>
+  <hr>
+
+
+  <button class="app-button" mat-button mat-raised-button
+          (click)="transfert(address)">
+    Envoyer
+  </button>
+
+  <button class="app-button"
+          mat-button mat-raised-button
+          (click)="_location.back()">
+    Retour
+  </button>
 
 
 </div>

@@ -57,11 +57,12 @@
   </div>
 
   <div *ngIf="_event?.stats?.sold+_event?.stats?.reserved==0" style="width: 80%;display: inline-block;">
-    Aucun billet n'a été vendu, l'annulation correspond juste à repasser l'événement en mode DRAFT.<br>
+    Aucun billet n'a été vendu, l'annulation correspond dans ce cas à retirer l'événement du store pour pouvoir le modifier ou le supprimer totalement<br>
     <br>
-    <button class="app-button" mat-button mat-flat-button
+    <button class="app-button"
+            mat-button mat-flat-button
             (click)="to_draft()">
-      Draft
+      Mode édition
     </button>
   </div>
 

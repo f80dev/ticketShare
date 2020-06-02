@@ -77,8 +77,10 @@
     <div *ngIf="event?.showTickets" style="width: 100%;">
       <app-tuto label="Si vous le souhaitez vous pouvez envoyer/offrir vos billets à des amis" icon="card_gift"></app-tuto>
       <app-mytickets style="min-height:200px;width:100%;display: flex;flex-wrap: wrap;justify-content: center;"
+                     *ngIf="event.reserved?.length>0"
                      [tickets]="event.reserved">
       </app-mytickets>
+      <div style="margin:15px" *ngIf="event.reserved?.length==0"><br>Tous vos billets ont été transférés<br></div>
     </div>
   </div>
 
@@ -86,7 +88,7 @@
           mat-button mat-flat-button
           *ngIf="event?.state?.indexOf('cancel')==-1"
           (click)="buy_other(event)">
-    <div class="bloc-bouton">Acheter plus<br>de billets</div>
+    <div class="bloc-bouton">Racheter<br>des billets</div>
   </button>
 
 </app-event>

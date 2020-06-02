@@ -56,7 +56,7 @@ export class MyeventsComponent implements OnInit {
               this.config.user._events[i]["showTickets"]=true;
           }
         }
-      },5000);
+      },2000);
     }
     subscribe_socket(this,"refresh_buy",()=>{
       this.refresh();
