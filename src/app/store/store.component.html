@@ -87,6 +87,18 @@
 
       <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
 
+        <!--TODO: a inclure dans la fenetre-->
+        <!--<table class="app-table">-->
+          <!--<tr>-->
+            <!--<th>Status</th><th>Billets</th>-->
+          <!--</tr>-->
+          <!--<tr *ngFor="let r of charts[0].data">-->
+            <!--<td>{{r[0]}}</td><td>{{r[1]}}</td>-->
+          <!--</tr>-->
+        <!--</table>-->
+
+
+        <!---->
         <div *ngIf="event.htags?.length>1">
           <small>{{event.htags}}</small><br>
         </div>
