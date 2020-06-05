@@ -6,6 +6,7 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {$$, showMessage,isToday,getTime,checkLogin} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {A11yModule} from '@angular/cdk/a11y';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-validate',
@@ -33,6 +34,7 @@ export class ValidateComponent implements OnInit {
   constructor(public api: ApiService,
               public router:Router,
               public dialog: MatDialog,
+              public _location:Location,
               public config:ConfigService,
               public toast:MatSnackBar,
               public route: ActivatedRoute) {
