@@ -214,20 +214,19 @@ export function create_charts(event:any){
   }
 
   if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
-    var rc=[];
-    for(let dt of event.statsDates){
-      var sDate=new Date(dt[0]).toLocaleDateString();
-      rc.push([sDate.split("/")[0],dt[1]]);
-    }
+    var rc:any[]=[];
+    // for(let dt of event.statsDates){
+    //   var sDate=new Date(dt[0]).toLocaleDateString();
+    //   rc.push([sDate.split("/")[0],dt[1]]);
+    // }
 
     var new_option=JSON.parse(JSON.stringify(option));
     new_option["legend"]="none";
-    new_option["vAxis"]={title:"Dates"};
     return_list.push({
       title:"Ventes par dates",
-      type:ChartType.BarChart,
+      type:ChartType.ColumnChart,
       columnNames:["Dates","Nb de ventes"],
-      data:rc,
+      data:event.statsDates,
       options: new_option
     });
   }

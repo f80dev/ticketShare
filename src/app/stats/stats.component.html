@@ -1,6 +1,5 @@
 <div class="mainform">
-  <br>
-  <app-tuto label="Vous avez accès ici aux statistiques de ventes et validation de votre événement en temps réel"></app-tuto>
+  <app-tuto label="Retrouvez ici le résultat de vos ventes / validation des entrées en temps réel"></app-tuto>
   <br>
 
   <app-hourglass [message]="message"></app-hourglass>
@@ -8,7 +7,7 @@
   <div *ngIf="charts.length>0" style="max-width: 1200px;width:100%;display: inline-block;text-align: center;">
     <table class="app-table">
       <tr>
-        <th>Catégories</th><th>Billets</th>
+        <th>Status</th><th>Billets</th>
       </tr>
       <tr *ngFor="let r of charts[0].data">
         <td>{{r[0]}}</td><td>{{r[1]}}</td>
@@ -18,7 +17,7 @@
 
     <div *ngFor="let chart of charts" style="width:100%;">
       <google-chart
-        style="width:100%;background: none;"
+        style="width:100%;background: none;height:250px;"
         [type]="chart.type"
         [title]="chart.title"
         [data]="chart.data"
@@ -44,5 +43,6 @@
           (click)="_location.back()">
     Retour
   </button>
+  <br>
 
 </div>

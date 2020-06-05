@@ -170,10 +170,12 @@ h2 {
   border-collapse: collapse;
   border-color: lightgrey;
   text-align: center;
+  padding: 3px;
+  border: lightgrey solid 1px;
   display: inline-block; }
 
 th {
-  background-color: lightgrey; }
+  background-color: rgba(46, 138, 255, 0.31); }
 
 table, th, td {
   border: none;

@@ -226,7 +226,10 @@ export class StoreComponent implements OnInit {
    * @param event
    */
   sales(event:any){
+    if(this.config.device.isDesktop)
       event.preview=false;
+    else
+      this.router.navigate(["stats"],{queryParams:{event:event._id}});
   }
 
 
@@ -318,6 +321,9 @@ export class StoreComponent implements OnInit {
   use_as_template(event) {
     this.router.navigate(["eventeditor"],{queryParams:{event:event._id}});
   }
+
+
+
 
   tr_delete(event) {
     this.api.delevent(event._id,true).subscribe(()=>{

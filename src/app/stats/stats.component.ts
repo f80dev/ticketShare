@@ -32,20 +32,21 @@ export class StatsComponent implements OnInit {
 
 
   refresh(){
-    this.charts=[];
     this.message="Chargement des statistiques ...";
-    this.api.stats(this._event._id).subscribe((r:any)=>{
-      this._event=r;
-      this.message="";
-      this.charts=create_charts(r);
-    });
+    setTimeout(()=>{
+      this.api.stats(this._event._id).subscribe((r:any)=>{
+        this._event=r;
+        this.message="";
+        this.charts=create_charts(r);
+      });
+    },1000);
+
   }
 
 
 
   ngOnInit() {
     if(!this.route.snapshot.queryParamMap.has("event"))this.router.navigate(["store"]);
-
     this._event={"_id":this.route.snapshot.queryParamMap.get("event")};
     this.refresh();
     subscribe_socket(this,"refresh_stats");
