@@ -166,8 +166,8 @@ export class ApiService {
     return this._get("available/"+event+buyer);
   }
 
-  stats(eventid:string) {
-    return this._get("stats/"+eventid);
+  stats(eventid:string,format="json") {
+    return this._get("stats/"+eventid+"?format="+format);
   }
 
   renew_dev_token(userid){

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {Location} from "@angular/common";
-import {create_charts, subscribe_socket} from "../tools";
+import {create_charts, showMessage, subscribe_socket} from "../tools";
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -51,4 +51,8 @@ export class StatsComponent implements OnInit {
     subscribe_socket(this,"refresh_stats");
   }
 
+  toExcel() {
+    open(this.config.infos_server.domain+"/api/stats/"+this._event._id+"?format=xls&ts="+new Date().getTime());
+    showMessage(this,"Statistiques disponibles dans votre répertoire de téléchargement")
+  }
 }
