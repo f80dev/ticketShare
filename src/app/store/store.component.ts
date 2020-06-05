@@ -226,7 +226,7 @@ export class StoreComponent implements OnInit {
    * @param event
    */
   sales(event:any){
-    if(this.config.device.isDesktop)
+    if(this.config.infos_server.islocal)
       event.preview=false;
     else
       this.router.navigate(["stats"],{queryParams:{event:event._id}});
