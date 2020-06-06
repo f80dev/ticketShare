@@ -25,9 +25,7 @@ export class CancelComponent implements OnInit {
     public route:ActivatedRoute,
     public _location:Location,
     public api:ApiService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     checkLogin(this);
@@ -37,18 +35,23 @@ export class CancelComponent implements OnInit {
     this.config.reload_user(()=>{
       this.message="";
       this._event=this.config.user._events[params.get("idevent")];
+      this._event.cancel={cause:"",hour:"",refund_address:""};
       if(!this._event.stats.hasOwnProperty("reserved"))this._event.stats["reserved"]=0;
       if(!this._event.stats.hasOwnProperty("sold"))this._event.stats["sold"]=0;
     })
   }
 
+
+
   cancel_event(auto){
     this.message="Annulation de l'événement";
-    this.api.delevent(this._event._id,auto,this._event.refund_address).subscribe(()=>{
+    this.api.delevent(this._event._id,auto,this._event.cancel).subscribe(()=>{
       this.message="";
       this._location.back();
     });
   }
+
+
 
   to_draft(){
     this.api.setevent(this._event._id,{state:"draft"}).subscribe(()=>{
@@ -56,7 +59,6 @@ export class CancelComponent implements OnInit {
       this._location.back();
     });
   }
-
 
 
 }

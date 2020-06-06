@@ -87,16 +87,6 @@
 
       <div *ngIf="event.state=='online' && (event.preview || event.owner!=config.user?.address)">
 
-        <!--TODO: a inclure dans la fenetre-->
-        <!--<table class="app-table">-->
-          <!--<tr>-->
-            <!--<th>Status</th><th>Billets</th>-->
-          <!--</tr>-->
-          <!--<tr *ngFor="let r of charts[0].data">-->
-            <!--<td>{{r[0]}}</td><td>{{r[1]}}</td>-->
-          <!--</tr>-->
-        <!--</table>-->
-
 
         <!---->
         <div *ngIf="event.htags?.length>1">
@@ -106,6 +96,18 @@
         <div *ngIf="event.description?.length>0 && event.owner!=config.user?.address" style="font-size: small;color:gray;height: 200px;overflow: hidden;">
           {{event.description}}
         </div>
+
+
+        <!--TODO: a inclure dans la fenetre-->
+        <table *ngIf="event.owner==config.user?.address" class="app-table">
+          <tr>
+            <th>Status</th><th>Billets</th>
+          </tr>
+          <tr *ngFor="let r of event.stats">
+            <td>{{r[0]}}</td><td>{{r[1]}}</td>
+          </tr>
+        </table>
+        <br>
 
 
         <div *ngIf="event.tickets.length>0">

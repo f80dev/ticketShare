@@ -21,16 +21,34 @@
         <br>
         <mat-form-field class="form-field-style" style="width: 80% !important;text-align: center;" >
           <input type="text"
-                 matInput
-                 autofocus
+                 matInput autofocus
                  id="txtRefund_address"
-                 min="10000"
-                 max="999999"
                  title="Adresse d'obtention du remboursement"
                  placeholder="Adresse d'obtention du remboursement"
-                 [(ngModel)]="_event.refund_address">
+                 [(ngModel)]="_event.cancel.refund_address">
         </mat-form-field>
-        <br><br>
+        <br>
+        <mat-form-field class="form-field-style" style="width: 80% !important;text-align: center;" >
+          <input type="text"
+                 matInput autofocus
+                 id="txtCancelCause"
+                 max=150
+                 title="Donner quelques informations sur la cause de l'annulation"
+                 placeholder="Cause de l'annulation"
+                 [(ngModel)]="_event.cancel.cause">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="form-field-style" style="width: 30% !important;text-align: center;" >
+          <input type="text"
+                 matInput autofocus
+                 id="txtOpenHours"
+                 title="Indiquer la plage horaire d'ouverture "
+                 placeholder="Plages horaires"
+                 [(ngModel)]="_event.cancel.hours">
+        </mat-form-field>
+        <br>
+
+        <br>
         Vos clients seront invités par mail à présenter leur(s) billet(s)<br>
         à cette adresse pour obtenir le remboursement
 

@@ -200,7 +200,7 @@ h2 {
 .app-table {
   font-size: small;
   border-collapse: collapse;
-  border-color: lightgrey;
+  border-spacing: 5px;
   text-align: center;
   padding: 3px;
   border: lightgrey solid 1px;
@@ -208,12 +208,15 @@ h2 {
 }
 
 th {
-  background-color: rgba(46, 138, 255, 0.31);
+  background-color: darkblue;
+  color:white;
+  padding:5px;
+  padding-left: 10px;
+  padding-right:10px;
 }
 
 table, th, td {
   border: none;
-  padding:4px;
 }
 
 

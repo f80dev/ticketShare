@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1591387308317,
+  "timestamp": 1591455437091,
   "index": "https://app.kerberus.tech/index.html",
   "assetGroups": [
     {
@@ -10,11 +10,11 @@
       "urls": [
         "https://app.kerberus.tech/favicon.ico",
         "https://app.kerberus.tech/index.html",
-        "https://app.kerberus.tech/main.7d66e36898eca8d15f14.js",
+        "https://app.kerberus.tech/main.adcf495dc7b6c9227615.js",
         "https://app.kerberus.tech/polyfills-es5.7f65fd69434e9c1d4be2.js",
         "https://app.kerberus.tech/polyfills.3674f8de99920a5805fb.js",
         "https://app.kerberus.tech/runtime.c45919dffd6cc0dba81a.js",
-        "https://app.kerberus.tech/styles.1f44cc71a89614cb3a5a.css"
+        "https://app.kerberus.tech/styles.a20a293c3d1a6c80e9e4.css"
       ],
       "patterns": []
     },
@@ -252,12 +252,12 @@
     "https://app.kerberus.tech/assets/tickets.csv": "b27898c3b6ba259ab69856295e5d0e28596a1151",
     "https://app.kerberus.tech/assets/use.html": "50c569fa4043fbb46170a1c394573f374beee6a9",
     "https://app.kerberus.tech/favicon.ico": "d3bb29f413917e45b59439c2456716ecc4ba41c8",
-    "https://app.kerberus.tech/index.html": "bc438642d6ec3b0a0a76b78e30f0fac0a199d9e8",
-    "https://app.kerberus.tech/main.7d66e36898eca8d15f14.js": "e22e32f82b60bfadb1bdd8152ea6e8e4379f4b51",
+    "https://app.kerberus.tech/index.html": "072423916f43078406c5688495446a8fee7bc2c7",
+    "https://app.kerberus.tech/main.adcf495dc7b6c9227615.js": "fc017ef6d101d5d2dd4c4bedb3bd703814fabdac",
     "https://app.kerberus.tech/polyfills-es5.7f65fd69434e9c1d4be2.js": "afaaf229d450784a5ce6db0bfa07fe672afd80b8",
     "https://app.kerberus.tech/polyfills.3674f8de99920a5805fb.js": "596ecea66141846f4460a1f6eca90a72280876ca",
     "https://app.kerberus.tech/runtime.c45919dffd6cc0dba81a.js": "8fa0f1104722967d17ff31db8a086e9967381682",
-    "https://app.kerberus.tech/styles.1f44cc71a89614cb3a5a.css": "989b26c15f8394272ad1b165d8bc5269b6e42f08"
+    "https://app.kerberus.tech/styles.a20a293c3d1a6c80e9e4.css": "74b24acb97e7b202180a5de5c213bbcc9feb0dc2"
   },
   "navigationUrls": [
     {
