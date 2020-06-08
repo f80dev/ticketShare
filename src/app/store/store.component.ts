@@ -125,7 +125,17 @@ export class StoreComponent implements OnInit {
 
     this.refresh();
 
-    subscribe_socket(this,"refresh_store");
+    subscribe_socket(this,"refresh_store",(evt_name,evt)=>{
+      if(!evt){
+        this.refresh();
+      } else {
+        this.api.stats(evt._id).subscribe((r)=>{
+          for(let i=0;i<this.events.length;i++)
+            if(this.events[i]._id==evt._id)this.events[i]=evt;
+        });
+      }
+    });
+    //subscribe_socket(this,"refresh_stats")
   }
 
 
