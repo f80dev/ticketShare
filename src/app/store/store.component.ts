@@ -64,7 +64,7 @@ export class StoreComponent implements OnInit {
       this.events=[];
       this.tags=[];
       for(let e of l_events){
-        if((e.state!='closed' || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
+        if((e.state=='online' || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
           }
@@ -125,17 +125,17 @@ export class StoreComponent implements OnInit {
 
     this.refresh();
 
-    subscribe_socket(this,"refresh_store",(evt_name,evt)=>{
-      if(!evt){
-        this.refresh();
-      } else {
-        this.api.stats(evt._id).subscribe((r)=>{
-          for(let i=0;i<this.events.length;i++)
-            if(this.events[i]._id==evt._id)this.events[i]=evt;
+    subscribe_socket(this,"refresh_store");
+    subscribe_socket(this,"refresh_stats",(data:any)=>{
+        this.api.stats(data.param._id).subscribe((r:any)=>{
+          for(let i=0;i<this.events.length;i++){
+            if(this.events[i]._id==r._id){
+              this.events[i].stats=r.stats;
+            }
+          }
+
         });
-      }
-    });
-    //subscribe_socket(this,"refresh_stats")
+      });
   }
 
 

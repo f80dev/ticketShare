@@ -114,9 +114,13 @@ export class EventeditorComponent implements OnInit {
   }
 
   publish() {
+    this.message="En cours de fabrication";
     this.api._post("add_event/"+this.config.user.email,this.code).subscribe((r:any)=>{
+      this.message="Evenement fabriqué";
       $$("result du add_event=",r);
-      this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
+      setTimeout(()=>{
+        this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
+      },500)
     })
 
   }

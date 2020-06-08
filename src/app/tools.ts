@@ -175,7 +175,7 @@ export function subscribe_socket(vm:any,event_name:string,func=null){
           if(func==null) {
             if (vm.refresh != null) vm.refresh();
           }else{
-            func(event_name,data);
+            func(data);
           }
         },500);
 
@@ -205,7 +205,7 @@ export function create_charts(event:any){
 
   if(event.hasOwnProperty("cats") && event.cats.length>0){
     return_list.push({
-      title:"Catégories vendues",
+      title:"Ventes par catégorie de prix",
       type:ChartType.PieChart,
       columnNames:["Prix","Nb de ventes"],
       data:event.cats,

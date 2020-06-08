@@ -20,7 +20,7 @@ export class DevelopperComponent implements OnInit {
         label:"Créer un événement",
         api:"add_event/fnac",
         api_name:"add_event",
-        intro:"Enregistrez votre événement en vue de sécuriser les billets",
+        intro:"Créer votre événement via l'API",
         sample:"",
         source:"",
         faq:"https://server.f80.fr:6800/api/faqs/api_build_event?format=html"
@@ -29,7 +29,7 @@ export class DevelopperComponent implements OnInit {
         label:"Sécuriser vos billets",
         api:"add_ticket/{{eventid}}/paul.dudule@gmail.com/TKT_cat1_05/10",
         api_name:"add_ticket",
-        intro:"sécuriser un billet de votre billeterie en l'envoyant dans la blockchaine",
+        intro:"sécuriser chaque billet par envoi dans la blockchaine",
         sample:"https://app.kerberus.tech/assets/store.html?idevent={{eventid}}&faq",
         source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
         faq:"https://server.f80.fr:6800/api/faqs/api_add_ticket?format=html"

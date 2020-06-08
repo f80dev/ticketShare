@@ -99,7 +99,7 @@
 
 
         <!--TODO: a inclure dans la fenetre-->
-        <table *ngIf="event.owner==config.user?.address" class="app-table">
+        <table *ngIf="event.owner==config.user?.address && event.stats?.length>0" class="app-table">
           <tr>
             <th>Status</th><th>Billets</th>
           </tr>
@@ -207,7 +207,7 @@
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
-                  *ngIf="event.preview && event.state=='online'"
+                  *ngIf="event.preview && event.state=='online' && event.stats?.length>0"
                   (click)="sales(event)">
             Ventes
           </button>
@@ -283,7 +283,7 @@
 
 
       <!--Rechargement-->
-      <div style="text-align: center;width: 100%;" *ngIf="event.state=='draft'">
+      <div style="text-align: center;width: 100%;" *ngIf="event.state=='draft' && event.owner==config.user.address">
         <table style="width:100%;text-align: left;">
           <tr *ngIf="event.tickets?.length>0 && event.store==null">
             <td>Dates</td>

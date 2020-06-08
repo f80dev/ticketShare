@@ -68,9 +68,10 @@ export class AppComponent implements OnInit,OnDestroy {
 
     $$("Positionnement des événements")
     subscribe_socket(this, "refresh_sell");
-    subscribe_socket(this, "refresh_buy", (mes, data) => {
+    subscribe_socket(this, "refresh_buy", (data) => {
+      debugger
       localStorage.removeItem("dtBuy");
-      this.router.navigate(["myevents"], {queryParams: {event: data.param.event}})
+      this.router.navigate(["myevents"], {queryParams: {event: data.event}})
     });
 
     //TODO: intégrer https://medium.com/b2expand/inject-web3-in-angular-6-0-a03ca345892
