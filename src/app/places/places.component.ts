@@ -84,7 +84,7 @@ export class PlacesComponent implements OnInit {
     $$("Chargement des heures disponibles pour "+this.selectDate);
     this.hours=[];
     for(let dt of this._dates){
-      let s=dt.toLocaleTimeString().substr(0,dt.toLocaleTimeString().lastIndexOf(":"));
+      let s=dt.toTimeString().substr(0,dt.toTimeString().lastIndexOf(":"));
       if(dt.toLocaleDateString()==this.selectDate && this.hours.indexOf(s)==-1){
         this.hours.push(s);
       }

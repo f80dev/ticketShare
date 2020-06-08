@@ -3,8 +3,9 @@ import {ConfigService} from "../config.service";
 import {ApiService} from "../api.service";
 import {Router} from "@angular/router";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {api,showMessage} from "../tools";
+import {PromptComponent} from "../prompt/prompt.component";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class SettingsComponent implements OnInit {
   account=0;
   constructor(public config:ConfigService,
               public dialog: MatDialog,
+              public toast:MatSnackBar,
               public router:Router,
               public api:ApiService) { }
 
@@ -45,23 +47,57 @@ export class SettingsComponent implements OnInit {
 
   addImage(event) {
     event.stopPropagation();
-    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'5vh'},maxWidth:400,maxHeight:700,width: '90vw',height:'90vh', data:
-        {
-          result:this.config.user.photo,
-          width: 200,
-          height:200,
-          emoji:false,
-          internet:false,
-          ratio:1
-        }
-    }).afterClosed().subscribe((result) => {
-      if(result){
-        this.config.user.photo=result;
-        this.api.setuser(this.config.user._id,{photo:this.config.user.photo}).subscribe(()=>{
-          showMessage(this,"Profil mis à jour");
-        });
+
+
+    //TODO: renforcer la sécurité de ce code
+    this.dialog.open(PromptComponent, {
+      width: '80%',
+      data: {
+        title: "Code secret nécéssaire",
+        question: "Indiquer votre code secret KERBERUS pour modifier votre photo d'identité",
+        result: "",
+        onlyConfirm: false,
+        canEmoji: false,
+        lbl_ok: "Valider",
+        lbl_cancel: "Annuler"
+      }
+    }).afterClosed().subscribe((result_code) => {
+      if(result_code!="no"){
+        this.api.checkCode(this.config.user.email,result_code).subscribe((r:any)=>{
+          debugger
+          if(r.code==result_code){
+            this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'5vh'},maxWidth:400,maxHeight:700,width: '90vw',height:'90vh', data:
+                {
+                  result:this.config.user.photo,
+                  checkCode:true,
+                  width: 200,
+                  height:200,
+                  emoji:false,
+                  internet:false,
+                  ratio:1
+                }
+            }).afterClosed().subscribe((result) => {
+              if(result){
+                this.config.user.photo=result;
+                this.api.setuser(this.config.user._id,{photo:this.config.user.photo}).subscribe(()=>{
+                  showMessage(this,"Profil mis à jour");
+                });
+              }
+            });
+          } else {
+            showMessage(this,"Code incorrect. Le renvoyer par email ?",0,()=>{
+              this.api.resend(this.config.user._id).subscribe(()=>{
+                showMessage(this,"Code renvoyé à votre adresse mail");
+              })
+            },"Renvoyer");
+          }
+        })
       }
     });
+
+
+
+
   }
 
   changeOffer() {

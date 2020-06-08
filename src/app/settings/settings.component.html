@@ -16,7 +16,7 @@
   </button>
 
   <button class="app-button large-button"
-          *ngIf="config.user?.photo?.length==0"
+          *ngIf="config.user?.photo?.length==0 && config.user?.email?.length>0"
           mat-button mat-raised-button
           (click)="addImage($event)">
     Ajouter une photo
