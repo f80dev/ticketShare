@@ -13,13 +13,13 @@
       <button mat-raised-button mat-button class="app-button" (click)="download_sample()">Voir un exemple</button>
     </div>
 
-    <div *ngIf="tickets.length>0" style="width:100%;text-align: center;">
+    <div *ngIf="tickets.length>0" style="width:100%;text-align: center;display:inline-block;">
       Importation réussi. Vérifier les billets:<br><br>
-      <table style="border: none;display: inline-block;font-size: x-small;width:100%;">
+      <table class="app-table">
         <tr style="background-color: lightgrey;">
-          <td>Référence</td><td>Titulaire</td><td>Prix</td><td>Dates</td>
+          <th>Référence</th><th>Titulaire</th><th>Prix</th><th>Dates</th>
         </tr>
-        <tr *ngFor="let t of tickets" style="padding:5px;font-size: medium;">
+        <tr *ngFor="let t of tickets" style="padding:5px;">
           <td>{{t.ref}}</td><td>{{t.owner}}</td><td>{{t.price}}€</td><td>{{t.date | date:'dd/MM HH:mm'}}</td>
         </tr>
       </table>
@@ -32,16 +32,24 @@
         (click)="build_tickets()">
         <div class="bloc-bouton">Fabriquer<br>les billets</div>
       </button>
+
       <button
         class="app-button" mat-button mat-flat-button
-        id="cmdCancel"
-        (click)="_location.back()">
-        Annuler
+        id="cmdRebuild" *ngIf="tickets.length>0"
+        (click)="tickets=[]">
+        Recommencer
       </button>
+
 
     </div>
 
-    <br><br>
+    <br><br><hr><br>
+    <button
+      class="app-button" mat-button mat-flat-button
+      id="cmdCancel"
+      (click)="_location.back()">
+      Retour
+    </button>
 
 
   </div>

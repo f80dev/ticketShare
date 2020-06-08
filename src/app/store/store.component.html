@@ -236,7 +236,7 @@
 
         <button class="app-logo-button"
                 mat-button mat-flat-button mat-icon-button
-                *ngIf="event.stores && event.state=='online'"
+                *ngIf="event.stores && event.state=='online' && event.owner==config.user?.address"
                 (click)="router.navigate(['importer'],{queryParams:{event:event._id}})">
           <mat-icon>cloud_upload</mat-icon>
         </button>
