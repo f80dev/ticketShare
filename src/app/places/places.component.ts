@@ -172,6 +172,11 @@ export class PlacesComponent implements OnInit {
     var tickets=[];
     if(this.sel_tickets!=null){
       for(let ticket of this.sel_tickets) {
+        debugger
+        if(ticket.need_photo && this.config.user.photo.length==0){
+          showMessage(this,"Impossible, certaines places nécéssitent d'avoir attaché à une photo à votre compte");
+          return;
+        }
         tickets.push(ticket.value)
       }
     }

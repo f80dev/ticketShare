@@ -195,21 +195,21 @@
                   name="cmdPreview"
                   *ngIf="!event.preview && event.state=='online'"
                   (click)="preview(event)">
-            Description
+            Vue générale
           </button>
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdStats"
                   *ngIf="!event.preview && event.state=='online'"
                   (click)="router.navigate(['stats'],{queryParams:{event:event._id}})">
-            Statistiques
+            <div class="bloc-bouton">Statistiques<br>détaillées</div>
           </button>
 
           <button class="app-button" mat-button mat-flat-button
                   name="cmdSales"
                   *ngIf="event.preview && event.state=='online' && event.stats?.length>0"
                   (click)="sales(event)">
-            Ventes
+            <div class="bloc-bouton">Etat des<br>ventes</div>
           </button>
 
 
@@ -286,7 +286,7 @@
       <div style="text-align: center;width: 100%;" *ngIf="event.state=='draft' && event.owner==config.user.address">
         <table style="width:100%;text-align: left;">
           <tr *ngIf="event.tickets?.length>0 && event.store==null">
-            <td>Dates</td>
+            <td>Dates de l'événement</td>
             <td *ngIf="event.dtStart!=event.dtEnd">Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM/yy'}}</td>
             <td *ngIf="event.dtStart==event.dtEnd">le <app-date [date]="event.dtStart"></app-date></td>
           </tr>
@@ -339,7 +339,7 @@
                 title="Votre événement sera disponible dans la billeterie"
                 *ngIf="config.user.money>=event.cost"
                 (click)="publish(event)">
-          Publier
+          <div class="bloc-bouton">Démarrer<br>la vente</div>
         </button>
 
         <!--<button class="app-button" mat-button mat-flat-button-->

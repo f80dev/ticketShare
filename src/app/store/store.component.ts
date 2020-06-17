@@ -57,6 +57,7 @@ export class StoreComponent implements OnInit {
 
   refresh(){
     checkConfig(this);
+    if(!this.config.user)return;
     this.message="Chargement des événements disponibles";
     $$("Récupération des événements");
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{

@@ -20,7 +20,7 @@ export class DevelopperComponent implements OnInit {
         label:"Créer un événement",
         api:"add_event/fnac",
         api_name:"add_event",
-        intro:"Créer votre événement via l'API",
+        intro:"Créer votre événement depuis votre site via l'API KERBERUS",
         sample:"",
         source:"",
         faq:"https://server.f80.fr:6800/api/faqs/api_build_event?format=html"
@@ -31,7 +31,7 @@ export class DevelopperComponent implements OnInit {
         api_name:"add_ticket",
         intro:"sécuriser chaque billet par envoi dans la blockchaine",
         sample:"https://app.kerberus.tech/assets/store.html?idevent={{eventid}}&faq",
-        source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/use.html",
+        source:"https://github.com/f80dev/ticketShare/blob/master/src/assets/store.html",
         faq:"https://server.f80.fr:6800/api/faqs/api_add_ticket?format=html"
       },
       {
