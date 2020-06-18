@@ -339,17 +339,9 @@
                 name="cmdPublish"
                 title="Votre événement sera disponible dans la billeterie"
                 *ngIf="config.user.money>=event.cost"
-                (click)="publish(event,false)">
-          <div class="bloc-bouton">Lancer<br>les invitations</div>
-        </button>
-
-
-        <button class="app-button" mat-button mat-flat-button
-                name="cmdPublish"
-                title="Votre événement sera disponible dans la billeterie"
-                *ngIf="config.user.money>=event.cost"
-                (click)="publish(event,true)">
-          <div class="bloc-bouton">Mettre dans<br>la billeterie</div>
+                (click)="publish(event)">
+          <div *ngIf="!event.private" class="bloc-bouton">Mettre dans<br>la billeterie</div>
+          <div *ngIf="event.private" class="bloc-bouton">Ouvrir les<br>inscriptions</div>
         </button>
 
         <!--<button class="app-button" mat-button mat-flat-button-->

@@ -20,7 +20,7 @@
   </button>
 
   <button class="app-button" mat-button mat-flat-button
-          *ngIf="config.user.address==_event.owner"
+          *ngIf="config.user.address==_event.owner && !_event.private"
           ngxClipboard [cbContent]="_event?.share_link"
           (click)="openPrinter(_event)">
     Fabriquer l'affiche

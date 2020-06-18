@@ -78,7 +78,7 @@ export class StoreComponent implements OnInit {
             e["width"]="95%";
           }
 
-          if(e.state=="ready")e.treatment="En cours de publication ...";
+          if(e.state=="ready")e.treatment="En cours de lancement ...";
           if(e.state=="in treatment")e.treatment="En cours d'insertion dans la blockchain. Cela prendra quelques minutes ...";
 
           e["preview"]=true;
@@ -281,8 +281,8 @@ export class StoreComponent implements OnInit {
 
 
 
-  publish(event:any,_private=false){
-    this.api.setevent(event["_id"],{"state":"ready","private":_private}).subscribe(()=>{
+  publish(event:any){
+    this.api.setevent(event["_id"],{"state":"ready"}).subscribe(()=>{
       showMessage(this,"Votre évémenement est prêt à être mise en ligne");
       this.refresh();
     })

@@ -64,9 +64,7 @@
     <span style="color: red;font-size: large;">Vente terminée</span>
   </div>
 
-
   <app-tuto label="Après achat, KERBERUS sécurise votre achat. Ce traitement peut prendre quelques minutes"></app-tuto>
-
 
   <div *ngIf="event.state!='reserved' && event.state!='cancel' && event.state!='closed'">
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
@@ -93,6 +91,12 @@
 
 </app-event>
   <br>
-  <br>
-  <a [href]="config.user?.marketplace" target="_blank">Voir mes billets dans la blockchain</a><br>
+  <div *ngIf="events.length>0">
+    <br>
+    <a [href]="config.user?.marketplace" target="_blank">
+      Voir mes billets dans la blockchain
+    </a>
+    <br>
+  </div>
+
 </div>
