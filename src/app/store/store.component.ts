@@ -65,7 +65,7 @@ export class StoreComponent implements OnInit {
       this.events=[];
       this.tags=[];
       for(let e of l_events){
-        if((e.state=='online' || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
+        if(((!e.private && e.state=='online') || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
           }
@@ -281,8 +281,8 @@ export class StoreComponent implements OnInit {
 
 
 
-  publish(event:any){
-    this.api.setevent(event["_id"],{"state":"ready"}).subscribe(()=>{
+  publish(event:any,_private=false){
+    this.api.setevent(event["_id"],{"state":"ready","private":_private}).subscribe(()=>{
       showMessage(this,"Votre évémenement est prêt à être mise en ligne");
       this.refresh();
     })

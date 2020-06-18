@@ -213,8 +213,6 @@
           </button>
 
 
-
-
           <button class="app-button" mat-button mat-flat-button
                   name="cmdGraph"
                   *ngIf="event.state=='close'"
@@ -284,6 +282,8 @@
 
       <!--Rechargement-->
       <div style="text-align: center;width: 100%;" *ngIf="event.state=='draft' && event.owner==config.user.address">
+
+
         <table style="width:100%;text-align: left;">
           <tr *ngIf="event.tickets?.length>0 && event.store==null">
             <td>Dates de l'événement</td>
@@ -310,8 +310,9 @@
           </tr>
         </table>
 
-        <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
 
+
+        <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
 
           <div *ngIf="config.user.money<event.cost" style="color:red;">
             Il manque {{event.cost-config.user?.money}}€ sur votre compte pour créer l'événement<br><br>
@@ -338,8 +339,17 @@
                 name="cmdPublish"
                 title="Votre événement sera disponible dans la billeterie"
                 *ngIf="config.user.money>=event.cost"
-                (click)="publish(event)">
-          <div class="bloc-bouton">Démarrer<br>la vente</div>
+                (click)="publish(event,false)">
+          <div class="bloc-bouton">Lancer<br>les invitations</div>
+        </button>
+
+
+        <button class="app-button" mat-button mat-flat-button
+                name="cmdPublish"
+                title="Votre événement sera disponible dans la billeterie"
+                *ngIf="config.user.money>=event.cost"
+                (click)="publish(event,true)">
+          <div class="bloc-bouton">Mettre dans<br>la billeterie</div>
         </button>
 
         <!--<button class="app-button" mat-button mat-flat-button-->
