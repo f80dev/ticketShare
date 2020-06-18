@@ -332,12 +332,12 @@
         <button class="app-button" mat-button mat-flat-button
                 *ngIf="event.stores"
                 (click)="router.navigate(['developper'],{queryParams:{event_target:event._id}})">
-          Développeur
+          <div class="bloc-bouton">Connectez une<br>billeterie</div>
         </button>
 
         <button class="app-button" mat-button mat-flat-button
                 name="cmdPublish"
-                title="Votre événement sera disponible dans la billeterie"
+                title="Ouvrir la vente des billets de votre événement"
                 *ngIf="config.user.money>=event.cost"
                 (click)="publish(event)">
           <div *ngIf="!event.private" class="bloc-bouton">Mettre dans<br>la billeterie</div>
