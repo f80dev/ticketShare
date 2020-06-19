@@ -44,8 +44,12 @@ export class ApiService {
     return this.http.get(api('delchecker/'+userid+"/"+eventid));
   }
 
-  search(query:string) {
-    return this.http.get(api('search/'+query));
+  search(query:string,user:string="") {
+    return this.http.get(api('search/'+query+"/"+user));
+  }
+
+  add_guest(eventid:string,email:string="") {
+    return this.http.get(api('add_guest/'+eventid+"/"+email));
   }
 
   getbalances(idevent:string,withIdentities=false) {

@@ -30,7 +30,7 @@ export class SearchComponent implements OnInit {
   onEnter(event=null){
     if(event==null || event.keyCode==13){
       this.message="Recherche en cours ...";
-      this.api.search(this.query).subscribe((r:any)=>{
+      this.api.search(this.query,this.config.user.email).subscribe((r:any)=>{
         if(r.length>0)
           this.message=r.length+" événements correspondent à votre recherche"
         else

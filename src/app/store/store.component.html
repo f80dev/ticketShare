@@ -269,15 +269,10 @@
       </div>
 
 
-
-
-
       <app-hourglass [message]="event.treatment"
                      [canCancel]="true"
                      (cancel)="onCancel(event)">
       </app-hourglass>
-
-      <br>
 
 
       <!--Rechargement-->
@@ -311,9 +306,8 @@
         </table>
 
 
-
+        <!--Proposition de rechargement du compte-->
         <div *ngIf="event.cost>0" style="width:90%;display: inline-block;text-align: center;">
-
           <div *ngIf="config.user.money<event.cost" style="color:red;">
             Il manque {{event.cost-config.user?.money}}€ sur votre compte pour créer l'événement<br><br>
           </div>
@@ -341,22 +335,15 @@
                 *ngIf="config.user.money>=event.cost"
                 (click)="publish(event)">
           <div *ngIf="!event.private" class="bloc-bouton">Mettre dans<br>la billeterie</div>
-          <div *ngIf="event.private" class="bloc-bouton">Ouvrir les<br>inscriptions</div>
+          <div *ngIf="event.private" class="bloc-bouton">Ouvrir la<br>vente</div>
         </button>
-
-        <!--<button class="app-button" mat-button mat-flat-button-->
-                <!--name="cmdDetail"-->
-                <!--*ngIf="event.owner==config.user?.address"-->
-                <!--(click)="showData(event)">-->
-          <!--Détail-->
-        <!--</button>-->
 
 
         <button class="app-button" mat-button mat-flat-button
                 name="cmdDelete"
                 title="Votre événement est supprimé. Par sécurité, il est envoyé sur votre mail avant."
                 (click)="delete(event)">
-          Supprimer
+          Annuler
         </button>
 
         <!--<button class="app-button" mat-button mat-flat-button-->

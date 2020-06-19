@@ -17,6 +17,8 @@ import {ConfigService} from "../config.service";
 export class PromoComponent implements OnInit {
 
   _event:any={};
+  email_to_invite:any={value:""};
+  show_qrcode=false;
 
   constructor(
     public ngNavigatorShareService: NgNavigatorShareService,
@@ -44,7 +46,20 @@ export class PromoComponent implements OnInit {
   }
 
 
+  add_guest(_evt={keyCode:0}){
+    if(_evt.keyCode!=13)return;
+    this.api.add_guest(this._event._id,this.email_to_invite.value).subscribe((r:any)=>{
+      if(r){
+        showMessage(this,r.message)
+        this.email_to_invite.value="";
+      }
+
+    })
+  }
+
+
   share_event(event:any){
+    this.show_qrcode=true;
     this.ngNavigatorShareService.share({title: event.name,text: "Outil de validation des billets",url: event.share_link})
       .then( (response) => {console.log(response);},()=>{
         this._clipboardService.copyFromContent(event.share_link);

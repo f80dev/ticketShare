@@ -14,6 +14,20 @@
             label="KERBERUS simplifie la fabrication du visuel de votre événement en produisant un fichier au format standard SVG contenant l'ensemble des éléments nécéssaires à la réalisation d'une affiche">
   </app-tuto>
 
+  <div *ngIf="_event.private" style="text-align: center;width: 100%;">
+    <mat-form-field style="width:50%;max-width: 200px;text-align: center;"  >
+      <mat-label>Email de l'invité</mat-label>
+      <input matInput [(ngModel)]="email_to_invite.value" (keypress)="add_guest($event)">
+    </mat-form-field>
+
+    <button class="app-logo-button"
+            mat-button mat-flat-button mat-icon-button
+            (click)="add_guest({keyCode:13})">
+      <mat-icon>person_add</mat-icon>
+    </button>
+
+  </div>
+
   <button class="app-button" mat-button mat-flat-button
           (click)="share_event(_event)">
     Partager le lien
@@ -27,12 +41,15 @@
   </button>
   <br>
 
-  <br><br>Faites flasher ce code<br>pour vendre des places<br>
-  <img [src]="_event.qrcode"
-       style="width: 250px;height: 250px;cursor: pointer;"
-       (click)="informe_copy()"
-       ngxClipboard [cbContent]="_event?.share_link">
-  <br>
+  <div *ngIf="show_qrcode">
+    <br><br>Faites flasher ce code<br>pour vendre des places<br>
+    <img [src]="_event.qrcode"
+         style="width: 250px;height: 250px;cursor: pointer;"
+         (click)="informe_copy()"
+         ngxClipboard [cbContent]="_event?.share_link">
+    <br>
+  </div>
+
   <br>
   <button class="app-button"
           mat-button mat-flat-button

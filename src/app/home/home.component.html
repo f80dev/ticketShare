@@ -29,27 +29,27 @@
   <br>
   <br>
   <mat-nav-list>
-    <a title="Accédez à tous vos billets" mat-list-item routerLink="myevents" id="cmdMyPlaces">
+    <a title="Accédez à tous vos billets"
+       *ngIf="config.user?.email?.length>0"
+       mat-list-item routerLink="myevents" id="cmdMyPlaces">
       <mat-icon>event_seat</mat-icon>
       &nbsp;&nbsp;Mes billets achetés
     </a>
 
-    <!--<a title="Accédez aux paramètres de votre wallet spectacle" mat-list-item routerLink="wallet" id="cmdWallet">-->
-      <!--<mat-icon>attach_money</mat-icon>-->
-      <!--&nbsp;&nbsp;Wallet-->
-    <!--</a>-->
 
     <a title="Accèdez à l'ensemble des événements disponibles" mat-list-item routerLink="search" id="cmdStore">
       <mat-icon>shopping_cart</mat-icon>
       &nbsp;&nbsp;Billeterie
     </a>
 
-    <a title="Accèdez à l'ensemble de mes évélements" mat-list-item routerLink="store" [queryParams]="{onlyMyEvents:true}" id="cmdMyEvents">
+    <a title="Accèdez à l'ensemble de mes évélements" mat-list-item routerLink="store"
+       *ngIf="config.user?.email?.length>0"
+       [queryParams]="{onlyMyEvents:true}" id="cmdMyEvents">
       <mat-icon>account_balance</mat-icon>
       &nbsp;&nbsp;Mes événements
     </a>
 
-    <a title="Vos préférence" mat-list-item routerLink="settings" id="cmdSettings">
+    <a title="Vos préférence" mat-list-item routerLink="settings" id="cmdSettings" *ngIf="config.user?.email?.length>0">
       <mat-icon>build</mat-icon>
       &nbsp;&nbsp;Préférences
     </a>

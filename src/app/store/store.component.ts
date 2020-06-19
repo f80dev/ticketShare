@@ -65,7 +65,7 @@ export class StoreComponent implements OnInit {
       this.events=[];
       this.tags=[];
       for(let e of l_events){
-        if(((!e.private && e.state=='online') || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
+        if((((!e.private || e.guestlist.indexOf(this.config.user.email)>-1) && e.state=='online') || e.owner==this.config.user.address) && (this.filterEvent==null || this.filterEvent==e._id) && (!this.onlyMyEvents || e["owner"]==this.config.user.address)){
           for(let tag of e.tags.split(" ")){
             if(this.tags.indexOf(tag)==-1 && tag.length>0)this.tags.push(tag);
           }

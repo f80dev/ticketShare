@@ -45,8 +45,8 @@
         <div style="height:45px;font-size: x-small">{{template.description}}</div>
         <img class="image-photo"
              [src]="template.visual"
-             style="width:150px;height:150px;"><br>
-        <div>{{template.title}}</div>
+             style="width:150px;height:150px;">
+        <br>
       </div>
     </div>
   </div>
@@ -73,7 +73,6 @@
 
       <div *ngIf="config.device.isDesktop">
         <br>
-
         Adapter ce modèle à votre événement<br>
         <button class="app-button "
                 style="margin-top: 10px;"
@@ -83,9 +82,9 @@
         </button>
       </div>
 
-      <div *ngIf="config.device.isMobile" style="width: 80%;">
+      <div *ngIf="config.device.isMobile" style="width: 80%;text-align: center;">
         <br>
-        Personnalisation impossible depuis un mobile, connectez vous depuis un ordinateur si besoin.
+        Personnalisation de l'événement impossible depuis un mobile, connectez-vous depuis un ordinateur si besoin.
       </div>
 
 
@@ -140,7 +139,7 @@
               *ngIf="!showPublish"
               mat-button mat-raised-button
               (click)="check_event()">
-        Vérifier
+        <Vérifier
       </button>
     </div>
 
