@@ -129,22 +129,33 @@
     <div *ngFor="let ticket of tickets">
       Billet <span>#{{ticket.seat || ticket.ref}}</span>&nbsp;
       <div *ngIf="dates?.length>1">Pour le {{ticket.date*1000 | date:'dd/MM/yy HH:mm'}}</div>
+      <div *ngIf="ticket.data?.length>0">
+          <div *ngIf="ticket.data.endsWith('.jpg'); else elseBlock">
+            <img [src]="ticket.data" style="width: 200px;">
+          </div>
+          <ng-template #elseBlock>{{ticket.data}}</ng-template>
+          <br>
+      </div>
+
+
     </div>
 
-    <br>
-    <button class="app-button" mat-button
-            mat-raised-button (click)="reload()">
-      Suivant
-    </button>
-
-    <button class="app-button" mat-button mat-flat-button
-            name="cmdBack"
-            (click)="_location.back()">
-      Retour
-    </button>
-
-
   </div>
+
+  <br>
+  <hr>
+  <br>
+  <button class="app-button" mat-button
+          mat-raised-button (click)="reload()">
+    Suivant
+  </button>
+
+  <button class="app-button" mat-button mat-flat-button
+          name="cmdBack"
+          (click)="_location.back()">
+    Retour
+  </button>
+
 
   <!--<br>-->
   <!--<button class="app-button" mat-button-->

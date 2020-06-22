@@ -48,6 +48,8 @@ export class StoreComponent implements OnInit {
     this.refresh();
   }
 
+
+
   openEventEditor() {
     askForAuthent(this,"La création d'un événement nécéssite une adresse mail pour l'envoi des confirmations",'eventeditor');
   }
@@ -62,6 +64,7 @@ export class StoreComponent implements OnInit {
     $$("Récupération des événements");
     this.api.getevents(localStorage.getItem("address"),this.sortField,this.filterField).subscribe((l_events:any)=>{
       this.message="";
+
       this.events=[];
       this.tags=[];
       for(let e of l_events){
