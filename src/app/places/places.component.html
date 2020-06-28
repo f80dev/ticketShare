@@ -21,7 +21,7 @@
         </button>
       </td>
       <td *ngIf="nb_places>0" style="text-align: left;">
-        {{nb_places}} billets pour {{total}}€
+        {{nb_places}} {{eventitem}} pour {{total}}€
       </td>
 
     </tr>
@@ -83,13 +83,13 @@
                 <mat-label>Acheter</mat-label>
                 <mat-select [(value)]="categories[cat].buy" (valueChange)="update_total($event)">
                   <mat-option *ngFor="let i of categories[cat].range" [value]="i">
-                    {{i}} place<span *ngIf="i>1">s</span>
+                    {{i}} {{eventitem}}<span *ngIf="i>1">s</span>
                   </mat-option>
                 </mat-select>
               </mat-form-field>
 
               <div *ngIf="categories[cat].to_buy>0">
-                Reste {{categories[cat].to_buy-categories[cat].buy}} places
+                Reste {{categories[cat].to_buy-categories[cat].buy}} {{eventitem}}s
               </div>
 
               <span *ngIf="categories[cat].to_buy==0">Plus disponible</span>

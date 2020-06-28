@@ -52,9 +52,8 @@
   </div>
 
   <div *ngIf="selTemplate">
-      <h2>{{selTemplate.title}}</h2>
-      <small>{{selTemplate.description}}</small>
-    <br><br>
+    <br>
+      <h3>{{selTemplate.title}}</h3>
     <app-tuto label="Vous pouvez recevoir le modèle sur votre mail, le personnaliser et nous le renvoyer pour publication immédiate,
                      OU pouvez directement publier le modèle comme un événement fictif. Dans ce cas, seul les profils pilotes
                      pour 'fictivement' acheter des places. C'est un bon moyen de tester gratuitement KERBERUS">
@@ -139,7 +138,7 @@
               *ngIf="!showPublish"
               mat-button mat-raised-button
               (click)="check_event()">
-        <Vérifier
+        Vérifier
       </button>
     </div>
 

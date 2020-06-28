@@ -104,28 +104,31 @@
   </div>
 
 
-
   <br>
-
+  <hr>
+  <br>
   <button class="app-button"
           id="cmdAdvanced"
           mat-button mat-raised-button
           (click)="openWallet()">
     <div class="bloc-bouton">Paramétres<br>avancés</div>
   </button>
-  &nbsp;
+
+
   <button class="app-button"
           *ngIf="config.user.email.length>0"
           id="cmdOpenDev"
           mat-button mat-raised-button
           (click)="router.navigate(['developper'])">
-    <div class="bloc-bouton">Developpeur</div>
+    Developpeur
   </button>
-  <br>
 
+  <button class="app-button"
+          mat-button mat-raised-button
+          (click)="clear_tuto()">
+    <div class="bloc-bouton">Revoir<br>les tutos</div>
+  </button>
 
-  <br>
-  <hr>
 
   <button class="app-button"
           id="cmdCancel"
@@ -134,12 +137,11 @@
     Annuler
   </button>
 
-
   <button class="app-button"
           id="cmdSave"
           mat-button mat-raised-button
           (click)="saveUser($event)">
-    Enregistre
+    Enregistrer
   </button>
 
 </div>

@@ -20,6 +20,7 @@ export class PlacesComponent implements OnInit {
   message="";
   total=0;
   eventname="";
+  eventitem="place";
   categories={};
   l_categories:string[]=[];
   cats:any[]=[];

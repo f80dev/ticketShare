@@ -60,7 +60,10 @@ export class TutoComponent implements OnChanges,OnInit {
 
 
   hideTuto(addHisto=false) {
-    if(addHisto)localStorage.setItem(this.code,"read"+new Date().getTime()); //Marque l'affichage
+    if(addHisto){
+      var s=localStorage.getItem("tuto")+","+this.code;
+      localStorage.setItem("tuto",s);
+    } //Marque l'affichage
     this.text="";
     this._if=false;
     this.config.visibleTuto=false;
@@ -83,7 +86,7 @@ export class TutoComponent implements OnChanges,OnInit {
     this.text=this.transPipe.transform(this.text);
 
     this.code="histo"+hashCode(this.text+this.subtitle);
-    if(localStorage.hasOwnProperty(this.code)){
+    if(localStorage.hasOwnProperty("tuto") && localStorage.getItem("tuto").indexOf(this.code)>-1){
       this._if=false;
     }
     else{
