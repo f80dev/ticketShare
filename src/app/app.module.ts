@@ -22,6 +22,8 @@ import {
   MatSelectModule, MatSidenavModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
+
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {ImageCropperModule} from "ngx-image-cropper";
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {FlipModule} from "ngx-flip";
@@ -133,6 +135,8 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     MatSidenavModule,
     MatSliderModule,
     PickerModule,
+
+    AngularFontAwesomeModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MonacoEditorModule.forRoot(),

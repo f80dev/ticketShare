@@ -70,16 +70,7 @@
 
       <br>
 
-      <div *ngIf="config.device.isDesktop">
-        <br>
-        Adapter ce modèle à votre événement<br>
-        <button class="app-button "
-                style="margin-top: 10px;"
-                mat-button mat-raised-button
-                (click)="showCode=true">
-          Editer
-        </button>
-      </div>
+
 
       <div *ngIf="config.device.isMobile" style="width: 80%;text-align: center;">
         <br>
@@ -145,53 +136,79 @@
     <br>
     <br>
 
-    <table style="width: 100%;" *ngIf="!showCode">
-      <tr style="font-size: small;">
-        <td style="width: 40%;">
-          Tester {{config.values.appname}} en créant un<br>
-          événement fictif à partir de ce modèle
+    <div style="width: 100%;display: flex;flex-wrap: wrap;justify-content: center;" *ngIf="!showCode">
+
+      <div class="zone-option" *ngIf="config.device.isDesktop">
+        <div class="zone-option-header">
+          Adapter ce modèle à<br> votre événement
+        </div>
+        <fa class="big-icon" name="fas fa-edit" size="2x"></fa><br><br>
+
+
+        <button class="app-button "
+                style="margin-top: 10px;"
+                mat-button mat-raised-button
+                (click)="showCode=true">
+          Editer
+        </button>
+
+      </div>
+
+
+
+      <div class="zone-option">
+        <div class="zone-option-header">
+          Tester ce modèle avec un événement fictif
           <app-faq-link faq="fictif"></app-faq-link>
-        </td>
-        <td></td>
-        <td *ngIf="config.user?.email" style="width: 40%;">
-          Récupérer le modèle pour le personnaliser depuis votre ordinateur
-        </td>
-      </tr>
-      <tr></tr>
-      <tr>
-        <td>
-          <button class="app-button"
-                  style="margin-top: 10px;"
-                  id="cmdCreateFictif"
-                  mat-button mat-raised-button
-                  (click)="fictif()">
-              Tester
-          </button>
-        </td>
-        <td style="width: 10%;"></td>
-        <td>
-          <button
-                  id="cmdSendTemplate"
-                  class="app-logo-button"
-                  *ngIf="config.user?.email"
-                  title="Recevoir le fichier de configuration de l'événement sur son mail"
-                  mat-button mat-raised-button mat-icon-button
-                  (click)="sendDemo()">
-            <mat-icon>email</mat-icon>
-          </button>
-          &nbsp;
-          <button
-                  id="cmdDownloadTemplate"
-                  class="app-logo-button"
-                  *ngIf="config.user?.email"
-                  title="Télécharger le fichier de configuration de l'événement"
-                  mat-button mat-raised-button mat-icon-button
-                  (click)="download_template()">
-            <mat-icon>get_app</mat-icon>
-          </button>
-        </td>
-      </tr>
-    </table>
+        </div>
+
+        <br><fa class="big-icon" name="fas fa-play" size="2x"></fa><br><br>
+
+        <button class="app-button"
+                style="margin-top: 10px;"
+                id="cmdCreateFictif"
+                mat-button mat-raised-button
+                (click)="fictif()">
+          Tester
+        </button>
+      </div>
+
+
+      <div class="zone-option">
+        <div class="zone-option-header">
+          Récupérer ce modèle sur votre ordinateur
+        </div>
+
+        <br><fa class="big-icon" name="fas fa-download" size="2x"></fa><br><br>
+
+        <button
+          id="cmdSendTemplate"
+          class="app-logo-button"
+          *ngIf="config.user?.email"
+          title="Recevoir le fichier de configuration de l'événement sur son mail"
+          mat-button mat-raised-button mat-icon-button
+          (click)="sendDemo()">
+          <mat-icon>email</mat-icon>
+        </button>
+
+        &nbsp;
+        <button
+          id="cmdDownloadTemplate"
+          class="app-logo-button"
+          *ngIf="config.user?.email"
+          title="Télécharger le fichier de configuration de l'événement"
+          mat-button mat-raised-button mat-icon-button
+          (click)="download_template()">
+          <mat-icon>get_app</mat-icon>
+        </button>
+
+      </div>
+
+
+
+    </div>
+
+
 
   </div>
 

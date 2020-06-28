@@ -184,4 +184,18 @@ th {
 table, th, td {
   border: none; }
 
+.zone-option {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  font-size: small;
+  text-align: center;
+  margin: 2%; }
+
+.zone-option-header {
+  height: 50px;
+  margin-bottom: 10px;
+  width: 80%;
+  display: inline-block; }
+
 /*# sourceMappingURL=styles.css.map */

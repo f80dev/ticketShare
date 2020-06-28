@@ -6,6 +6,7 @@ import {showMessage, $$, checkLogin} from '../tools';
 import {ApiService} from '../api.service';
 import {MatSnackBar} from "@angular/material";
 
+
 @Component({
   selector: 'app-eventeditor',
   templateUrl: './eventeditor.component.html',
