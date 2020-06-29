@@ -20,7 +20,12 @@ export class SearchComponent implements OnInit {
     public config:ConfigService,
     public api:ApiService,
     public router:Router
-  ) { }
+  ) {
+
+  }
+
+
+
 
   ngOnInit() {
   }
@@ -31,17 +36,13 @@ export class SearchComponent implements OnInit {
     if(event==null || event.keyCode==13){
       this.message="Recherche en cours ...";
       this.api.search(this.query,this.config.user.email).subscribe((r:any)=>{
-        if(r.length>0)
-          this.message=r.length+" événements correspondent à votre recherche"
-        else
-          this.message="Aucun événement ne correspond à votre requête."
-
+        if(r.length>1)this.message=r.length+" événements correspondent à votre recherche"
+        if(r.length==0)this.message="Aucun événement ne correspond à votre requête."
+        if(r.length==1)this.router.navigate(['store'],{queryParams:{event:r[0]._id}})
         this._events=r;
       });
     }
   }
-
-
 
 
   openEventEditor() {
