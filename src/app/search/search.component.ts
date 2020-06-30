@@ -21,7 +21,6 @@ export class SearchComponent implements OnInit {
     public api:ApiService,
     public router:Router
   ) {
-
   }
 
 
@@ -43,6 +42,8 @@ export class SearchComponent implements OnInit {
       });
     }
   }
+
+
 
 
   openEventEditor() {

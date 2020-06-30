@@ -334,8 +334,8 @@
                 title="Ouvrir la vente des billets de votre événement"
                 *ngIf="config.user.money>=event.cost"
                 (click)="publish(event)">
-          <div *ngIf="!event.private" class="bloc-bouton">Mettre<br>en vente</div>
-          <div *ngIf="event.private" class="bloc-bouton">Ouvrir la<br>vente</div>
+          <div *ngIf="!event.private" class="bloc-bouton">Ouvrir la<br>vente</div>
+          <div *ngIf="event.private" class="bloc-bouton">Mettre en<br>vente</div>
         </button>
 
 

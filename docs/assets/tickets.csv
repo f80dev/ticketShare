@@ -1,4 +1,4 @@
-REFERENCE;EMAIL;DATE;HEURE;PRIX
-REF1;roger.legume@gmail.com;01/06/2021;20:00;20
-REF2;sophie.dudule@gmail.com;01/06/2021;20:00;30
+REFERENCE;EMAIL;DATE;HEURE;PRIX;DESCRIPTION;VISUAL;DATA
+REF1;roger.legume@gmail.com;01/06/2021;20:00;20;Place dans la fosse;https://app.kerberus.tech/assets/img/tickets.jpg;donnees incluses au billet
+REF2;sophie.dudule@gmail.com;01/06/2021;20:00;30;Place en gradin;https://app.kerberus.tech/assets/img/tickets.jpg;;donnees incluses
 
