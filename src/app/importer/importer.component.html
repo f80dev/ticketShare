@@ -10,18 +10,24 @@
     <div *ngIf="tickets.length==0">
       <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="import($event)" accept=".csv"/>
       <button mat-raised-button mat-button class="app-button" (click)="csvInput.click()">Importer des billets</button>
-      <button mat-raised-button mat-button class="app-button" (click)="download_sample()">Voir un exemple</button>
+      <button mat-raised-button mat-button class="app-button" (click)="download_sample()">
+        <div class="bloc-bouton">
+          Voir un exemple<br>de fichier de billets
+        </div>
+      </button>
     </div>
 
+    <app-tuto *ngIf="tickets.length>0" label="La sécurisation des billets entraine l'envoi d'un mail à chaque titulaire pour l'informer de la procédure de validation à l'entrée de l'événement"></app-tuto>
     <div *ngIf="tickets.length>0" style="width:100%;text-align: center;display:inline-block;">
       Importation du fichier terminée.<br>
       Vérifier les billets:<br><br>
       <table class="app-table">
         <tr style="background-color: lightgrey;">
-          <th>Référence</th><th>Titulaire</th><th>Prix</th><th>Dates</th>
+          <th>Référence</th><th>Titulaire</th><th>Prix</th><th>Dates</th><th>Description</th><th>Visuel</th><th>Data</th>
         </tr>
         <tr *ngFor="let t of tickets" style="padding:5px;">
           <td>{{t.ref}}</td><td>{{t.owner}}</td><td>{{t.price}}€</td><td>{{t.date | date:'dd/MM HH:mm'}}</td>
+          <td>{{t.description}}</td><td><img [src]="t.visual" width="50px"></td><td>{{t.data_exposed}}</td>
         </tr>
       </table>
 
@@ -31,7 +37,7 @@
         class="app-button" mat-button mat-flat-button
         id="cmdBuild" *ngIf="tickets.length>0"
         (click)="build_tickets()">
-        <div class="bloc-bouton">Fabriquer<br>les billets</div>
+        <div class="bloc-bouton">Sécuriser<br>ces billets</div>
       </button>
 
       <button

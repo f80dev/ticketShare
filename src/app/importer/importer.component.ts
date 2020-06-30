@@ -45,7 +45,11 @@ export class ImporterComponent implements OnInit {
       reader.onload = ()=>{
         this.api.add_ticket(idevent,reader.result,this.config.user.access_token,true).subscribe((r:any)=>{
           this.message="";
-          this.tickets=r;
+          this.tickets=[];
+          for(let t of r){
+            t.data_exposed=t.data.substr(0,Math.min(t.data.length,20))+"..";
+            this.tickets.push(t);
+          }
         },(err)=>{
           this.message="";
           showError(this,err);
