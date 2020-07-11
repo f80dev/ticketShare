@@ -214,12 +214,6 @@ export function create_charts(event:any){
   }
 
   if(event.hasOwnProperty("statsDates") && event.statsDates.length>0){
-    var rc:any[]=[];
-    // for(let dt of event.statsDates){
-    //   var sDate=new Date(dt[0]).toLocaleDateString();
-    //   rc.push([sDate.split("/")[0],dt[1]]);
-    // }
-
     var new_option=JSON.parse(JSON.stringify(option));
     new_option["legend"]="none";
     return_list.push({

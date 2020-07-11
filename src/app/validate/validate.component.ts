@@ -101,7 +101,8 @@ export class ValidateComponent implements OnInit {
   getplaces(addr,idevent,func,func_error=null){
     if(addr.length<42){
       addr=addr.replace("#","")
-      $$("On effectue une recherche sur la base de la référence du ticket")
+      $$("On effectue une recherche sur la base de la référence du ticket");
+
       Object.keys(this.all_tickets).forEach((k)=>{
         if(k.startsWith("0x") && addr.length<42){
           this.all_tickets[k].forEach((t)=>{
@@ -142,8 +143,12 @@ export class ValidateComponent implements OnInit {
       this.getplaces(addr,this._event["_id"],(r)=>{
         this.address="";
         this.message="";
-        this.tickets=r.tickets;
-        this._user={pseudo:r.pseudo,photo:r.photo};
+        if(!r)
+          this.tickets=[];
+        else{
+          this.tickets=r.tickets;
+          this._user={pseudo:r.pseudo,photo:r.photo};
+        }
 
         this._dates=[];
         for(let _t of this.tickets){
@@ -267,7 +272,7 @@ export class ValidateComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       if(result!="no"){
         this.api.addchecker(result,this._event._id).subscribe(()=>{
-          showMessage(this,result+" va recevoir un mail pour la validation des billets");
+          showMessage(this,result+" va recevoir un mail pour la validation des billets",4000);
           this._event.validate.checkers.push(result);
         });
       }

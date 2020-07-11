@@ -1,8 +1,16 @@
 <app-hourglass [message]="message"></app-hourglass>
 <div class="mainform" *ngIf="message.length==0">
-  <h3>Validation pour {{_event?.name}}
+  <h3>Contrôle d'accès pour {{_event?.name}}
     <app-faq-link faq="validate"></app-faq-link>
   </h3>
+
+  <app-tuto [if]="config.webcamsAvailable>0"
+            label="Scannez la carte KERBERUS des visiteurs ou le code bar de leur billet pour consulter les places qu'ils possèdent. Vous pouvez également utilisé le BIP du téléphone">
+  </app-tuto>
+
+  <app-tuto [if]="config.webcamsAvailable==0"
+            label="Saisissez la référence du billet présenté ou l'email des visiteurs pour retrouver l'ensemble des billets. Vérifier la cohérence de la photo si possible">
+  </app-tuto>
 
   <div *ngIf="config.webcamsAvailable>0">
 
@@ -41,14 +49,13 @@
 
   <div  *ngIf="config.webcamsAvailable==0 && address.length==0 && tickets.length==0" style="font-size: x-small">
     <br>
-    Aucune caméra détectée sur ce device pour<br>
-    valider les entrées sur la base du QRCode<br>
+    Pas caméra détectée pour valider les billets
   </div>
 
 
 
   <div *ngIf="_event?.owner==config.user?.address && tickets.length==0">
-    <br><br>
+    <br><br><br>
     <div *ngIf="_event?.validate.checkers?.length==1">
       Vous êtes le seul habilité à contrôler les billets
     </div>

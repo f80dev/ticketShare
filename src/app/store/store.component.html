@@ -101,7 +101,7 @@
         <!--TODO: a inclure dans la fenetre-->
         <table *ngIf="event.owner==config.user?.address && event.stats?.length>0" class="app-table">
           <tr>
-            <th>Status</th><th>Billets</th>
+            <th>Billets</th><th></th>
           </tr>
           <tr *ngFor="let r of event.stats">
             <td>{{r[0]}}</td><td>{{r[1]}}</td>
