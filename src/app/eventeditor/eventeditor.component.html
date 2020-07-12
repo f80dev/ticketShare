@@ -25,7 +25,7 @@
     <!--Zone de filtre des templates-->
     <div style="width: 100%;">
       <mat-form-field style="width: 150px;" *ngIf="cats?.length>1">
-        <mat-label>Type d'événement</mat-label>
+        <mat-label>Catégorie d'événements</mat-label>
         <mat-select [(value)]="selectCategorie">
           <mat-option *ngFor="let cat of cats" [value]="cat">
             {{cat}}

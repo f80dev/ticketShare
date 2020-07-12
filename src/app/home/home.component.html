@@ -16,8 +16,8 @@
        title="Cliquez sur le QRCode pour enregistrer l'adresse de votre wallet spectacle dans le presse-papier"
        [cbContent]="config.user?.address"
        (click)="informe_copy()">
-    <qr-code [size]="150"
-             style="display: inline-block;vertical-align: middle;"
+    <qr-code [size]="100"
+             style="display: inline-block;vertical-align: middle;margin: 20px;"
              [value]="config.user?.address">
     </qr-code>
     <br>

@@ -235,7 +235,7 @@
 
 
       //http://localhost:6800/api/add_ticket/last/paul.dudule@gmail.com/tkt3/10/+30
-      var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000*24));
+      var delay=Math.round((new Date(params.get("date")).getTime()-new Date().getTime())/(3600*1000));
       for(var i=0;i<params.get("tickets");i++) {
 
         setTimeout(function (i) {
