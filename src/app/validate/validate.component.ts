@@ -139,7 +139,7 @@ export class ValidateComponent implements OnInit {
   refresh(addr:string){
     this.lastAddress=addr;
     if(addr.length>0){
-      this.message="Récupération des places du client";
+      this.message="Récupération des "+this._event.item+" du client";
       this.getplaces(addr,this._event["_id"],(r)=>{
         this.address="";
         this.message="";

@@ -168,7 +168,7 @@ export class StoreComponent implements OnInit {
    * @param _evt
    */
   buy(_evt: any) {
-    var url_redirect="/places?event="+_evt._id+"&etherprice="+_evt.etherprice;
+    var url_redirect="/places?event="+_evt._id+"&etherprice="+_evt.etherprice+"&eventitem="+_evt.item+"&eventname="+_evt.name;
     if(_evt.hasOwnProperty("stores")){
       url_redirect=_evt.store.web.replace("{{domain}}",this.config.infos_server.domain).replace("{{idevent}}",_evt._id).replace("{{access_token}}",this.config.user.access_token);
     }

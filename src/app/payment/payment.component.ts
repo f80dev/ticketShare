@@ -17,7 +17,7 @@ export class PaymentComponent implements OnInit {
   showRefund=false;
   order: any = {};
   message = '';
-  private event: any = null;
+  _event: any = null;
   tickets=null;
 
 
@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
 
     this.api.getevent(this.order.event).subscribe((r) => {
-      this.event = r;
+      this._event = r;
       this.tickets=this.getTicketsForOrder(r);
       this.config.reload_user(()=>{
         this.amount_to_credit=Math.round(this.config.user.money-this.order.total+0.5);

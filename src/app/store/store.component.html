@@ -69,6 +69,14 @@
         Cet événement utilise une billeterie externe<app-faq-link faq="extern_store"></app-faq-link><br>
       </div>
 
+
+      <div *ngIf="event.state=='closed'">
+        Vente des billets terminée
+      </div>
+
+
+
+
       <div *ngIf="event.state=='draft' && event.owner==config.user?.address"
            style="width:100%;text-align: left;overflow: hidden;">
 

@@ -53,7 +53,7 @@ export class PlacesComponent implements OnInit {
    * Chargement des tickets
    */
   load_tickets(func,func_error){
-    this.message="Récupération des places diponibles";
+    this.message="Récupération des "+this.eventitem+" diponibles";
     const addr=localStorage.getItem("address");
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.api.available(params.get("event"),addr).subscribe((r:any)=>{
@@ -107,7 +107,7 @@ export class PlacesComponent implements OnInit {
       this.message="";
       if(this.tickets.length==0){
         this._location.back();
-        showMessage(this,"Plus de place disponible");
+        showMessage(this,"Plus de "+this.eventitem+" disponible");
       } else {
         this.categories={};
         $$("On parcours l'ensemble des tickets pour identifier les catégories");
@@ -147,6 +147,8 @@ export class PlacesComponent implements OnInit {
 
   ngOnInit() {
     this.onResize({event:{target:window}});
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    this.eventitem=params.get("eventitem");
     checkLogin(this);
     this.config.reload_user();
     this.load_tickets(()=>{

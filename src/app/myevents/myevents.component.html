@@ -69,7 +69,7 @@
   <div *ngIf="event.state!='reserved' && event.state!='cancel' && event.state!='closed'">
     <div *ngIf="!event?.hasOwnProperty('showTickets')" style="margin-top: 10px;text-align: center;width: 100%;">
       <button class="app-button" mat-button mat-flat-button (click)="myplaces(event)">
-        <div class="bloc-bouton">Voir mes<br>billets</div>
+        <div class="bloc-bouton">Voir mes<br>{{event?.item}}</div>
       </button>
     </div>
     <div *ngIf="event?.showTickets" style="width: 100%;">
@@ -86,7 +86,7 @@
           mat-button mat-flat-button
           *ngIf="event?.state?.indexOf('cancel')==-1"
           (click)="buy_other(event)">
-    <div class="bloc-bouton">Acheter<br>d'autres billets</div>
+    <div class="bloc-bouton">Acheter<br>d'autres {{event?.item}}</div>
   </button>
 
 </app-event>

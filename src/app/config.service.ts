@@ -103,7 +103,7 @@ export class ConfigService {
    * @param func
    */
   reload_user(func=null,address=""){
-    if(address.length==0)address=this.user.address;
+    if((address==null || address.length==0) && this.user != null)address=this.user.address;
     localStorage.setItem("address",address);
     if(this.user!=null){
       this.api.getuser(address).subscribe((r:any)=>{
