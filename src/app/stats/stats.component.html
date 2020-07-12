@@ -7,7 +7,7 @@
   <div *ngIf="charts.length>0" style="max-width: 1200px;width:100%;display: inline-block;text-align: center;">
     <table class="app-table">
       <tr>
-        <th>Status</th><th>Billets</th>
+        <th>Status</th><th>{{_event.item}}</th>
       </tr>
       <tr *ngFor="let r of charts[0].data">
         <td>{{r[0]}}</td><td>{{r[1]}}</td>
