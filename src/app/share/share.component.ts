@@ -30,6 +30,10 @@ export class ShareComponent implements OnInit {
     this.eventid= this.route.snapshot.queryParamMap.get("event");
   }
 
+  /**
+   * Envoi d'une invitation
+   * @param _to
+   */
   transfert(_to:string){
     if(_to.indexOf(":")>-1)_to=_to.split(":")[1];
     this.message="Demande de transfert en cours vers "+_to;

@@ -48,8 +48,8 @@ export class ApiService {
     return this.http.get(api('search/'+query+"/"+user));
   }
 
-  add_guest(eventid:string,email:string="") {
-    return this.http.get(api('add_guest/'+eventid+"/"+email));
+  add_guest(eventid:string,email:string="",intro="") {
+    return this.http.get(api('add_guest/'+eventid+"/"+email+"/"+intro));
   }
 
   getbalances(idevent:string,withIdentities=false) {

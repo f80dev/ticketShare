@@ -15,11 +15,17 @@
   </app-tuto>
 
   <div *ngIf="_event.private" style="text-align: center;width: 100%;">
+
+    <mat-form-field style="width:90%;max-width: 400px;text-align: center;"  >
+      <mat-label>Message d'intro</mat-label>
+      <input matInput [(ngModel)]="intro.value">
+    </mat-form-field>
+    <br>
+
     <mat-form-field style="width:50%;max-width: 200px;text-align: center;"  >
       <mat-label>Email de l'invité</mat-label>
       <input matInput [(ngModel)]="email_to_invite.value" (keypress)="add_guest($event)">
     </mat-form-field>
-
     <button class="app-logo-button"
             mat-button mat-flat-button mat-icon-button
             (click)="add_guest({keyCode:13})">

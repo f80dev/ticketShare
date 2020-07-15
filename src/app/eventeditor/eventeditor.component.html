@@ -156,7 +156,7 @@
 
 
 
-      <div class="zone-option">
+      <div class="zone-option" *ngIf="config.user.offer.name=='pilote'">
         <div class="zone-option-header">
           Tester ce modèle avec un événement fictif
           <app-faq-link faq="fictif"></app-faq-link>

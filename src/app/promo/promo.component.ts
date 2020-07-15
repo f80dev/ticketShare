@@ -18,6 +18,7 @@ export class PromoComponent implements OnInit {
 
   _event:any={};
   email_to_invite:any={value:""};
+  intro:any={value:""};
   show_qrcode=false;
 
   constructor(
@@ -33,13 +34,19 @@ export class PromoComponent implements OnInit {
 
   }
 
+
+
+
   ngOnInit() {
     if(!this.route.snapshot.queryParamMap.has("event"))this.router.navigate(["store"]);
     this.api.getevent(this.route.snapshot.queryParamMap.get("event")).subscribe((e:any)=>{
       e.qrcode=environment.domain_server+"/api/qrcode?url="+encodeURIComponent(e.share_link);
       this._event=e;
+      this.intro.value="Vous êtes invité à l'événement privé \"" + this._event.name+"\"";
     })
   }
+
+
 
   informe_copy() {
     showMessage(this,"Adresse copiée");
@@ -48,9 +55,9 @@ export class PromoComponent implements OnInit {
 
   add_guest(_evt={keyCode:0}){
     if(_evt.keyCode!=13)return;
-    this.api.add_guest(this._event._id,this.email_to_invite.value).subscribe((r:any)=>{
+    this.api.add_guest(this._event._id,this.email_to_invite.value,this.intro.value).subscribe((r:any)=>{
       if(r){
-        showMessage(this,r.message)
+        showMessage(this,r.message);
         this.email_to_invite.value="";
       }
 
@@ -72,9 +79,9 @@ export class PromoComponent implements OnInit {
   }
 
 
-  openPrinter(_event:any){
-    //sendToPrint("print-section");
 
+
+  openPrinter(_event:any){
     open(api("build_affiche/"+_event._id),"_blank")
   }
 

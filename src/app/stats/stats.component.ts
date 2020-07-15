@@ -17,7 +17,6 @@ export class StatsComponent implements OnInit {
   charts:any[]=[];
   message="";
 
-
   constructor(
     public socket:Socket,
     public api:ApiService,
