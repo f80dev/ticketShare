@@ -16,7 +16,7 @@
 
     <tr *ngIf="order?.nb_places>0">
       <td>
-        {{order?.nb_places}} {{_event?.item}}<span *ngIf="order?.nb_places>0">s</span> pour un total de
+        {{order?.nb_places}} {{_event?.item [ pluriel]}}<span *ngIf="order?.nb_places>0">s</span> pour un total de
       </td>
       <td style="text-align: right;">
           -{{order?.total | number:'1.0-1'}}€

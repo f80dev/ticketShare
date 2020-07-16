@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '../config.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
-import {showMessage, $$, checkLogin} from '../tools';
+import {showMessage, $$, checkLogin, showError} from '../tools';
 import {ApiService} from '../api.service';
 import {MatSnackBar} from "@angular/material";
 
@@ -123,8 +123,22 @@ export class EventeditorComponent implements OnInit {
         this.router.navigate(["store"],{queryParams:{onlyMyEvents:true}});
       },500)
     })
-
   }
+
+
+  import(fileInputEvent: any) {
+    this.message="Importation en cours ...";
+    let reader:any = new FileReader();
+    reader.onload = ()=>{
+      this.code=reader.result;
+      this.check_event();
+      this.message="";
+      this.showCode=true;
+    };
+    reader.readAsText(fileInputEvent.target.files[0]);
+  }
+
+
 
   check_event() {
     this.api._post("check_event/"+this.config.user.address,this.code).subscribe((result)=>{

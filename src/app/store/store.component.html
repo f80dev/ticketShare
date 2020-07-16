@@ -106,18 +106,6 @@
         </div>
 
 
-        <!--TODO: a inclure dans la fenetre-->
-        <table *ngIf="event.owner==config.user?.address && event.stats?.length>0" class="app-table">
-          <tr>
-            <th>{{event.item}}</th><th></th>
-          </tr>
-          <tr *ngFor="let r of event.stats">
-            <td>{{r[0]}}</td><td>{{r[1]}}</td>
-          </tr>
-        </table>
-        <br>
-
-
         <div *ngIf="event.tickets.length>0">
           <span *ngIf="event.dtStart!=event.dtEnd">
             Du {{event.dtStart*1000 | date:'dd/MM'}} au {{event.dtEnd*1000 | date:'dd/MM'}}
@@ -127,6 +115,20 @@
             le {{event.dtStart*1000 | date:'dd/MM/yy'}}
           </span>
         </div>
+        <br>
+
+        <!--TODO: a inclure dans la fenetre-->
+        <table *ngIf="event.owner==config.user?.address && event.stats?.length>0" class="app-table">
+          <tr>
+            <th>{{event.item | pluriel}}</th><th></th>
+          </tr>
+          <tr *ngFor="let r of event.stats">
+            <td>{{r[0]}}</td><td>{{r[1]}}</td>
+          </tr>
+        </table>
+        <br>
+
+
       </div>
 
 
@@ -298,7 +300,7 @@
             <td><app-date [date]="event.onstore"></app-date></td>
           </tr>
           <tr *ngIf="event?.store==null">
-            <td title="Nombre de billets liés à l'événement">Nombre de {{event.item}}</td>
+            <td title="Nombre de billets liés à l'événement">Nombre de {{event.item | pluriel}}</td>
             <td>{{event.tickets.length}}&nbsp;<small>(pour l'ensemble des dates)</small></td>
           </tr>
           <tr *ngIf="event.cost>0" >

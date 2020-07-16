@@ -37,6 +37,11 @@ export class ImporterComponent implements OnInit {
     if(!this.route.snapshot.queryParamMap.has("event"))this.router.navigate(["store"]);
   }
 
+
+  /**
+   * Importation d'un fichier
+   * @param fileInputEvent
+   */
   import(fileInputEvent: any) {
     this.message="Importation en cours ...";
 
@@ -56,8 +61,6 @@ export class ImporterComponent implements OnInit {
         })
       };
       reader.readAsDataURL(fileInputEvent.target.files[0]);
-
-
   }
 
   build_tickets() {

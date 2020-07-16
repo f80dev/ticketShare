@@ -76,6 +76,7 @@ import { StatsComponent } from './stats/stats.component';
 import { ImporterComponent } from './importer/importer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { PlurielPipe } from './pluriel.pipe';
 
 const config: SocketIoConfig = { url: environment.domain_server, options: {} };
 
@@ -122,7 +123,8 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     DevelopperComponent,
     CancelComponent,
     StatsComponent,
-    ImporterComponent
+    ImporterComponent,
+    PlurielPipe
   ],
   entryComponents: [
     PromptComponent,
@@ -173,7 +175,7 @@ const config: SocketIoConfig = { url: environment.domain_server, options: {} };
     GoogleChartsModule
   ],
   providers: [
-    ApiService,TransPipe,SafePipe,ClipboardService,
+    ApiService,TransPipe,SafePipe,ClipboardService,PlurielPipe,
     {provide: SocialServiceConfig,useFactory: getAuthServiceConfigs},
     {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: false}}
   ],

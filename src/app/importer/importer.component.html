@@ -8,8 +8,10 @@
     <br><br>
 
     <div *ngIf="tickets.length==0">
+
       <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="import($event)" accept=".csv"/>
       <button mat-raised-button mat-button class="app-button" (click)="csvInput.click()">Importer des billets</button>
+
       <button mat-raised-button mat-button class="app-button" (click)="download_sample()">
         <div class="bloc-bouton">
           Voir un exemple<br>de fichier de billets
@@ -17,8 +19,12 @@
       </button>
     </div>
 
-    <app-tuto *ngIf="tickets.length>0" label="La sécurisation des billets entraine l'envoi d'un mail à chaque titulaire pour l'informer de la procédure de validation à l'entrée de l'événement"></app-tuto>
+    <app-tuto *ngIf="tickets.length>0"
+              label="La sécurisation des billets entraine l'envoi d'un mail à chaque titulaire pour l'informer de la procédure de validation à l'entrée de l'événement">
+    </app-tuto>
+
     <div *ngIf="tickets.length>0" style="width:100%;text-align: center;display:inline-block;">
+
       Importation du fichier terminée.<br>
       Vérifier les billets:<br><br>
       <table class="app-table">
