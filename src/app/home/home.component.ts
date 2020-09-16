@@ -1,5 +1,4 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ConfigService} from '../config.service';
 import {MatSnackBar} from '@angular/material';
@@ -25,8 +24,7 @@ export class HomeComponent implements OnInit {
               public router: Router,
               public socket:Socket,
               public config: ConfigService,
-              public _location: Location,
-              public route: ActivatedRoute) {
+              public _location: Location) {
   }
 
 
@@ -34,8 +32,12 @@ export class HomeComponent implements OnInit {
     $$("Récupération du client");
     if(localStorage.getItem("address")){
       this.api.getuser(localStorage.getItem("address")).subscribe((r: any) => {
-        if(r!=null)
+        if(r!=null){
+          $$("Mode connecté avec l'email : "+r.email);
           this.config.user=r;
+        } else {
+          $$("address de wallet inconnu");
+        }
       });
     }
   }

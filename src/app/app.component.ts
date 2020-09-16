@@ -63,6 +63,17 @@ export class AppComponent implements OnInit,OnDestroy {
 
   }
 
+
+  clearAccount(){
+    showMessage(this, "Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
+    localStorage.removeItem("address");
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  }
+
+
+
   ngOnInit(): void {
     this.init_event_for_network_status();
 
@@ -86,26 +97,26 @@ export class AppComponent implements OnInit,OnDestroy {
 
       const address = localStorage.getItem('address');
       if (address) {
-        $$("Address récupérée sur le device " + address + ". On se reconnecte au compte");
+        $$("Adresse récupérée sur le device " + address + ". On se reconnecte au compte");
         this.message = "Reconnexion a votre compte";
         this.showZoneOptions = false;
         this.showIntro = false;
         this.api.getuser(address, 30).subscribe((r: any) => {
-          // if(address!=r.address){
-          //   $$("On ne tient pas compte de l'adresse qui a été passé en argument, pour l'utiliser il faut d'abord se déconnecter du compte existant")
-          // }
-          this.config.user = r;
-          this.analyse_params((p: any) => {
-            this.use_params(p);
-          });
-        }, (err) => {
-          if (err.status == 400) {
-            showMessage(this, "Le compte à été supprimé de la base de donnée, on le supprime du device et on redémarre l'application");
-            localStorage.removeItem("address");
-            setTimeout(() => {
-              window.location.reload();
-            }, 500);
+          this.message="";
+          if(!r.email)
+            this.clearAccount();
+          else{
+            $$("Le client identifié a pour adresse mail "+r.email);
+            this.config.user = r;
+            this.analyse_params((p: any) => {
+              this.use_params(p);
+            });
+          }
 
+        }, (err) => {
+          this.message="";
+          if (err.status == 400) {
+            this.clearAccount();
           } else
             showMessage(this, err.message);
         });
