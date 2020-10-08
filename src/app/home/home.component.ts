@@ -6,6 +6,7 @@ import {ApiService} from '../api.service';
 import {Meta} from '@angular/platform-browser';
 import {$$, subscribe_socket,showMessage} from '../tools';
 import {Socket} from "ngx-socket-io";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
